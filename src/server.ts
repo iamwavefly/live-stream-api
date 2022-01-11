@@ -22,7 +22,7 @@ app.get("/", async (req: Request, res: Response): Promise<Response> => {
 app.use("/api/user", UserRoute);
 // swagger setup
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-
+// create port server
 try {
   app.listen(port, (): void => {
     console.log(`Connected successfully on port ${port}`);
