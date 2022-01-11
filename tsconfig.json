@@ -4,7 +4,7 @@
     "module": "commonjs",
     "pretty": true,
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./src/dist",
     "importHelpers": true,
     "strict": true,
     "noImplicitAny": false,
