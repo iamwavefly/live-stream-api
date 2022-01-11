@@ -6,7 +6,7 @@ import swaggerDocs from "./docs/";
 import UserRoute from "./api/routes/user/";
 
 const app: Application = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // Body parsing Middleware
 app.use(express.json());
