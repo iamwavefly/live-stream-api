@@ -14,8 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 
-app.get("/", async (req: Request, res: Response): Promise<Response> => {
-  return res.status(200).send({
+app.get("/", async (req: Request, res: Response) => {
+  res.status(200).send({
     message: "Live sumo API index",
   });
 });
