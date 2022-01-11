@@ -6,8 +6,6 @@ import swaggerDocs from "./docs/";
 import UserRoute from "./api/routes/user/";
 
 const app: Application = express();
-const port = process.env.PORT || 5000;
-
 // Body parsing Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +21,8 @@ app.use("/api/user", UserRoute);
 // swagger setup
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 // create port server
+const port = process.env.PORT || 5000;
+
 try {
   app.listen(port, (): void => {
     console.log(`Connected successfully on port ${port}`);
