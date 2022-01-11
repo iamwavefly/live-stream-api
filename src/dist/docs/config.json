@@ -15,7 +15,7 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "localhost:5000/api",
+    "host": "live-sumo-api.herokuapp.com/api",
     "paths": {
         "/user/new": {
             "post": {
@@ -35,9 +35,17 @@
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task": {
-                                    "type": "object",
-                                    "$ref": "#/definitions/newUser"
+                                "fullname": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "password2": {
+                                    "type": "string"
                                 }
                             }
                         }
