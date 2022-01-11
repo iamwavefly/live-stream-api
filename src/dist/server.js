@@ -5,14 +5,28 @@ const express_1 = (0, tslib_1.__importDefault)(require("express"));
 const swagger_ui_express_1 = (0, tslib_1.__importDefault)(require("swagger-ui-express"));
 const cors_1 = (0, tslib_1.__importDefault)(require("cors"));
 const morgan_1 = (0, tslib_1.__importDefault)(require("morgan"));
-const docs_1 = (0, tslib_1.__importDefault)(require("./docs/"));
+const config_json_1 = (0, tslib_1.__importDefault)(require("./docs/config.json"));
 const user_1 = (0, tslib_1.__importDefault)(require("./api/routes/user/"));
+const mongoose_1 = (0, tslib_1.__importDefault)(require("mongoose"));
+const dotenv = (0, tslib_1.__importStar)(require("dotenv"));
 const app = (0, express_1.default)();
+// config environment vars
+dotenv.config();
 // Body parsing Middleware
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, morgan_1.default)("dev"));
 app.use((0, cors_1.default)());
+// DB Config
+const db = require("./config/db").mongoURI;
+// Connect to MongoDB
+mongoose_1.default
+    .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => console.log("MongoDB Connected"))
+    .catch((err) => console.log(err));
 app.get("/", (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     res.status(200).send({
         message: "Live sumo API index",
@@ -20,7 +34,7 @@ app.get("/", (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, functi
 }));
 app.use("/api/user", user_1.default);
 // swagger setup
-app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(docs_1.default));
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(config_json_1.default));
 // create port server
 const port = process.env.PORT || 5000;
 try {

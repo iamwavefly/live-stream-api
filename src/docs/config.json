@@ -1,0 +1,104 @@
+{
+  "swagger": "2.0",
+  "tags": {
+    "name": "User"
+  },
+  "info": {
+    "description": "BlueCodeTech - Live Snap API",
+    "version": "1.0.0",
+    "title": "LiveSnap",
+    "contact": {
+      "email": "hello@bluecodetech.co"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:5000/api",
+  "paths": {
+    "/user/new": {
+      "post": {
+        "summary": "Create new user",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "task": {
+                  "type": "object",
+                  "$ref": "#/definitions/newUser"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "success"
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "summary": "Get user",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Valid user_id is required",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "newUser": {
+      "type": "object",
+      "properties": {
+        "fullname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "password2": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

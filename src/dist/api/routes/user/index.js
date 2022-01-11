@@ -7,5 +7,7 @@ const router = (0, express_1.Router)();
 router.get("/", user_1.all);
 //get single user
 router.get("/:id", user_1.user);
+// new user
+router.post("/new", user_1.newUser);
 exports.default = router;
 //# sourceMappingURL=index.js.map
