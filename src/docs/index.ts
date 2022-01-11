@@ -1,8 +1,8 @@
 const swaggerDocOption = {
   openapi: "3.0.3", // present supported openapi version
   info: {
-    title: "Simple Todos API", // short title.
-    description: "A simple todos API", //  desc.
+    title: "Live Sumo API", // short title.
+    description: "Live streaming applica. api", //  desc.
     version: "1.0.0", // version number
     contact: {
       name: "Bluecodetech", // your name

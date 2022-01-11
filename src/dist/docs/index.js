@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const swaggerDocOption = {
     openapi: "3.0.3",
     info: {
-        title: "Simple Todos API",
-        description: "A simple todos API",
+        title: "Live Sumo API",
+        description: "Live streaming applica. api",
         version: "1.0.0",
         contact: {
             name: "Bluecodetech",
