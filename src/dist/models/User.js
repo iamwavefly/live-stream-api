@@ -17,6 +17,11 @@ const UserSchema = new mongoose_1.Schema({
     user_id: {
         type: Number,
     },
+    stream_videos: [{ type: mongoose_1.Types.ObjectId, ref: "stream_videosc" }],
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 //Create a Model.
 const UserModel = (0, mongoose_1.model)("User", UserSchema);

@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.newUser = exports.user = exports.all = void 0;
+exports.updateUserPassword = exports.updateUser = exports.loginUser = exports.newUser = exports.user = exports.all = void 0;
 const tslib_1 = require("tslib");
 const User_1 = (0, tslib_1.__importDefault)(require("../../../models/User"));
 const user_1 = require("../../../validation/user");
 const bcryptjs_1 = (0, tslib_1.__importDefault)(require("bcryptjs"));
+const jsonwebtoken_1 = (0, tslib_1.__importDefault)(require("jsonwebtoken"));
 const all = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     return res.status(200).json({
         status: "success",
@@ -56,7 +57,12 @@ const newUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, fun
             });
         }
         bcryptjs_1.default.genSalt(10, (err, salt) => {
-            const newUser = new User_1.default({ email, fullname, password, user_id: usersLen });
+            const newUser = new User_1.default({
+                email,
+                fullname,
+                password,
+                user_id: usersLen,
+            });
             bcryptjs_1.default.hash(newUser.password, salt, (err, hash) => {
                 if (err) {
                     return res.status(400).json({
@@ -67,7 +73,7 @@ const newUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, fun
                 }
                 newUser.password = hash;
                 const savedUser = newUser.save();
-                return res.status(200).json({
+                return res.status(201).json({
                     status: "success",
                     status_code: 100,
                     data: savedUser,
@@ -86,4 +92,182 @@ const newUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, fun
     }
 });
 exports.newUser = newUser;
+// Login user
+const loginUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+    const { email, password } = req.body;
+    const user = yield User_1.default.findOne({ email });
+    if (!email || !password) {
+        return res.status(403).json({
+            status: "fail",
+            status_code: 105,
+            message: "Please fill all the fields",
+        });
+    }
+    if (!user) {
+        return res.status(400).json({
+            status: "fail",
+            status_code: 102,
+            message: "Email or password is incorrect",
+        });
+    }
+    try {
+        // Match password
+        bcryptjs_1.default.compare(password, user.password, (err, isMatch) => {
+            if (err) {
+                return res.status(400).json({
+                    status: "fail",
+                    status_code: 102,
+                    message: err,
+                });
+            }
+            if (isMatch) {
+                const token = jsonwebtoken_1.default.sign({ user }, process.env.jwtSecret, {
+                    expiresIn: "12h",
+                });
+                return res.status(200).json({
+                    status: "Success",
+                    status_code: 100,
+                    token,
+                });
+            }
+            else {
+                return res.status(400).json({
+                    status: "fail",
+                    status_code: 102,
+                    message: "Email or password is incorrect",
+                });
+            }
+        });
+    }
+    catch (error) {
+        if (error) {
+            return res.status(400).json({
+                status: "fail",
+                status_code: 102,
+                message: error,
+            });
+        }
+    }
+});
+exports.loginUser = loginUser;
+// update user
+const updateUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+    if (!req.body) {
+        return res.status(400).json({
+            status: "fail",
+            status_code: 105,
+            message: "Null object detected",
+        });
+    }
+    try {
+        User_1.default.findByIdAndUpdate(req.user._id, {
+            $set: req.body,
+        }, { upsert: true, new: true }, (error, user) => {
+            if (error) {
+                return res.status(400).json({
+                    status: "fail",
+                    status_code: 105,
+                    message: error,
+                });
+            }
+            return res.status(201).json({
+                status: "updated",
+                status_code: 100,
+                data: { user },
+            });
+        });
+    }
+    catch (error) {
+        if (error) {
+            return res.status(400).json({
+                status: "fail",
+                status_code: 102,
+                message: error,
+            });
+        }
+    }
+});
+exports.updateUser = updateUser;
+// update user password
+const updateUserPassword = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+    const { oldPassword, newPassword, newPassword2 } = req.body;
+    if (!Object.keys(req.body).length) {
+        return res.status(400).json({
+            status: "fail",
+            status_code: 105,
+            message: "Null object detected",
+        });
+    }
+    try {
+        User_1.default.findById(req.user._id, (error, user) => {
+            if (!user) {
+                return res.status(404).json({
+                    status: "fail",
+                    status_code: 105,
+                    message: "User not found",
+                });
+            }
+            if (newPassword !== newPassword2) {
+                return res.status(400).json({
+                    status: "fail",
+                    status_code: 102,
+                    message: "Password misMatch",
+                });
+            }
+            if (user) {
+                bcryptjs_1.default.compare(oldPassword, user.password, (error, isMatch) => {
+                    if (error) {
+                        return res.status(400).json({
+                            status: "fail",
+                            status_code: 102,
+                            message: error,
+                        });
+                    }
+                    if (!isMatch) {
+                        return res.status(400).json({
+                            status: "Invalid password",
+                            status_code: 105,
+                            message: error,
+                        });
+                    }
+                    else {
+                        if (!newPassword || !newPassword2) {
+                            return res.status(400).json({
+                                status: "fail",
+                                status_code: 105,
+                                message: "New password fields is required",
+                            });
+                        }
+                        bcryptjs_1.default.hash(newPassword, 8, (error, hash) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+                            if (error) {
+                                return res.status(400).json({
+                                    status: "fail",
+                                    status_code: 102,
+                                    message: error,
+                                });
+                            }
+                            user.password = hash;
+                            yield user.save();
+                            return res.status(201).json({
+                                status: "Success",
+                                status_code: 100,
+                                message: "User password updated",
+                            });
+                        }));
+                    }
+                });
+            }
+        });
+    }
+    catch (error) {
+        if (error) {
+            return res.status(400).json({
+                status: "fail",
+                status_code: 102,
+                message: error,
+            });
+        }
+    }
+});
+exports.updateUserPassword = updateUserPassword;
 //# sourceMappingURL=index.js.map

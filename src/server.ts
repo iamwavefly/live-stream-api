@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "morgan";
 import swaggerDocs from "./docs/config.json";
 import UserRoute from "./api/routes/user/";
+import StreamRoute from "./api/routes/stream";
 import mongoose, { ConnectOptions } from "mongoose";
 import * as dotenv from "dotenv";
 
@@ -33,7 +34,10 @@ app.get("/", async (req: Request, res: Response) => {
     message: "Live sumo API index",
   });
 });
+// user routes
 app.use("/api/user", UserRoute);
+// stream routes
+app.use("/api/stream", StreamRoute);
 // swagger setup
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 // create port server

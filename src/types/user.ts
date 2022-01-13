@@ -3,4 +3,6 @@ export interface userTypes {
   email: string;
   password: string;
   user_id: number;
+  createdAt: Date | string;
+  stream_videos: [];
 }

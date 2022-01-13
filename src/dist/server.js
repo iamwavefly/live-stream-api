@@ -7,6 +7,7 @@ const cors_1 = (0, tslib_1.__importDefault)(require("cors"));
 const morgan_1 = (0, tslib_1.__importDefault)(require("morgan"));
 const config_json_1 = (0, tslib_1.__importDefault)(require("./docs/config.json"));
 const user_1 = (0, tslib_1.__importDefault)(require("./api/routes/user/"));
+const stream_1 = (0, tslib_1.__importDefault)(require("./api/routes/stream"));
 const mongoose_1 = (0, tslib_1.__importDefault)(require("mongoose"));
 const dotenv = (0, tslib_1.__importStar)(require("dotenv"));
 const app = (0, express_1.default)();
@@ -32,7 +33,10 @@ app.get("/", (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, functi
         message: "Live sumo API index",
     });
 }));
+// user routes
 app.use("/api/user", user_1.default);
+// stream routes
+app.use("/api/stream", stream_1.default);
 // swagger setup
 app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(config_json_1.default));
 // create port server

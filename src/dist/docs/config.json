@@ -1,7 +1,10 @@
 {
     "swagger": "2.0",
     "tags": {
-        "name": "User"
+        "name": [
+            "User",
+            "Stream"
+        ]
     },
     "info": {
         "description": "BlueCodeTech - Live Snap API",
@@ -61,6 +64,44 @@
                 }
             }
         },
+        "/user/login": {
+            "post": {
+                "summary": "Login user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
         "/user/{id}": {
             "get": {
                 "summary": "Get user",
@@ -81,6 +122,278 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "put": {
+                "summary": "Update user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {}
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/user/update/password": {
+            "put": {
+                "summary": "Update user password",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User password object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "oldPassword": {
+                                    "type": "string"
+                                },
+                                "newPassword": {
+                                    "type": "string"
+                                },
+                                "newPassword2": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/stream/upload/video": {
+            "post": {
+                "summary": "Stream video upload",
+                "produces": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "Stream"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Video stream object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "stream_video": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/stream/delete/video": {
+            "delete": {
+                "summary": "Stream video upload",
+                "produces": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "Stream"
+                ],
+                "parameters": [
+                    {
+                        "name": "video_id",
+                        "in": "path",
+                        "description": "Valid video_id is required",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/stream/all/filterable": {
+            "get": {
+                "summary": "Get stream 👉 support pagination and filter",
+                "produces": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "Stream"
+                ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "type": "number"
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "type": "number"
+                    },
+                    {
+                        "name": "stream_id",
+                        "in": "path",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "path",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/stream/new": {
+            "post": {
+                "summary": "Create new stream",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stream"
+                ],
+                "parameters": [
+                    {
+                        "name": "video_id",
+                        "in": "path",
+                        "description": "Valid video_id from video upload is required",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Stream object",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "stream_title": {
+                                    "type": "string"
+                                },
+                                "stream_description": {
+                                    "type": "string"
+                                },
+                                "stream_date": {
+                                    "type": "string"
+                                },
+                                "tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "stream_platforms": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "stream_video_edits": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "countdown": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/stream/delete": {
+            "delete": {
+                "summary": "Delete stream",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Stream"
+                ],
+                "parameters": [
+                    {
+                        "name": "stream_id",
+                        "in": "path",
+                        "description": "Valid stream_id is required",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
                         "description": "success"
                     },
                     "400": {
