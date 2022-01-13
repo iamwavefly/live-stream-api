@@ -186,7 +186,9 @@ const newStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
 exports.newStream = newStream;
 // get all stream
 const allStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
-    const { stream_id, sort_by, limit, page } = req.params;
+    const { id } = req.user;
+    const userStreams = yield Stream_1.default.findById(id).sort({ created_at: "asc" });
+    const { stream_id, sort_by, limit, page } = req.query;
     try {
         // find steam by stream_id
         if (stream_id) {
@@ -231,6 +233,11 @@ const allStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
                 data: streams,
             });
         }
+        return res.status(200).json({
+            status: "success",
+            status_code: 100,
+            data: userStreams,
+        });
     }
     catch (error) {
         return res.status(403).json({

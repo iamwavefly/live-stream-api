@@ -31,7 +31,7 @@ const user = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, functi
 });
 exports.user = user;
 const newUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
-    const { email, fullname, password, password2 } = req.body;
+    const { email, fullname, password } = req.body;
     const userWithEmail = yield User_1.default.findOne({ email });
     const userCheck = user_1.UserValidate.validate(req.body);
     const usersLen = (yield User_1.default.find()).length + 1;
@@ -40,13 +40,6 @@ const newUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, fun
             const { details } = userCheck.error;
             const message = details.map((i) => i.message).join(",");
             return res.status(400).json({ message });
-        }
-        if (password !== password2) {
-            return res.status(403).json({
-                status: "fail",
-                status_code: 105,
-                message: "Password misMatch",
-            });
         }
         if (userWithEmail) {
             console.log(userWithEmail);

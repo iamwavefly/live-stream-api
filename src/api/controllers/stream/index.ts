@@ -5,7 +5,7 @@ import StreamVideo from "../../../models/stream/Video";
 import Stream from "../../../models/stream/Stream";
 import User from "../../../models/User";
 import { StreamValidate } from "../../../validation/stream";
-import bytes from 'bytes'
+import bytes from "bytes";
 
 export const uploadVideo = async (req, res: Response) => {
   const videoMaxSize = 209715200;
@@ -182,7 +182,9 @@ export const newStream = async (req, res: Response) => {
 };
 // get all stream
 export const allStream = async (req, res: Response) => {
-  const { stream_id, sort_by, limit, page } = req.params;
+  const { id } = req.user;
+  const userStreams = await Stream.findById(id).sort({ created_at: "asc" });
+  const { stream_id, sort_by, limit, page } = req.query;
   try {
     // find steam by stream_id
     if (stream_id) {
@@ -228,6 +230,11 @@ export const allStream = async (req, res: Response) => {
         data: streams,
       });
     }
+    return res.status(200).json({
+      status: "success",
+      status_code: 100,
+      data: userStreams,
+    });
   } catch (error) {
     return res.status(403).json({
       status: "fail",

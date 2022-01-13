@@ -27,7 +27,7 @@ export const user = async (req: Request, res: Response) => {
   });
 };
 export const newUser = async (req: Request, res: Response) => {
-  const { email, fullname, password, password2 } = req.body;
+  const { email, fullname, password } = req.body;
   const userWithEmail = await User.findOne({ email });
   const userCheck = UserValidate.validate(req.body);
   const usersLen = (await User.find()).length + 1;
@@ -36,13 +36,6 @@ export const newUser = async (req: Request, res: Response) => {
       const { details } = userCheck.error;
       const message = details.map((i) => i.message).join(",");
       return res.status(400).json({ message });
-    }
-    if (password !== password2) {
-      return res.status(403).json({
-        status: "fail",
-        status_code: 105,
-        message: "Password misMatch",
-      });
     }
     if (userWithEmail) {
       console.log(userWithEmail);

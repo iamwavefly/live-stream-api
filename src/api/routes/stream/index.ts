@@ -22,11 +22,7 @@ router.delete("/delete/video/:video_id", ensureAuth, deleteVideo);
 // new stream
 router.post("/new/:video_id", ensureAuth, newStream);
 // get streams
-router.get(
-  "/all/filterable/:sort_by?/:limit?/:page?/:stream_id?",
-  ensureAuth,
-  allStream
-);
+router.get("/all/filterable", ensureAuth, allStream);
 // delete stream
 router.delete("/delete/:stream_id", ensureAuth, deleteStream);
 

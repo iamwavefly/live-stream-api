@@ -13,7 +13,7 @@ router.delete("/delete/video/:video_id", ensureAuth_1.default, stream_1.deleteVi
 // new stream
 router.post("/new/:video_id", ensureAuth_1.default, stream_1.newStream);
 // get streams
-router.get("/all/filterable/:sort_by?/:limit?/:page?/:stream_id?", ensureAuth_1.default, stream_1.allStream);
+router.get("/all/filterable", ensureAuth_1.default, stream_1.allStream);
 // delete stream
 router.delete("/delete/:stream_id", ensureAuth_1.default, stream_1.deleteStream);
 exports.default = router;
