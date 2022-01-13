@@ -5,7 +5,7 @@ import StreamVideo from "../../../models/stream/Video";
 import Stream from "../../../models/stream/Stream";
 import User from "../../../models/User";
 import { StreamValidate } from "../../../validation/stream";
-import byteToSize from "../../../helper/byteToSize";
+import bytes from 'bytes'
 
 export const uploadVideo = async (req, res: Response) => {
   const videoMaxSize = 209715200;
@@ -53,7 +53,7 @@ export const uploadVideo = async (req, res: Response) => {
         stream_video_url: data.Location,
         stream_video_id: videoLen,
         stream_video_title: videoTitle,
-        stream_video_size: byteToSize(videoSize),
+        stream_video_size: bytes(videoSize),
         created_by: req.user._id,
       });
       const video = await stremVideo.save();

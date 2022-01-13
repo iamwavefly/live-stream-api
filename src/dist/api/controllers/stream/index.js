@@ -8,7 +8,7 @@ const Video_1 = (0, tslib_1.__importDefault)(require("../../../models/stream/Vid
 const Stream_1 = (0, tslib_1.__importDefault)(require("../../../models/stream/Stream"));
 const User_1 = (0, tslib_1.__importDefault)(require("../../../models/User"));
 const stream_1 = require("../../../validation/stream");
-const byteToSize_1 = (0, tslib_1.__importDefault)(require("../../../helper/byteToSize"));
+const bytes_1 = (0, tslib_1.__importDefault)(require("bytes"));
 const uploadVideo = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     const videoMaxSize = 209715200;
     let uploadedVideo = req["file"].originalname.split(".");
@@ -56,7 +56,7 @@ const uploadVideo = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0,
                 stream_video_url: data.Location,
                 stream_video_id: videoLen,
                 stream_video_title: videoTitle,
-                stream_video_size: (0, byteToSize_1.default)(videoSize),
+                stream_video_size: (0, bytes_1.default)(videoSize),
                 created_by: req.user._id,
             });
             const video = yield stremVideo.save();

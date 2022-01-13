@@ -1,9 +1,5 @@
 import { Schema, model, Types } from "mongoose";
 import { videoTypes } from "../../types/video";
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
-const ffmpeg = require("fluent-ffmpeg");
-ffmpeg.setFfmpegPath(ffmpegPath);
-import { getVideoDurationInSeconds } from "get-video-duration";
 
 const StreamVideoSchema = new Schema<videoTypes>({
   stream_video_url: {
@@ -75,21 +71,17 @@ const StreamVideoSchema = new Schema<videoTypes>({
 // };
 
 StreamVideoSchema.pre("validate", async function (next) {
-  if (this.stream_video_url) {
-    //get video duration
-    getVideoDurationInSeconds(this.stream_video_url).then((duration) => {
-      this.stream_video_duration = duration;
-    });
+  // if (this.stream_video_url) {
 
-    //     const audioFileName = `./src/temp/${
-    //       this.stream_video_title + this.stream_video_id
-    //   }`;
-    //       convert(this.stream_video_url, `${audioFileName}.mp3`, (err) => {
-    //       console.log("new");
-    //        if (!err) {
-    //      }
-    //    });
-  }
+  //     const audioFileName = `./src/temp/${
+  //       this.stream_video_title + this.stream_video_id
+  //   }`;
+  //       convert(this.stream_video_url, `${audioFileName}.mp3`, (err) => {
+  //       console.log("new");
+  //        if (!err) {
+  //      }
+  //    });
+  // }
   next();
 });
 

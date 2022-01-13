@@ -2,10 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const mongoose_1 = require("mongoose");
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
-const ffmpeg = require("fluent-ffmpeg");
-ffmpeg.setFfmpegPath(ffmpegPath);
-const get_video_duration_1 = require("get-video-duration");
 const StreamVideoSchema = new mongoose_1.Schema({
     stream_video_url: {
         type: String,
@@ -73,20 +69,16 @@ const StreamVideoSchema = new mongoose_1.Schema({
 // };
 StreamVideoSchema.pre("validate", function (next) {
     return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-        if (this.stream_video_url) {
-            //get video duration
-            (0, get_video_duration_1.getVideoDurationInSeconds)(this.stream_video_url).then((duration) => {
-                this.stream_video_duration = duration;
-            });
-            //     const audioFileName = `./src/temp/${
-            //       this.stream_video_title + this.stream_video_id
-            //   }`;
-            //       convert(this.stream_video_url, `${audioFileName}.mp3`, (err) => {
-            //       console.log("new");
-            //        if (!err) {
-            //      }
-            //    });
-        }
+        // if (this.stream_video_url) {
+        //     const audioFileName = `./src/temp/${
+        //       this.stream_video_title + this.stream_video_id
+        //   }`;
+        //       convert(this.stream_video_url, `${audioFileName}.mp3`, (err) => {
+        //       console.log("new");
+        //        if (!err) {
+        //      }
+        //    });
+        // }
         next();
     });
 });
