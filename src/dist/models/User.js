@@ -6,6 +6,12 @@ const UserSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
+    googleId: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
     email: {
         type: String,
         required: true,
@@ -17,7 +23,8 @@ const UserSchema = new mongoose_1.Schema({
     user_id: {
         type: Number,
     },
-    stream_videos: [{ type: mongoose_1.Types.ObjectId, ref: "stream_videosc" }],
+    streams: [{ type: mongoose_1.Types.ObjectId, ref: "Stream" }],
+    linked_accounts: {},
     createdAt: {
         type: Date,
         default: Date.now,

@@ -6,6 +6,12 @@ const UserSchema = new Schema<userTypes>({
     type: String,
     required: true,
   },
+  googleId: {
+    type: String,
+  },
+  image: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
@@ -17,7 +23,8 @@ const UserSchema = new Schema<userTypes>({
   user_id: {
     type: Number,
   },
-  stream_videos: [{ type: Types.ObjectId, ref: "stream_videosc" }],
+  streams: [{ type: Types.ObjectId, ref: "Stream" }],
+  linked_accounts: {},
   createdAt: {
     type: Date,
     default: Date.now,

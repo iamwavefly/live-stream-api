@@ -16,7 +16,6 @@ const uploadVideo = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0,
     const videoSize = req["file"].size;
     const videoTitle = uploadedVideo[0];
     const videoLen = (yield Video_1.default.find()).length + 1;
-    const user = yield User_1.default.findById(req.user._id);
     // check video format
     if (videoFormat !== "mp4") {
         return res.status(403).json({
@@ -44,7 +43,6 @@ const uploadVideo = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0,
     });
     try {
         s3Upload.upload(params, (error, data) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
-            var _a;
             if (error) {
                 return res.status(403).json({
                     status: "fail",
@@ -56,13 +54,11 @@ const uploadVideo = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0,
                 stream_video_url: data.Location,
                 stream_video_id: videoLen,
                 stream_video_title: videoTitle,
-                stream_video_size: (0, bytes_1.default)(videoSize),
+                stream_video_size: (0, bytes_1.default)(String(videoSize)),
+                stream_video_duration: (0, bytes_1.default)(String(videoSize)),
                 created_by: req.user._id,
             });
             const video = yield stremVideo.save();
-            const { id } = video;
-            (_a = user === null || user === void 0 ? void 0 : user.stream_videos) === null || _a === void 0 ? void 0 : _a.push(id);
-            yield user.save();
             return res.status(201).json({
                 status: "success",
                 status_code: 100,
@@ -164,10 +160,11 @@ const newStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
                 .json({ status: "fail", status_code: 105, message });
         }
         //   init new stream
-        const newStream = new Stream_1.default(Object.assign(Object.assign({}, req.body), { stream_video_id: StreamVideoId, stream_id: StreamLen, created_by: user._id }));
+        const newStream = new Stream_1.default(Object.assign(Object.assign({}, req.body), { stream_video: StreamVideoId, stream_id: StreamLen, created_by: user._id }));
         // create stream
         const savedStream = yield newStream.save();
         if (savedStream) {
+            yield User_1.default.updateOne({ _id: req.user._id }, { $push: { streams: savedStream._id } });
             return res.status(201).json({
                 status: "success",
                 status_code: 100,
@@ -186,13 +183,15 @@ const newStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
 exports.newStream = newStream;
 // get all stream
 const allStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
-    const { id } = req.user;
-    const userStreams = yield Stream_1.default.findById(id).sort({ created_at: "asc" });
+    const { _id } = req.user;
+    const userStreams = yield Stream_1.default.find({ created_by: _id })
+        .populate("stream_video")
+        .populate("created_by");
     const { stream_id, sort_by, limit, page } = req.query;
     try {
-        // find steam by stream_id
+        // // find steam by stream_id
         if (stream_id) {
-            const stream = yield Stream_1.default.findById(stream_id).lean();
+            const stream = yield Stream_1.default.findById(stream_id);
             if (!stream) {
                 return res.status(400).json({
                     status: "fail",
@@ -206,7 +205,7 @@ const allStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
                 data: stream,
             });
         }
-        // sort
+        // // sort
         if (sort_by) {
             const streams = yield Stream_1.default.find().sort({ sort_by: "asc" });
             if (!streams) {
@@ -222,7 +221,7 @@ const allStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
                 data: streams,
             });
         }
-        // pagination
+        // // pagination
         if (page || limit) {
             const streams = yield Stream_1.default.find()
                 .limit(limit * 1)

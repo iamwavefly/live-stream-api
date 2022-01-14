@@ -6,11 +6,15 @@ import swaggerDocs from "./docs/config.json";
 import UserRoute from "./api/routes/user/";
 import StreamRoute from "./api/routes/stream";
 import mongoose, { ConnectOptions } from "mongoose";
+import session from "express-session";
+import passport from "passport";
 import * as dotenv from "dotenv";
 
 const app: Application = express();
 // config environment vars
 dotenv.config();
+// passport configuration
+require("./config/passport")(passport);
 // Body parsing Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +33,23 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
+// Sessions
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+// Set global var
+app.use((req, res, next) => {
+  res.locals.user = req["user"] || null;
+  next();
+});
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get("/", async (req: Request, res: Response) => {
   res.status(200).send({
     message: "Live sumo API index",
@@ -41,7 +62,7 @@ app.use("/api/stream", StreamRoute);
 // swagger setup
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 // create port server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
 try {
   app.listen(port, (): void => {

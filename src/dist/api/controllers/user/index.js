@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUserPassword = exports.updateUser = exports.loginUser = exports.newUser = exports.user = exports.all = void 0;
+exports.updateUserPassword = exports.updateUser = exports.googleCallback = exports.facebookAuthent = exports.loginUser = exports.newUser = exports.user = exports.all = void 0;
 const tslib_1 = require("tslib");
 const User_1 = (0, tslib_1.__importDefault)(require("../../../models/User"));
 const user_1 = require("../../../validation/user");
 const bcryptjs_1 = (0, tslib_1.__importDefault)(require("bcryptjs"));
 const jsonwebtoken_1 = (0, tslib_1.__importDefault)(require("jsonwebtoken"));
+const queryString = (0, tslib_1.__importStar)(require("query-string"));
+const passport_1 = (0, tslib_1.__importDefault)(require("passport"));
 const all = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     return res.status(200).json({
         status: "success",
@@ -15,18 +17,19 @@ const all = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, functio
 });
 exports.all = all;
 const user = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    if (!id || typeof id === undefined) {
+    const { _id } = req === null || req === void 0 ? void 0 : req.user;
+    const user = yield User_1.default.findById({ _id }).populate("streams");
+    if (!_id || typeof _id === undefined) {
         return res.status(403).json({
             status: "fail",
             status_code: 105,
-            message: "Invalid user id passed",
+            message: "Currently, unable to fetch user profile",
         });
     }
     return res.status(200).json({
         status: "success",
         status_code: 100,
-        message: "Fetch user",
+        data: user,
     });
 });
 exports.user = user;
@@ -143,6 +146,51 @@ const loginUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
     }
 });
 exports.loginUser = loginUser;
+// Auth facebook user
+const facebookAuthent = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+    const stringifiedParams = queryString.stringify({
+        client_id: process.env.facebookAppId,
+        redirect_uri: process.env.facebookAppRedir,
+        scope: ["email", "user_friends"].join(","),
+        response_type: 200,
+        auth_type: "rerequest",
+        display: "popup",
+    });
+    const facebookLoginUrl = `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`;
+    try {
+        console.log(stringifiedParams);
+        res.redirect(facebookLoginUrl);
+    }
+    catch (error) {
+        if (error) {
+            return res.status(400).json({
+                status: "fail",
+                status_code: 102,
+                message: error,
+            });
+        }
+    }
+});
+exports.facebookAuthent = facebookAuthent;
+// Auth google user
+const googleCallback = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+    try {
+        passport_1.default.authenticate("google", { failureRedirect: "/" }),
+            (req, res) => {
+                res.send("sas");
+            };
+    }
+    catch (error) {
+        if (error) {
+            return res.status(400).json({
+                status: "fail",
+                status_code: 102,
+                message: error,
+            });
+        }
+    }
+});
+exports.googleCallback = googleCallback;
 // update user
 const updateUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     if (!req.body) {

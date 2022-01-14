@@ -2,8 +2,9 @@ import { Schema, model, Types } from "mongoose";
 import { userTypes } from "src/types/user";
 
 const StreamSchema = new Schema({
-  stream_video_id: {
+  stream_video: {
     type: Types.ObjectId,
+    ref: "stream_video",
     required: true,
   },
   stream_id: {
@@ -44,6 +45,7 @@ const StreamSchema = new Schema({
   },
   created_by: {
     type: Types.ObjectId,
+    ref: "User",
     required: true,
   },
   created_at: {

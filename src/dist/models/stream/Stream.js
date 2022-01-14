@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const StreamSchema = new mongoose_1.Schema({
-    stream_video_id: {
+    stream_video: {
         type: mongoose_1.Types.ObjectId,
+        ref: "stream_video",
         required: true,
     },
     stream_id: {
@@ -44,6 +45,7 @@ const StreamSchema = new mongoose_1.Schema({
     },
     created_by: {
         type: mongoose_1.Types.ObjectId,
+        ref: "User",
         required: true,
     },
     created_at: {

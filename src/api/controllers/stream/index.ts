@@ -14,7 +14,6 @@ export const uploadVideo = async (req, res: Response) => {
   const videoSize = req["file"].size;
   const videoTitle = uploadedVideo[0];
   const videoLen = (await StreamVideo.find()).length + 1;
-  const user = await User.findById(req.user._id);
   // check video format
   if (videoFormat !== "mp4") {
     return res.status(403).json({
@@ -53,13 +52,11 @@ export const uploadVideo = async (req, res: Response) => {
         stream_video_url: data.Location,
         stream_video_id: videoLen,
         stream_video_title: videoTitle,
-        stream_video_size: bytes(videoSize),
+        stream_video_size: bytes(String(videoSize)),
+        stream_video_duration: bytes(String(videoSize)),
         created_by: req.user._id,
       });
       const video = await stremVideo.save();
-      const { id } = video;
-      user?.stream_videos?.push(id as never);
-      await user.save();
       return res.status(201).json({
         status: "success",
         status_code: 100,
@@ -159,13 +156,17 @@ export const newStream = async (req, res: Response) => {
     //   init new stream
     const newStream = new Stream({
       ...req.body,
-      stream_video_id: StreamVideoId,
+      stream_video: StreamVideoId,
       stream_id: StreamLen,
       created_by: user._id,
     });
     // create stream
     const savedStream = await newStream.save();
     if (savedStream) {
+      await User.updateOne(
+        { _id: req.user._id },
+        { $push: { streams: savedStream._id } }
+      );
       return res.status(201).json({
         status: "success",
         status_code: 100,
@@ -182,13 +183,15 @@ export const newStream = async (req, res: Response) => {
 };
 // get all stream
 export const allStream = async (req, res: Response) => {
-  const { id } = req.user;
-  const userStreams = await Stream.findById(id).sort({ created_at: "asc" });
+  const { _id } = req.user;
+  const userStreams = await Stream.find({ created_by: _id })
+    .populate("stream_video")
+    .populate("created_by");
   const { stream_id, sort_by, limit, page } = req.query;
   try {
-    // find steam by stream_id
+    // // find steam by stream_id
     if (stream_id) {
-      const stream = await Stream.findById(stream_id).lean();
+      const stream = await Stream.findById(stream_id);
       if (!stream) {
         return res.status(400).json({
           status: "fail",
@@ -202,7 +205,7 @@ export const allStream = async (req, res: Response) => {
         data: stream,
       });
     }
-    // sort
+    // // sort
     if (sort_by) {
       const streams = await Stream.find().sort({ sort_by: "asc" });
       if (!streams) {
@@ -218,7 +221,7 @@ export const allStream = async (req, res: Response) => {
         data: streams,
       });
     }
-    // pagination
+    // // pagination
     if (page || limit) {
       const streams = await Stream.find()
         .limit(limit * 1)

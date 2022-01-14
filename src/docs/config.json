@@ -102,7 +102,7 @@
         }
       }
     },
-    "/user/{id}": {
+    "/user/me": {
       "get": {
         "summary": "Get user",
         "produces": [
@@ -111,15 +111,7 @@
         "tags": [
           "User"
         ],
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "path",
-            "description": "Valid user_id is required",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "success"

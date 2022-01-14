@@ -3,6 +3,8 @@ import User from "../../../models/User";
 import { UserValidate } from "../../../validation/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import * as queryString from "query-string";
+import passport from "passport";
 
 export const all = async (req: Request, res: Response) => {
   return res.status(200).json({
@@ -11,19 +13,20 @@ export const all = async (req: Request, res: Response) => {
     message: "Fetch all user",
   });
 };
-export const user = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  if (!id || typeof id === undefined) {
+export const user = async (req, res: Response) => {
+  const { _id } = req?.user;
+  const user = await User.findById({ _id }).populate("streams");
+  if (!_id || typeof _id === undefined) {
     return res.status(403).json({
       status: "fail",
       status_code: 105,
-      message: "Invalid user id passed",
+      message: "Currently, unable to fetch user profile",
     });
   }
   return res.status(200).json({
     status: "success",
     status_code: 100,
-    message: "Fetch user",
+    data: user,
   });
 };
 export const newUser = async (req: Request, res: Response) => {
@@ -124,6 +127,47 @@ export const loginUser = async (req: Request, res: Response) => {
         });
       }
     });
+  } catch (error) {
+    if (error) {
+      return res.status(400).json({
+        status: "fail",
+        status_code: 102,
+        message: error,
+      });
+    }
+  }
+};
+// Auth facebook user
+export const facebookAuthent = async (req: Request, res: Response) => {
+  const stringifiedParams = queryString.stringify({
+    client_id: process.env.facebookAppId,
+    redirect_uri: process.env.facebookAppRedir,
+    scope: ["email", "user_friends"].join(","), // comma seperated string
+    response_type: 200,
+    auth_type: "rerequest",
+    display: "popup",
+  });
+  const facebookLoginUrl = `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`;
+  try {
+    console.log(stringifiedParams);
+    res.redirect(facebookLoginUrl);
+  } catch (error) {
+    if (error) {
+      return res.status(400).json({
+        status: "fail",
+        status_code: 102,
+        message: error,
+      });
+    }
+  }
+};
+// Auth google user
+export const googleCallback = async (req: Request, res: Response) => {
+  try {
+    passport.authenticate("google", { failureRedirect: "/" }),
+      (req, res) => {
+        res.send("sas");
+      };
   } catch (error) {
     if (error) {
       return res.status(400).json({
