@@ -6,8 +6,12 @@ const UserSchema = new Schema<userTypes>({
     type: String,
     required: true,
   },
-  googleId: {
+  auth_id: {
+    type: Number,
+  },
+  auth_type: {
     type: String,
+    default: "local",
   },
   image: {
     type: String,
@@ -18,7 +22,6 @@ const UserSchema = new Schema<userTypes>({
   },
   password: {
     type: String,
-    required: true,
   },
   user_id: {
     type: Number,

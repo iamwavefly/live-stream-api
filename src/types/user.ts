@@ -5,7 +5,8 @@ export interface userTypes {
   user_id: number;
   createdAt: Date | string;
   streams: any;
-  googleId: string;
+  auth_id: Number;
+  auth_type: string;
   image: string;
   linked_accounts?: {};
   stream_videos: [];

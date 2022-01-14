@@ -16,8 +16,8 @@ dotenv.config();
 // passport configuration
 require("./config/passport")(passport);
 // Body parsing Middleware
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 
@@ -41,14 +41,15 @@ app.use(
     saveUninitialized: false,
   })
 );
-// Set global var
-app.use((req, res, next) => {
-  res.locals.user = req["user"] || null;
-  next();
-});
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Set global var
+app.use((req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
 
 app.get("/", async (req: Request, res: Response) => {
   res.status(200).send({

@@ -3,8 +3,6 @@ import User from "../../../models/User";
 import { UserValidate } from "../../../validation/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import * as queryString from "query-string";
-import passport from "passport";
 
 export const all = async (req: Request, res: Response) => {
   return res.status(200).json({
@@ -138,45 +136,42 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 // Auth facebook user
-export const facebookAuthent = async (req: Request, res: Response) => {
-  const stringifiedParams = queryString.stringify({
-    client_id: process.env.facebookAppId,
-    redirect_uri: process.env.facebookAppRedir,
-    scope: ["email", "user_friends"].join(","), // comma seperated string
-    response_type: 200,
-    auth_type: "rerequest",
-    display: "popup",
+export const verifySocialAuthent = async (req: Request, res: Response) => {
+  const { auth_id } = req.query;
+  console.log(auth_id);
+  const user = await User.findOne({ auth_id: auth_id });
+  // try {
+  if (!auth_id) {
+    return res.status(400).json({
+      status: "fail",
+      status_code: 102,
+      message: "Invalid auth id",
+    });
+  }
+  if (!user) {
+    return res.status(400).json({
+      status: "fail",
+      status_code: 102,
+      message: "User not found",
+    });
+  }
+  const token = jwt.sign({ user }, process.env.jwtSecret, {
+    expiresIn: "12h",
   });
-  const facebookLoginUrl = `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`;
-  try {
-    console.log(stringifiedParams);
-    res.redirect(facebookLoginUrl);
-  } catch (error) {
-    if (error) {
-      return res.status(400).json({
-        status: "fail",
-        status_code: 102,
-        message: error,
-      });
-    }
-  }
-};
-// Auth google user
-export const googleCallback = async (req: Request, res: Response) => {
-  try {
-    passport.authenticate("google", { failureRedirect: "/" }),
-      (req, res) => {
-        res.send("sas");
-      };
-  } catch (error) {
-    if (error) {
-      return res.status(400).json({
-        status: "fail",
-        status_code: 102,
-        message: error,
-      });
-    }
-  }
+  return res.status(200).json({
+    status: "Success",
+    status_code: 100,
+    token,
+  });
+  // } catch (error) {
+  //   if (error) {
+  //     return res.status(400).json({
+  //       status: "fail",
+  //       status_code: 102,
+  //       message: error,
+  //     });
+  //   }
+  // }
 };
 // update user
 export const updateUser = async (req: any, res: Response) => {

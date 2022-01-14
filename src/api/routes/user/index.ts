@@ -8,7 +8,7 @@ import {
   loginUser,
   updateUser,
   updateUserPassword,
-  googleCallback,
+  verifySocialAuthent,
 } from "../../controllers/user/";
 
 const router = Router();
@@ -23,11 +23,27 @@ router.post("/new", newUser);
 router.post("/login", loginUser);
 // login user
 router.get(
-  "/login/google",
-  passport.authenticate("google", { scope: ["profile"] })
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
 );
 // login user
-router.get("/auth/google/callback", googleCallback);
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "https://live-snap-front-end.herokuapp.com/login",
+  }),
+  (req, res) => {
+    const user = req.user as any;
+    const { auth_id } = user;
+    res
+      .status(201)
+      .redirect(
+        `https://live-snap-front-end.herokuapp.com/login/social/?auth_id=${auth_id}/`
+      );
+  }
+);
+// verify user social login
+router.post("/auth/verify", verifySocialAuthent);
 
 // login user
 router.put("/update", ensureAuth, updateUser);
