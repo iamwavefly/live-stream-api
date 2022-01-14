@@ -18,8 +18,8 @@ dotenv.config();
 // passport configuration
 require("./config/passport")(passport_1.default);
 // Body parsing Middleware
+app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, morgan_1.default)("dev"));
 app.use((0, cors_1.default)());
 // DB Config
@@ -38,14 +38,14 @@ app.use((0, express_session_1.default)({
     resave: false,
     saveUninitialized: false,
 }));
-// Set global var
-app.use((req, res, next) => {
-    res.locals.user = req["user"] || null;
-    next();
-});
 // Passport middleware
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
+// Set global var
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
 app.get("/", (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     res.status(200).send({
         message: "Live sumo API index",

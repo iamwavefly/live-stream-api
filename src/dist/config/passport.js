@@ -8,14 +8,18 @@ module.exports = function (passport) {
         clientID: process.env.googleClientId,
         clientSecret: process.env.googleClientSecret,
         callbackURL: "/api/user/auth/google/callback",
-    }, (accessToken, refreshToken, profile, done) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+        passReqToCallback: true,
+    }, (request, accessToken, refreshToken, profile, done) => (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+        var _a;
         const newUser = {
-            googleId: profile.id,
-            fullname: profile.displayName,
-            image: profile.photos[0].value,
+            auth_id: profile.id,
+            auth_type: "google",
+            fullname: profile === null || profile === void 0 ? void 0 : profile.displayName,
+            image: (_a = profile === null || profile === void 0 ? void 0 : profile.photos[0]) === null || _a === void 0 ? void 0 : _a.value,
+            email: profile === null || profile === void 0 ? void 0 : profile.emails[0].value,
         };
         try {
-            let user = yield User_1.default.findOne({ googleId: profile.id });
+            let user = yield User_1.default.findOne({ auth_id: profile.id });
             if (user) {
                 done(null, user);
             }

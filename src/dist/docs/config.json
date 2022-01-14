@@ -3,7 +3,8 @@
     "tags": {
         "name": [
             "User",
-            "Stream"
+            "Stream",
+            "0Auth"
         ]
     },
     "info": {
@@ -141,6 +142,48 @@
                             "type": "object",
                             "properties": {}
                         }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/user/auth/google": {
+            "get": {
+                "summary": "Initialize Google 0Auth",
+                "tags": [
+                    "0Auth"
+                ],
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/user/auth/verify": {
+            "post": {
+                "summary": "Verify 0Auth",
+                "tags": [
+                    "0Auth"
+                ],
+                "parameters": [
+                    {
+                        "name": "auth_id",
+                        "in": "path",
+                        "description": "Valid auth_id is required",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "responses": {

@@ -15,9 +15,19 @@ router.post("/new", user_1.newUser);
 // login user
 router.post("/login", user_1.loginUser);
 // login user
-router.get("/login/google", passport_1.default.authenticate("google", { scope: ["profile"] }));
+router.get("/auth/google", passport_1.default.authenticate("google", { scope: ["profile", "email"] }));
 // login user
-router.get("/auth/google/callback", user_1.googleCallback);
+router.get("/auth/google/callback", passport_1.default.authenticate("google", {
+    failureRedirect: "https://live-snap-front-end.herokuapp.com/login",
+}), (req, res) => {
+    const user = req.user;
+    const { auth_id } = user;
+    res
+        .status(201)
+        .redirect(`https://live-snap-front-end.herokuapp.com/login/social/?auth_id=${auth_id}/`);
+});
+// verify user social login
+router.post("/auth/verify", user_1.verifySocialAuthent);
 // login user
 router.put("/update", ensureAuth_1.default, user_1.updateUser);
 // login user password
