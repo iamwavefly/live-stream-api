@@ -171,6 +171,7 @@
         }
       }
     },
+    
     "/user/auth/verify": {
       "post": {
         "summary": "Verify 0Auth",
