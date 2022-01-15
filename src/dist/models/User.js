@@ -6,9 +6,7 @@ const UserSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
-    auth_id: {
-        type: Number,
-    },
+    auth_id: {},
     auth_type: {
         type: String,
         default: "local",
@@ -18,7 +16,6 @@ const UserSchema = new mongoose_1.Schema({
     },
     email: {
         type: String,
-        required: true,
     },
     password: {
         type: String,

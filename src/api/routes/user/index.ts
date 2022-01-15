@@ -21,15 +21,51 @@ router.get("/me", ensureAuth, user);
 router.post("/new", newUser);
 // login user
 router.post("/login", loginUser);
-// login user
+// google init login
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
-// login user
+// google callback
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
+    failureRedirect: "https://live-snap-front-end.herokuapp.com/login",
+  }),
+  (req, res) => {
+    const user = req.user as any;
+    const { auth_id } = user;
+    res
+      .status(201)
+      .redirect(
+        `https://live-snap-front-end.herokuapp.com/login/social/?auth_id=${auth_id}/`
+      );
+  }
+);
+// facebook init login
+router.get("/auth/facebook", passport.authenticate("facebook"));
+// facebook callback
+router.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    failureRedirect: "https://live-snap-front-end.herokuapp.com/login",
+  }),
+  (req, res) => {
+    const user = req.user as any;
+    const { auth_id } = user;
+    res
+      .status(201)
+      .redirect(
+        `https://live-snap-front-end.herokuapp.com/login/social/?auth_id=${auth_id}/`
+      );
+  }
+);
+// linkedin init login
+router.get("/auth/linkedin", passport.authenticate("linkedin"));
+// linkedin callback
+router.get(
+  "/auth/linkedin/callback",
+  passport.authenticate("linkedin", {
     failureRedirect: "https://live-snap-front-end.herokuapp.com/login",
   }),
   (req, res) => {

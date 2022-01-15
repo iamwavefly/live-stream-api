@@ -144,43 +144,44 @@ const loginUser = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
     }
 });
 exports.loginUser = loginUser;
-// Auth facebook user
+// auth social verify
 const verifySocialAuthent = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     const { auth_id } = req.query;
     console.log(auth_id);
     const user = yield User_1.default.findOne({ auth_id: auth_id });
-    // try {
-    if (!auth_id) {
-        return res.status(400).json({
-            status: "fail",
-            status_code: 102,
-            message: "Invalid auth id",
+    try {
+        if (!auth_id) {
+            return res.status(400).json({
+                status: "fail",
+                status_code: 102,
+                message: "Invalid auth id",
+            });
+        }
+        if (!user) {
+            return res.status(400).json({
+                status: "fail",
+                status_code: 102,
+                message: "User not found",
+            });
+        }
+        const token = jsonwebtoken_1.default.sign({ user }, process.env.jwtSecret, {
+            expiresIn: "12h",
+        });
+        return res.status(200).json({
+            status: "Success",
+            status_code: 100,
+            token,
         });
     }
-    if (!user) {
-        return res.status(400).json({
-            status: "fail",
-            status_code: 102,
-            message: "User not found",
-        });
+    catch (error) {
+        if (error) {
+            return res.status(400).json({
+                status: "fail",
+                status_code: 102,
+                message: error,
+            });
+        }
     }
-    const token = jsonwebtoken_1.default.sign({ user }, process.env.jwtSecret, {
-        expiresIn: "12h",
-    });
-    return res.status(200).json({
-        status: "Success",
-        status_code: 100,
-        token,
-    });
-    // } catch (error) {
-    //   if (error) {
-    //     return res.status(400).json({
-    //       status: "fail",
-    //       status_code: 102,
-    //       message: error,
-    //     });
-    //   }
-    // }
 });
 exports.verifySocialAuthent = verifySocialAuthent;
 // update user

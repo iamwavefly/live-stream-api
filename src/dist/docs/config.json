@@ -171,6 +171,40 @@
                 }
             }
         },
+        "/user/auth/facebook": {
+            "get": {
+                "summary": "Initialize Facebook 0Auth",
+                "tags": [
+                    "0Auth"
+                ],
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/user/auth/linkedin": {
+            "get": {
+                "summary": "Initialize LinkedIn 0Auth",
+                "tags": [
+                    "0Auth"
+                ],
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
         "/user/auth/verify": {
             "post": {
                 "summary": "Verify 0Auth",
