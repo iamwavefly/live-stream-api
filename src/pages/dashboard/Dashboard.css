@@ -1,0 +1,145 @@
+/* global dashboard styles */
+.mainContent{
+    display: flex;
+}
+.left{
+    width: 20%;
+}
+.right{
+    width: 100%;
+}
+
+
+/* page specific styles */
+.content-div{
+    display: flex;
+    padding: 1.5rem;
+    width: 100%;
+}
+.leftContent{
+    width: 100%;
+    margin: 1.0rem;
+}
+.rightContent{
+    width: 70%;
+    margin: 1.0rem;
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+.welcome{
+    display: flex;
+    background: #451ECC;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.welcome-left-header h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36.6171px;
+    line-height: 46px;
+
+    color: #FFFFFF;
+}
+.welcome-left-body p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    
+    color: #FFFFFF;
+}
+.welcome-image img{
+    margin-top: -2.5rem;
+}
+
+.overview-header{
+    padding-top: 1.5rem;
+    padding-bottom: 0.1rem;
+}
+.overview-header h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 19px;
+    color: rgba(0, 0, 0, 0.87);
+    }
+
+.overview-body{
+    display: flex;
+    margin-left: -0.2rem;
+}
+
+.overview-cards{
+    display: flex;
+    width: 100%;
+    margin: 0.4rem;
+    box-shadow: 5.08642px 5.08642px 91.5556px rgba(45, 43, 126, 0.1);
+    border-radius: 10.1728px;
+}
+.blue{
+    background: #451ECB;
+}
+.gray{
+    background-color: #EBE5FF;
+}
+
+.cards-left{
+    padding-left: 1rem;
+    padding-top: 1.2rem;
+}
+.cards-left h1{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30.007px;
+    line-height: 38px;
+}
+.cards-left p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 9.45715px;
+}
+.white{
+    color: #FFFFFF;
+}
+.black{
+    color: #000000;
+}
+.blue{
+    color:#451ECB;
+}
+.graph-card{
+    margin-top: 2.5rem;
+    background-color: #FFFFFF;
+    border-radius: 7px;
+    box-shadow: 5.08642px 5.08642px 91.5556px rgba(45, 43, 126, 0.1);
+}
+
+.graph-header h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12.5772px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.graph-header{
+    padding: 1.2rem 0.7rem;
+    padding-bottom: 1.0rem;
+}
+.line{
+    border: 1px solid #C4C4C4;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.socialsDiv{
+    display:flex
+}

@@ -1,0 +1,319 @@
+@import url("https://fonts.googleapis.com/css?family=Mulish");
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.contain{
+    display: flex;
+}
+
+.main{
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-image: url(/public/coming-soon/background.jpg);
+    object-fit: cover;
+    padding: 0px 30px;
+}
+
+.topLeft{
+    position: absolute;
+    top: 30px;
+    left: 50px;
+}
+
+@media screen and (max-width:768px){
+    .main{
+        width: 100%;
+        height: 1300px;
+        background-position: center;
+        background-size: cover;
+        background-image: url(/public/coming-soon/background.jpg);
+        object-fit: cover;
+    }
+    .topLeft img {
+        width: 65%;
+    }
+    .topLeft{
+        left: 10px;
+        top: 35px;
+    }
+}
+
+.topRight{
+    position: absolute;
+    top: 30px;
+    right: 50px;
+}
+
+.topRight a {
+    width: 156px;
+    height: 45px;
+    background: #FFFFFF;
+    border-radius: 25px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    color: #451ECC;
+}
+
+@media screen and (max-width:768px){
+    .topRight {
+        right: 10px;
+    }    
+    .topRight a {
+        width: 120px;
+        height: 45px;
+        font-size: 14px;
+    }
+}
+
+/* Create two equal columns that floats next to each other */
+.columns {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 768px) {
+    .frame{
+      margin-top: 22.5rem;
+    }
+    .columns {
+      width: 100%;
+    }
+  }
+  
+  /* Clear floats after the columns */
+  .rows:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .wrappers{
+      width: 100%;
+      height: 100%;
+      margin-left: 2.5rem;
+      margin-top: 8rem;
+
+  }
+
+  .headers{
+      width: 75%;
+      margin-bottom: 2.5rem;
+  }
+  .headers h2{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 50px;    
+    letter-spacing: 2.5px;
+    color: #FFFFFF;
+  }
+.paras{
+    width: 75%;
+    margin-bottom: 4.0rem;
+}
+
+.paras p{
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 2.5px;
+  color: #FFFFFF;
+}
+.inputs{
+    width: 100%;
+    margin-bottom: 5.0rem;
+}
+.inputs input{
+width: 75%;
+  height: 65px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+.inputs input::placeholder{
+  padding-left: 0.5rem;
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  color: #C4C4C4;
+  letter-spacing: 0.7px;
+  padding-top: 0.6rem;
+}
+
+.copy{
+    width: 65%;
+}
+.copy h5{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  color: #FFFFFF;
+}
+
+  @media screen and (max-width: 768px) {
+    .wrappers{
+          margin-left: 0;
+    }
+    .headers{
+        width: 100%;
+    }
+    .headers h2{
+        font-family: Mulish;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 36px;    
+        letter-spacing: 0.5px;
+        color: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .paras{
+        width: 100%;
+    }
+    .paras p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .inputs{
+        width: 100%;
+    }
+    .inputs input{
+        width: 100%;
+    }
+    .copy{
+        display: none;
+        /* width: 100%; */
+        /* margin-top: 19rem; */
+    }
+    .copy h5{
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      color: #FFFFFF;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+  }
+
+  .wrappers2{
+    width: 100%;
+    height: 100%;
+    margin-left: 4.0rem;
+    margin-top: 9rem;
+  }
+
+  .frame{
+      width: 100%;
+      margin-bottom: 3.5rem;
+  }
+
+  .btn-group{  
+      margin-left: 32rem;
+  }
+
+  @media screen and (max-width: 768px) {
+      img{
+          width:100%
+      }
+      .wrappers2{
+          margin-left: 0;
+          margin-top: 25rem;
+      }
+      .btn-group{
+            width: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+      }
+  }
+
+  .inputs{
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+  .inputDiv{
+      width: inherit;
+  }
+  .btnDiv{
+    position: relative;
+    right: 335px;
+    background: transition;
+    width: 30px;
+    cursor: pointer;
+    top: 8px;
+  }
+  .btnStyle{
+    background: #451ECC;
+    border: white;
+    border-radius: 20px;
+    width: 164px;
+    height: 50px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  @media screen and (max-width: 768px) {
+      .inputs{
+          display: flex;
+          width: 100%;
+          margin-left: 1.0rem;
+          /* padding-bottom: 3.5rem; */
+      }    
+      .btnDiv{
+          right: 102px;
+          background: transition;
+          cursor: pointer;
+          top: 15px;
+      }  
+      .btnStyle{
+          font-size: 10px;
+          width: 100px;
+          height: 35px;
+      }
+  }

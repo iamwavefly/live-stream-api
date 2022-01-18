@@ -1,0 +1,85 @@
+.mainNav{
+    background: #FAFAFA;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    width: 100%;
+    height: 10%;
+}
+img{
+    max-width: 100%;
+}
+
+.contentNav{
+    display: flex;
+    margin-left: 65%;
+    /* align-items: center;
+    justify-content: center; */
+}
+.streamNav{
+    background: #451ECC;
+    border-radius: 8px; 
+    padding-top: 1.0rem;
+    padding-bottom: 1.0rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2.5rem;
+}
+.streamNav a{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.subNav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notification{
+    margin-right: 0.5rem;
+}
+.notification a{
+    background: #451ECC;
+    box-shadow: 17.6923px 35.3846px 127.385px rgba(45, 43, 126, 0.2);
+    border-radius: 7.07692px;
+    padding: 0.6rem;
+    margin-right: 0.8rem;
+}
+.profileImage{
+    margin-top: 0.1rem;
+}
+.profileImage link img{
+    height: 90%;
+}
+.profile{
+    display: flex;
+}
+.profileText{
+    display: block;
+    padding-top: 0.5rem;
+}
+.profileText .profileName{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.6884px;
+    line-height: 16px;
+
+    color: #666666;
+}
+.profileText .accountStatus{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11.6791px;
+    line-height: 15px;
+
+    color: #C4C4C4;
+}

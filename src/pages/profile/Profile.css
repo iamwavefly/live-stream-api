@@ -1,0 +1,52 @@
+/* global dashboard styles */
+.mainContent{
+    display: flex;
+}
+.left{
+    width: 20%;
+}
+.right{
+    width: 100%;
+}
+
+.profileContent{
+    width: 95%;
+    margin: 2.0rem;
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+}
+.profileContentHeader{
+    display: flex;
+    margin-left: 2.5rem;
+}
+.profileContentItem{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 3.5rem;
+}
+.profileContentItem a{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #666666;
+    text-decoration: none;
+}
+
+.profileDivider{
+    height: 1px;
+    background: #DADADA;
+    border-radius: 0.5px;
+    margin: 1.5rem;
+}
+
+.profileContentTitle h3{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.87);
+    margin: 1.5rem;
+}

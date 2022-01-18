@@ -1,0 +1,38 @@
+img{
+    max-width: 100%;
+}
+
+.mainBar{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    height: 760px;
+    /* width: 20%; */
+}
+.logoBar{
+    margin-left: 1.5rem;
+    margin-bottom: 2.3rem;
+    padding-top: 1.8rem;
+}
+.itemBar{
+    display: flex;
+    padding: 1.2rem;
+    margin-left: 0.5rem;
+}
+
+.textBar{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18.5px;
+    letter-spacing: 0.163835px;
+    margin-left: 1.0rem;
+}
+.textBar a{
+    text-decoration: none;
+    color: #455A64;
+}
+.reverseIcon{
+    margin-top: 10.5rem;
+    margin-left: 10.5rem;
+}
