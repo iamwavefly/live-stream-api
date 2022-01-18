@@ -49,8 +49,11 @@ img{
     background: #451ECC;
     box-shadow: 17.6923px 35.3846px 127.385px rgba(45, 43, 126, 0.2);
     border-radius: 7.07692px;
-    padding: 0.6rem;
+    padding: 1.0rem;
     margin-right: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .profileImage{
     margin-top: 0.1rem;
@@ -60,6 +63,8 @@ img{
 }
 .profile{
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .profileText{
     display: block;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { logout } from '../../redux/login/LoginAction';
 import "./Sidebar.css"
 
@@ -18,7 +19,7 @@ const Sidebar = () => {
                     <div className="iconBar">
                         <img src="/images/dash-icon.svg" alt="" />
                     </div>
-                    <div className="textBar"><a href="">Dashboard</a></div>
+                    <div className="textBar"><Link to="/dashboard">Dashboard</Link></div>
                 </div>
                 <div className="itemBar">
                     <div className="iconBar">

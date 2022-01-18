@@ -6,7 +6,7 @@ img{
     background: #FFFFFF;
     border: 1px solid #C5C5C7;
     box-sizing: border-box;
-    height: 760px;
+    /* height: 760px; */
     /* width: 20%; */
 }
 .logoBar{
@@ -35,4 +35,5 @@ img{
 .reverseIcon{
     margin-top: 10.5rem;
     margin-left: 10.5rem;
+    padding-bottom: 1.5rem;
 }

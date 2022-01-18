@@ -14,6 +14,8 @@ import Profile from "./pages/profile/Profile";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import SocialAuth from "./pages/auth/SocialAuth";
+import ProfileAccount from "./pages/profile/ProfileAccount";
+import ProfileNotification from "./pages/profile/ProfileNotification";
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
 
           <Route path='/dashboard' component={Dashboard} exact />
           <Route path='/profile' component={Profile} exact />
+          <Route path='/profile/account' component={ProfileAccount} exact />
+          <Route path='/profile/notification' component={ProfileNotification} exact />
           <Route path='/privacy-policy' component={Privacy} exact />
           <Route path='/terms-service' component={Terms} exact />
           <Route path='/login/social' component={SocialAuth} exact />
