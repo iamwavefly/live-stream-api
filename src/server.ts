@@ -5,6 +5,7 @@ import morgan from "morgan";
 import swaggerDocs from "./docs/config.json";
 import UserRoute from "./api/routes/user/";
 import StreamRoute from "./api/routes/stream";
+import EditorRoute from "./api/routes/editor";
 import mongoose, { ConnectOptions } from "mongoose";
 import session from "express-session";
 import passport from "passport";
@@ -60,6 +61,8 @@ app.get("/", async (req: Request, res: Response) => {
 app.use("/api/user", UserRoute);
 // stream routes
 app.use("/api/stream", StreamRoute);
+// editor routes
+app.use("/api/edit", EditorRoute);
 // swagger setup
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 // create port server

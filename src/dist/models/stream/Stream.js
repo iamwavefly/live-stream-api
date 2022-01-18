@@ -7,6 +7,10 @@ const StreamSchema = new mongoose_1.Schema({
         ref: "stream_video",
         required: true,
     },
+    stream_transcript: {
+        type: mongoose_1.Types.ObjectId,
+        ref: "transcribe_video",
+    },
     stream_id: {
         type: Number,
         required: true,

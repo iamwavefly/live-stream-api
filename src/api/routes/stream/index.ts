@@ -6,6 +6,7 @@ import {
   deleteStream,
   deleteVideo,
   allStream,
+  allVideo,
 } from "../../controllers/stream/";
 import upload from "../../../config/multer";
 
@@ -21,6 +22,8 @@ router.post(
 router.delete("/delete/video/:video_id", ensureAuth, deleteVideo);
 // new stream
 router.post("/new/:video_id", ensureAuth, newStream);
+// get video
+router.get("/video/all/filterable", ensureAuth, allVideo);
 // get streams
 router.get("/all/filterable", ensureAuth, allStream);
 // delete stream

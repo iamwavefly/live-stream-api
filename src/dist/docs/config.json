@@ -4,6 +4,7 @@
         "name": [
             "User",
             "Stream",
+            "Edit",
             "0Auth"
         ]
     },
@@ -306,6 +307,34 @@
                 }
             }
         },
+        "/stream/video/all/filterable": {
+            "post": {
+                "summary": "Get all video streams",
+                "produces": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "Stream"
+                ],
+                "parameters": [
+                    {
+                        "name": "video_id",
+                        "in": "path",
+                        "description": "Valid video_id is required",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
         "/stream/delete/video": {
             "delete": {
                 "summary": "Stream video upload",
@@ -457,6 +486,34 @@
                         "name": "stream_id",
                         "in": "path",
                         "description": "Valid stream_id is required",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/edit/stream/transcript/video": {
+            "post": {
+                "summary": "Create video transcript",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Edit"
+                ],
+                "parameters": [
+                    {
+                        "name": "video_id",
+                        "in": "path",
+                        "description": "Valid video_id is required",
                         "required": true,
                         "type": "string"
                     }

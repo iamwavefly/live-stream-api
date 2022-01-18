@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteStream = exports.allStream = exports.newStream = exports.deleteVideo = exports.uploadVideo = void 0;
+exports.deleteStream = exports.allVideo = exports.allStream = exports.newStream = exports.deleteVideo = exports.uploadVideo = void 0;
 const tslib_1 = require("tslib");
 const aws_sdk_1 = (0, tslib_1.__importDefault)(require("aws-sdk"));
 const uuid = require("uuid").v4;
@@ -92,6 +92,7 @@ const deleteVideo = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0,
         Bucket: "worldbankpayint",
         Key: video === null || video === void 0 ? void 0 : video.stream_video_url,
     };
+    console.log(video);
     // initialize s3
     const S3 = new aws_sdk_1.default.S3({
         accessKeyId: process.env.accessKeyId,
@@ -247,6 +248,33 @@ const allStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, f
     }
 });
 exports.allStream = allStream;
+// get all video
+const allVideo = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
+    const { _id } = req.user;
+    const userVideo = yield Video_1.default.find({ created_by: _id }).populate("created_by");
+    try {
+        if (!userVideo) {
+            return res.status(200).json({
+                status: "success",
+                status_code: 105,
+                message: "No video found",
+            });
+        }
+        return res.status(200).json({
+            status: "success",
+            status_code: 100,
+            data: userVideo,
+        });
+    }
+    catch (error) {
+        return res.status(403).json({
+            status: "fail",
+            status_code: 105,
+            message: error,
+        });
+    }
+});
+exports.allVideo = allVideo;
 // delete stream
 const deleteStream = (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, function* () {
     const { stream_id } = req.params;

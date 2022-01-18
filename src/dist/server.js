@@ -8,6 +8,7 @@ const morgan_1 = (0, tslib_1.__importDefault)(require("morgan"));
 const config_json_1 = (0, tslib_1.__importDefault)(require("./docs/config.json"));
 const user_1 = (0, tslib_1.__importDefault)(require("./api/routes/user/"));
 const stream_1 = (0, tslib_1.__importDefault)(require("./api/routes/stream"));
+const editor_1 = (0, tslib_1.__importDefault)(require("./api/routes/editor"));
 const mongoose_1 = (0, tslib_1.__importDefault)(require("mongoose"));
 const express_session_1 = (0, tslib_1.__importDefault)(require("express-session"));
 const passport_1 = (0, tslib_1.__importDefault)(require("passport"));
@@ -55,6 +56,8 @@ app.get("/", (req, res) => (0, tslib_1.__awaiter)(void 0, void 0, void 0, functi
 app.use("/api/user", user_1.default);
 // stream routes
 app.use("/api/stream", stream_1.default);
+// editor routes
+app.use("/api/edit", editor_1.default);
 // swagger setup
 app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(config_json_1.default));
 // create port server

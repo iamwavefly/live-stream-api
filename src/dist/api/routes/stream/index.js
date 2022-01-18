@@ -12,6 +12,8 @@ router.post("/upload/video", multer_1.default.single("stream_video"), ensureAuth
 router.delete("/delete/video/:video_id", ensureAuth_1.default, stream_1.deleteVideo);
 // new stream
 router.post("/new/:video_id", ensureAuth_1.default, stream_1.newStream);
+// get video
+router.get("/video/all/filterable", ensureAuth_1.default, stream_1.allVideo);
 // get streams
 router.get("/all/filterable", ensureAuth_1.default, stream_1.allStream);
 // delete stream

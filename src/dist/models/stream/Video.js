@@ -29,6 +29,7 @@ const StreamVideoSchema = new mongoose_1.Schema({
     created_by: {
         type: mongoose_1.Types.ObjectId,
         required: true,
+        ref: "User",
     },
     created_at: {
         type: Date,

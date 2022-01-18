@@ -28,6 +28,7 @@ const StreamVideoSchema = new Schema<videoTypes>({
   created_by: {
     type: Types.ObjectId,
     required: true,
+    ref: "User",
   },
   created_at: {
     type: Date,

@@ -88,6 +88,7 @@ export const deleteVideo = async (req, res: Response) => {
     Bucket: "worldbankpayint",
     Key: video?.stream_video_url,
   };
+  console.log(video);
   // initialize s3
   const S3 = new AWS.S3({
     accessKeyId: process.env.accessKeyId,
@@ -237,6 +238,33 @@ export const allStream = async (req, res: Response) => {
       status: "success",
       status_code: 100,
       data: userStreams,
+    });
+  } catch (error) {
+    return res.status(403).json({
+      status: "fail",
+      status_code: 105,
+      message: error,
+    });
+  }
+};
+// get all video
+export const allVideo = async (req, res: Response) => {
+  const { _id } = req.user;
+  const userVideo = await StreamVideo.find({ created_by: _id }).populate(
+    "created_by"
+  );
+  try {
+    if (!userVideo) {
+      return res.status(200).json({
+        status: "success",
+        status_code: 105,
+        message: "No video found",
+      });
+    }
+    return res.status(200).json({
+      status: "success",
+      status_code: 100,
+      data: userVideo,
     });
   } catch (error) {
     return res.status(403).json({

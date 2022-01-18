@@ -1,11 +1,14 @@
 import { Schema, model, Types } from "mongoose";
-import { userTypes } from "src/types/user";
 
 const StreamSchema = new Schema({
   stream_video: {
     type: Types.ObjectId,
     ref: "stream_video",
     required: true,
+  },
+  stream_transcript: {
+    type: Types.ObjectId,
+    ref: "transcribe_video",
   },
   stream_id: {
     type: Number,
@@ -59,5 +62,5 @@ StreamSchema.pre("validate", function (next) {
 });
 
 //Create a Model.
-const StreamModel = model<userTypes>("Stream", StreamSchema);
+const StreamModel = model("Stream", StreamSchema);
 export default StreamModel;
