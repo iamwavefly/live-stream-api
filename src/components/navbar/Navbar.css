@@ -27,6 +27,11 @@ img{
     align-items: center;
     justify-content: center;
     margin-right: 2.5rem;
+    cursor: pointer;
+}
+.streamNav:hover{
+    background: #1f0e5f;
+    transition: 0.6s;
 }
 .streamNav a{
     font-family: Mulish;
@@ -44,6 +49,10 @@ img{
 }
 .notification{
     margin-right: 0.5rem;
+}
+.notification a:hover{
+    background: #1f0e5f;
+    transition: 0.6s;
 }
 .notification a{
     background: #451ECC;

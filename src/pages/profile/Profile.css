@@ -37,6 +37,10 @@
     color: #666666;
     text-decoration: none;
 }
+.profileContentItem a:hover{
+    border-bottom: 1px solid #2b1770;
+    transition: 1.0s;
+}
 
 .headerSectionDiv{
     margin-left: 1.0rem;

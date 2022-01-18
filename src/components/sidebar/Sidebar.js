@@ -15,50 +15,66 @@ const Sidebar = () => {
                 <div className="logoBar">
                     <img src="/images/main-logo.svg" alt="" />
                 </div>
-                <div className="itemBar">
-                    <div className="iconBar">
-                        <img src="/images/dash-icon.svg" alt="" />
+                <Link to="/dashboard" style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/dash-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Dashboard</div>
                     </div>
-                    <div className="textBar"><Link to="/dashboard">Dashboard</Link></div>
-                </div>
-                <div className="itemBar">
-                    <div className="iconBar">
-                        <img src="/images/video-icon.svg" alt="" />
+                </Link>
+                <Link to="/video" style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/video-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Videos</div>
                     </div>
-                    <div className="textBar"><a href="">Videos</a></div>
-                </div>
-                <div className="itemBar">
-                    <div className="iconBar">
-                        <img src="/images/person-icon.svg" alt="" />
+                </Link>
+                <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/person-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Accounts</div>
                     </div>
-                    <div className="textBar"><a href="">Accounts</a></div>
-                </div>
-                <div className="itemBar">
-                    <div className="iconBar">
-                        <img src="/images/stream-icon.svg" alt="" />
+                </a>
+                <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/stream-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Streaming</div>
                     </div>
-                    <div className="textBar"><a href="">Streaming</a></div>
-                </div>
-                <div className="itemBar">
-                    <div className="iconBar">
-                        <img src="/images/schedule-icon.svg" alt="" />
+                </a>
+                <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/schedule-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Schedule</div>
                     </div>
-                    <div className="textBar"><a href="">Schedule</a></div>
-                </div>
-                <div className="itemBar">
-                    <div className="iconBar">
-                        <img src="/images/accounts-icon.svg" alt="" />
+                </a>
+                <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/accounts-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Teams</div>
                     </div>
-                    <div className="textBar"><a href="">Teams</a></div>
-                </div>
-                <div className="itemBar">
-                    <div className="iconBar">
-                        <img src="/images/accounts-icon.svg" alt="" />
+                </a>
+                <a href="#" onClick={logoutHandler} style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/accounts-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Logout</div>
                     </div>
-                    <div className="textBar"><a href="#" onClick={logoutHandler}>Logout</a></div>
-                </div>
+                </a>
                 <div className="reverseIcon">
-                    <img src="/images/reverse-icon.svg" alt="" />
+                    <a href="">
+                        <img src="/images/reverse-icon.svg" alt="" />
+                    </a>
                 </div>
             </div>
         </>

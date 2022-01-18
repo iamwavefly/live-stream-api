@@ -17,17 +17,17 @@ const Navbar = () => {
                                 <img src="/images/notification.svg" alt="" />
                             </a>
                         </div>
-                        <div className="profile">
-                            <div className="profileImage">
-                                <Link to="/profile">
+                        <Link to="/profile" style={{textDecoration:"none"}}>
+                            <div className="profile">
+                                <div className="profileImage">
                                     <img src="/images/profile-image.svg" alt="" />
-                                </Link>
+                                </div>
+                                <div className="profileText">
+                                    <div className='profileName'>Emilia Dunes</div>
+                                    <div className='accountStatus'>Free account</div>
+                                </div>
                             </div>
-                            <div className="profileText">
-                                <div className='profileName'>Emilia Dunes</div>
-                                <div className='accountStatus'>Free account</div>
-                            </div>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>

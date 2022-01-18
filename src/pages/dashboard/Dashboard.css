@@ -74,6 +74,7 @@
 .overview-body{
     display: flex;
     margin-left: -0.2rem;
+    cursor: pointer;
 }
 
 .overview-cards{

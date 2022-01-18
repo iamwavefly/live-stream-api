@@ -3,3 +3,10 @@
     margin: 0;
     box-sizing: border-box;
 }
+td{
+    cursor: pointer;
+}
+button:hover{
+    background-color: #1f0e5f;
+    transition: 0.6s;
+}
