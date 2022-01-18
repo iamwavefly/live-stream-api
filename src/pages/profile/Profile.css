@@ -18,11 +18,10 @@
 }
 .profileContentHeader{
     display: flex;
-    margin-left: 2.5rem;
 }
 .profileContentItem{
     padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-bottom: 0.4rem;
     padding-left: 3.5rem;
 }
 .profileContentItem a{
@@ -35,6 +34,10 @@
     text-decoration: none;
 }
 
+.headerSectionDiv{
+    margin-left: 1.0rem;
+    margin-right: 1.0rem;
+}
 .profileDivider{
     height: 1px;
     background: #DADADA;
@@ -49,4 +52,53 @@
     font-size: 20px;
     color: rgba(0, 0, 0, 0.87);
     margin: 1.5rem;
+}
+
+.profileContentBody{
+    display: flex;
+}
+.profilePicDiv{
+    margin-left: 2.0rem;
+}
+
+.profileDetailsDiv{
+    margin-left: 4.0rem;
+    margin-bottom: 1.0rem;
+}
+.formHeader{
+    margin-bottom: 1.2rem;
+}
+.formHeader h5{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #666666;
+}
+.formBody{
+    width: 100%;
+}
+
+.formElement label{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #666666;
+    padding-bottom: 0.5rem;
+}
+.formControl{
+    width: 160%;
+    background: #FAFAFA;
+    border-radius: 5px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.6884px;
+    color: #666666;
+    padding: 0.5rem;
+}
+.formGroup{
+    padding-bottom: 1.0rem;
 }

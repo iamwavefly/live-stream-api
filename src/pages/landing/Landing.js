@@ -46,7 +46,7 @@ const Landing = () => {
                         <div className="columns">
                             <div className="wrappers2">
                                 <div className="frame">
-                                    <img src="/coming-soon/frame.svg" alt="" />
+                                    <img src="/coming-soon/IMAGE.svg" alt="" />
                                 </div>
                                 <div className="btn-group">
                                     <a href="/facebook">
