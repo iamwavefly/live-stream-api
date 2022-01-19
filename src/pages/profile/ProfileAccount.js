@@ -53,7 +53,7 @@ const ProfileAccount = () => {
                                     </div>
                                     <div className="socialAcctText"><a href="">Facebook</a></div>
                                 </div>
-                                <div className="socialName">
+                                <div className="socialName" style={{marginLeft:"-1.5rem"}}>
                                     <span>Bualdfam Trunix </span>
                                 </div>
                                 <div className="removeText">

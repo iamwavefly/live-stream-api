@@ -18,6 +18,10 @@ import ProfileAccount from "./pages/profile/ProfileAccount";
 import ProfileNotification from "./pages/profile/ProfileNotification";
 import Video from "./pages/video/Video";
 import VideoList from "./pages/video/VideoList";
+import Account from "./pages/accounts/Account";
+import Streaming from "./pages/streaming/Streaming";
+import Teams from "./pages/team/Teams";
+import TeamAdmin from "./pages/team/TeamAdmin";
 
 
 function App() {
@@ -41,6 +45,10 @@ function App() {
           <Route path='/profile/notification' component={ProfileNotification} exact />
           <Route path='/video' component={Video} exact />
           <Route path='/video/video-list' component={VideoList} exact />
+          <Route path='/accounts' component={Account} exact />
+          <Route path='/streaming' component={Streaming} exact />
+          <Route path='/teams' component={Teams} exact />
+          <Route path='/teams/admin' component={TeamAdmin} exact />
           <Route path='/privacy-policy' component={Privacy} exact />
           <Route path='/terms-service' component={Terms} exact />
           <Route path='/login/social' component={SocialAuth} exact />

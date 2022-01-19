@@ -31,22 +31,22 @@ const Sidebar = () => {
                         <div className="textBar">Videos</div>
                     </div>
                 </Link>
-                <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
+                <Link to="/accounts" style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">
                             <img src="/images/person-icon.svg" alt="" />
                         </div>
                         <div className="textBar">Accounts</div>
                     </div>
-                </a>
-                <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
+                </Link>
+                <Link to="/streaming" style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">
                             <img src="/images/stream-icon.svg" alt="" />
                         </div>
                         <div className="textBar">Streaming</div>
                     </div>
-                </a>
+                </Link>
                 <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">
@@ -55,14 +55,14 @@ const Sidebar = () => {
                         <div className="textBar">Schedule</div>
                     </div>
                 </a>
-                <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
+                <Link to="/teams" style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">
                             <img src="/images/accounts-icon.svg" alt="" />
                         </div>
                         <div className="textBar">Teams</div>
                     </div>
-                </a>
+                </Link>
                 <a href="#" onClick={logoutHandler} style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">

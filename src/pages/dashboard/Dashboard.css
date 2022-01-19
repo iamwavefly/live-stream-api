@@ -1,6 +1,7 @@
 /* global dashboard styles */
 .mainContent{
     display: flex;
+    background-color: #FAFAFA;
 }
 .left{
     width: 20%;

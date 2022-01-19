@@ -85,7 +85,7 @@ const Video = () => {
                                                 <h5>+</h5>
                                             </div>
                                         </div> */}
-                                        <div className="videoUploadBtn" style={{paddingLeft:"1rem", paddingRight:"1rem"}}>
+                                        <div className="videoUploadBtn" style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
                                             <img src="/images/plus.svg" alt="" />
                                         </div>
                                     </div>
@@ -183,11 +183,13 @@ const Video = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            <div className="viewAll">
-                                <div className="viewAllBtn">
-                                    <Link to="/video/video-list" className='clickBtn' style={{color:"#FFFFFF"}}>View all</Link>
+                            <Link to="/video/video-list" className='clickBtn' style={{ color: "#FFFFFF" }}>
+                                <div className="viewAll">
+                                    <div className="viewAllBtn">
+                                        View all
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

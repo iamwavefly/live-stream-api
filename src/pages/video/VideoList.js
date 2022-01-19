@@ -102,11 +102,13 @@ const VideoList = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            <div className="viewAll">
-                                <div className="viewAllBtn">
-                                    <Link to="/video" className='clickBtn' style={{color:"#FFFFFF"}}> Return Back </Link>
+                            <Link to="/video" className='clickBtn' style={{ color: "#FFFFFF" }}>
+                                <div className="viewAll">
+                                    <div className="viewAllBtn">
+                                        Upload new
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

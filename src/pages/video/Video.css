@@ -253,12 +253,10 @@
     letter-spacing: -0.0457529px;
     color: #3A3B3F;
 }
-td{
+tbody tr{
     background: #FFFFFF;
-    mix-blend-mode: normal;
-    opacity: 1.0;
-    border-top: 1px solid #EBE5FF;
-    border-bottom: 0.5px solid #EBE5FF;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
 }
 
 .videoTableBody{
@@ -267,12 +265,15 @@ td{
 .videoTableBody table{
     width: 100%;
 }
+
 th{
     padding-bottom: 1.0rem;
-}
-.tableBorder td{
-    padding-top: 1.0rem;
-    padding-bottom: 1.0rem;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.8108px;
+    letter-spacing: -0.0457529px;
+    color: #3A3B3F;
 }
 .viewAll{
     display: flex;

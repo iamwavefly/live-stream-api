@@ -10,3 +10,10 @@ button:hover{
     background-color: #1f0e5f;
     transition: 0.6s;
 }
+.contentRight-header h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.87);
+}
