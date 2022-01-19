@@ -25,6 +25,19 @@
     display: flex;
 }
 
+.scheduleStats:hover{
+    background: #451ECC;
+    transition: 0.8s ease-in;
+}
+.scheduleStats:hover > .scheduleNo h3{ 
+    color: #FFFFFF;
+    transition: 0.8s ease-in;
+}
+.scheduleStats:hover > .scheduleText h5{ 
+    color: #FFFFFF;
+    transition: 0.8s ease-in;
+}
+
 .scheduleStats{
     background: #451ECC;
     border-radius: 6px;
@@ -116,6 +129,12 @@
     border-radius: 7.26287px;
     cursor: pointer;
 }
+
+.videoUploadBtn:hover{
+    background: #C5C5C7;
+    transition: 0.8s ease-in;
+}
+
 .plusSign{
     position: relative;
 }
@@ -262,8 +281,21 @@ tbody tr{
 .videoTableBody{
     width:100%
 }
-.videoTableBody table{
+table{
     width: 100%;
+    padding-left: 2.5rem;
+    cursor: pointer;
+}
+th{
+    padding-left: 2.5rem;
+}
+td{
+    padding-left: 2.5rem;
+}
+tbody tr:hover{
+    color: #FFFFFF;
+    background-color: #451ECC;
+    transition: 1s ease-in-out;
 }
 
 th{
@@ -274,6 +306,7 @@ th{
     font-size: 12.8108px;
     letter-spacing: -0.0457529px;
     color: #3A3B3F;
+    
 }
 .viewAll{
     display: flex;
@@ -294,7 +327,7 @@ th{
 }
 .viewAllBtn:hover{
     background: #1f0e5f;
-    transition: 0.6s;
+    transition: 1s ease-in-out;
 }
 .clickBtn{
     text-decoration: none;

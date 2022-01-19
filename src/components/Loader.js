@@ -1,10 +1,12 @@
 import React from 'react'
-import { Spinner } from 'react-bootstrap'
+import './Loader.css'
+// import { Spinner } from 'react-bootstrap'
+
 
 const Loader = () => {
     return (
         <>
-            <div>
+            {/* <div>
                 <Spinner
                     animation='border'
                     role='status'
@@ -16,8 +18,13 @@ const Loader = () => {
                         color: '#451ECC',
                     }}
                 >
-                    {/* <span className='sr-only'>Loading...</span> */}
                 </Spinner>
+            </div> */}
+
+            <div class="overlay">
+                <div class="overlay__inner">
+                    <div class="overlay__content"><span class="spinner"></span></div>
+                </div>
             </div>
 
         </>

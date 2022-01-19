@@ -39,7 +39,7 @@
 }
 .profileContentItem a:hover{
     border-bottom: 1px solid #2b1770;
-    transition: 1.0s;
+    transition: 0.6s ease-in-out;
 }
 
 .headerSectionDiv{

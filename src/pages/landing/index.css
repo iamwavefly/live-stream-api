@@ -279,7 +279,7 @@ width: 75%;
   }
   .btnDiv{
     position: relative;
-    right: 335px;
+    right: 340px;
     background: transition;
     width: 30px;
     cursor: pointer;
@@ -288,7 +288,7 @@ width: 75%;
   .btnStyle{
     background: #451ECC;
     border: white;
-    border-radius: 20px;
+    border-radius: 12px;
     width: 164px;
     height: 50px;
     font-family: Mulish;
@@ -306,7 +306,7 @@ width: 75%;
           /* padding-bottom: 3.5rem; */
       }    
       .btnDiv{
-          right: 102px;
+          right: 114px;
           background: transition;
           cursor: pointer;
           top: 15px;

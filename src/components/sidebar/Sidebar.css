@@ -22,7 +22,7 @@ img{
 }
 .itemBar:hover{
     background: rgba(69, 30, 204, 0.1);
-    transition: 0.5s;
+    transition: 0.5s ease-out;
     border-left: 5px solid #451ECC;
 }
 
@@ -46,5 +46,5 @@ img{
 }
 .reverseIcon a:hover{
     color: #1f0e5f;
-    transition: 0.6s;
+    transition: 0.6s ease-in-out;
 }

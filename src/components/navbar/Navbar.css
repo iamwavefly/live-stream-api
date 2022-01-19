@@ -31,7 +31,7 @@ img{
 }
 .streamNav:hover{
     background: #1f0e5f;
-    transition: 0.6s;
+    transition: 0.6s ease-in-out;
 }
 .streamNav a{
     font-family: Mulish;
@@ -52,7 +52,7 @@ img{
 }
 .notification a:hover{
     background: #1f0e5f;
-    transition: 0.6s;
+    transition: 0.6s ease-in-out;
 }
 .notification a{
     background: #451ECC;
