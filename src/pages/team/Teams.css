@@ -4,14 +4,14 @@
     margin-top: 2.0rem;
 }
 .teamLeft{
-    margin-right: 2.5rem;
+    margin-right: 0.5rem;
 }
 .teamLeftHead{
     display: flex;
     margin-bottom: 2.5rem;
 }
 .teamLeftHeadItem{
-    margin-right: 1.0rem;
+    margin-right: 2.8rem;
     padding-top: 1.0rem;
     padding-left: 1.5rem;
     padding-bottom: 0.5rem;
@@ -60,6 +60,7 @@
     border: 1px solid #C5C5C7;
     box-sizing: border-box;
     border-radius: 8px;
+    width: 92%;
 }
 
 .teamRightTop{
@@ -160,10 +161,14 @@
     width: inherit;
 }
 
+.inputDiv input::placeholder{
+    margin-top: -0.3rem;
+}
+
 .iconDiv{
     position: absolute;
-    left: 30px;
-    right: 10px;
+    left: 63rem;
+    top: 29rem;
     background: transition;
     width: 30px;
 }

@@ -49,6 +49,7 @@ const Teams = () => {
                                     <table>
                                         <thead>
                                             <tr>
+                                                {/* <th></th> */}
                                                 <th>Names</th>
                                                 <th>Email</th>
                                                 <th>Position</th>
@@ -58,6 +59,7 @@ const Teams = () => {
                                         </thead>
                                         <tbody className='tableBorder'>
                                             <tr>
+                                                {/* <td><img src="/images/team.svg" alt="" /></td> */}
                                                 <td>Emilia Dunes</td>
                                                 <td>bill.sanders@example.com</td>
                                                 <td>Personal Assistant</td>
