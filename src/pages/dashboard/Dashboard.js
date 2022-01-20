@@ -1,9 +1,13 @@
+import React, { useState } from 'react';
 import { Link } from "react-router-dom"
 import Navbar from "../../components/navbar/Navbar"
 import Sidebar from "../../components/sidebar/Sidebar"
 import "./Dashboard.css"
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { Tooltip } from "react-bootstrap";
+// import DatePicker from 'sassy-datepicker';
+
+
 // const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 },];
 const data = [
     {
@@ -51,6 +55,9 @@ const data = [
 ]
 
 const Dashboard = () => {
+    // const onChange = (date) => {
+    //     console.log(date.toString());
+    // };
     return (
         <>
             <div className="mainContent">
@@ -187,6 +194,9 @@ const Dashboard = () => {
                                     <p>Detailed live analytics are available from Standard Plan onwards. You can still access basic analytics available on Dashboard.</p>
                                 </div>
                             </div>
+                            {/* <div className="calenderDiv">
+                                <DatePicker onChange={onChange} />
+                            </div> */}
                         </div>
                     </div>
                 </div>

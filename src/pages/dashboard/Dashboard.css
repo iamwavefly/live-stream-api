@@ -89,7 +89,6 @@
 
 .overview-cards:hover{
     background: #451ECC;
-    transition: 1s ease-in;
 }
 
 .overview-cards:hover > .cards-left h1{
@@ -202,6 +201,7 @@
 
 .activityContent{
     margin-bottom: 2.0rem;
+    cursor: pointer;
 }
 
 .activityContent p{
@@ -211,4 +211,8 @@
     font-size: 14px;
     line-height: 15px;
     letter-spacing: 0.073943px;
+}
+
+.calenderDiv{
+    padding:1.5rem
 }
