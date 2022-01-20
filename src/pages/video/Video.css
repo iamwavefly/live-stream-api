@@ -290,7 +290,7 @@ th{
     padding-left: 2.5rem;
 }
 td{
-    padding-left: 2.5rem;
+    padding-left: 1.8rem;
 }
 tbody tr:hover{
     color: #FFFFFF;
@@ -300,6 +300,7 @@ tbody tr:hover{
 
 th{
     padding-bottom: 1.0rem;
+    padding-top: 1rem;
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;

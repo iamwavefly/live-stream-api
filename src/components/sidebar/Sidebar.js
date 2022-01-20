@@ -47,14 +47,14 @@ const Sidebar = () => {
                         <div className="textBar">Streaming</div>
                     </div>
                 </Link>
-                <a href="" style={{ color: "#455A64", textDecoration: "none" }}>
+                <Link to="/schedule" style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">
                             <img src="/images/schedule-icon.svg" alt="" />
                         </div>
                         <div className="textBar">Schedule</div>
                     </div>
-                </a>
+                </Link>
                 <Link to="/teams" style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">
