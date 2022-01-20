@@ -7,7 +7,7 @@ td{
     cursor: pointer;
 }
 button:hover{
-    background-color: #1f0e5f;
+    background-color: #7854ed;
     transition: 0.6s;
 }
 .contentRight-header h4{

@@ -30,7 +30,7 @@ img{
     cursor: pointer;
 }
 .streamNav:hover{
-    background: #1f0e5f;
+    background: #7854ed;
     transition: 0.6s ease-in-out;
 }
 .streamNav a{
@@ -51,7 +51,7 @@ img{
     margin-right: 0.5rem;
 }
 .notification a:hover{
-    background: #1f0e5f;
+    background: #7854ed;
     transition: 0.6s ease-in-out;
 }
 .notification a{

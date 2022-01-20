@@ -1,0 +1,174 @@
+.mainDiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 5rem;
+}
+
+.mainModal{
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+    width: 50%;
+    padding: 4.5rem;
+}
+
+.modalHeader{
+    margin-bottom: 2.5rem;
+}
+.modalHeader h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.modalBody{
+    margin-bottom: 2.0rem;
+}
+.modalBody p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.8108px;
+    letter-spacing: -0.0457529px;
+    color: #000000;
+
+}
+
+.modalActions{
+    display: flex;
+}
+.theButton{
+    margin-right: 1.0rem;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.cancelStyle{
+    padding: 0.8rem;
+    width: 10rem;
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    color: #000000;
+    border: 1px solid #451ECC;
+}
+.cancelStyle:hover{
+    background:#FFFFFF
+}
+
+.continueStyle{
+    padding: 0.8rem;
+    width: 10rem;
+    background: #451ECC;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    color: #FFFFFF;
+    border: 1px solid #451ECC;
+}
+
+.modalQuestion{
+    margin-top: 3.5rem;
+}
+.modalQuestion p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #000000;
+}
+
+.modalFooter{
+    margin-top: 3.5rem;
+}
+
+.modalFooter p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #000000;
+}
+
+.dividerLine{
+    opacity: 0.4;
+    border: 1px solid #C4C4C4;
+    margin-bottom: 1.5rem;
+}
+
+.uploadingBox{
+    border: 1px solid #451ECC;
+    box-sizing: border-box;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadContents{
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.uploadImage{
+    margin-bottom: 1.5rem;
+}
+
+.uploadHeaderMessage{
+    margin-bottom: 2.0rem;
+}
+.uploadHeaderMessage h3{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26.25px;
+    line-height: 33px;
+    text-align: center;
+    text-transform: capitalize;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.uploadTextArea{
+    margin-bottom: 2.0rem;
+}
+
+.uploadTextArea p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #666666;
+}
+
+.uploadTextArea span{
+    font-family: Mulish;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 10.0519px;
+    line-height: 13px;
+    color: #9EA0A5;
+}
+
+.button-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancelCamera{
+    background: #FF3D00;
+    border-radius: 3.66218px;
+    margin-right: 0.5rem;
+    padding: 0.8rem 2.0rem;
+    border: none;
+    color: #FFFFFF;
+}
+.acceptCamera{
+    background: #451ECC;
+    border-radius: 3.66218px;
+    margin-right: 0.5rem;
+    padding: 0.8rem 2.0rem;
+    border: none;
+    color: #FFFFFF;
+}

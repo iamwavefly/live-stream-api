@@ -23,6 +23,8 @@ import Streaming from "./pages/streaming/Streaming";
 import Teams from "./pages/team/Teams";
 import TeamAdmin from "./pages/team/TeamAdmin";
 import Schedule from "./pages/schedule/Schedule";
+import AccountModal from "./components/modals/AccountModal";
+import StreamingModals from "./components/modals/StreamingModals";
 
 
 function App() {
@@ -54,6 +56,10 @@ function App() {
           <Route path='/privacy-policy' component={Privacy} exact />
           <Route path='/terms-service' component={Terms} exact />
           <Route path='/login/social' component={SocialAuth} exact />
+
+
+          <Route path='/acctmodal' component={AccountModal} exact/>
+          <Route path='/streammodal' component={StreamingModals} exact/>
         </Switch>
       </Router>
 
