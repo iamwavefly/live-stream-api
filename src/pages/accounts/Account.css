@@ -6,6 +6,7 @@
 }
 .contentLeft{
     margin-right: 3.5rem;
+    width: 60%;
 }
 
 .addAccountDiv{
@@ -71,7 +72,7 @@
     color: rgba(0, 0, 0, 0.87);
 }
 .mainText{
-    margin-right: 16rem;
+    margin-right: 31rem;
 }
 .subText h6{
     font-family: Mulish;
@@ -130,4 +131,15 @@
 }
 .socialName{
     margin-right: 3.5rem;
+}
+
+.contentRight{
+    width: 50%;
+}
+.contentRight-header h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.87);
 }

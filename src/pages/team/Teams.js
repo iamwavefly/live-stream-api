@@ -138,10 +138,10 @@ const Teams = () => {
                                 <div className="inviteTeamBody">
                                     <div className="inputSection">
                                         <div className="inputFormElement">
-                                            <div className="iconDiv">
+                                            <div className="iconDivElement">
                                                 <img src="/images/mail.svg" alt="" />
                                             </div>
-                                            <div className="inputDiv">
+                                            <div className="inputDivElement">
                                                 <input type="email" placeholder='primustest@company mail.com' name='email' required style={{ borderColor: "#451ECC", paddingLeft: "45px" }} className="form-control " />
                                             </div>
                                         </div>

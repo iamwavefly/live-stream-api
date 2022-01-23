@@ -25,6 +25,10 @@ import TeamAdmin from "./pages/team/TeamAdmin";
 import Schedule from "./pages/schedule/Schedule";
 import AccountModal from "./components/modals/AccountModal";
 import StreamingModals from "./components/modals/StreamingModals";
+import Broadcast from "./pages/broadcast/Broadcast";
+import AllowCameraModal from "./components/modals/AllowCameraModal";
+import ShowSuccessModal from "./components/modals/ShowSuccessModal";
+import SHowFailedModal from "./components/modals/SHowFailedModal";
 
 
 function App() {
@@ -50,6 +54,7 @@ function App() {
           <Route path='/video/video-list' component={VideoList} exact />
           <Route path='/accounts' component={Account} exact />
           <Route path='/streaming' component={Streaming} exact />
+          <Route path='/broadcast' component={Broadcast} exact />
           <Route path='/teams' component={Teams} exact />
           <Route path='/teams/admin' component={TeamAdmin} exact />
           <Route path='/schedule' component={Schedule} exact />
@@ -59,7 +64,7 @@ function App() {
 
 
           <Route path='/acctmodal' component={AccountModal} exact/>
-          <Route path='/streammodal' component={StreamingModals} exact/>
+          <Route path='/streammodal' component={SHowFailedModal} exact/>
         </Switch>
       </Router>
 

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import StreamingModals from '../../components/modals/StreamingModals'
+import ShowSuccessModal from '../../components/modals/ShowSuccessModal'
 import Navbar from "../../components/navbar/Navbar"
 import Sidebar from "../../components/sidebar/Sidebar"
 import './Streaming.css'
 
 const Streaming = () => {
+    const [modal, setModal] = useState(false);
+    const Toggle = () => setModal(!modal);
     return (
         <>
             <div className="mainContent">
@@ -27,9 +31,13 @@ const Streaming = () => {
                                         <h6>IMPORT VIDEO FILE</h6>
                                     </div>
                                     <div className="streamOptionsGroup">
-                                        <div className="streamItem" style={{ border: "0.743529px dashed #FFFFFF", boxSizing: "border-box", borderRadius: "4.46117px" }}>
+                                        <div className="streamItem" style={{ border: "0.743529px dashed #FFFFFF", boxSizing: "border-box", borderRadius: "4.46117px" }} onClick={() => Toggle()}>
                                             <div className="streamImg">
+                                                {/* <label htmlFor="file-input">
+                                                    <img src="/images/folder.svg" alt="" />
+                                                </label> */}
                                                 <img src="/images/folder.svg" alt="" />
+                                                {/* <input id="file-input" type="file" /> */}
                                             </div>
                                             <div className="streamText">
                                                 <h6>My Device</h6>
@@ -51,7 +59,7 @@ const Streaming = () => {
                                                 <h6>Screen Record</h6>
                                             </div>
                                         </div>
-                                        <div className="streamItem" style={{ marginTop: "0.4rem" }}>
+                                        <div className="streamItem" style={{ marginTop: "0.6rem" }}>
                                             <div className="streamImg">
                                                 <img src="/images/previous-uploads.svg" alt="" />
                                             </div>
@@ -93,7 +101,11 @@ const Streaming = () => {
                                             </div>
                                         </div> */}
                                         <div className="videoUploadBtn" style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
+                                            {/* <label htmlFor="file-input">
+                                                <img src="/images/plus.svg" alt="" />
+                                            </label> */}
                                             <img src="/images/plus.svg" alt="" />
+                                            {/* <input id="file-input" type="file" /> */}
                                         </div>
                                     </div>
                                 </div>
@@ -169,6 +181,10 @@ const Streaming = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className='uploadVideoModal'>
+                <StreamingModals show={modal} close={Toggle} />
+                {/* <ShowSuccessModal show={modal} close={Toggle} /> */}
             </div>
         </>
     )

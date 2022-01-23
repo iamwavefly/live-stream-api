@@ -105,7 +105,7 @@ const Dashboard = () => {
                                             <p>SCHEDULED STREAM</p>
                                         </div>
                                         <div className="cards-right">
-                                            <img src="/images/image2.svg" alt="" />
+                                            <img src="/images/Menu.svg" alt="" />
                                         </div>
                                     </div>
                                     <div className="overview-cards gray">
@@ -114,7 +114,7 @@ const Dashboard = () => {
                                             <p>CONNECTED ACCOUNT</p>
                                         </div>
                                         <div className="cards-right">
-                                            <img src="/images/image2.svg" alt="" />
+                                            <img src="/images/Notes.svg" alt="" />
                                         </div>
                                     </div>
                                 </div>

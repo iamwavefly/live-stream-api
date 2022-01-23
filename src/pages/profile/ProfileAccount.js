@@ -1,14 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { fetchUserDetails } from '../../redux/fetchUser/fetchUserAction';
 
 const ProfileAccount = () => {
-    const cancelSettings = (e) => {
-        e.preventDefault()
+    const dispatch = useDispatch();
+    const fetchUser = useSelector((state) => state.fetchUser)
+    const { loading, error, userDet } = fetchUser;
 
-        document.location.href('/profile')
-    }
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin;
+
+    const [email, setEmail] = useState('')
+
+    useEffect(() => {
+        dispatch(fetchUserDetails())
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (!userInfo) {
+            document.location.href("/login")
+        } else {
+            setEmail(userDet?.data?.email)
+        }
+    }, [dispatch, userInfo, userDet]);
     return (
         <>
             <div className="mainContent">
@@ -78,7 +96,7 @@ const ProfileAccount = () => {
                         <div className="accountRight">
                             <div className="messageRight">
                                 <p>
-                                    spontenousdesigns@gmail.com is your current email address registered with LiveSnap. All reminders & notifications will be sent to this email address.
+                                    {email} is your current email address registered with LiveSnap. All reminders & notifications will be sent to this email address.
                                 </p>
                             </div>
                             <div className="changeEmail">
@@ -95,11 +113,6 @@ const ProfileAccount = () => {
                                 <div className="changeEmailFooter">
                                     <button className="saveBtn">Save</button>
                                 </div>
-                                <form onSubmit={cancelSettings}>
-                                    <div className="changeEmailFooter">
-                                        <button className="cancelBtn" onClick={cancelSettings}>Cancel</button>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>

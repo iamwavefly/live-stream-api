@@ -155,7 +155,7 @@
 
 .divContentRight{
     margin-left: 2.9rem;
-    width: 45%;
+    /* width: 45%; */
     cursor: pointer;
 }
 
@@ -212,7 +212,7 @@
     border-radius: 4.5px;
 }
 .storageSpace{
-    margin-left: 19.5rem;
+    margin-left: 30.5rem;
     margin-bottom: 0.5rem;
 }
 .storageSpace span{
@@ -262,7 +262,7 @@
 }
 
 .sortDiv{
-    margin-left: 58rem;
+    margin-left: 70rem;
 }
 .sortDiv h6{
     font-family: Mulish;
@@ -333,4 +333,10 @@ th{
 .clickBtn{
     text-decoration: none;
     color: #FFFFFF;
+}
+
+.videoUploadBtn > input {
+    visibility:hidden;
+    width:0;
+    height:0
 }

@@ -5,7 +5,7 @@ const AccountModal = () => {
     return (
         <div>
             <div className="mainDiv">
-                <div className="mainModal" id='myModal'>
+                {/* <div className="mainModal" id='myModal'>
                     <div className="modalHeader">
                         <h4>Continue as Emilia Dunes?</h4>
                     </div>
@@ -21,12 +21,12 @@ const AccountModal = () => {
                         </div>
                     </div>
                     <div className="modalQuestion">
-                        <p>Not Emilia Dunes? <a href="#" style={{ textDecoration: "none" }}>Log into another account.</a></p>
+                        <p>Not Emilia Dunes? <a href="/login" style={{ textDecoration: "none" }}>Log into another account.</a></p>
                     </div>
                     <div className="modalFooter">
                         <p>LiveSnap’s <a href="/privacy-policy" style={{ textDecoration: "none" }}>Privacy Policy</a> and <a href="/terms-service" style={{ textDecoration: "none" }}>Terms</a></p>
                     </div>
-                </div>
+                </div> */}
                 {/* <div className="mainModal">
                     <div className="modalHeader">
                         <h4 style={{ color: "#FF3366" }}>Error</h4>
@@ -40,6 +40,22 @@ const AccountModal = () => {
                         </div>
                     </div>
                 </div> */}
+                <div className="mainModal">
+                    <div className="modalHeader">
+                        <h4>Remove Account?</h4>
+                    </div>
+                    <div className="modalBody">
+                        <p>Removing account will sign you out of all facebook account on web browsers and mobile apps</p>
+                    </div>
+                    <div className="modalActions">
+                        <div className="theButton">
+                            <button className='cancelStyle'>Cancel</button>
+                        </div>
+                        <div className="theButton">
+                            <button className='continueStyle'>Remove</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

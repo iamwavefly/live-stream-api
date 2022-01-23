@@ -1,15 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Navbar.css"
 import { Link } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { fetchUserDetails } from '../../redux/fetchUser/fetchUserAction';
 
 const Navbar = () => {
+    const dispatch = useDispatch();
+    const fetchUser = useSelector((state) => state.fetchUser)
+    const { loading, error, userDet } = fetchUser;
+
+    const userLogin = useSelector((state) => state.userLogin)
+    const { userInfo } = userLogin;
+
+    const [fullname, setFullname] = useState('')
+
+    useEffect(() => {
+        dispatch(fetchUserDetails())
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (!userInfo) {
+            document.location.href("/login")
+        } else {
+            setFullname(userDet?.data?.fullname)
+        }
+    }, [dispatch, userInfo, userDet]);
     return (
         <>
             <div className='mainNav'>
                 <div className="contentNav">
                     <div className="streamNav">
-                        <a href="#"> + New Stream </a>
+                        <Link to="/streaming"> + New Stream </Link>
                     </div>
                     <div className='subNav'>
                         <div className="notification">
@@ -17,13 +39,13 @@ const Navbar = () => {
                                 <img src="/images/notification.svg" alt="" />
                             </a>
                         </div>
-                        <Link to="/profile" style={{textDecoration:"none"}}>
+                        <Link to="/profile" style={{ textDecoration: "none" }}>
                             <div className="profile">
                                 <div className="profileImage">
                                     <img src="/images/profile-image.svg" alt="" />
                                 </div>
                                 <div className="profileText">
-                                    <div className='profileName'>Emilia Dunes</div>
+                                    <div className='profileName'>{fullname}</div>
                                     <div className='accountStatus'>Free account</div>
                                 </div>
                             </div>

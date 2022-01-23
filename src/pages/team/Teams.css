@@ -63,6 +63,10 @@
     width: 92%;
 }
 
+.teamRight{
+    width: 45%;
+}
+
 .teamRightTop{
     background: #FFFFFF;
     border: 1px solid #C5C5C7;
@@ -157,18 +161,18 @@
     padding: 2.0rem;
 }
 
-.inputDiv{
+.inputDivElemet{
     width: inherit;
 }
 
-.inputDiv input::placeholder{
+.inputDivElement input::placeholder{
     margin-top: -0.3rem;
 }
 
-.iconDiv{
+.iconDivElement{
     position: absolute;
-    left: 63rem;
-    top: 29rem;
+    left: 67rem;
+    top: 29.9rem;
     background: transition;
     width: 30px;
 }

@@ -1,18 +1,16 @@
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../backendUrl";
-import { FETCH_USER_FAIL, FETCH_USER_REQUEST, FETCH_USER_SUCCESS } from "./fetchUserType";
+import { UPDATE_PROFILE_FAILURE, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from "./UpdateProfileTypes";
 
 
-export const fetchUserDetails =
-  () => async (dispatch) => {
+export const editUser =
+  (fullname, email) => async (dispatch) => {
     try {
       dispatch({
-        type: FETCH_USER_REQUEST,
+        type: UPDATE_PROFILE_REQUEST
       });
 
       const user_det = await JSON.parse(localStorage.getItem('userInfo'));
-      // console.log("Bearer "+user_det.token);
-
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -20,22 +18,16 @@ export const fetchUserDetails =
         },
       };
 
-      const { data } = await axios.get(
-        `${BACKEND_BASE_URL}/user/me`,
+      const { data } = await axios.put(
+        `${BACKEND_BASE_URL}/user/update`,
+        { fullname, email },
         config
       );
-      // console.log(data)
 
       dispatch({
-        type: FETCH_USER_SUCCESS,
+        type: UPDATE_PROFILE_SUCCESS,
         payload: data,
       });
-
-      // if( data.status === "success" ){
-      //   setTimeout(()=>{
-      //     document.location.href = "/verify"
-      //   }, 500)
-      // }
 
     //   dispatch({
     //     type: USER_LOGIN_SUCCESS,
@@ -46,7 +38,7 @@ export const fetchUserDetails =
     } catch (error) {
       console.log(error)
       dispatch({
-        type: FETCH_USER_FAIL,
+        type: UPDATE_PROFILE_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

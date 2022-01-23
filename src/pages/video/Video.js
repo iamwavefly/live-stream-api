@@ -86,7 +86,10 @@ const Video = () => {
                                             </div>
                                         </div> */}
                                         <div className="videoUploadBtn" style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
-                                            <img src="/images/plus.svg" alt="" />
+                                            <label htmlFor="file-input">
+                                                <img src="/images/plus.svg" alt="" />
+                                            </label>
+                                            <input id="file-input" type="file" />
                                         </div>
                                     </div>
                                 </div>

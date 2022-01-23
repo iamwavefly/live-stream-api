@@ -3,12 +3,17 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userRegisterReducer} from "./register/RegisterReducer";
 import { userLoginReducer } from "./login/LoginReducer";
+import { fetchUserReducer } from "./fetchUser/fetchUserReducer";
+import { updateUserReducer } from "./profile-update/UpdateProfileReducer";
+import { updatePasswordReducer } from "./password-update/UpdatePasswordReducer";
 
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
-  userLogin: userLoginReducer
- 
+  userLogin: userLoginReducer,
+  fetchUser: fetchUserReducer,
+  changeUser: updateUserReducer,
+  passChange: updatePasswordReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

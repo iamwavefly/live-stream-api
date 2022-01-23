@@ -1,0 +1,125 @@
+
+.mainBroadcast{
+    padding: 2.5rem
+}
+
+.mainBroadHeader{
+    margin-bottom: 1.0rem;
+}
+
+.broadHeader h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 30px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.broadHeader p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.subBroadHeader{
+    margin-bottom: 2.5rem;
+}
+
+.broadcastCardSection{
+    display: flex;
+    margin-bottom: 2.5rem;
+}
+
+.broadcastCardItems{
+    display: flex;
+    padding: 1.5rem;
+    background: #451ECC;
+    border-radius: 10px;
+    margin-right: 2.5rem;
+    cursor: pointer;
+}
+
+.cardItemText h5{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.cardItemIcon{
+    margin-right: 1.5rem;
+}
+.cardItemText{
+    padding-top: 0.5rem;
+}
+
+.formDiv{
+    width: 100%;
+}
+
+.broadcastFormElement{
+    border: 1px solid #C5C5C7;
+    border-radius: 3.63547px;
+    width: 70%;
+    height: auto;
+    margin-bottom: 2.0rem;
+}
+
+input::placeholder{
+    padding-left: 1.0rem;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 25px;
+
+    color: rgba(69, 90, 100, 0.87);
+
+}
+
+.broadcastInputElement{
+    height: 50px;
+    width: 100%;
+}
+
+.broadcastSubmitSection{
+    display: flex;
+}
+
+.cancelBroad{
+    padding: 0.8rem;
+    width: 10rem;
+    background: #FF3D00;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    color: #FFFFFF;
+    border: 1px solid #cc1e1e;
+    margin-right: 1.5rem;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+
+color: #FFFFFF;
+}
+.cancelBroad:hover{
+    background:#FFFFFF
+}
+
+.continueBroad{
+    padding: 0.8rem;
+    width: 10rem;
+    background: #451ECC;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    color: #FFFFFF;
+    border: 1px solid #451ECC;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+}

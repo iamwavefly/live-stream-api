@@ -1,9 +1,15 @@
 .mainDiv{
-    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     justify-content: center;
-    align-content: center;
-    margin-top: 5rem;
+    align-items: center;
+
+    background-color: rgba(20, 19, 19, 0.35);
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .mainModal{
@@ -52,7 +58,7 @@
     background: #FFFFFF;
     box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
     color: #000000;
-    border: 1px solid #451ECC;
+    border: 1px solid #cc1e1e;
 }
 .cancelStyle:hover{
     background:#FFFFFF
@@ -103,6 +109,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 3.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .uploadContents{
@@ -156,7 +164,7 @@
     align-items: center;
 }
 
-.cancelCamera{
+.cancelButton{
     background: #FF3D00;
     border-radius: 3.66218px;
     margin-right: 0.5rem;
@@ -164,7 +172,7 @@
     border: none;
     color: #FFFFFF;
 }
-.acceptCamera{
+.acceptButton{
     background: #451ECC;
     border-radius: 3.66218px;
     margin-right: 0.5rem;
