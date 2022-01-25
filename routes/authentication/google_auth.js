@@ -1,57 +1,46 @@
 const dateUtil = require('date-fns');
 const path = require("path");
 const functions = require("../../utility/function.js")
-
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oidc');
+const passport = require("passport");
 
 const db = require("../../models");
 const USER = db.user;
 
-module.exports = function (passport, app) {
-    let endpoint_category = path.basename(path.dirname(__filename));
 
-    
-    passport.use(new GoogleStrategy( {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/authentication/google_auth/callback",
-        scope: ['profile', 'email'],
-        passReqToCallback: true
-    }, async (request, accessToken, refreshToken, profile, done) => {
-            
-            try {
-    
-                let user = await USER.findOne({ google_id: profile.id });
-                console.log({google_id: profile.id}, "google_id");
-    
-                if (user) {
-                    return done(null, user);
-                } else {
-                    user = await USER.create({
-                        google_id: profile.id,
-                        name: profile.displayName,
-                        email: profile.emails[0].value,
-                        auth_method: "google",
-                        token: functions.uniqueId(30, "alphanumeric"),
-                        password: "",
-                        is_verified: true,
-                        is_blocked: false,
-                        is_registered: true,
-                        
-                    });
-                    return done(null, user);
-                }
-    
-            } catch (error) {
-                return done(error, false, error.message);
-            }
-    
-        }));
+module.exports = function (app) {
 
-    passport.serializeUser(function (user, done) {
-        done(null, user.id);
-    }
-    );
-  
+    app.get(`/auth/google`, async (request, response) => {
+        passport.authenticate('google', { scope: ['profile', 'email'] })(request, response);
+    });
+    
+    app.get(`/auth/google/callback`, passport.authenticate('google', { failureRedirect: '/login' }), async (request, response) => {
+        let user = request.user;
+        let payload = {
+            is_verified: false,
+            is_blocked: false,
+            is_registered: false
+        }
+        let userExists = await USER.find({ email: user.email })
+        if (!functions.empty(userExists)) {
+            payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
+            throw new Error("This email address has been registered already, try another email address.")
+        } else {
+            let verification_code = functions.uniqueId(6, "number");
+            let user = await USER.create({
+                name: user.name,
+                email: user.email,
+                password: "",
+                is_verified: false,
+                is_blocked: false,
+                is_registered: true,
+                verification_code: verification_code,
+                created_at: dateUtil.format(new Date(), "YYYY-MM-DD HH:mm:ss"),
+                updated_at: dateUtil.format(new Date(), "YYYY-MM-DD HH:mm:ss")
+            })
+            payload["is_registered"] = functions.stringToBoolean(user.is_registered)
+            payload["is_verified"] = functions.stringToBoolean(user.is_verified)
+            payload["is_blocked"] = functions.stringToBoolean(user.is_blocked)
+        }
+        response.status(200).json({ "status": 200, "message": "Successfully logged in.", "data": payload });
+    });
 }

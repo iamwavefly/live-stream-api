@@ -10,6 +10,9 @@ var cluster = require('cluster');
 var passport = require ("passport");
 var session = require ("express-session");
 
+//bring in the passport config
+require('./config/passportConfig')(passport);
+
 // DATABASE
 const db = require("./models/index.js");
 db.mongoose.connect(db.url, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
@@ -81,7 +84,7 @@ signup(app)
 resend_code(app)
 reset_password(app)
 verify_code(app)
-google_auth(passport)
+google_auth(app)
 
 // ACCOUNT
 const get_user = require('./routes/account/get_user')
