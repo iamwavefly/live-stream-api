@@ -13,7 +13,7 @@ module.exports = function (app) {
         passport.authenticate('google', { scope: ['profile', 'email'] })(request, response);
     });
     
-    app.get(`/auth/google/callback`, passport.authenticate('google', { failureRedirect: '/login' }), async (request, response) => {
+    app.get(`/auth/google/callback`, passport.authenticate('google', { failureRedirect: 'https://live-snap-front-end.herokuapp.com/login' }), async (request, response) => {
         let user = request.user;
         let payload = {
             is_verified: false,
