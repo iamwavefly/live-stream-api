@@ -32,7 +32,6 @@ module.exports = mongoose => {
         },
         duration: {
             type: Number,
-            default: 0
         },
     }, { timestamps: true });
 
