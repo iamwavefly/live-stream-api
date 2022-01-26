@@ -74,7 +74,7 @@ module.exports = function (app) {
                     
                     payload["email"] = request.body.email
                     response.status(200).json({ "status": 200, "message": "Email address verification code has been sent to your email address.", "data": payload });
-                
+
                 }
 
             } catch (e) {
