@@ -14,4 +14,6 @@ db.url = db_url;
 
 // set the model
 db.user = require("../models/users")(mongoose);
+db.video = require("../models/videos")(mongoose);
+db.team = require("../models/teams")(mongoose);
 module.exports = db;

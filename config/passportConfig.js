@@ -12,8 +12,8 @@ module.exports = function (passport) {  // passport is a global variable
     passport.use(new GoogleStrategy( {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "/api/user/auth/google/callback",
-        // callbackURL: "/authentication/auth/google/callback",
+        // callbackURL: "/api/user/auth/google/callback",
+        callbackURL: "/authentication/auth/google/callback",
         scope: ['profile', 'email'],
         passReqToCallback: true
     }, async (request, accessToken, refreshToken, profile, done) => {

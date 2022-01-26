@@ -38,6 +38,12 @@ module.exports = mongoose => {
             match: [/^[+]?[\s./0-9]*[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/g, 'The phone number entered is invalid, check and retry.'],
             index: true
         },
+        account_type: {
+            type: String,
+            default: "free account",
+            enum: ["paid account"],
+            index: true
+        },
         country: {
             type: String,
             default: ""

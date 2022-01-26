@@ -96,6 +96,26 @@ edit_user(app)
 change_password(app)
 upload_photo(app)
 
+// VIDEO
+const upload_video = require('./routes/video/upload_video')
+const edit_video = require('./routes/video/edit_video')
+const delete_video = require('./routes/video/delete_video')
+const get_videos = require('./routes/video/get_videos')
+upload_video(app)
+edit_video(app)
+delete_video(app)
+get_videos(app)
+
+
+// TEAM
+const create_team = require('./routes/team/create_team')
+const edit_team = require('./routes/team/edit_team')
+const delete_team = require('./routes/team/delete_team')
+const get_teams = require('./routes/team/get_teams')
+create_team(app)
+edit_team(app)
+delete_team(app)
+get_teams(app)
 
 app.get("/", (req, res) => {
   res.status(200).json({ "status": 200, "message": "Welcome to live snap api.", "data": null })
