@@ -17,11 +17,12 @@ module.exports = function (app) {
 
         /* 
         token
+        password
         new_password
         confirm_password
         */
 
-        if (request.body.token && request.body.new_password && request.body.confirm_password) {
+        if (request.body.token && request.body.password && request.body.new_password && request.body.confirm_password) {
 
             let payload = {
                 is_verified: false,
@@ -44,6 +45,16 @@ module.exports = function (app) {
                         payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
                         throw new Error("This user authentication token has expired, login again retry.")
+                    }
+
+                    // decrypt the password in the database and compare it with the one sent in the request body
+                    const password = functions.decrypt(userExists.password);
+                    if (password !== request.body.password) {
+                        console.log("password", password)
+                        payload["is_verified"] = functions.stringToBoolean(userExists.is_verified)
+                        payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
+                        payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
+                        throw new Error("The password entered is incorrect, check and retry.")
                     }
 
                     // Check if new password matches old password
