@@ -29,6 +29,7 @@ import Broadcast from "./pages/broadcast/Broadcast";
 import AllowCameraModal from "./components/modals/AllowCameraModal";
 import ShowSuccessModal from "./components/modals/ShowSuccessModal";
 import SHowFailedModal from "./components/modals/SHowFailedModal";
+import CreateNewSchedule from "./pages/schedule/CreateNewSchedule";
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
           <Route path='/broadcast' component={Broadcast} exact />
           <Route path='/teams' component={Teams} exact />
           <Route path='/teams/admin' component={TeamAdmin} exact />
+          <Route path='/schedule/create-schedule' component={CreateNewSchedule} exact />
           <Route path='/schedule' component={Schedule} exact />
           <Route path='/privacy-policy' component={Privacy} exact />
           <Route path='/terms-service' component={Terms} exact />

@@ -31,7 +31,7 @@ const ConfirmPassCode = () => {
                                                 <img src="/images/Lock.svg" alt="" />
                                             </div>
                                             <div className="inputDiv">
-                                                <input type="text" placeholder='Enter reset code' name='email' style={{ borderColor: "#451ECC", paddingLeft: "45px" }} className="form-control" />
+                                                <input type="text" placeholder='Enter reset code' name='email' style={{ borderColor: "#451ECC", paddingLeft: "35px" }} className="form-control" />
                                             </div>
                                         </div>
                                         <div className='hint' style={{ margin: "15px", textAlign:"center" }}>

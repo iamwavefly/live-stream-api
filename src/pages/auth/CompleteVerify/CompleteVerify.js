@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import './CompleteVerify.css'
 
 const CompleteVerify = () => {
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            document.location.href("/login")
+        }, 1000);
+    }, []);
+
     return (
         <>
             <section>
@@ -17,8 +25,7 @@ const CompleteVerify = () => {
                                         <img src="/images/Group.svg" style={{ paddingTop: "10px" }} alt="" />
                                     </div>
                                     <div className='message'>
-                                        <p>Thanks for verifying your email address, you can now proceed wiith your registration.
-                                            You will be automatically redirected to Login</p>
+                                        <p>Thanks for verifying your email address, you registration is now complete and you can now proceed to <Link to="/login">Login</Link> to your account</p>
                                     </div>
                                 </div>
                             </div>

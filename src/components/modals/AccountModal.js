@@ -5,7 +5,7 @@ const AccountModal = () => {
     return (
         <div>
             <div className="mainDiv">
-                {/* <div className="mainModal" id='myModal'>
+                <div className="mainModal" id='myModal'>
                     <div className="modalHeader">
                         <h4>Continue as Emilia Dunes?</h4>
                     </div>
@@ -26,7 +26,7 @@ const AccountModal = () => {
                     <div className="modalFooter">
                         <p>LiveSnap’s <a href="/privacy-policy" style={{ textDecoration: "none" }}>Privacy Policy</a> and <a href="/terms-service" style={{ textDecoration: "none" }}>Terms</a></p>
                     </div>
-                </div> */}
+                </div>
                 {/* <div className="mainModal">
                     <div className="modalHeader">
                         <h4 style={{ color: "#FF3366" }}>Error</h4>
@@ -40,7 +40,7 @@ const AccountModal = () => {
                         </div>
                     </div>
                 </div> */}
-                <div className="mainModal">
+                {/* <div className="mainModal">
                     <div className="modalHeader">
                         <h4>Remove Account?</h4>
                     </div>
@@ -55,7 +55,7 @@ const AccountModal = () => {
                             <button className='continueStyle'>Remove</button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

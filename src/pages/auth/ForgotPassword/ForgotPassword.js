@@ -35,7 +35,7 @@ const ForgotPassword = () => {
                                                 <img src="/images/mail.svg" alt="" />
                                             </div>
                                             <div className="inputDiv">
-                                                <input type="email" placeholder='Email' name='email' style={{ borderColor: "#451ECC", paddingLeft: "45px" }} className="form-control" />
+                                                <input type="email" placeholder='Email' name='email' style={{ borderColor: "#451ECC", paddingLeft: "35px" }} className="form-control" />
                                             </div>
                                         </div>
 

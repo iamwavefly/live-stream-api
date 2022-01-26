@@ -1,18 +1,13 @@
-import{
-    USER_REGISTER_FAIL,
-    USER_REGISTER_REQUEST,
-    USER_REGISTER_SUCCESS,
-} from "./RegisterTypes";
-
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../backendUrl";
+import { VERIFY_EMAIL_FAILURE, VERIFY_EMAIL_REQUEST, VERIFY_EMAIL_SUCCESS } from "./VerifyTypes";
 
 
-export const register =
-  (name, email, password) => async (dispatch) => {
+export const verify =
+  (email, verification_code) => async (dispatch) => {
     try {
       dispatch({
-        type: USER_REGISTER_REQUEST,
+        type: VERIFY_EMAIL_REQUEST,
       });
 
       const config = {
@@ -20,19 +15,21 @@ export const register =
           "Content-Type": "application/json",
         },
       };
+
       const { data } = await axios.post(
-        `${BACKEND_BASE_URL}/authentication/signup`,
-        { name, email, password },
+        `${BACKEND_BASE_URL}/authentication/verify_code`,
+        { email, verification_code },
         config
       );
+      console.log(data)
 
       dispatch({
-        type: USER_REGISTER_SUCCESS,
+        type: VERIFY_EMAIL_SUCCESS,
         payload: data,
       });
       if( data.status === 200 ){
         setTimeout(()=>{
-          document.location.href = "/verify?email="+email
+          document.location.href = "/verify-complete"
         }, 500)
       }
 
@@ -45,9 +42,11 @@ export const register =
     } catch (error) {
       console.log(error)
       dispatch({
-        type: USER_REGISTER_FAIL,
+        type: VERIFY_EMAIL_FAILURE,
         payload:
           error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
       });
     }
   };

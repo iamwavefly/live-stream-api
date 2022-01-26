@@ -12,7 +12,7 @@ toast.configure()
 
 
 const Register = () => {
-    const [fullname, setFullname] = useState();
+    const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setpassword] = useState();
     const [passwordShown, setPasswordShown] = useState(false);
@@ -37,7 +37,7 @@ const Register = () => {
     const handleReg = (e) => {
         e.preventDefault();
 
-        dispatch(register(fullname, email, password))
+        dispatch(register(name, email, password))
     }
     return (
         <>
@@ -74,7 +74,7 @@ const Register = () => {
                                                 <img src="/images/Profile.svg" alt="" />
                                             </div>
                                             <div className='inputDiv'>
-                                                <input type="text" placeholder='Full name' required value={fullname} onChange={(e) => setFullname(e.target.value)} name='fullname' style={{ paddingLeft: "45px" }} className="form-control" />
+                                                <input type="text" placeholder='Full name' required value={name} onChange={(e) => setName(e.target.value)} name='name' style={{ paddingLeft: "35px" }} className="form-control" />
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -82,7 +82,7 @@ const Register = () => {
                                                 <img src="/images/mail.svg" alt="" />
                                             </div>
                                             <div className="inputDiv">
-                                                <input type="email" placeholder='Email' required value={email} onChange={(e) => setEmail(e.target.value)} name='email' style={{ paddingLeft: "45px" }} className="form-control" />
+                                                <input type="email" placeholder='Email' required value={email} onChange={(e) => setEmail(e.target.value)} name='email' style={{ paddingLeft: "35px" }} className="form-control" />
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -90,7 +90,7 @@ const Register = () => {
                                                 <img src="/images/Lock.svg" alt="" />
                                             </div>
                                             <div className="inputDiv">
-                                                <input type={passwordShown ? "text" : "password"} required value={password} onChange={(e) => setpassword(e.target.value)} name='password' placeholder='Password' style={{ paddingLeft: "45px" }} className="form-control" />
+                                                <input type={passwordShown ? "text" : "password"} required value={password} onChange={(e) => setpassword(e.target.value)} name='password' placeholder='Password' style={{ paddingLeft: "35px" }} className="form-control" />
                                             </div>
                                             <div className="iconDivPass">
                                                 <i onClick={togglePassword} className='icon'><img src="/images/eye.svg" alt="" /></i>

@@ -6,6 +6,7 @@ import { userLoginReducer } from "./login/LoginReducer";
 import { fetchUserReducer } from "./fetchUser/fetchUserReducer";
 import { updateUserReducer } from "./profile-update/UpdateProfileReducer";
 import { updatePasswordReducer } from "./password-update/UpdatePasswordReducer";
+import { verifyEmailReducer } from "./verify/VerifyReducer";
 
 
 const reducer = combineReducers({
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   fetchUser: fetchUserReducer,
   changeUser: updateUserReducer,
   passChange: updatePasswordReducer,
+  userVerify: verifyEmailReducer,
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

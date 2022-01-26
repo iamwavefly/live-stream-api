@@ -17,7 +17,7 @@ export const login =
       };
 
       const { data } = await axios.post(
-        `${BACKEND_BASE_URL}/user/login`,
+        `${BACKEND_BASE_URL}/authentication/login`,
         { email, password },
         config
       );
@@ -26,7 +26,7 @@ export const login =
         type: USER_LOGIN_SUCCESS,
         payload: data,
       });
-      if( data.status === "Success" ){
+      if( data.status === 200 ){
         setTimeout(()=>{
           document.location.href = "/dashboard"
         }, 500)

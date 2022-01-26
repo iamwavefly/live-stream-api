@@ -37,7 +37,7 @@ const CreateNewPassword = () => {
                                                 <img src="/images/Lock.svg" alt="" />
                                             </div>
                                             <div className="inputDiv">
-                                                <input type={passwordShown ? "text" : "password"} name='password1' placeholder='Enter new password' style={{ borderColor: "#451ECC", paddingLeft: "45px" }} className="form-control" />
+                                                <input type={passwordShown ? "text" : "password"} name='password1' placeholder='Enter new password' style={{ borderColor: "#451ECC", paddingLeft: "35px" }} className="form-control" />
                                             </div>
                                             <div className="iconDivPass">
                                                 <i onClick={togglePassword} className='icon'><img src="/images/eye.svg" alt="" /></i>
@@ -48,7 +48,7 @@ const CreateNewPassword = () => {
                                                 <img src="/images/Lock.svg" alt="" />
                                             </div>
                                             <div className="inputDiv">
-                                                <input type={passwordShown ? "text" : "password"} name='password2' placeholder='Confirm password' style={{ paddingLeft: "45px" }} className="form-control" />
+                                                <input type={passwordShown ? "text" : "password"} name='password2' placeholder='Confirm password' style={{ paddingLeft: "35px" }} className="form-control" />
                                             </div>
                                             <div className="iconDivPass">
                                                 <i onClick={togglePassword} className='icon'><img src="/images/eye.svg" alt="" /></i>

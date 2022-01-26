@@ -74,7 +74,7 @@ const Login = () => {
                                             </div>
                                             <div className="inputDiv">
                                                 <input type="email" placeholder='Email' name='email' required
-                                                    value={email} onChange={(e) => setEmail(e.target.value)} style={{ borderColor: "#451ECC", paddingLeft: "45px" }} className="form-control " />
+                                                    value={email} onChange={(e) => setEmail(e.target.value)} style={{ borderColor: "#451ECC", paddingLeft: "35px" }} className="form-control " />
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -83,7 +83,7 @@ const Login = () => {
                                             </div>
                                             <div className="inputDiv">
                                                 <input type={passwordShown ? "text" : "password"} name='password' required
-                                                    value={password} onChange={(e) => setpassword(e.target.value)} placeholder='Password' style={{ paddingLeft: "45px" }} className="form-control" />
+                                                    value={password} onChange={(e) => setpassword(e.target.value)} placeholder='Password' style={{ paddingLeft: "35px" }} className="form-control" />
                                             </div>
                                             <div className="iconDivPass">
                                                 <i onClick={togglePassword} className='icon'><img src="/images/eye.svg" alt="" /></i>
