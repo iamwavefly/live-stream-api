@@ -50,7 +50,6 @@ module.exports = function (app) {
                     // decrypt the password in the database and compare it with the one sent in the request body
                     const password = functions.decrypt(userExists.password);
                     if (password !== request.body.password) {
-                        console.log("password", password)
                         payload["is_verified"] = functions.stringToBoolean(userExists.is_verified)
                         payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)

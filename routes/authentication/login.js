@@ -4,6 +4,7 @@ const functions = require("../../utility/function.js")
 
 const db = require("../../models");
 const USER = db.user;
+const TEAM = db.team;
 
 // CACHE
 const NodeCache = require('node-cache');
@@ -95,7 +96,36 @@ module.exports = function (app) {
                 }
 
             } else {
-                response.status(400).json({ "status": 400, "message": "Incorrect user login credential entered, check and retry.", "data": payload });
+               //check if its a team member and confirm password is correct
+                let teamExists = await TEAM.find({ email: request.body.email})
+                if (!functions.empty(teamExists)) {
+                    teamExists = Array.isArray(teamExists)? teamExists[0] : teamExists;
+                    let decrypted_password = await functions.decrypt(teamExists.password)
+                    if (decrypted_password === request.body.password) {
+                        payload["is_verified"] = functions.stringToBoolean(teamExists.is_verified)
+                        payload["is_blocked"] = functions.stringToBoolean(teamExists.is_blocked)
+                        payload["is_registered"] = functions.stringToBoolean(teamExists.is_registered)
+                        payload["name"] = teamExists.name
+                        let new_token = teamExists.token; //functions.uniqueId(30, "alphanumeric");
+                        payload["token"] = new_token
+
+                        await TEAM.updateOne(
+                            {email: request.body.email},
+                            {
+                                token: new_token,
+                                token_expiry: dateUtil.addMinutes(new Date(), process.env.TOKEN_EXPIRY_MINUTES).toISOString()
+                            }
+                        );
+
+                        response.status(200).json({ "status": 200, "message": "Team login details has been verified successfully.", "data": payload });
+
+                    } else {
+                        payload["is_verified"] = functions.stringToBoolean(teamExists.is_verified)
+                        payload["is_blocked"] = functions.stringToBoolean(teamExists.is_blocked)
+                        payload["is_registered"] = functions.stringToBoolean(teamExists.is_registered)
+                        response.status(400).json({ "status": 400, "message": "Incorrect team access key (pin or password) credential entered, check and retry.", "data": payload });
+                    }
+                }
             }
 
         } else {

@@ -49,7 +49,7 @@ module.exports = function (app) {
                             token: request.body.token,
                             name: request.body.name,
                             email: request.body.email,
-                            password: request.body.password
+                            password: functions.encrypt(request.body.password),
                         })
 
                         teamExists = await TEAM.find({ token: request.body.token})
