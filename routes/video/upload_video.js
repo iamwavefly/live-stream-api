@@ -7,6 +7,7 @@ const axios = require('axios');
 const storage = multer.memoryStorage()
 const upload = multer({storage: storage});
 const fs = require('fs');
+const { getVideoDurationInSeconds } = require('get-video-duration')
 
 const db = require("../../models");
 const USER = db.user;
@@ -110,8 +111,7 @@ module.exports = function (app) {
                                 name: filename,
                                 url: file_path,
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
-                                duration: await functions.getVideoDuration(file_path),
-                            
+                                duration: await getVideoDurationInSeconds(file_path),
                             })
                         });
 
