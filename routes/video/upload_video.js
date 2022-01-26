@@ -110,8 +110,9 @@ module.exports = function (app) {
                                 name: filename,
                                 url: file_path,
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
+                                duration: await functions.getVideoDuration(file_path),
+                            
                             })
-                            console.log((file_buffer.length/1024/1024).toFixed(2))
                         });
 
                     }else{
