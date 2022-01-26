@@ -30,6 +30,11 @@ module.exports = mongoose => {
             type: Number,
             default: 0
         },
+        type: {
+            type: String,
+            default: "video",
+            enum: ["video", "audio"]
+        },
         duration: {
             type: Number,
             default: 0

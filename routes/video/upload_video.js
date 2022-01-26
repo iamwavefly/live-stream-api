@@ -6,6 +6,7 @@ const multer = require('multer');
 const axios = require('axios');
 const storage = multer.memoryStorage()
 const upload = multer({storage: storage});
+const fs = require('fs');
 
 const db = require("../../models");
 const USER = db.user;
@@ -108,7 +109,8 @@ module.exports = function (app) {
                                 token: request.body.token,
                                 name: filename,
                                 url: file_path,
-                                size: file_buffer.length /1e+6,
+                                size: (file_buffer.length / 1024 / 1024).toFixed(2),
+                                type: path.extname(file_path).replace(".", ""),
                             })
                         });
 
