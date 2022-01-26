@@ -110,8 +110,8 @@ module.exports = function (app) {
                                 name: filename,
                                 url: file_path,
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
-                                type: path.extname(file_path).replace(".", ""),
                             })
+                            console.log((file_buffer.length/1024/1024).toFixed(2))
                         });
 
                     }else{
@@ -121,7 +121,7 @@ module.exports = function (app) {
                         if(request.body.file_url){
                             if(functions.validURL(request.body.file_url)){
 
-                                let filename = "video_"+functions.uniqueId(30, "alphanumeric");
+                                let filename = "video_"+functions.uniqueId(6, "number");
                                 uploadParams.Key = filename;
 
                                 uploadUrlToS3(request.body.file_url).then(async (data) => {
@@ -130,7 +130,8 @@ module.exports = function (app) {
                                         video_id: functions.uniqueId(10, "alphanumeric"),
                                         token: request.body.token,
                                         name: filename,
-                                        url: file_path
+                                        url: file_path,
+                                        size: (file_buffer.length / 1024 / 1024).toFixed(2),
                                     })
                                 }).catch((error) => {
                                     throw new Error(error.message)
