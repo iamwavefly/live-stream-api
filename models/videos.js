@@ -21,6 +21,19 @@ module.exports = mongoose => {
             type: String,
             default: ""
         },
+        status: {
+            type: String,
+            default: "queued",
+            enum: ["queued", "InProgress", "Streamed", "failed"],
+        },
+        size: {
+            type: Number,
+            default: 0
+        },
+        duration: {
+            type: Number,
+            default: 0
+        },
     }, { timestamps: true });
 
     const Video = mongoose.model("video", schema);

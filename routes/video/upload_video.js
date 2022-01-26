@@ -22,7 +22,7 @@ const uploadParams = {
     Key: null,
     Body: null,
     ContentEncoding: 'base64',
-    ContentType: 'video/mp4'
+    ContentType: 'video/mp4, video/avi, video/webm, video/mkv',
 };
 
 const uploadUrlToS3 = (url) => {
@@ -90,7 +90,7 @@ module.exports = function (app) {
                     // UPLOAD FROM FILE
                     if(request.body.file_base64){
 
-                        let filename = "video_"+functions.uniqueId(30, "alphanumeric");
+                        let filename = "video_"+functions.uniqueId(6, "number");
                         uploadParams.Key = filename;
 
                         let file_buffer = new Buffer.from(request.body.file_base64.replace("data:image/gif;base64,", "").replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "").replace("data:video/mp4;base64,", "").replace("data:video/webm;base64,", "").replace("data:video/mov;base64,", "").replace("data:audio/mp3;base64,", "").replace("data:audio/mpeg;base64,", "").replace("data:audio/wav;base64,", ""), "base64")
@@ -108,6 +108,7 @@ module.exports = function (app) {
                                 token: request.body.token,
                                 name: filename,
                                 url: file_path,
+                                size: file_buffer.length /1e+6,
                             })
                         });
 
