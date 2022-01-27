@@ -91,11 +91,8 @@ module.exports = function (app) {
 
                     // UPLOAD FROM FILE
                     if(request.body.file_base64){
-
-                        // let filename = "video_"+functions.uniqueId(6, "number");
-                        // uploadParams.Key = filename;
                         
-                        let filename = "video_"+functions.uniqueId(15, "alphanumeric");
+                        let filename = "video_"+functions.uniqueId(6, "alphanumeric");
                         uploadParams.Key = filename;
                         
                         let file_buffer = new Buffer.from(request.body.file_base64.replace("data:image/gif;base64,", "").replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "").replace("data:video/mp4;base64,", "").replace("data:video/webm;base64,", "").replace("data:video/mov;base64,", "").replace("data:audio/mp3;base64,", "").replace("data:audio/mpeg;base64,", "").replace("data:audio/wav;base64,", ""), "base64")
@@ -107,18 +104,19 @@ module.exports = function (app) {
                                 throw new Error(error.message)
                             }
 
-                            let file_path = `https://${uploadParams.Bucket}.s3.${process.env.S3_REGION}.amazonaws.com/${filename}`
+                            let file_path = `https://${uploadParams.Bucket}.s3.${process.env.S3_REGION}.amazonaws.com/${filename}`;
+                            let file_duration = await getVideoDurationInSeconds(file_path);
                             await VIDEO.create({
                                 video_id: functions.uniqueId(10, "alphanumeric"),
                                 token: request.body.token,
                                 name: filename,
                                 url: file_path,
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
-                                duration: await getVideoDurationInSeconds(file_path),
-                                // duration: await getVideoDurationInSeconds(file_path).then(duration => duration).catch(err => {
-                                //     throw new Error(err.message)}),
+                                duration: file_duration,
                             })
-                        });
+                        }).catch(error => {
+                            throw new Error(error.message)
+                        })
 
                     }else{
                         
@@ -127,18 +125,19 @@ module.exports = function (app) {
                         if(request.body.file_url){
                             if(functions.validURL(request.body.file_url)){
 
-                                let filename = "video_"+functions.uniqueId(6, "number");
+                                let filename = "video_"+functions.uniqueId(6, "alphanumeric");
                                 uploadParams.Key = filename;
 
                                 uploadUrlToS3(request.body.file_url).then(async (data) => {
                                     let file_path = `https://${uploadParams.Bucket}.s3.${process.env.S3_REGION}.amazonaws.com/${filename}`
+                                    let file_duration = await getVideoDurationInSeconds(file_path);
                                     await VIDEO.create({
                                         video_id: functions.uniqueId(10, "alphanumeric"),
                                         token: request.body.token,
                                         name: filename,
                                         url: file_path,
                                         size: (file_buffer.length / 1024 / 1024).toFixed(2),
-                                        duration: await getVideoDurationInSeconds(file_path),
+                                        duration: file_duration,
                                     })
                                 }).catch((error) => {
                                     throw new Error(error.message)
@@ -173,33 +172,3 @@ module.exports = function (app) {
     })
 
 }
-
-
-// if (request.body.token && request.body.video_id) {
-//     let payload = {
-//         token: request.body.token,
-//         video_id: request.body.video_id,
-//         scheduled_at: request.body.scheduled_at
-//     }
-//     let user = await USER.findOne({ where: { token: payload.token } });
-//     if (user) {
-//         let video = await VIDEO.findOne({ where: { id: payload.video_id } });
-//         if (video) {
-//             let job = bull.add(payload.video_id, { scheduled_at: payload.scheduled_at });
-//             response.send({
-//                 status: "success",
-//                 message: "Video scheduled successfully"
-//             });
-//         } else {
-//             response.send({
-//                 status: "error",
-//                 message: "Video not found"
-//             });
-//         }
-//     } else {
-//         response.send({
-//             status: "error",
-//             message: "User not found"
-//         });
-//     }
-// }
