@@ -111,6 +111,7 @@ module.exports = function (app) {
                                 name: filename,
                                 url: file_path,
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
+                                duration: await getVideoDurationInSeconds(file_path),
                                 // duration: await getVideoDurationInSeconds(file_path).then(duration => duration).catch(err => {
                                 //     throw new Error(err.message)}),
                             })
