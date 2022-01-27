@@ -29,37 +29,35 @@ module.exports = mongoose => {
             type: String,
             default: ""
         },
-        stream : {
-            title:{
-                type: String,
-                default: ""
-            },
-            description:{
-                type: String,
-                default: ""
-            },
-            tags:{
-                type: String,
-                default: ""
-            },
-            stream_date:{
-                type: Date,
-                default: Date.now
-            },
-            stream_time:{
-                type: String,
-                default: ""
-            },
-            is_scheduled:{
-                type: Boolean,
-                default: false
-            },
-            status: {
-                type: String,
-                default: "queued",
-                enum: ["queued", "Scheduled", "InProgress", "Streamed", "failed"],
-            },
-        },  
+        title:{
+            type: String,
+            default: ""
+        },
+        description:{
+            type: String,
+            default: ""
+        },
+        tags:{
+            type: String,
+            default: ""
+        },
+        stream_date:{
+            type: Date,
+            default: Date.now
+        },
+        stream_time:{
+            type: String,
+            default: ""
+        },
+        is_scheduled:{
+            type: Boolean,
+            default: false
+        },
+        status: {
+            type: String,
+            default: "Queued",
+            enum: ["Queued", "Scheduled", "InProgress", "Streamed", "failed"],
+        },
     }, { timestamps: true });
 
     const Video = mongoose.model("video", schema);

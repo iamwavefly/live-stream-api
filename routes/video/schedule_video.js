@@ -94,10 +94,6 @@ module.exports = function (app) {
         } else {
             response.status(400).json({ "status": 400, "message": "Incomplete or missing requests parameter(s)", "data": null });
         }
-     
-
-       
-      
 
     })
 
