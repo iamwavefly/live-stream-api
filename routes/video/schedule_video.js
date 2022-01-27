@@ -9,7 +9,7 @@ const VIDEO = db.video;
 module.exports = function (app) {
     let endpoint_category = path.basename(path.dirname(__filename));
 
-    app.post(`/${endpoint_category}/schedule_video`, async (request, response) => {
+    app.put(`/${endpoint_category}/schedule_video`, async (request, response) => {
 
         /* 
         token

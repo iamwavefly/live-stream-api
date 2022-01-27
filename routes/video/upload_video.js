@@ -92,9 +92,12 @@ module.exports = function (app) {
                     // UPLOAD FROM FILE
                     if(request.body.file_base64){
 
-                        let filename = "video_"+functions.uniqueId(6, "number");
+                        // let filename = "video_"+functions.uniqueId(6, "number");
+                        // uploadParams.Key = filename;
+                        
+                        let filename = "video_"+functions.uniqueId(15, "alphanumeric");
                         uploadParams.Key = filename;
-
+                        
                         let file_buffer = new Buffer.from(request.body.file_base64.replace("data:image/gif;base64,", "").replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "").replace("data:video/mp4;base64,", "").replace("data:video/webm;base64,", "").replace("data:video/mov;base64,", "").replace("data:audio/mp3;base64,", "").replace("data:audio/mpeg;base64,", "").replace("data:audio/wav;base64,", ""), "base64")
                         uploadParams.Body = file_buffer;
                         const params = uploadParams;
@@ -135,6 +138,7 @@ module.exports = function (app) {
                                         name: filename,
                                         url: file_path,
                                         size: (file_buffer.length / 1024 / 1024).toFixed(2),
+                                        duration: await getVideoDurationInSeconds(file_path),
                                     })
                                 }).catch((error) => {
                                     throw new Error(error.message)
@@ -152,7 +156,6 @@ module.exports = function (app) {
                     payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
                     payload["videos"] = videoExists,
-                    console.log(videoExists)
                     response.status(200).json({ "status": 200, "message": "Hurray! video has uploaded successfully.", "data": payload });
 
                 } catch (e) {
