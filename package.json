@@ -18,6 +18,8 @@
     "aws-sdk": "^2.1056.0",
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
+    "bull": "^4.4.0",
+    "bullmq": "^1.67.1",
     "cluster": "^0.7.7",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
@@ -38,6 +40,7 @@
     "passport-google-oidc": "^0.1.0",
     "passport-linkedin-oauth2": "^2.0.0",
     "path": "^0.12.7",
+    "redis": "^4.0.2",
     "request": "^2.88.2"
   }
 }

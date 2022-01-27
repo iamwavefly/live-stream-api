@@ -9,6 +9,7 @@ const cors = require('cors');
 var cluster = require('cluster');
 var passport = require ("passport");
 var session = require ("express-session");
+const redis = require('redis');
 
 //bring in the passport config
 require('./config/passportConfig')(passport);
@@ -69,6 +70,20 @@ app.use(bodyParser.urlencoded({
 //STATIC
 app.use('/media', express.static('media'))
 
+// connect to redis
+const redisClient = redis.createClient({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD
+});
+
+console.log(`Running in ${process.env.MODE} mode`);
+
+
+// client.on('error', function (err) {
+//     console.log('Error ' + err);
+// });
+
 
 // ROUTES
 
@@ -101,10 +116,12 @@ const upload_video = require('./routes/video/upload_video')
 const edit_video = require('./routes/video/edit_video')
 const delete_video = require('./routes/video/delete_video')
 const get_videos = require('./routes/video/get_videos')
+const schedule_video = require('./routes/video/schedule_video')
 upload_video(app)
 edit_video(app)
 delete_video(app)
 get_videos(app)
+schedule_video(app)
 
 
 // TEAM

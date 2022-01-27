@@ -111,7 +111,8 @@ module.exports = function (app) {
                                 name: filename,
                                 url: file_path,
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
-                                duration: await getVideoDurationInSeconds(file_path),
+                                // duration: await getVideoDurationInSeconds(file_path).then(duration => duration).catch(err => {
+                                //     throw new Error(err.message)}),
                             })
                         });
 
@@ -150,6 +151,7 @@ module.exports = function (app) {
                     payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
                     payload["videos"] = videoExists,
+                    console.log(videoExists)
                     response.status(200).json({ "status": 200, "message": "Hurray! video has uploaded successfully.", "data": payload });
 
                 } catch (e) {
@@ -167,3 +169,33 @@ module.exports = function (app) {
     })
 
 }
+
+
+// if (request.body.token && request.body.video_id) {
+//     let payload = {
+//         token: request.body.token,
+//         video_id: request.body.video_id,
+//         scheduled_at: request.body.scheduled_at
+//     }
+//     let user = await USER.findOne({ where: { token: payload.token } });
+//     if (user) {
+//         let video = await VIDEO.findOne({ where: { id: payload.video_id } });
+//         if (video) {
+//             let job = bull.add(payload.video_id, { scheduled_at: payload.scheduled_at });
+//             response.send({
+//                 status: "success",
+//                 message: "Video scheduled successfully"
+//             });
+//         } else {
+//             response.send({
+//                 status: "error",
+//                 message: "Video not found"
+//             });
+//         }
+//     } else {
+//         response.send({
+//             status: "error",
+//             message: "User not found"
+//         });
+//     }
+// }
