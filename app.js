@@ -117,11 +117,13 @@ const edit_video = require('./routes/video/edit_video')
 const delete_video = require('./routes/video/delete_video')
 const get_videos = require('./routes/video/get_videos')
 const schedule_video = require('./routes/video/schedule_video')
+const get_scheduled_video = require('./routes/video/get_scheduled_video')
 upload_video(app)
 edit_video(app)
 delete_video(app)
 get_videos(app)
 schedule_video(app)
+get_scheduled_video(app)
 
 
 // TEAM

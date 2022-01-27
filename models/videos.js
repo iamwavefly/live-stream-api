@@ -11,7 +11,7 @@ module.exports = mongoose => {
             type: String,
             required: true
         },
-        author: { 
+        scheduled_by: { 
             type: String
         },
         name: { 
@@ -42,8 +42,8 @@ module.exports = mongoose => {
             default: ""
         },
         stream_date:{
-            type: Date,
-            default: Date.now
+            type: String,
+            default: ""
         },
         stream_time:{
             type: String,
@@ -52,6 +52,11 @@ module.exports = mongoose => {
         is_scheduled:{
             type: Boolean,
             default: false
+        },
+        streamed_platform:{
+            type: String,
+            default: "facebook",
+            enum: ["twitch", "youtube", "facebook", "twitter", "instagram"]
         },
         status: {
             type: String,

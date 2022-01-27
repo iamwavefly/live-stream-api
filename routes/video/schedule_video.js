@@ -21,6 +21,7 @@ module.exports = function (app) {
         stream_time
         is_scheduled
         status
+        streamed_platform
         */
        
         if (request.body.token && request.body.video_id) {
@@ -61,13 +62,15 @@ module.exports = function (app) {
                                 tags: functions.empty(request.body.tags)? videoExists.tags : request.body.tags,
                                 stream_date: functions.empty(request.body.stream_date)? videoExists.stream_date : request.body.stream_date,
                                 stream_time: functions.empty(request.body.stream_time)? videoExists.stream_time : request.body.stream_time,
+                                streamed_platform: functions.empty(request.body.streamed_platform)? videoExists.streamed_platform : request.body.streamed_platform,
+                                is_scheduled: true,
+                                status: "Scheduled",
+                                scheduled_by: userExists.name
                                 
                             },
-
-                            {
-                                is_scheduled: true,
-                                status: "Scheduled"
-                            }
+                            
+                       
+                            
                         );
 
                         videoExists = await VIDEO.find({ token: request.body.token, video_id: request.body.video_id})
