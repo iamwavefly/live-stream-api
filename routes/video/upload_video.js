@@ -114,8 +114,6 @@ module.exports = function (app) {
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
                                 duration: file_duration,
                             })
-                        }).catch(error => {
-                            throw new Error(error.message)
                         })
 
                     }else{
