@@ -1,59 +1,53 @@
-const dateUtil = require('date-fns');
-const path = require("path");
-const functions = require("../utility/function.js")
-
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oidc');
-
+var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const db = require("../models");
 const USER = db.user;
 
-module.exports = function (passport) {  // passport is a global variable
+module.exports = function (passport) {
     passport.use(new GoogleStrategy( {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://live-snap-front-end.herokuapp.com/",
-        // redirectUri: "https://live-snap-front-end.herokuapp.com/",
-        scope: ['profile', 'email'],
+        callbackURL: process.env.GOOGLE_CALLBACK_URL,
         passReqToCallback: true
     }, async (request, accessToken, refreshToken, profile, done) => {
-            try {
-    
-                let user = await USER.findOne({ google_id: profile.id });
-                
-    
-                if (user) {
-                    return done(null, user);
-                } else {
-                    user = await USER.create({
-                        google_id: profile.id,
-                        name: profile.displayName,
-                        email: profile.emails[0].value,
-                        auth_method: "google",
-                        token: functions.uniqueId(30, "alphanumeric"),
-                        password: "",
-                        is_verified: true,
-                        is_blocked: false,
-                        is_registered: true,
-                        
-                    });
-                    return done(null, user);
-                }
-    
-            } catch (error) {
-                return done(error, false, error.message);
-            }
-    
-        }));
+        console.log(profile, 'profile');
+        alert(profile);
+        // try {
+        //     let user = await USER.findOne({ googleId: profile.id });
+        //     if (user) {
+        //         done(null, user);
+        //     } else {
+        //         let newUser = await USER.create({
+        //             googleId: profile.id,
+        //             name: profile.displayName,
+        //             email: profile.emails[0].value,
+        //             token: functions.uniqueId(30, "alphanumeric"),
+        //             is_verified: true,
+        //             is_registered: true
+        //         });
+        //         done(null, newUser);
+        //     }
+        // } catch (error) {
+        //     done(error);
+        // }
+    }));
 
-    passport.serializeUser(function (user, done) {
+    passport.serializeUser((user, done) => {
         done(null, user.id);
     });
 
-    passport.deserializeUser(function (id, done) {
-        USER.findById(id, function (err, user) {
-            done(err, user);
-        });
+    passport.deserializeUser(async (id, done) => {
+        try {
+            let user = await USER.findById(id);
+
+            if (user) {
+                done(null, user);
+            } else {
+                done(null, false);
+            }
+        } catch (error) {
+            done(error);
+        }
     });
   
 }

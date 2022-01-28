@@ -5,43 +5,35 @@ const passport = require("passport");
 
 const db = require("../../models");
 const USER = db.user;
-
+ 
+        
 
 module.exports = function (app) {
 
     app.get(`/auth/google`, async (request, response) => {
-        passport.authenticate('google', { scope: ['profile', 'email'] })(request, response);
-        console.log({scope: ['profile', 'email']});
+        passport.authenticate('google', { scope: ['profile', 'email'] });
     });
     
-    app.get(`/auth/google/callback`, passport.authenticate('google', { failureRedirect: 'https://live-snap-front-end.herokuapp.com/login' }), async (request, response) => {
-        let user = request.user;
-        let payload = {
-            is_verified: false,
-            is_blocked: false,
-            is_registered: false
-        }
-        let userExists = await USER.find({ email: user.email })
-        if (!functions.empty(userExists)) {
-            payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
-            throw new Error("This email address has been registered already, try another email address.")
+    app.get(`/auth/google/callback`, passport.authenticate('google', { 
+        
+        failureRedirect: 'https://live-snap-front-end.herokuapp.com/login',
+        successRedirect: "https://live-snap-front-end.herokuapp.com/dashboard"}),
+        
+        async (request, response) => {
+        let user = await USER.findOne({ googleId: request.user.id });
+        if (user) {
+            response.redirect('/');
         } else {
-            let verification_code = functions.uniqueId(6, "number");
-            let user = await USER.create({
-                name: user.name,
-                email: user.email,
-                password: "",
-                is_verified: false,
-                is_blocked: false,
-                is_registered: true,
-                verification_code: verification_code,
-                created_at: dateUtil.format(new Date(), "YYYY-MM-DD HH:mm:ss"),
-                updated_at: dateUtil.format(new Date(), "YYYY-MM-DD HH:mm:ss")
-            })
-            payload["is_registered"] = functions.stringToBoolean(user.is_registered)
-            payload["is_verified"] = functions.stringToBoolean(user.is_verified)
-            payload["is_blocked"] = functions.stringToBoolean(user.is_blocked)
+            let newUser = await USER.create({
+                googleId: request.user.id,
+                name: request.user.displayName,
+                email: request.user.emails[0].value,
+                token: functions.uniqueId(30, "alphanumeric"),
+                is_verified: true,
+                is_registered: true
+            });
+            response.redirect('/');
         }
-        response.status(200).json({ "status": 200, "message": "Successfully logged in.", "data": payload });
-    });
-}
+    }
+
+    )}

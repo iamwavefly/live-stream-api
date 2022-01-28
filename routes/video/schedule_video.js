@@ -21,7 +21,11 @@ module.exports = function (app) {
         stream_time
         is_scheduled
         status
-        streamed_platform
+        is_facebook
+        is_twitter
+        is_instagram
+        is_youtube
+        is_twitch
         */
        
         if (request.body.token && request.body.video_id) {
@@ -62,15 +66,16 @@ module.exports = function (app) {
                                 tags: functions.empty(request.body.tags)? videoExists.tags : request.body.tags,
                                 stream_date: functions.empty(request.body.stream_date)? videoExists.stream_date : request.body.stream_date,
                                 stream_time: functions.empty(request.body.stream_time)? videoExists.stream_time : request.body.stream_time,
-                                streamed_platform: functions.empty(request.body.streamed_platform)? videoExists.streamed_platform : request.body.streamed_platform,
                                 is_scheduled: true,
                                 status: "Scheduled",
+                                is_facebook: functions.stringToBoolean(request.body.is_facebook)? true : false,
+                                is_twitter: functions.stringToBoolean(request.body.is_twitter)? true : false,
+                                is_instagram: functions.stringToBoolean(request.body.is_instagram)? true : false,
+                                is_youtube: functions.stringToBoolean(request.body.is_youtube)? true : false,
+                                is_twitch: functions.stringToBoolean(request.body.is_twitch)? true : false,
                                 scheduled_by: userExists.name
                                 
                             },
-                            
-                       
-                            
                         );
 
                         videoExists = await VIDEO.find({ token: request.body.token, video_id: request.body.video_id})

@@ -53,9 +53,25 @@ module.exports = mongoose => {
             type: Boolean,
             default: false
         },
-        streamed_platform:{
-            type: Array,
-            default: []
+        is_facebook:{
+            type: Boolean,
+            default: false
+        },
+        is_twitter:{
+            type: Boolean,
+            default: false
+        },
+        is_instagram:{
+            type: Boolean,
+            default: false
+        },
+        is_youtube:{
+            type: Boolean,
+            default: false
+        },
+        is_twitch:{
+            type: Boolean,
+            default: false
         },
         status: {
             type: String,

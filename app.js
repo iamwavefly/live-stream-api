@@ -43,8 +43,9 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }))
-app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.initialize());
+
 
 
 app.use(function(req, res, next) {
