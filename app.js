@@ -140,6 +140,7 @@ get_teams(app)
 const get_countries = require('./routes/countries/get_countries')
 get_countries(app)
 
+
 app.get("/", (req, res) => {
   res.status(200).json({ "status": 200, "message": "Welcome to live snap api.", "data": null })
 });

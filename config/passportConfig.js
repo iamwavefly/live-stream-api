@@ -12,16 +12,15 @@ module.exports = function (passport) {  // passport is a global variable
     passport.use(new GoogleStrategy( {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        // callbackURL: "/api/user/auth/google/callback",
-        callbackURL: "/authentication/auth/google/callback",
+        callbackURL: "https://live-snap-front-end.herokuapp.com/",
+        // redirectUri: "https://live-snap-front-end.herokuapp.com/",
         scope: ['profile', 'email'],
         passReqToCallback: true
     }, async (request, accessToken, refreshToken, profile, done) => {
-            
             try {
     
                 let user = await USER.findOne({ google_id: profile.id });
-                console.log({google_id: profile.id}, "google_id");
+                
     
                 if (user) {
                     return done(null, user);

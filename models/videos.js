@@ -54,9 +54,8 @@ module.exports = mongoose => {
             default: false
         },
         streamed_platform:{
-            type: String,
-            default: "facebook",
-            enum: ["twitch", "youtube", "facebook", "twitter", "instagram"]
+            type: Array,
+            default: []
         },
         status: {
             type: String,
