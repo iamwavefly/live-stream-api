@@ -7,7 +7,10 @@ import { fetchUserReducer } from "./fetchUser/fetchUserReducer";
 import { updateUserReducer } from "./profile-update/UpdateProfileReducer";
 import { updatePasswordReducer } from "./password-update/UpdatePasswordReducer";
 import { verifyEmailReducer } from "./verify/VerifyReducer";
-
+import { updatePicsReducer } from "./profile-pics/UploadPicsReducer";
+import { uploadVideoReducer } from "./video/VideoReducer";
+import { getVideosReducer } from "./getVideos/GetVideoReducer"
+import { createScheduleReducer, fetchScheduleReducer } from "./schedule/ScheduleReducer"
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
@@ -16,6 +19,11 @@ const reducer = combineReducers({
   changeUser: updateUserReducer,
   passChange: updatePasswordReducer,
   userVerify: verifyEmailReducer,
+  uploadPhoto: updatePicsReducer,
+  uploadVideo: uploadVideoReducer,
+  getallVideos: getVideosReducer,
+  createNewSchedule: createScheduleReducer,
+  getAllSchedules: fetchScheduleReducer
 });
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))

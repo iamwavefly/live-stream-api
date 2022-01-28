@@ -26,14 +26,14 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: bold;
-    font-size: 30.5896px;
+    font-size: 27.5896px;
     color: #FFFFFF;
 }
 .blueColor h6{
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 11px;
+    font-size: 9px;
     color: #FFFFFF;
 }
 .grayColor{
@@ -44,14 +44,14 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: bold;
-    font-size: 30.5896px;
+    font-size: 27px;
     color: #000000;
 }
 .grayColor h6{
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 11px;
+    font-size: 9px;
     color: #000000;
 }
 
@@ -87,9 +87,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 18px;
-
+    font-size: 13px;
     color: #666666;
 }
 
@@ -97,7 +95,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 11px;
     display: flex;
     align-items: center;
     letter-spacing: -0.05em;
@@ -108,7 +106,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 16px;
 
     color: #EB9481;
@@ -130,7 +128,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: 900;
-    font-size: 12px;
+    font-size: 10px;
 }
 .deleteBtn{
     height: 3rem;
@@ -143,7 +141,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: 900;
-    font-size: 12px;
+    font-size: 10px;
 }
 .flexed{
     display: flex;
@@ -188,7 +186,7 @@
     margin-bottom: 1.5rem;
 }
 .inputAddElement span{
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .tagContent{
@@ -206,7 +204,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 11px;
     color: #666666;
 }
 

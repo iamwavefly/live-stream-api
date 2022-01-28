@@ -1,53 +1,39 @@
-import React, { useState } from "react"
-import axios from "axios";
+import React, { useEffect, useState } from "react"
 import './Modals.css'
 import { toast } from "react-toastify";
-import Loader from '../Loader.js'
-import { BACKEND_BASE_URL } from "../../redux/backendUrl";
+import { useDispatch } from "react-redux";
+import { videoUpload } from "../../redux/video/VideoActions";
+import { useSelector } from "react-redux";
+import Loader2 from "../Loader2.js";
 toast.configure();
 
 
 const StreamingModals = ({ show, close }) => {
+    const dispatch = useDispatch();
 
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [loading, setLoading] = useState(false)
+    const uploadVideo = useSelector((state) => state.uploadVideo)
+    const { loading_video, error_video, newVideo } = uploadVideo;
 
-    const handleSubmit = async (event) => {
-        setLoading(true)
-        const user_det = await JSON.parse(localStorage.getItem('userInfo'));
+    const [file_base64, setFileBase64] = useState(null);
+    const [video, setVideo] = useState('');
 
-        // alert("Uploading")
-        event.preventDefault()
-        const formData = new FormData();
-        formData.append("stream_video", selectedFile);
-        try {
-            const response = await axios({
-                method: "post",
-                // url: "https://live-sumo-api.herokuapp.com/api/stream/upload/video",
-                url: `${BACKEND_BASE_URL}/stream/upload/video`,
-                data: formData,
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": "Bearer " + user_det.token,
-                },
-            })
-            setLoading(false)
-
-            if (response.data.status === "success") {
-                toast.success("Video Upload was Successfull")
-                close()
-            }
-            console.log(response.data)
-        } catch (error) {
-            setLoading(false)
-            toast.error(error.response.data.message)
-
-            console.log(error)
+    useEffect(() => {
+        if (newVideo) {
+            close();
+            toast.success("Hurray!!! your video was uploaded Successfully", { autoClose: 1000 })
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
         }
-    }
+        else {
+            toast.error(error_video)
+        }
+    }, [newVideo, error_video]);
 
-    const handleFileSelect = (event) => {
-        setSelectedFile(event.target.files[0])
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        dispatch(videoUpload(file_base64))
     }
 
     return (
@@ -58,7 +44,7 @@ const StreamingModals = ({ show, close }) => {
                     <div className="mainDiv">
 
                         {/* modal for uploading of files */}
-                        {loading && <Loader />}
+                        {/* {loading && <Loader />} */}
                         <div className="mainModal" id='myModal'>
                             <div className="modalHeader" style={{ textAlign: "center" }}>
                                 <h4>Upload Videos</h4>
@@ -70,15 +56,36 @@ const StreamingModals = ({ show, close }) => {
                                             <img src="/images/uploadPic.svg" alt="" />
                                         </div>
                                         <div className="uploadTextArea">
-                                            <input type="file" onChange={handleFileSelect} style={{ textAlign: "center", marginLeft: "16rem" }} />
+                                            {loading_video ? (<Loader2 />) : (
+                                                <div style={{ paddingLeft: "5.0rem" }}>
+                                                    <input type='file' accept=".mp4, .mkv, .avi, .webm" onChange={(event) => {
+                                                        event.preventDefault()
+                                                        const file = event.target.files[0]
+                                                        const reader = new window.FileReader()
+                                                        reader.readAsArrayBuffer(file)
+
+                                                        reader.onloadend = () => {
+                                                            // setFileBuffer(Buffer(reader.result))
+
+                                                            //convert to base64
+                                                            const base64 = btoa(new Uint8Array(reader.result).reduce((data, byte) => data + String.fromCharCode(byte), ''))
+                                                            setVideo(`data:image/png;base64,${base64}`)
+                                                            setFileBase64(base64)
+                                                        }
+                                                    }} />
+                                                </div>)}
                                             <span>Upload Max of 5GB directly</span>
+
                                         </div>
                                     </div>
                                 </div>
                                 <div className="uploadFooter">
                                     <div className="button-group">
-                                        <button className='cancelButton' onClick={() => close()}>Close</button>
-                                        <button className='acceptButton' type="submit" onSubmit={handleSubmit}>Upload File</button>
+                                        {loading_video ? ("") : (<div>
+                                            <button className='cancelButton' onClick={() => close()}>Close</button>
+                                            <button className='acceptButton' type="submit" onSubmit={handleSubmit}>Upload Video</button>
+                                        </div>)}
+
                                     </div>
                                 </div>
                             </form>
@@ -86,7 +93,7 @@ const StreamingModals = ({ show, close }) => {
 
 
                     </div>
-                : null
+                    : null
             },
 
         </>

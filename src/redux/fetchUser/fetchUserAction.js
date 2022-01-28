@@ -11,17 +11,15 @@ export const fetchUserDetails =
       });
 
       const user_det = await JSON.parse(localStorage.getItem('userInfo'));
-      // console.log("Bearer "+user_det.token);
+      // console.log(user_det)
 
       const config = {
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer "+user_det.token
         },
       };
 
       const { data } = await axios.get(
-        `${BACKEND_BASE_URL}/user/me`,
+        `${BACKEND_BASE_URL}/account/get_user?token=${user_det.data.token}`,
         config
       );
       // console.log(data)

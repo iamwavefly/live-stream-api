@@ -6,7 +6,7 @@
 }
 
 .splitLeft{
-    margin-right: 4.5rem;
+    margin-right: 2.5rem;
 }
 .newStream{
     margin-bottom: 1.5rem;
@@ -16,7 +16,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 21px;
     color: rgba(0, 0, 0, 0.87);
 }
 .newStreamBody{
@@ -35,7 +35,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 18px;
     letter-spacing: -0.0457529px;
     text-transform: capitalize;
@@ -62,7 +62,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 10px;
+    font-size: 8px;
     text-transform: capitalize;
     color: #FFFFFF;
 }
@@ -106,7 +106,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 9px;
     letter-spacing: -0.0457529px;
     text-transform: capitalize;
     color: #3A3B3F;
@@ -123,24 +123,25 @@
 
 .splitRightHeader{
     display: flex;
+    justify-content: space-between;
 }
 
-.mainHeading{
+/* .mainHeading{
     margin-right: 31rem;
-}
+} */
 
 .mainHeading h4{
     font-family: Mulish;
     font-style: normal;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 21px;
     color: rgba(0, 0, 0, 0.87);
 }
 .subHeading {
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 11.6791px;
+    font-size: 9px;
     text-decoration-line: underline;
     color: #451ECC;
 }
@@ -159,8 +160,4 @@
 
 .splitRight{
     width: 50%;
-}
-
-.uploadVideoModal{
-    /* position: absolute; */
 }

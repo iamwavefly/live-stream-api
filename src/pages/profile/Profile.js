@@ -9,6 +9,7 @@ import { fetchUserDetails } from '../../redux/fetchUser/fetchUserAction'
 import Loader from '../../components/Loader';
 import { editUser } from '../../redux/profile-update/UpdateProfileAction';
 import { changePass } from '../../redux/password-update/UpdatePasswordAction';
+import { photoUpload } from '../../redux/profile-pics/UploadPicsAction';
 toast.configure()
 
 
@@ -23,14 +24,22 @@ const Profile = () => {
     const passChange = useSelector((state) => state.passChange)
     const { loading_pass, error_pass, changePassword } = passChange;
 
+    const uploadPhoto = useSelector((state) => state.uploadPhoto);
+    const { loading_pics, error_pics, newPhoto } = uploadPhoto;
+
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin;
 
-    const [fullname, setFullname] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [oldPassword, setOldPassword] = useState('')
-    const [newPassword, setNewPassword] = useState('')
-    const [newPassword2, setNewPassword2] = useState('')
+    const [phone, setPhone] = useState('')
+    const [country, setCountry] = useState('')
+    const [password, setPassword] = useState('')
+    const [new_password, setNewPassword] = useState('')
+    const [confirm_password, setConfirmPassword] = useState('')
+    const [file_buffer, setFileBuffer] = useState(null);
+    const [file_base64, setFileBase64] = useState(null);
+    const [photo, setPhoto] = useState('');
 
     useEffect(() => {
         dispatch(fetchUserDetails())
@@ -40,39 +49,54 @@ const Profile = () => {
         if (!userInfo) {
             document.location.href("/login")
         } else {
-            setFullname(userDet?.data?.fullname)
-            setEmail(userDet?.data.email)
+            setName(userDet?.data?.profile?.name)
+            setEmail(userDet?.data.profile?.email)
+            setPhone(userDet?.data.profile?.phone)
+            setCountry(userDet?.data.profile?.country)
+            setPhoto(userDet?.data.profile?.photo)
         }
     }, [dispatch, userInfo, userDet]);
 
-    useEffect(() =>{
-        if(newDetails){
+    useEffect(() => {
+        if (newDetails) {
             toast.success("Profile update was successfull")
         }
-        else{
+        else {
             toast.error(error_new)
         }
     }, [newDetails, error_new]);
 
-    useEffect(() =>{
-        if(changePassword){
+    useEffect(() => {
+        if (changePassword) {
             toast.success("Password update was successfull")
         }
-        else{
+        else {
             toast.error(error_pass)
         }
     }, [changePassword, error_pass]);
 
-    const editProfile = (e) =>{
+    useEffect(() => {
+        if (newPhoto) {
+            toast.success("Profile photo was Updated Successfully")
+        }
+        else {
+            toast.error(error_pics)
+        }
+    }, [newPhoto, error_pics]);
+
+    const editProfile = (e) => {
         e.preventDefault();
 
-        dispatch(editUser(fullname, email))
+        dispatch(editUser(name, email, phone, country))
     }
-    const updatePassword = (e) =>{
+    const updatePassword = (e) => {
         e.preventDefault();
 
-        // console.log( oldPassword, newPassword, newPassword2 )
-        dispatch(changePass(oldPassword, newPassword, newPassword2))
+        dispatch(changePass(password, new_password, confirm_password))
+    }
+    const handleUpload = (e) => {
+        e.preventDefault();
+        dispatch(photoUpload(file_base64))
     }
 
 
@@ -111,15 +135,40 @@ const Profile = () => {
                         </div>
                         <div className="profileContentBody">
                             <div className="profilePicDiv">
-                                <div className="profileImage">
-                                    <img src="/images/profile-image2.svg" alt="" />
-                                </div>
-                                <div className="profilePicInput">
-                                    <input type="file" />
-                                </div>
+                                {photo ? (
+                                    <div className="profileImage">
+                                        <img src={photo} alt="" style={{objectFit:"cover"}} />
+                                    </div>
+                                ) : (
+                                    <div className="profileImage">
+                                        <img src="./images/blank-image.svg" alt="" style={{objectFit:"cover"}} />
+                                    </div>
+                                )}
+
+                                <form onSubmit={handleUpload}>
+                                    <div className="profilePicInput" style={{ marginBottom: "1.5rem" }}>
+                                        <input type='file' accept=".png, .jpg, .jpeg" onChange={(event) => {
+                                            event.preventDefault()
+                                            const file = event.target.files[0]
+                                            const reader = new window.FileReader()
+                                            reader.readAsArrayBuffer(file)
+
+                                            reader.onloadend = () => {
+                                                // setFileBuffer(Buffer(reader.result))
+
+                                                //convert to base64
+                                                const base64 = btoa(new Uint8Array(reader.result).reduce((data, byte) => data + String.fromCharCode(byte), ''))
+                                                setPhoto(`data:image/png;base64,${base64}`)
+                                                setFileBase64(base64)
+                                            }
+                                        }} />
+                                    </div>
+                                    <button className='formBtn' onSubmit={handleUpload} style={{ width: "100%" }}>Upload Picture</button>
+                                </form>
                             </div>
                             {loading_new && <Loader />}
                             {loading_pass && <Loader />}
+                            {loading_pics && <Loader />}
                             <div className="profileDetailsDiv">
                                 <div className="formHeader">
                                     <h5>My Details</h5>
@@ -128,20 +177,25 @@ const Profile = () => {
                                     <form className='formElement' onSubmit={editProfile}>
                                         <div className="formGroup">
                                             <label>Full Name</label>
-                                            <input type="text" className='formControl' name="fullname" value={fullname}  onChange={(e) => setFullname(e.target.value)} />
+                                            <input type="text" className='formControl' name="name" value={name} onChange={(e) => setName(e.target.value)} />
                                         </div>
                                         <div className="formGroup">
                                             <label>Email</label>
-                                            <input type="text" className='formControl' name="email" value={email}  onChange={(e) => setEmail(e.target.value)} />
+                                            <input type="text" className='formControl' name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                         </div>
-                                        {/* <div className="formGroup">
+                                        <div className="formGroup">
                                             <label>Phone number</label>
-                                            <input type="text" className='formControl' name="password" value="09-09000300" />
+                                            <input type="tel" className='formControl' name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
                                         </div>
                                         <div className="formGroup">
                                             <label>Country</label>
-                                            <input type="text" className='formControl' name="password" value="09-09000300" />
-                                        </div> */}
+                                            <input type="text" className='formControl' name="country" value={country} onChange={(e) => setCountry(e.target.value)}  />
+                                            {/* <select name="country" className='formControl' id="">
+                                                <option value={country} onChange={(e) => setCountry(e.target.value)} className='formControl'>{country}</option>
+                                                <option value="nigeria" onChange={(e) => setCountry(e.target.value)} className='formControl'>Nigeria</option>
+                                                <option value="ghana" onChange={(e) => setCountry(e.target.value)} className='formControl'>Ghana</option>
+                                            </select> */}
+                                        </div>
                                         <div className="formGroup">
                                             <button className="formBtn" onSubmit={editProfile}>Update Profile</button>
                                         </div>
@@ -156,15 +210,15 @@ const Profile = () => {
                                     <form className='formElement' onSubmit={updatePassword}>
                                         <div className="formGroup">
                                             <label>Old Password</label>
-                                            <input type="password" className='formControl' name='oldPassword' required value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                                            <input type="password" className='formControl' name='password' required value={password} onChange={(e) => setPassword(e.target.value)} />
                                         </div>
                                         <div className="formGroup">
                                             <label>New Password</label>
-                                            <input type="password" className='formControl' name='newPassword' required value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                                            <input type="password" className='formControl' name='new_password' required value={new_password} onChange={(e) => setNewPassword(e.target.value)} />
                                         </div>
                                         <div className="formGroup">
                                             <label>Confirm Password</label>
-                                            <input type="password" className='formControl' name='newPassword2' required value={newPassword2} onChange={(e) => setNewPassword2(e.target.value)} />
+                                            <input type="password" className='formControl' name='confirm_password' required value={confirm_password} onChange={(e) => setConfirmPassword(e.target.value)} />
                                         </div>
                                         <div className="formGroup">
                                             <button className="formBtn" onSubmit={updatePassword}>Change Password</button>

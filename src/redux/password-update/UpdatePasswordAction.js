@@ -4,7 +4,7 @@ import { UPDATE_PASSWORD_FAILURE, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCE
 
 
 export const changePass =
-  (oldPassword, newPassword, newPassword2) => async (dispatch) => {
+  (password, new_password, confirm_password) => async (dispatch) => {
       
     try {
       dispatch({
@@ -12,16 +12,16 @@ export const changePass =
       });
 
       const user_det = await JSON.parse(localStorage.getItem('userInfo'));
+      const token = user_det.data.token
       const config = {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer "+user_det.token
         },
       };
 
       const { data } = await axios.put(
-        `${BACKEND_BASE_URL}/user/update/password`,
-        { oldPassword, newPassword, newPassword2 },
+        `${BACKEND_BASE_URL}/account/change_password`,
+        {token, password, new_password, confirm_password },
         config
       );
 
@@ -29,7 +29,7 @@ export const changePass =
         type: UPDATE_PASSWORD_SUCCESS,
         payload: data,
       });
-      console.log(data)
+      // console.log(data)
       
 
     //   dispatch({

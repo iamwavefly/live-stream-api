@@ -13,7 +13,8 @@ const Navbar = () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin;
 
-    const [fullname, setFullname] = useState('')
+    const [name, setName] = useState('')
+    const [account_type, setAccountType] = useState('')
 
     useEffect(() => {
         dispatch(fetchUserDetails())
@@ -23,7 +24,8 @@ const Navbar = () => {
         if (!userInfo) {
             document.location.href("/login")
         } else {
-            setFullname(userDet?.data?.fullname)
+            setName(userDet?.data?.profile?.name)
+            setAccountType(userDet?.data?.profile?.account_type)
         }
     }, [dispatch, userInfo, userDet]);
     return (
@@ -45,8 +47,8 @@ const Navbar = () => {
                                     <img src="/images/profile-image.svg" alt="" />
                                 </div>
                                 <div className="profileText">
-                                    <div className='profileName'>{fullname}</div>
-                                    <div className='accountStatus'>Free account</div>
+                                    <div className='profileName' style={{textTransform:"capitalize"}}>{name}</div>
+                                    <div className='accountStatus' style={{textTransform:"capitalize"}}>{account_type}</div>
                                 </div>
                             </div>
                         </Link>

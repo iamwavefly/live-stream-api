@@ -136,41 +136,7 @@ const Teams = () => {
                                     <h4>Invite Team member</h4>
                                 </div>
                                 <div className="inviteTeamBody">
-                                    <div className="inputSection">
-                                        <div className="inputFormElement">
-                                            <div className="iconDivElement">
-                                                <img src="/images/mail.svg" alt="" />
-                                            </div>
-                                            <div className="inputDivElement">
-                                                <input type="email" placeholder='primustest@company mail.com' name='email' required style={{ borderColor: "#451ECC", paddingLeft: "45px" }} className="form-control " />
-                                            </div>
-                                        </div>
-                                        <div className="inputAddElement">
-                                            <span> + </span>
-                                        </div>
-                                    </div>
-                                    {/* <div className="inviteTeamMiddle">
-                                        <div className="tagsSection">
-                                            <div className="tagContent">
-                                                <div className="tagText">
-                                                    <h6>Segrio Tielemans</h6>
-                                                </div>
-                                                <div className="tagIcon">
-                                                    <span> X </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="tagsSection">
-                                            <div className="tagContent">
-                                                <div className="tagText">
-                                                    <h6>Segrio Tielemans</h6>
-                                                </div>
-                                                <div className="tagIcon">
-                                                    <span> X </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
+                                    
                                 </div>
                                 <div className="inviteTeamFooter">
                                     <div className="inviteBtn">

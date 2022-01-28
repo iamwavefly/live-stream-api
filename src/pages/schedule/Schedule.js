@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Loader2 from '../../components/Loader2'
 import Navbar from "../../components/navbar/Navbar"
 import Sidebar from "../../components/sidebar/Sidebar"
+import { formatDate, formatTime } from '../../functions'
+import { fetchAllSchedules } from '../../redux/schedule/ScheduleActions'
 import './Schedule.css'
 
 const Schedule = () => {
+
+    const dispatch = useDispatch();
+    const getAllSchedules = useSelector((state) => state.getAllSchedules)
+    const { loading, error, allSchedule } = getAllSchedules;
+
+
+    useEffect(() => {
+        dispatch(fetchAllSchedules())
+    }, [dispatch]);
+
+    useEffect(() => {
+
+        // console.log(allVideos)
+
+    }, [dispatch, allSchedule]);
+
     return (
         <>
             <div className="mainContent">
@@ -57,13 +78,14 @@ const Schedule = () => {
                             <div className="leftSplitBody">
                                 <div className="splitTableHead">
                                     <div className="scheduleDiv">
-                                        <h6>Upload History</h6>
+                                        <h6>Schedule History</h6>
                                     </div>
                                     <div className="sortByDiv">
                                         <h6>Sort by: Size </h6>
                                     </div>
                                 </div>
                                 <div className="scheduleTableBody">
+                                {loading ? (<Loader2 />) : (
                                     <table>
                                         <thead>
                                             <tr>
@@ -71,30 +93,20 @@ const Schedule = () => {
                                                 <th>Date</th>
                                                 <th>Time</th>
                                                 <th>Status</th>
-                                                {/* <th>Actions</th> */}
                                             </tr>
                                         </thead>
                                         <tbody className='tableBorder'>
-                                            <tr>
-                                                <td>9705791119.mp4</td>
-                                                <td>5/27/15</td>
-                                                <td>12:40 PM</td>
-                                                <td>Streamed</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9705791119.mp4</td>
-                                                <td>5/27/15</td>
-                                                <td>12:40 PM</td>
-                                                <td>Streamed</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9705791119.mp4</td>
-                                                <td>5/27/15</td>
-                                                <td>12:40 PM</td>
-                                                <td>Streamed</td>
-                                            </tr>
+                                            {allSchedule && allSchedule?.data?.videos.map(video =>
+                                                <tr key={video.video_id}>
+                                                    <td>{video.title}</td>
+                                                    <td>{video.stream_date}</td>
+                                                    <td>{video.stream_time}</td>
+                                                    <td>{video.status}</td>
+                                                </tr>
+                                            )}
                                         </tbody>
                                     </table>
+                                )}
                                 </div>
                             </div>
                         </div>

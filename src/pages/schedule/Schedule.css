@@ -52,11 +52,12 @@
 
 .contentFooterTop{
     display: flex;
+    justify-content: space-between;
 }
 
-.footerTopLeft{
+/* .footerTopLeft{
     margin-right: 17.5rem;
-}
+} */
 .footerTopLeft h6{
     font-family: Mulish;
     font-style: normal;
@@ -84,6 +85,8 @@
 
 .splitTableHead{
     display: flex;
+    justify-content: space-between;
+    padding: 1.0rem;
 }
 
 .leftSplitBody{
@@ -92,9 +95,9 @@
     padding-bottom: 1.5rem;
 }
 
-.scheduleDiv{
+/* .scheduleDiv{
     margin-right: 20rem;
-}
+} */
 
 .splitTableHead{
     margin-bottom: 1.5rem;
@@ -147,11 +150,12 @@
 
 .rightSplitBodyTop{
     display: flex;
+    justify-content: space-between;
     margin-bottom: 0.7rem;
 }
-.fileSize{
+/* .fileSize{
     margin-right: 16.5rem;
-}
+} */
 
 .fileSize h5{
     font-family: Mulish;
@@ -280,4 +284,84 @@
 
 .rightSplit{
     width: 50%;
+}
+
+.create_schedule_main{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin: 2.5rem;
+    padding: 1.5rem;
+}
+
+.createStreamHeading{
+    margin-bottom: 1.0rem;
+}
+.createScehduleMainHeading{
+    margin-bottom: 1.0rem;
+}
+.createScehduleMainHeading h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    color: #121212;
+}
+
+.createScheduleSubHeading p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;    
+    color: #121212;
+}
+.createScheduleNormalDetails{
+    margin-bottom: 2.5rem;
+}
+
+.formControl{
+    width: 100%;
+    height: 3.5rem;
+    background: #FAFAFA;
+    border-radius: 5px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.6884px;
+    color: #666666;
+    padding: 0.5rem;
+    border: none;
+}
+.formGroup{
+    padding-bottom: 1.0rem;
+}
+
+/* .checkBoxItem label{
+    white-space: nowrap;
+    display: block;
+} */
+.checkBoxItem input[type='checkbox']{
+    float: left;
+    width: 20px;
+    margin-top: 0.3rem;
+}
+
+.checkBoxItem input[type='checkbox'] + label {
+    display: block;
+    width: 30px;
+  }
+
+  .submitBtn{
+    background: #451ECC;
+    border-radius: 3.66667px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0.9rem;
+    border: none;
+    width: 20%;
 }

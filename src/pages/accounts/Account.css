@@ -1,12 +1,10 @@
 .contentDiv{
     display: flex;
-    margin-left: 4.5rem;
-    margin-right: 3.5rem;
-    margin-top: 2.0rem;
+    margin: 2.5rem;
 }
 .contentLeft{
     margin-right: 3.5rem;
-    width: 60%;
+    /* width: 60%; */
 }
 
 .addAccountDiv{
@@ -17,7 +15,7 @@
     font-family: Mulish;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 17px;
     color: rgba(0, 0, 0, 0.87);
 }
 
@@ -63,22 +61,23 @@
 
 .scheduledStream-header{
     display: flex;
+    justify-content: space-between;
 }
 .mainText h4{
     font-family: Mulish;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 17px;
     color: rgba(0, 0, 0, 0.87);
 }
-.mainText{
+/* .mainText{
     margin-right: 31rem;
-}
+} */
 .subText h6{
     font-family: Mulish;
     font-style: normal;
     font-weight: 600;
-    font-size: 12.8108px;
+    font-size: 10px;
     letter-spacing: -0.0457529px;
     color: #3A3B3F;
     margin-top: 0.4rem;
@@ -113,15 +112,16 @@
 }
 .socialAccount{
     display: flex;
+    justify-content: space-between;
 }
-.socialAcctIcon{
+/* .socialAcctIcon{
     margin-right: 1.4rem;
-}
+} */
 .socialAcctText{
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 13px;
     letter-spacing: 0.163835px;
     color: #455A64;
     margin-right: 6.5rem;
@@ -133,13 +133,10 @@
     margin-right: 3.5rem;
 }
 
-.contentRight{
-    width: 50%;
-}
 .contentRight-header h4{
     font-family: Mulish;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 17px;
     color: rgba(0, 0, 0, 0.87);
 }

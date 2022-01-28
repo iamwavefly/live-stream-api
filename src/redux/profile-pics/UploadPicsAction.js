@@ -1,13 +1,12 @@
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../backendUrl";
-import { UPDATE_PROFILE_FAILURE, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS } from "./UpdateProfileTypes";
+import { UPLOAD_PICS_FAILURE, UPLOAD_PICS_REQUEST, UPLOAD_PICS_SUCCESS } from "./UploadPicsTypes";
 
-
-export const editUser =
-  (name, email, phone, country) => async (dispatch) => {
+export const photoUpload =
+  (file_base64) => async (dispatch) => {
     try {
       dispatch({
-        type: UPDATE_PROFILE_REQUEST
+        type: UPLOAD_PICS_REQUEST
       });
 
       const user_det = await JSON.parse(localStorage.getItem('userInfo'));
@@ -18,14 +17,16 @@ export const editUser =
         },
       };
 
+    //   console.log(token, file_base64)
       const { data } = await axios.put(
-        `${BACKEND_BASE_URL}/account/edit_user`,
-        {token, name, email, phone, country },
+        `${BACKEND_BASE_URL}/account/upload_photo`,
+        {token, file_base64},
         config
       );
+      console.log(data)
 
       dispatch({
-        type: UPDATE_PROFILE_SUCCESS,
+        type: UPLOAD_PICS_SUCCESS,
         payload: data,
       });
 
@@ -38,7 +39,7 @@ export const editUser =
     } catch (error) {
       console.log(error)
       dispatch({
-        type: UPDATE_PROFILE_FAILURE,
+        type: UPLOAD_PICS_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
