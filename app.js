@@ -7,12 +7,13 @@ const http = require('http');
 const helmet = require('helmet')
 const cors = require('cors');
 var cluster = require('cluster');
-var passport = require ("passport");
+// var passport = require ("passport");
 var session = require ("express-session");
 const redis = require('redis');
+var axios = require('axios');
 
 //bring in the passport config
-require('./config/passportConfig')(passport);
+// require('./config/passportConfig')(passport);
 
 // DATABASE
 const db = require("./models/index.js");
@@ -37,14 +38,14 @@ app.use(helmet())
 app.use(cors());
 
 //passport
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
-}))
-app.use(passport.session());
-app.use(passport.initialize());
+// app.use(session({
+//     secret: 'keyboard cat',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false }
+// }))
+// app.use(passport.session());
+// app.use(passport.initialize());
 
 
 
@@ -72,13 +73,13 @@ app.use(bodyParser.urlencoded({
 app.use('/media', express.static('media'))
 
 // connect to redis
-const redisClient = redis.createClient({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
-    password: process.env.REDIS_PASSWORD
-});
+// const redisClient = redis.createClient({
+//     host: process.env.REDIS_HOST,
+//     port: process.env.REDIS_PORT,
+//     password: process.env.REDIS_PASSWORD
+// });
 
-console.log(`Running in ${process.env.MODE} mode`);
+// console.log(`Running in ${process.env.MODE} mode`);
 
 
 // client.on('error', function (err) {
@@ -95,12 +96,14 @@ const resend_code = require('./routes/authentication/resend_code')
 const reset_password = require('./routes/authentication/reset_password')
 const verify_code = require('./routes/authentication/verify_code')
 const google_auth = require('./routes/authentication/google_auth')
+const facebook_auth = require('./routes/authentication/facebook_auth')
 login(app)
 signup(app)
 resend_code(app)
 reset_password(app)
 verify_code(app)
 google_auth(app)
+facebook_auth(app)
 
 // ACCOUNT
 const get_user = require('./routes/account/get_user')
@@ -141,10 +144,27 @@ get_teams(app)
 const get_countries = require('./routes/countries/get_countries')
 get_countries(app)
 
+//youtube
+const broadcast = require('./routes/youtube/broadcast')
+const livestream = require('./routes/youtube/livestream')
+// const video_upload = require('./routes/youtube/video_upload')
+broadcast(app)
+livestream(app)
+// video_upload(app)
+
+// YOUTUBE
+const auth = require('./routes/accounts/youtube/auth')
+const callback = require('./routes/accounts/youtube/callback')
+const video_upload = require('./routes/accounts/youtube/video_upload')
+auth(app)
+callback(app)
+video_upload(app)
+
 
 app.get("/", (req, res) => {
   res.status(200).json({ "status": 200, "message": "Welcome to live snap api.", "data": null })
 });
+
 
 // 404
 app.get('*', function (req, res) {

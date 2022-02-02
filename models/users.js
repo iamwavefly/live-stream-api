@@ -9,6 +9,14 @@ module.exports = mongoose => {
             required: true,
             index: true
         },
+        google_access_token: {
+            type: String,
+            default: ''
+        },
+        google_refresh_token: {
+            type: String,
+            default: ''
+        },
         photo: { 
             type: String,
             default: ""
@@ -22,14 +30,13 @@ module.exports = mongoose => {
         email: {
             type: String,
             lowercase: true,
-            required: [true, "The email address can't be blank, check and retry"],
+            // required: [true, "The email address can't be blank, check and retry"],
             match: [/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'The email address entered is invalid, check and retry.'],
             index: true,
             unique: true
         },
         password: {
             type: String,
-            required: true
         },
         phone: {
             type: String,
@@ -39,9 +46,8 @@ module.exports = mongoose => {
         },
         account_type: {
             type: String,
-            default: "free account",
-            enum: ["paid account"],
-            index: true
+            default: "Free Account",
+            enum: ["Free Account","Paid Account"]
         },
         country: {
             type: String,
@@ -69,7 +75,7 @@ module.exports = mongoose => {
         token_expiry: { 
             type: String,
             default: dateUtil.addMinutes(new Date(), process.env.TOKEN_EXPIRY_MINUTES).toISOString()
-        }
+        },
     }, { timestamps: true });
 
     schema.plugin(uniqueValidator, {message: 'This email address is already taken, Try another one.'});

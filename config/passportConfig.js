@@ -10,8 +10,6 @@ module.exports = function (passport) {
         callbackURL: process.env.GOOGLE_CALLBACK_URL,
         passReqToCallback: true
     }, async (request, accessToken, refreshToken, profile, done) => {
-        console.log(profile, 'profile');
-        alert(profile);
         // try {
         //     let user = await USER.findOne({ googleId: profile.id });
         //     if (user) {

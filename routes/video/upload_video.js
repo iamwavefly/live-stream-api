@@ -114,6 +114,16 @@ module.exports = function (app) {
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
                                 duration: file_duration,
                             })
+
+                            //convert to rtmp
+                            // let rtmp_url = `rtmp://${process.env.RTMP_HOST}/live/${filename}`;
+                            // let rtmp_params = {
+                            //     Bucket: process.env.RTMP_BUCKET,
+                            //     Key: filename,
+                            //     Body: file_buffer,
+                            //     ContentEncoding: 'base64',
+                            //     ContentType: 'video/mp4, video/avi, video/webm, video/mkv',
+                            // };
                         })
 
                     }else{
