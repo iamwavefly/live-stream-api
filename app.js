@@ -95,15 +95,11 @@ const signup = require('./routes/authentication/signup')
 const resend_code = require('./routes/authentication/resend_code')
 const reset_password = require('./routes/authentication/reset_password')
 const verify_code = require('./routes/authentication/verify_code')
-const google_auth = require('./routes/authentication/google_auth')
-const facebook_auth = require('./routes/authentication/facebook_auth')
 login(app)
 signup(app)
 resend_code(app)
 reset_password(app)
 verify_code(app)
-google_auth(app)
-facebook_auth(app)
 
 // ACCOUNT
 const get_user = require('./routes/account/get_user')
@@ -144,21 +140,20 @@ get_teams(app)
 const get_countries = require('./routes/countries/get_countries')
 get_countries(app)
 
-//youtube
-const broadcast = require('./routes/youtube/broadcast')
-const livestream = require('./routes/youtube/livestream')
-// const video_upload = require('./routes/youtube/video_upload')
-broadcast(app)
-livestream(app)
-// video_upload(app)
 
 // YOUTUBE
 const auth = require('./routes/accounts/youtube/auth')
 const callback = require('./routes/accounts/youtube/callback')
 const video_upload = require('./routes/accounts/youtube/video_upload')
+const get_all_videos = require('./routes/accounts/youtube/get_all_videos')
+const update_video = require('./routes/accounts/youtube/update_video')
+const delete_youtube_video = require('./routes/accounts/youtube/delete_youtube_video')
 auth(app)
 callback(app)
 video_upload(app)
+get_all_videos(app)
+update_video(app)
+delete_youtube_video(app)
 
 
 app.get("/", (req, res) => {

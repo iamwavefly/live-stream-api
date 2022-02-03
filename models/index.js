@@ -16,7 +16,6 @@ db.url = db_url;
 db.user = require("../models/users")(mongoose);
 db.video = require("../models/videos")(mongoose);
 db.team = require("../models/teams")(mongoose);
-db.accounts = require("../models/accounts")(mongoose);
 module.exports = db;
 
 // mongodb+srv://LiveSumo:w65HMDvQTVoBJ073@live-sumo-cluster.bbtvv.mongodb.net/Live-snap-db?retryWrites=true&w=majority
