@@ -156,6 +156,26 @@ update_video(app)
 delete_youtube_video(app)
 
 
+// FACEBOOK
+const facebook_auth = require('./routes/accounts/facebook/facebook_auth')
+const facebook_callback = require('./routes/accounts/facebook/facebook_callback')
+facebook_auth(app)
+facebook_callback(app)
+
+// TWITCH
+const twitch_auth = require('./routes/accounts/twitch/twitch_auth')
+const twitch_callback = require('./routes/accounts/twitch/twitch_callback')
+twitch_auth(app)
+twitch_callback(app)
+
+// TWITTER
+const twitter_auth = require('./routes/accounts/twitter/twitter_auth')
+const twitter_callback = require('./routes/accounts/twitter/twitter_callback')
+twitter_auth(app)
+twitter_callback(app)
+
+
+
 app.get("/", (req, res) => {
   res.status(200).json({ "status": 200, "message": "Welcome to live snap api.", "data": null })
 });

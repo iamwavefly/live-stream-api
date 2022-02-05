@@ -17,6 +17,30 @@ module.exports = mongoose => {
             type: String,
             default: ''
         },
+        facebook_access_token: {
+            type: String,
+            default: ''
+        },
+        facebook_refresh_token: {
+            type: String,
+            default: ''
+        },
+        twitch_access_token: {
+            type: String,
+            default: ''
+        },
+        twitch_refresh_token: {
+            type: String,
+            default: ''
+        },
+        twitter_access_token: {
+            type: String,
+            default: ''
+        },
+        twitter_refresh_token: {
+            type: String,
+            default: ''
+        },
         photo: { 
             type: String,
             default: ""
