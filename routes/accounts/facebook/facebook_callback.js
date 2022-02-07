@@ -41,6 +41,7 @@ module.exports = function (app) {
                     $set: {
                         token: token,
                         facebook_access_token: access_token,
+                        is_connected_facebook: true
                         // facebook_refresh_token: refresh_token,
                     }
                 }, { new: true })

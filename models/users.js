@@ -17,6 +17,10 @@ module.exports = mongoose => {
             type: String,
             default: ''
         },
+        is_connected_google:{
+            type: Boolean,
+            default: false
+        },
         facebook_access_token: {
             type: String,
             default: ''
@@ -24,6 +28,10 @@ module.exports = mongoose => {
         facebook_refresh_token: {
             type: String,
             default: ''
+        },
+        is_connected_facebook:{
+            type: Boolean,
+            default: false
         },
         twitch_access_token: {
             type: String,
@@ -33,6 +41,10 @@ module.exports = mongoose => {
             type: String,
             default: ''
         },
+        is_connected_twitch:{
+            type: Boolean,
+            default: false
+        },
         twitter_access_token: {
             type: String,
             default: ''
@@ -40,6 +52,10 @@ module.exports = mongoose => {
         twitter_refresh_token: {
             type: String,
             default: ''
+        },
+        is_connected_twitter:{
+            type: Boolean,
+            default: false
         },
         photo: { 
             type: String,
