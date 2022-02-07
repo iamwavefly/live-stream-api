@@ -22,8 +22,6 @@ module.exports = function (app) {
                 is_registered: false
             }
 
-        //   const granted_scopes = [ 'user:read:email', 'channel_stream', 'channel_subscriptions', 'chat_login', 'user_blocks_edit', 'user_read'];
-
             const exchange_token_url = `https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&code=${request.query.code}&grant_type=authorization_code&redirect_uri=${REDIRECT_URL}`;
 
             const exchange_token_response = await axios.post(exchange_token_url);
@@ -31,6 +29,26 @@ module.exports = function (app) {
             const access_token = exchange_token_response.data.access_token;
             const refresh_token = exchange_token_response.data.refresh_token;
 
+            //get the user profile from twitch
+            const user_profile_response = await axios.get(`https://api.twitch.tv/helix/users?login=${request.query.username}`, {
+                headers: {
+                    'Client-ID': process.env.TWITCH_CLIENT_ID,
+                    'Authorization': `Bearer ${access_token}`
+                }
+            });
+
+            const user_profile_body = user_profile_response.data.data[0];
+            console.log(user_profile_body);
+
+            // const user_profile_id = user_profile_body.id;
+
+            // const user_profile_email = user_profile_body.email;
+
+            const user_profile_name = user_profile_body.display_name;
+
+            const user_profile_picture = user_profile_body.profile_image_url;
+        
+            
             if (functions.empty(exchange_token_response.data)) { throw new Error("Access token and refresh token data are missing."); }
 
             if (!functions.empty(exchange_token_response.data.access_token || !functions.empty(exchange_token_response.data.refresh_token))) {
@@ -46,6 +64,8 @@ module.exports = function (app) {
                         token: token,
                         twitch_access_token: exchange_token_response.data.access_token,
                         twitch_refresh_token: exchange_token_response.data.refresh_token,
+                        twitch_profile_picture: user_profile_picture,
+                        twitch_profile_name: user_profile_name,
                     }
                 }, { new: true });
 
@@ -69,7 +89,11 @@ module.exports = function (app) {
                         payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked);
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered);
 
-                        response.redirect('https://live-snap-front-end.herokuapp.com');
+                        if(process.env.Mode === 'development'){
+                            response.redirect('http://localhost:3000/accounts')
+                        }else{
+                            response.redirect('https://live-snap-front-end.herokuapp.com/accounts')
+                        }
 
                     } catch (e) {
                         response.status(400).json({ "status": 400, "message": e.message, "data": payload });

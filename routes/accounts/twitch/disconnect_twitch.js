@@ -43,7 +43,8 @@ module.exports = function (app) {
                         $set: {
                             token: request.body.token,
                             twitch_access_token: "",
-                            twitch_refresh_token: "",
+                            twitch_profile_picture: '',
+                            twitch_profile_name: '',
                             is_connected_twitch: false
                         }
                     }, { new: true })

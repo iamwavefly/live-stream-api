@@ -3,6 +3,7 @@ const dateUtil = require('date-fns');
 var request_url = require('request');
 const db = require("../../../models");
 const { google } = require('googleapis');
+const axios = require('axios');
 
 const functions = require("../../../utility/function.js")
 const USER = db.user;
@@ -41,6 +42,23 @@ module.exports = function (app) {
                 refresh_token: body.refresh_token
             });
 
+            //get user profile from google
+
+            let url = `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${body.access_token}`
+
+            let user_profile = await axios.get(url)
+
+            let user_profile_body = user_profile.data
+
+            // let user_profile_id = user_profile_body.id
+
+            // let user_profile_email = user_profile_body.email
+
+            let user_profile_name = user_profile_body.name
+
+            let user_profile_picture = user_profile_body.picture
+            
+            
             if(functions.empty(body)){ throw new Error("Access token and refresh token data are missing.") }
 
             if(!functions.empty(body.access_token) || !functions.empty(body.refresh_token)){
@@ -54,6 +72,9 @@ module.exports = function (app) {
                         token: token,
                         google_access_token: body.access_token,
                         google_refresh_token: body.refresh_token,
+                        google_profile_picture: user_profile_picture,
+                        google_profile_name: user_profile_name,
+                        is_connected_google: true
                     }
                 }, { new: true })
                 
@@ -77,7 +98,11 @@ module.exports = function (app) {
                         payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
 
-                        response.redirect('https://live-snap-front-end.herokuapp.com')
+                        if(process.env.Mode === 'development'){
+                            response.redirect('http://localhost:3000/accounts')
+                        }else{
+                            response.redirect('https://live-snap-front-end.herokuapp.com/accounts')
+                        }
 
                     } catch (e) {
                         response.status(400).json({ "status": 400, "message": e.message, "data": payload });

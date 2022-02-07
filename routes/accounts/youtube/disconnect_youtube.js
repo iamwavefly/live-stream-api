@@ -43,7 +43,6 @@ module.exports = function (app) {
                         $set: {
                             token: request.body.token,
                             google_access_token: "",
-                            google_refresh_token: "",
                             is_connected_google: false
                         }
                     }, { new: true })

@@ -17,6 +17,14 @@ module.exports = mongoose => {
             type: String,
             default: ''
         },
+        google_profile_picture: {
+            type: String,
+            default: ''
+        },
+        google_profile_name: {
+            type: String,
+            default: ''
+        },
         is_connected_google:{
             type: Boolean,
             default: false
@@ -26,6 +34,14 @@ module.exports = mongoose => {
             default: ''
         },
         facebook_refresh_token: {
+            type: String,
+            default: ''
+        },
+        facebook_profile_picture: {
+            type: String,
+            default: ''
+        },
+        facebook_profile_name: {
             type: String,
             default: ''
         },
@@ -41,6 +57,14 @@ module.exports = mongoose => {
             type: String,
             default: ''
         },
+        twitch_profile_picture: {
+            type: String,
+            default: ''
+        },
+        twitch_profile_name: {
+            type: String,
+            default: ''
+        },
         is_connected_twitch:{
             type: Boolean,
             default: false
@@ -50,6 +74,14 @@ module.exports = mongoose => {
             default: ''
         },
         twitter_refresh_token: {
+            type: String,
+            default: ''
+        },
+        twitter_profile_picture: {
+            type: String,
+            default: ''
+        },
+        twitter_profile_name: {
             type: String,
             default: ''
         },
