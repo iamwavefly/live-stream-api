@@ -18,8 +18,8 @@ const Video = () => {
     const getallVideos = useSelector((state) => state.getallVideos)
     const { loading, error, allVideos } = getallVideos;
 
-    const [modal, setModal] = useState(false);
     const [loading_delete, setLoading] = useState(false);
+    const [modal, setModal] = useState(false);
     const Toggle = () => setModal(!modal);
 
     useEffect(() => {

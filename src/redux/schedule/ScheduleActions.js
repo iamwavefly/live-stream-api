@@ -23,6 +23,7 @@ export const newSchedule =
         { token, video_id, stream_date, stream_time, description, tags, title, is_instagram, is_twitter, is_facebook, is_youtube, is_twitch },
         config
       );
+      console.log(data)
 
       dispatch({
         type: CREATE_SCHEDULE_SUCCESS,

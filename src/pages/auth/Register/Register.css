@@ -145,7 +145,7 @@ section{
    background: transparent;
 }
 
-::placeholder{
+input::placeholder{
     font-family: Mulish;
     font-style: normal;
     font-weight: normal;

@@ -47,9 +47,9 @@ const CreateNewSchedule = () => {
     useEffect(() => {
         if (createSchedule) {
             toast.success("Your video was scheduled successfully", { autoClose: 2000 })
-            setTimeout(() => {
-                window.location.reload()
-            }, 2500)
+            // setTimeout(() => {
+            //     window.location.reload()
+            // }, 2500)
         }
         else {
             toast.error(error)
