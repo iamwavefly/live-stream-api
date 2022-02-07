@@ -159,8 +159,10 @@ delete_youtube_video(app)
 // FACEBOOK
 const facebook_auth = require('./routes/accounts/facebook/facebook_auth')
 const facebook_callback = require('./routes/accounts/facebook/facebook_callback')
+const facebook_upload = require('./routes/accounts/facebook/facebook_upload')
 facebook_auth(app)
 facebook_callback(app)
+facebook_upload(app)
 
 // TWITCH
 const twitch_auth = require('./routes/accounts/twitch/twitch_auth')
