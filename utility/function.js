@@ -5,6 +5,9 @@ const url_request = require("request")
 let countries = require('../json/countries.json');
 let currencies = require('../json/currencies.json');
 let languages = require('../json/languages.json');
+const ffmpeg = require('fluent-ffmpeg');
+const fs = require('fs');
+
 
 "use strict"
 var self = module.exports = {
@@ -325,6 +328,122 @@ var self = module.exports = {
                 callback({ status: 400, message: "An error was encountered while sending email to email address.", data: null })
             }
         })
-    }
+    },
 
-}
+
+    transcode_video:(fileName, filePath) =>{
+        return new Promise((resolve, reject) => {
+            //get the video thumbnail
+            ffmpeg(filePath)
+                .on('error', function (err) {
+                    reject(err)
+                }
+                )
+                .on('end', function () {
+                    resolve(fileName)
+                }
+                )
+                .screenshots({
+                    timestamps: ['20%'],
+                    filename: `${fileName}.png`,
+                    folder: './transcoded',
+                    size: '720x?'
+                });
+            
+        });
+    },
+
+
+    //  rtmp_server_url: "rtmp://localhost/live/stream"
+    //  path: "./videos/video.mp4"
+        stream_video: (path, rtmp_server_url) => {
+            return new Promise((resolve, reject) => {
+                var stream = fs.createReadStream(path);
+                var live = new ffmpeg({
+                    source: stream
+                })
+                    .withVideoCodec('libx264')
+                    .withAudioCodec('aac')
+                    .withAudioFrequency(44100)
+                    .withAudioChannels(2)
+                    .withAudioBitrate('128k')
+                    .withVideoBitrate('800k')
+                    .withSize('640x360')
+                    .withFps(30)
+                    .addOutputOption('-vcodec', 'libx264')
+                    .addOutputOption('-acodec', 'aac')
+                    .addOutputOption('-strict', 'experimental')
+                    .addOutputOption('-preset', 'veryfast')
+                    .addOutputOption('-ac', '2')
+                    .addOutputOption('-ar', '44100')
+                    .addOutputOption('-ab', '128k')
+                    .addOutputOption('-vb', '800k')
+                    .addOutputOption('-s', '640x360')
+                    .addOutputOption('-r', '30')
+                    .addOutputOption('-f', 'flv')
+                    .addOutputOption('-y')
+                    .addOutputOption('-vsync', '0')
+                    .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
+                    .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
+                    .addOutputOption('-vf', 'crop=640:360:0:0')
+                    .addOutputOption('-vf', 'setsar=1')
+                    .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+
+                    .on('error', function(err) {
+                        reject(err);
+                    })
+                    .on('end', function() {
+                        resolve(true);
+                    })
+                    .save(rtmp_server_url);
+            });
+        }}
+
+
+    // transcode_video:(fileName, filePath) =>{
+    //     return new Promise((resolve, reject) => {
+    //         ffmpeg(filePath)
+    //         .videoCodec('libx264')
+    //         .audioCodec('aac')
+    //         .size('640x360')
+    
+    //         .on('error', function(err) {
+    //             reject(err);
+    //         })
+    //         .on('end', function() {
+    //             ffmpeg(filePath)
+    //             .screenshots({
+    //                 timestamps: ['20%'],
+    //                 filename: `${fileName}.mp4.png`,
+    //                 folder: './transcoded',
+    //                 size: '720x?'
+    //             })
+    //             .on('error', function(err) {
+    //                 reject(err);
+    //             })
+    //             .on('end', function() {
+    //                 resolve(true);
+    //             })
+    
+    //         })
+    //         .save(`./transcoded/${fileName}.mp4`);
+            
+    //     });
+    // }
+
+     
+//     ffmpeg(filePath)
+//     .screenshots({
+//         timestamps: ['50%'],
+//         filename: `${fileName}.png`,
+//         folder: './transcoded',
+//         size: '720x?'
+//     })
+//     .on('error', function(err) {
+//         reject(err);
+//     })
+//     .on('end', function() {
+//         resolve(true);
+//     })
+
+// .save(`./transcoded/${fileName}.mp4`);

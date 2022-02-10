@@ -147,6 +147,6 @@ module.exports = function (app) {
         } catch (error) {
             response.status(400).json({ "status": 400, "message": error.message, "data": null });
         }
-    })
+    });
 
 }

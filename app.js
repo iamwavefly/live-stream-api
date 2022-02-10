@@ -1,19 +1,14 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-const express = require('express')
-const bodyParser = require('body-parser')
+const express = require('express');
+const bodyParser = require('body-parser');
 const http = require('http');
-const helmet = require('helmet')
+const helmet = require('helmet');
 const cors = require('cors');
 var cluster = require('cluster');
-// var passport = require ("passport");
-// var session = require ("express-session");
-// const redis = require('redis');
-// var axios = require('axios');
+const path = require('path');
 
-//bring in the passport config
-// require('./config/passportConfig')(passport);
 
 // DATABASE
 const db = require("./models/index.js");
@@ -37,18 +32,6 @@ const app = express()
 app.use(helmet())
 app.use(cors());
 
-//passport
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: false }
-// }))
-// app.use(passport.session());
-// app.use(passport.initialize());
-
-
-
 app.use(function(req, res, next) {
   res.setHeader(
     'Content-Security-Policy',
@@ -69,25 +52,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-//STATIC
+//STATICs
 app.use('/media', express.static('media'))
 
-// connect to redis
-// const redisClient = redis.createClient({
-//     host: process.env.REDIS_HOST,
-//     port: process.env.REDIS_PORT,
-//     password: process.env.REDIS_PASSWORD
-// });
 
-// console.log(`Running in ${process.env.MODE} mode`);
-
-
-// client.on('error', function (err) {
-//     console.log('Error ' + err);
-// });
-
-
-// ROUTES
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+app.use('/transcoded', express.static(path.join(__dirname, '/transcoded')))
 
 // AUTHENTICATION
 const login = require('./routes/authentication/login')
@@ -113,6 +83,7 @@ upload_photo(app)
 
 // VIDEO
 const upload_video = require('./routes/video/upload_video')
+const upload_file = require('./routes/video/upload_file')
 const edit_video = require('./routes/video/edit_video')
 const delete_video = require('./routes/video/delete_video')
 const get_videos = require('./routes/video/get_videos')
@@ -124,6 +95,7 @@ delete_video(app)
 get_videos(app)
 schedule_video(app)
 get_scheduled_video(app)
+upload_file(app)
 
 
 // TEAM
@@ -182,7 +154,6 @@ const twitter_auth = require('./routes/accounts/twitter/twitter_auth')
 const twitter_callback = require('./routes/accounts/twitter/twitter_callback')
 twitter_auth(app)
 twitter_callback(app)
-
 
 
 app.get("/", (req, res) => {

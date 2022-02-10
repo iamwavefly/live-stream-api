@@ -21,6 +21,9 @@ module.exports = mongoose => {
             type: Number,
             default: 0
         },
+        thumbnail: {
+            type: String
+        },
         duration: {
             type: Number,
             default: 0

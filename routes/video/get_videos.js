@@ -68,7 +68,7 @@ module.exports = function (app) {
                 } catch (e) {
                     response.status(400).json({ "status": 400, "message": e.message, "data": payload });
                 }
-
+                
             } else {
                 response.status(400).json({ "status": 400, "message": "User account access authentication credentials failed, check and retry.", "data": payload });
             }
