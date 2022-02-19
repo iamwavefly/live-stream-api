@@ -79,4 +79,16 @@ module.exports = function (app) {
 
     })
 
+    //get all videos from the database
+    app.get(`/${endpoint_category}/get_all_videos`, async (request, response) => {
+        try {
+            const videos = await VIDEO.find({});
+            response.status(200).json({ "status": 200, "count": videos.length , "message": "All videos has been fetched successfully.",  "data": videos });
+        } catch (e) {
+            response.status(400).json({ "status": 400,  "message": e.message, "data": null });
+        }
+
+         
+    })
+
 }

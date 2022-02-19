@@ -1,6 +1,7 @@
 const dateUtil = require('date-fns');
 const path = require("path");
 const functions = require("../../utility/function.js")
+const streaming = require("../../utility/streaming.js")
 const db = require("../../models");
 const USER = db.user;
 const VIDEO = db.video;
@@ -66,6 +67,7 @@ module.exports = function (app) {
                                 tags: functions.empty(request.body.tags)? videoExists.tags : request.body.tags,
                                 stream_date: functions.empty(request.body.stream_date)? videoExists.stream_date : request.body.stream_date,
                                 stream_time: functions.empty(request.body.stream_time)? videoExists.stream_time : request.body.stream_time,
+                                scheduled_start_times: functions.empty(request.body.scheduled_start_times)? videoExists.scheduled_start_times : request.body.scheduled_start_times,
                                 is_scheduled: true,
                                 status: "Scheduled",
                                 is_facebook: functions.stringToBoolean(request.body.is_facebook)? true : false,
@@ -83,7 +85,40 @@ module.exports = function (app) {
                         payload["is_verified"] = functions.stringToBoolean(userExists.is_verified)
                         payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
-                        payload["video"] = videoExists,
+                        payload["video"] = videoExists
+                            
+                         //schedule to youtube
+                         if(videoExists.is_youtube === true) {
+                            let broadcast_youtube = streaming.broadcast_youtube(
+                                videoExists.title,
+                                videoExists.description,
+                                videoExists.scheduled_start_times,
+                                userExists.google_refresh_token,
+                                videoExists.token,
+                                videoExists.video_id,
+                                // (body) => {
+                                //    let streamName = body.data  
+                                //    let rtmpAddress = `rtmps://a.rtmps.youtube.com/live2/${streamName}`
+                                // }  
+                                
+                            )    
+                          
+                         }else{
+                             console.log("Not youtube")
+                         }
+                         //schedule to facebook
+                         if(videoExists.is_facebook === true) {
+                            let broadcast_facebook = streaming.create_facebook_live_video(
+                                videoExists.title,
+                                videoExists.description,
+                                userExists.facebook_access_token,
+                                videoExists.token,
+                                videoExists.video_id,
+                            )
+                         }else{
+                                console.log("Not facebook")
+                            }
+
                         response.status(200).json({ "status": 200, "message": "Video has been scheduled successfully.", "data": payload });
                     
                     } catch (e) {

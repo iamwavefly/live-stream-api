@@ -24,80 +24,98 @@ module.exports = function (app) {
 
             let url = `https://graph.facebook.com/v12.0/oauth/access_token?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${REDIRECT_URL}&client_secret=${process.env.FACEBOOK_CLIENT_SECRET}&code=${request.query.code}`;
 
-            let auth_req = await request_url(url, async (err, res, body) => {
+            let auth_req =  request_url(url, async (err, res, body) => {
                
                 let access_token = JSON.parse(body).access_token;
-                
-                let url = `https://graph.facebook.com/v12.0/me?access_token=${access_token}&fields=id,name,email,picture`;
 
-                let user_profile_response = await request_url(url, async (err, res, body) => {
-                    let user_profile_body = JSON.parse(body)
-                    // let user_profile_id = user_profile_body.id
-                    // let user_profile_email = user_profile_body.email
-                    let user_profile_name = user_profile_body.name
-                    let user_profile_picture = user_profile_body.picture.data.url
+                console.log(access_token, 'access_token_body');
 
-                    if(functions.empty(body)){ throw new Error("Access token and refresh token data are missing.") }
+                //exchange access token for a long-lived token that can be used to access the API for a period of time
+                let url = `https://graph.facebook.com/v12.0/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.FACEBOOK_CLIENT_ID}&client_secret=${process.env.FACEBOOK_CLIENT_SECRET}&fb_exchange_token=${access_token}`;
 
-                    if(!functions.empty(access_token) ){
-                    
-                        let token = request.query.state
-        
-                        let userExists = await USER.find({ token: token})
+                let long_lived_token_req = request_url(url, async (err, res, body) => {
+                    let long_lived_token = JSON.parse(body).access_token;
+                    console.log(long_lived_token, 'long_lived_token_body');
+
+                    //get user profile
+                    let url = `https://graph.facebook.com/v12.0/me?access_token=${long_lived_token}&fields=id,name,email,picture`;
+
+                    let user_profile_response =  request_url(url, async (err, res, body) => {
+                        let user_profile_body = JSON.parse(body)
+                        // let user_profile_id = user_profile_body.id
+                        // let user_profile_email = user_profile_body.email
+                        let user_profile_name = user_profile_body.name
+                        let user_profile_picture = user_profile_body.picture.data.url
+    
+                        if(functions.empty(body)){ throw new Error("Access token and refresh token data are missing.") }
+    
+                        if(!functions.empty(access_token) ){
                         
-                        //save access token and refresh token to the database
-                        let user = await USER.findOneAndUpdate({ token: token }, {
-                            $set: {
-                                token: token,
-                                facebook_access_token: access_token,
-                                facebook_profile_picture: user_profile_picture,
-                                facebook_profile_name: user_profile_name,
-                                is_connected_facebook: true
-                                // facebook_refresh_token: refresh_token,
-                            }
-                        }, { new: true })
-                        
-                        if (!functions.empty(userExists)) {
-        
-                            try {
-        
-                                userExists = Array.isArray(userExists)? userExists[0] : userExists;
-        
-                                // Check if token has expired
-                                const difference = Math.abs(dateUtil.differenceInMinutes(new Date(userExists.token_expiry), new Date()))
-                                if (difference > process.env.TOKEN_EXPIRY_MINUTES) {
+                            let token = request.query.state
+            
+                            let userExists = await USER.find({ token: token})
+                            
+                            //save access token and refresh token to the database
+                            let user = await USER.findOneAndUpdate({ token: token }, {
+                                $set: {
+                                    token: token,
+                                    facebook_access_token: long_lived_token,
+                                    facebook_profile_picture: user_profile_picture,
+                                    facebook_profile_name: user_profile_name,
+                                    is_connected_facebook: true
+                                    // facebook_refresh_token: refresh_token,
+                                }
+                            }, { new: true })
+                            
+                            if (!functions.empty(userExists)) {
+            
+                                try {
+            
+                                    userExists = Array.isArray(userExists)? userExists[0] : userExists;
+            
+                                    // Check if token has expired
+                                    const difference = Math.abs(dateUtil.differenceInMinutes(new Date(userExists.token_expiry), new Date()))
+                                    if (difference > process.env.TOKEN_EXPIRY_MINUTES) {
+                                        payload["is_verified"] = functions.stringToBoolean(userExists.is_verified)
+                                        payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
+                                        payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
+                                        throw new Error("This user authentication token has expired, login again retry.")
+                                    }
+            
+            
                                     payload["is_verified"] = functions.stringToBoolean(userExists.is_verified)
                                     payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
-                                    throw new Error("This user authentication token has expired, login again retry.")
+            
+                                    if(process.env.Mode === 'development'){
+                                        response.redirect('http://localhost:3000/accounts')
+                                    }else{
+                                        response.redirect('https://live-snap-front-end.herokuapp.com/accounts')
+                                    }
+            
+                                } catch (e) {
+                                    response.status(400).json({ "status": 400, "message": e.message, "data": payload });
                                 }
-        
-        
-                                payload["is_verified"] = functions.stringToBoolean(userExists.is_verified)
-                                payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
-                                payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
-        
-                                if(process.env.Mode === 'development'){
-                                    response.redirect('http://localhost:3000/accounts')
-                                }else{
-                                    response.redirect('https://live-snap-front-end.herokuapp.com/accounts')
-                                }
-        
-                            } catch (e) {
-                                response.status(400).json({ "status": 400, "message": e.message, "data": payload });
+            
+                            } else {
+                                response.status(400).json({ "status": 400, "message": "User account access authentication credentials failed, check and retry.", "data": payload });
                             }
-        
+            
                         } else {
-                            response.status(400).json({ "status": 400, "message": "User account access authentication credentials failed, check and retry.", "data": payload });
+                            response.status(400).json({ "status": 400, "message": "Access token missing or expired, check and retry.", "data": payload });
                         }
-        
-                    } else {
-                        response.status(400).json({ "status": 400, "message": "Access token missing or expired, check and retry.", "data": payload });
+    
+    
                     }
+                    )
+
+                });
 
 
-                }
-                )
+
+
+                
+              
 
         
      

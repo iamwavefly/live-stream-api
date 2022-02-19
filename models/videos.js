@@ -44,11 +44,7 @@ module.exports = mongoose => {
             type: String,
             default: ""
         },
-        stream_date:{
-            type: String,
-            default: ""
-        },
-        stream_time:{
+        scheduled_start_times:{
             type: String,
             default: ""
         },
@@ -75,6 +71,26 @@ module.exports = mongoose => {
         is_twitch:{
             type: Boolean,
             default: false
+        },
+        youtube_rtmp_url:{
+            type: String,
+            default: ""
+        },
+        facebook_rtmp_url:{
+            type: String,
+            default: ""
+        },
+        twitter_rtmp_url:{
+            type: String,
+            default: ""
+        },
+        instagram_rtmp_url:{
+            type: String,
+            default: ""
+        },
+        twitch_rtmp_url:{
+            type: String,
+            default: ""
         },
         status: {
             type: String,

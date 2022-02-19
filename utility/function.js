@@ -7,7 +7,8 @@ let currencies = require('../json/currencies.json');
 let languages = require('../json/languages.json');
 const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
-
+var validator = require('validator');
+const https = require('https');
 
 "use strict"
 var self = module.exports = {
@@ -23,6 +24,7 @@ var self = module.exports = {
         return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
     },
 
+
     stringToBoolean: (string) => {
         if(self.empty(string)){
             return false;
@@ -36,6 +38,7 @@ var self = module.exports = {
         }
     },
 
+
     uniqueId: (length, type = "alphanumeric") => {
         var result = '';
         var characters = type == "number" ? '0123456789' : type == "alphabet" ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -45,6 +48,7 @@ var self = module.exports = {
         }
         return result;
     },
+
 
     diffArray: (arr1, arr2) => {
         function diff(a, b) {
@@ -56,17 +60,20 @@ var self = module.exports = {
         return [].concat(diff1, diff2)
     },
 
+
     ucwords: (str) => {
         return (str + '').replace(/^(.)|\s+(.)/g, ($1) => {
             return $1.toUpperCase()
         })
     },
 
+
     ucfirst: (str) => {
         str += ''
         var f = str.charAt(0).toUpperCase()
         return f + str.substr(1)
     },
+
 
     empty: (mixedVar) => {
         var undef
@@ -93,9 +100,11 @@ var self = module.exports = {
         return false
     },
 
+
     stripHtml: (html) => {
         return html.replace(/<[^>]*>?/gm, '')
     },
+
 
     // VALIDATE EMAIL
     validateEmail: (email) => {
@@ -103,11 +112,13 @@ var self = module.exports = {
         return re.test(String(email).toLowerCase());
     },
 
+
     validatePassword: (password) => {
         if(self.empty(password)){ return false  }
         if(password.length < 8){ return false }
         return true;
     },
+
 
     // VALIDATE PHONE
     validatePhone: (phone) => {
@@ -123,6 +134,7 @@ var self = module.exports = {
             }
         }
     },
+
 
     // URL DOWNLOADER
     downloadFromURL: (url, path, callback) => {
@@ -163,6 +175,7 @@ var self = module.exports = {
         }
     },
 
+
     // BASE64 ENCODER AND DECODER
     base64: (string, action = "encode") => {
         const base64 = {
@@ -178,6 +191,7 @@ var self = module.exports = {
         }
     },
 
+
     shorten: (arr, obj) => {
         arr.forEach((key) => {
             delete obj[key];
@@ -185,12 +199,14 @@ var self = module.exports = {
         return obj;
     },
 
+
     sortObject: (obj) => {
         return Object.keys(obj).sort().reduce((result, key) => {
             result[key] = obj[key];
             return result;
         }, {});
     },
+
 
     pagainateObject: (items, page, per_page) => {
         var page = page || 1,
@@ -210,6 +226,7 @@ var self = module.exports = {
         };
     },
 
+
     encrypt: (value) => {
         value = value.toString()
         const initVector = crypto.randomBytes(16);
@@ -222,12 +239,14 @@ var self = module.exports = {
         return self.base64(JSON.stringify(hash), "encode")
     },
 
+
     decrypt: (hash) => {
         hash = JSON.parse(self.base64(hash, "decode"))
         const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.initVector, 'hex'));
         const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
         return decrpyted.toString();
     },
+
 
     validURL: (str) => {
         var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
@@ -239,6 +258,7 @@ var self = module.exports = {
         return !!pattern.test(str);
     },
 
+
     getCountryNameOrCode: (country, what_to_get = "code") => {
         if (what_to_get.toLowerCase() == "code") {
             var country_object = countries.filter((country_data) => { return country_data.name.toLowerCase() == country.toLowerCase() })
@@ -248,6 +268,7 @@ var self = module.exports = {
             return self.empty(country_object) ? '' : country_object[0].name.toLowerCase()
         }
     },
+
 
     getCurrencyNameOrCode: (currency, what_to_get = "code") => {
         if (what_to_get.toLowerCase() == "code") {
@@ -259,17 +280,20 @@ var self = module.exports = {
         }
     },
 
+
     sendSMS: (to, body, callback) => {
         self.sendSMSWithTermii(to, body, function (report) {
             callback({ status: report.status, message: report.message, data: report.data })
         })
     },
 
+
     sendEmail: (subject, to, body, type, callback) => {
         self.sendEmailWithElasticEmail(subject, to, body, type, function (report) {
             callback({ status: report.status, message: report.message, data: report.data })
         })
     },
+
 
     sendSMSWithTermii: (to, body, callback) => {
         var data = {
@@ -293,6 +317,7 @@ var self = module.exports = {
             callback({ status: 200, message: "", data: response.body })
         });
     },
+
 
     sendEmailWithElasticEmail: (subject, to, body, type, callback) => {
         var options;
@@ -354,96 +379,225 @@ var self = module.exports = {
     },
 
 
-    //  rtmp_server_url: "rtmp://localhost/live/stream"
-    //  path: "./videos/video.mp4"
-        stream_video: (path, rtmp_server_url) => {
-            return new Promise((resolve, reject) => {
-                var stream = fs.createReadStream(path);
-                var live = new ffmpeg({
-                    source: stream
+    stream_video_facebook: (path_facebook, rtmp_server_url_facebook) => {
+        return new Promise((resolve, reject) => {
+            var stream_facebook = fs.createReadStream(path_facebook);
+            var live = new ffmpeg({
+                source: stream_facebook
+            })
+                .toFormat('mp4')
+                .withVideoCodec('libx264')
+                .withAudioCodec('aac')
+                .withAudioFrequency(44100)
+                .withAudioChannels(2)
+                .withAudioBitrate('128k')
+                .withVideoBitrate('800k')
+                .withSize('640x360')
+                .withFps(30)
+                .addOutputOption('-vcodec', 'libx264')
+                .addOutputOption('-acodec', 'aac')
+                .addOutputOption('-strict', 'experimental')
+                .addOutputOption('-preset', 'veryfast')
+                .addOutputOption('-ac', '2')
+                .addOutputOption('-ar', '44100')
+                .addOutputOption('-ab', '128k')
+                .addOutputOption('-vb', '800k')
+                .addOutputOption('-s', '640x360')
+                .addOutputOption('-r', '30')
+                .addOutputOption('-f', 'flv')
+                .addOutputOption('-y')
+                .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
+                .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
+                .addOutputOption('-vf', 'crop=640:360:0:0')
+                .addOutputOption('-vf', 'setsar=1')
+                .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+                .addOutputOption('-g', '4')
+                .addOutputOption('-analyzeduration', '2147483647')
+                .addOutputOption('-probesize', '2147483647')
+
+                .on('error', function(err) {
+                    reject(err);
                 })
-                    .withVideoCodec('libx264')
-                    .withAudioCodec('aac')
-                    .withAudioFrequency(44100)
-                    .withAudioChannels(2)
-                    .withAudioBitrate('128k')
-                    .withVideoBitrate('800k')
-                    .withSize('640x360')
-                    .withFps(30)
-                    .addOutputOption('-vcodec', 'libx264')
-                    .addOutputOption('-acodec', 'aac')
-                    .addOutputOption('-strict', 'experimental')
-                    .addOutputOption('-preset', 'veryfast')
-                    .addOutputOption('-ac', '2')
-                    .addOutputOption('-ar', '44100')
-                    .addOutputOption('-ab', '128k')
-                    .addOutputOption('-vb', '800k')
-                    .addOutputOption('-s', '640x360')
-                    .addOutputOption('-r', '30')
-                    .addOutputOption('-f', 'flv')
-                    .addOutputOption('-y')
-                    .addOutputOption('-vsync', '0')
-                    .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
-                    .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
-                    .addOutputOption('-vf', 'crop=640:360:0:0')
-                    .addOutputOption('-vf', 'setsar=1')
-                    .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+                .on('end', function() {
+                    resolve(true);
+                })
 
-                    .on('error', function(err) {
-                        reject(err);
-                    })
-                    .on('end', function() {
-                        resolve(true);
-                    })
-                    .save(rtmp_server_url);
-            });
-        }}
+                .save(rtmp_server_url_facebook);
+
+        });
+    },
 
 
-    // transcode_video:(fileName, filePath) =>{
-    //     return new Promise((resolve, reject) => {
-    //         ffmpeg(filePath)
-    //         .videoCodec('libx264')
-    //         .audioCodec('aac')
-    //         .size('640x360')
+    stream_video_twitch: (path_twitch, rtmp_server_url_twitch) => {
+        return new Promise((resolve, reject) => {
+            var stream_twitch = fs.createReadStream(path_twitch);
+            var live = new ffmpeg({
+                source: stream_twitch
+            })
+                .toFormat('mp4')
+                .withVideoCodec('libx264')
+                .withAudioCodec('aac')
+                .withAudioFrequency(44100)
+                .withAudioChannels(2)
+                .withAudioBitrate('128k')
+                .withVideoBitrate('800k')
+                .withSize('640x360')
+                .withFps(30)
+                .addOutputOption('-vcodec', 'libx264')
+                .addOutputOption('-acodec', 'aac')
+                .addOutputOption('-strict', 'experimental')
+                .addOutputOption('-preset', 'veryfast')
+                .addOutputOption('-ac', '2')
+                .addOutputOption('-ar', '44100')
+                .addOutputOption('-ab', '128k')
+                .addOutputOption('-vb', '800k')
+                .addOutputOption('-s', '640x360')
+                .addOutputOption('-r', '30')
+                .addOutputOption('-f', 'flv')
+                .addOutputOption('-y')
+                .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
+                .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
+                .addOutputOption('-vf', 'crop=640:360:0:0')
+                .addOutputOption('-vf', 'setsar=1')
+                .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+                .addOutputOption('-g', '4')
+                .addOutputOption('-analyzeduration', '2147483647')
+                .addOutputOption('-probesize', '2147483647')
+
+                .on('error', function(err) {
+                    reject(err);
+                })
+                .on('end', function() {
+                    resolve(true);
+                })
+
+                .save(rtmp_server_url_twitch);
+
+        });
+    },
+
+
+    stream_video_youtube: (path_youtube, rtmp_server_url_youtube) => {
+        return new Promise((resolve, reject) => {
+            var stream_youtube = fs.createReadStream(path_youtube);
+            var live = new ffmpeg({
+                source: stream_youtube
+            })
+                .toFormat('mp4')
+                .withVideoCodec('libx264')
+                .withAudioCodec('aac')
+                .withAudioFrequency(44100)
+                .withAudioChannels(2)
+                .withAudioBitrate('128k')
+                .withVideoBitrate('800k')
+                .withSize('640x360')
+                .withFps(30)
+                .addOutputOption('-vcodec', 'libx264')
+                .addOutputOption('-acodec', 'aac')
+                .addOutputOption('-strict', 'experimental')
+                .addOutputOption('-preset', 'veryfast')
+                .addOutputOption('-ac', '2')
+                .addOutputOption('-ar', '44100')
+                .addOutputOption('-ab', '128k')
+                .addOutputOption('-vb', '800k')
+                .addOutputOption('-s', '640x360')
+                .addOutputOption('-r', '30')
+                .addOutputOption('-f', 'flv')
+                .addOutputOption('-y')
+                .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
+                .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
+                .addOutputOption('-vf', 'crop=640:360:0:0')
+                .addOutputOption('-vf', 'setsar=1')
+                .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+                .addOutputOption('-g', '4')
+                .addOutputOption('-analyzeduration', '2147483647')
+                .addOutputOption('-probesize', '2147483647')
+
+                .on('error', function(err) {
+                    reject(err);
+                })
+                .on('end', function() {
+                    resolve(true);
+                })
+
+                .save(rtmp_server_url_youtube);
+
+        });
+    },
     
-    //         .on('error', function(err) {
-    //             reject(err);
-    //         })
-    //         .on('end', function() {
-    //             ffmpeg(filePath)
-    //             .screenshots({
-    //                 timestamps: ['20%'],
-    //                 filename: `${fileName}.mp4.png`,
-    //                 folder: './transcoded',
-    //                 size: '720x?'
-    //             })
-    //             .on('error', function(err) {
-    //                 reject(err);
-    //             })
-    //             .on('end', function() {
-    //                 resolve(true);
-    //             })
+    transcode_video:(fileName, filePath) =>{
+        return new Promise((resolve, reject) => {
+            ffmpeg(filePath)
+            .toFormat('mp4')
+            .withVideoCodec('libx264')
+            .withAudioCodec('aac')
+            .withAudioFrequency(44100)
+            .withAudioChannels(2)
+            .withAudioBitrate('128k')
+            .withVideoBitrate('800k')
+            .withSize('640x360')
+            .withFps(30)
+            .addOutputOption('-vcodec', 'libx264')
+            .addOutputOption('-acodec', 'aac')
+            .addOutputOption('-strict', 'experimental')
+            .addOutputOption('-preset', 'veryfast')
+            .addOutputOption('-ac', '2')
+            .addOutputOption('-ar', '44100')
+            .addOutputOption('-ab', '128k')
+            .addOutputOption('-vb', '800k')
+            .addOutputOption('-s', '640x360')
+            .addOutputOption('-r', '30')
+            .addOutputOption('-f', 'flv')
+            .addOutputOption('-y')
+            .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
+            .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
+            .addOutputOption('-vf', 'crop=640:360:0:0')
+            .addOutputOption('-vf', 'setsar=1')
+            .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+            .addOutputOption('-g', '4')
+            .addOutputOption('-analyzeduration', '2147483647')
+            .addOutputOption('-probesize', '2147483647')
     
-    //         })
-    //         .save(`./transcoded/${fileName}.mp4`);
+            .on('error', function(err) {
+                reject(err);
+            })
+            .on('end', function() {
+                ffmpeg(filePath)
+                .screenshots({
+                    timestamps: ['20%'],
+                    filename: `${fileName}.png`,
+                    folder: './transcoded',
+                    size: '720x?'
+                })
+                .on('error', function(err) {
+                    reject(err);
+                })
+                .on('end', function() {
+                    resolve(true);
+                })
+    
+            })
+            .save(`./transcoded/${fileName}.mp4`);
             
-    //     });
-    // }
+        });
+    },
 
-     
-//     ffmpeg(filePath)
-//     .screenshots({
-//         timestamps: ['50%'],
-//         filename: `${fileName}.png`,
-//         folder: './transcoded',
-//         size: '720x?'
-//     })
-//     .on('error', function(err) {
-//         reject(err);
-//     })
-//     .on('end', function() {
-//         resolve(true);
-//     })
+    download_video: (url, fileName, callback) => {
+        return new Promise((resolve, reject) => {
+            var file = fs.createWriteStream(`./uploads/${fileName}.mp4`);
+            var request = https.get(url, function(response) {
+                response.pipe(file);
+                file.on('finish', function() {
+                    file.close(
+                        console.log(`${fileName} downloaded`),
+                        callback(null, `${fileName} downloaded`)
+                    );
+                    resolve(true);
+                    callback(null, `${fileName}.mp4`);
+                });
+            });
+        });
+    },
 
-// .save(`./transcoded/${fileName}.mp4`);
+  
+};

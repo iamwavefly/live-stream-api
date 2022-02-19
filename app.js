@@ -89,6 +89,7 @@ const delete_video = require('./routes/video/delete_video')
 const get_videos = require('./routes/video/get_videos')
 const schedule_video = require('./routes/video/schedule_video')
 const get_scheduled_video = require('./routes/video/get_scheduled_video')
+const stream_scheduled_videos = require('./routes/video/stream_scheduled_videos')
 upload_video(app)
 edit_video(app)
 delete_video(app)
@@ -96,6 +97,7 @@ get_videos(app)
 schedule_video(app)
 get_scheduled_video(app)
 upload_file(app)
+stream_scheduled_videos(app)
 
 
 // TEAM
@@ -116,28 +118,18 @@ get_countries(app)
 // YOUTUBE
 const auth = require('./routes/accounts/youtube/auth')
 const callback = require('./routes/accounts/youtube/callback')
-const video_upload = require('./routes/accounts/youtube/video_upload')
-const get_all_videos = require('./routes/accounts/youtube/get_all_videos')
-const update_video = require('./routes/accounts/youtube/update_video')
-const delete_youtube_video = require('./routes/accounts/youtube/delete_youtube_video')
 const disconnect_youtube = require('./routes/accounts/youtube/disconnect_youtube')
 auth(app)
 callback(app)
-video_upload(app)
-get_all_videos(app)
-update_video(app)
-delete_youtube_video(app)
 disconnect_youtube(app)
 
 
 // FACEBOOK
 const facebook_auth = require('./routes/accounts/facebook/facebook_auth')
 const facebook_callback = require('./routes/accounts/facebook/facebook_callback')
-const facebook_upload = require('./routes/accounts/facebook/facebook_upload')
 disconnect_facebook = require('./routes/accounts/facebook/disconnect_facebook')
 facebook_auth(app)
 facebook_callback(app)
-facebook_upload(app)
 disconnect_facebook(app)
 
 // TWITCH
@@ -147,7 +139,6 @@ const disconnect_twitch = require('./routes/accounts/twitch/disconnect_twitch')
 twitch_auth(app)
 twitch_callback(app)
 disconnect_twitch(app)
-
 
 // TWITTER
 const twitter_auth = require('./routes/accounts/twitter/twitter_auth')

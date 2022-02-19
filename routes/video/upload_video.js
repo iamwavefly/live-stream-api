@@ -105,14 +105,14 @@ module.exports = function (app) {
                             }
 
                             let file_path = `https://${uploadParams.Bucket}.s3.${process.env.S3_REGION}.amazonaws.com/${filename}`;
-                            let file_duration = await getVideoDurationInSeconds(file_path);
+                            // let file_duration = await getVideoDurationInSeconds(file_path);
                             await VIDEO.create({
                                 video_id: functions.uniqueId(10, "alphanumeric"),
                                 token: request.body.token,
                                 name: filename,
                                 url: file_path,
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
-                                duration: file_duration,
+                                // duration: file_duration,
                             })
 
                         })
