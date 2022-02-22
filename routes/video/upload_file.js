@@ -87,11 +87,11 @@ module.exports = function (app) {
 
                         }else{
 
-                            const thumbnail_path = await functions.transcode_video(request.file.originalname, request.file.path)
+                            // const thumbnail_path = await functions.transcode_video(request.file.originalname, request.file.path)
 
-                            // get the generated thumbnail
-                            const thumbnails = fs.readFileSync(path.join(__dirname, `../../transcoded/${thumbnail_path}`), "utf8");
-                            console.log(thumbnails)
+                            // // get the generated thumbnail
+                            // const thumbnails = fs.readFileSync(path.join(__dirname, `../../transcoded/${thumbnail_path}`), "utf8");
+                            // console.log(thumbnails)
 
                             // Upload to S3
                             uploadParams.Key = `${request.file.originalname}`;
@@ -116,7 +116,7 @@ module.exports = function (app) {
                                         size: request.file.size,
                                         duration: await getVideoDurationInSeconds(request.file.path),
                                         status: "Queued",
-                                        thumbnail: thumbnail_path,
+                                        // thumbnail: thumbnail_path,
                                     })
                                     response.status(200).send({
                                         "message": "File uploaded successfully",

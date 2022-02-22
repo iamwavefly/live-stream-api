@@ -74,7 +74,6 @@ var self = module.exports = {
         return f + str.substr(1)
     },
 
-
     empty: (mixedVar) => {
         var undef
         var key
@@ -100,11 +99,9 @@ var self = module.exports = {
         return false
     },
 
-
     stripHtml: (html) => {
         return html.replace(/<[^>]*>?/gm, '')
     },
-
 
     // VALIDATE EMAIL
     validateEmail: (email) => {
@@ -112,13 +109,11 @@ var self = module.exports = {
         return re.test(String(email).toLowerCase());
     },
 
-
     validatePassword: (password) => {
         if(self.empty(password)){ return false  }
         if(password.length < 8){ return false }
         return true;
     },
-
 
     // VALIDATE PHONE
     validatePhone: (phone) => {
@@ -134,7 +129,6 @@ var self = module.exports = {
             }
         }
     },
-
 
     // URL DOWNLOADER
     downloadFromURL: (url, path, callback) => {
@@ -175,7 +169,6 @@ var self = module.exports = {
         }
     },
 
-
     // BASE64 ENCODER AND DECODER
     base64: (string, action = "encode") => {
         const base64 = {
@@ -191,7 +184,6 @@ var self = module.exports = {
         }
     },
 
-
     shorten: (arr, obj) => {
         arr.forEach((key) => {
             delete obj[key];
@@ -199,14 +191,12 @@ var self = module.exports = {
         return obj;
     },
 
-
     sortObject: (obj) => {
         return Object.keys(obj).sort().reduce((result, key) => {
             result[key] = obj[key];
             return result;
         }, {});
     },
-
 
     pagainateObject: (items, page, per_page) => {
         var page = page || 1,
@@ -226,7 +216,6 @@ var self = module.exports = {
         };
     },
 
-
     encrypt: (value) => {
         value = value.toString()
         const initVector = crypto.randomBytes(16);
@@ -239,14 +228,12 @@ var self = module.exports = {
         return self.base64(JSON.stringify(hash), "encode")
     },
 
-
     decrypt: (hash) => {
         hash = JSON.parse(self.base64(hash, "decode"))
         const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.initVector, 'hex'));
         const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
         return decrpyted.toString();
     },
-
 
     validURL: (str) => {
         var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
@@ -258,7 +245,6 @@ var self = module.exports = {
         return !!pattern.test(str);
     },
 
-
     getCountryNameOrCode: (country, what_to_get = "code") => {
         if (what_to_get.toLowerCase() == "code") {
             var country_object = countries.filter((country_data) => { return country_data.name.toLowerCase() == country.toLowerCase() })
@@ -268,7 +254,6 @@ var self = module.exports = {
             return self.empty(country_object) ? '' : country_object[0].name.toLowerCase()
         }
     },
-
 
     getCurrencyNameOrCode: (currency, what_to_get = "code") => {
         if (what_to_get.toLowerCase() == "code") {
@@ -280,20 +265,17 @@ var self = module.exports = {
         }
     },
 
-
     sendSMS: (to, body, callback) => {
         self.sendSMSWithTermii(to, body, function (report) {
             callback({ status: report.status, message: report.message, data: report.data })
         })
     },
 
-
     sendEmail: (subject, to, body, type, callback) => {
         self.sendEmailWithElasticEmail(subject, to, body, type, function (report) {
             callback({ status: report.status, message: report.message, data: report.data })
         })
     },
-
 
     sendSMSWithTermii: (to, body, callback) => {
         var data = {
@@ -317,7 +299,6 @@ var self = module.exports = {
             callback({ status: 200, message: "", data: response.body })
         });
     },
-
 
     sendEmailWithElasticEmail: (subject, to, body, type, callback) => {
         var options;
@@ -355,7 +336,6 @@ var self = module.exports = {
         })
     },
 
-
     transcode_video:(fileName, filePath) =>{
         return new Promise((resolve, reject) => {
             //get the video thumbnail
@@ -378,8 +358,7 @@ var self = module.exports = {
         });
     },
 
-
-    stream_video_facebook: (path_facebook, rtmp_server_url_facebook) => {
+    stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
         return new Promise((resolve, reject) => {
             var stream_facebook = fs.createReadStream(path_facebook);
             var live = new ffmpeg({
@@ -417,9 +396,17 @@ var self = module.exports = {
 
                 .on('error', function(err) {
                     reject(err);
+                    callback({ status: 400, message: "facebook error" + err, data: null })
                 })
                 .on('end', function() {
                     resolve(true);
+                    callback({
+                            status: 200,
+                            message: "Successfully streamed to facebook",
+                            data: {
+                                rtmp_server_url: rtmp_server_url_facebook
+                            }}
+                    );
                 })
 
                 .save(rtmp_server_url_facebook);
@@ -427,8 +414,7 @@ var self = module.exports = {
         });
     },
 
-
-    stream_video_twitch: (path_twitch, rtmp_server_url_twitch) => {
+    stream_video_twitch: (path_twitch, rtmp_server_url_twitch, callback) => {
         return new Promise((resolve, reject) => {
             var stream_twitch = fs.createReadStream(path_twitch);
             var live = new ffmpeg({
@@ -466,9 +452,18 @@ var self = module.exports = {
 
                 .on('error', function(err) {
                     reject(err);
+                    callback({ status: 400, message: "twitch error" + err, data: null })
                 })
                 .on('end', function() {
                     resolve(true);
+                    callback({
+                            status: 200,
+                            message: "Successfully streamed to twitch",
+                            data: {
+                                rtmp_server_url: rtmp_server_url_twitch
+                            }}
+                    );
+                    
                 })
 
                 .save(rtmp_server_url_twitch);
@@ -476,8 +471,7 @@ var self = module.exports = {
         });
     },
 
-
-    stream_video_youtube: (path_youtube, rtmp_server_url_youtube) => {
+    stream_video_youtube: (path_youtube, rtmp_server_url_youtube, callback) => {
         return new Promise((resolve, reject) => {
             var stream_youtube = fs.createReadStream(path_youtube);
             var live = new ffmpeg({
@@ -515,9 +509,17 @@ var self = module.exports = {
 
                 .on('error', function(err) {
                     reject(err);
+                    callback({ status: 400, message: "youtube error" + err, data: null })
                 })
                 .on('end', function() {
                     resolve(true);
+                    callback({
+                            status: 200,
+                            message: "Successfully streamed to youtube",
+                            data: {
+                                rtmp_server_url: rtmp_server_url_youtube
+                            }}
+                    );
                 })
 
                 .save(rtmp_server_url_youtube);
@@ -525,7 +527,7 @@ var self = module.exports = {
         });
     },
     
-    transcode_video:(fileName, filePath) =>{
+    transcode_video:(fileName, filePath, callback) =>{
         return new Promise((resolve, reject) => {
             ffmpeg(filePath)
             .toFormat('mp4')
@@ -560,6 +562,7 @@ var self = module.exports = {
     
             .on('error', function(err) {
                 reject(err);
+                callback({ status: 400, message: err, data: null })
             })
             .on('end', function() {
                 ffmpeg(filePath)
@@ -571,9 +574,17 @@ var self = module.exports = {
                 })
                 .on('error', function(err) {
                     reject(err);
+                    callback({ status: 400, message: err, data: null })
                 })
                 .on('end', function() {
                     resolve(true);
+                    callback({
+                            status: 200,
+                            message: "",
+                            data: {
+                                fileName: fileName
+                            }}
+                    );
                 })
     
             })
@@ -600,4 +611,29 @@ var self = module.exports = {
     },
 
   
+
+
+    delete_video: (fileName, callback) => {
+        return new Promise((resolve, reject) => {
+            fs.unlink(`./uploads/${fileName}.mp4`, (err) => {
+                if (err) {
+                    reject(err);
+                    callback({ status: 400, message: err, data: null })
+                }
+                resolve(true);
+                callback({ status: 200, message: "Video deleted", data: null })
+            });
+        });
+    },
+
+    //write a function to get date in iso format
+    get_date: (date, time) => {
+        var d = new Date(date);
+        var t = new Date(time);
+        return d.toISOString().slice(0, 10) + "T" + t.toISOString().slice(11, 19);
+    }
+
+    
 };
+
+

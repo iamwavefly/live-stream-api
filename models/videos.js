@@ -44,6 +44,14 @@ module.exports = mongoose => {
             type: String,
             default: ""
         },
+        date:{
+            type: String,
+            default: ""
+        },
+        time:{
+            type: String,
+            default: ""
+        },
         scheduled_start_times:{
             type: String,
             default: ""
@@ -95,7 +103,7 @@ module.exports = mongoose => {
         status: {
             type: String,
             default: "Queued",
-            enum: ["Queued", "Scheduled", "InProgress", "Streamed", "failed"],
+            enum: ["Queued", "Scheduled", "Streaming", "Streamed", "Failed"],
         },
     }, { timestamps: true });
 

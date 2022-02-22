@@ -59,7 +59,7 @@ broadcast_youtube: ( title, description, scheduledStartTime, refreshtoken, userT
                         },
                 },
                 status: {
-                    privacyStatus: 'private',
+                    privacyStatus: 'public',
                     selfDeclaredMadeForKids: true
                 },                    
                 }};
@@ -192,6 +192,11 @@ create_facebook_live_video: ( title, description, facebookAccessToken, userToken
     }
     
 )},
+
+
+
+
+    
 
 
 }

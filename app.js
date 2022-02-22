@@ -90,6 +90,7 @@ const get_videos = require('./routes/video/get_videos')
 const schedule_video = require('./routes/video/schedule_video')
 const get_scheduled_video = require('./routes/video/get_scheduled_video')
 const stream_scheduled_videos = require('./routes/video/stream_scheduled_videos')
+const unschedule_video = require('./routes/video/unschedule_video')
 upload_video(app)
 edit_video(app)
 delete_video(app)
@@ -98,6 +99,7 @@ schedule_video(app)
 get_scheduled_video(app)
 upload_file(app)
 stream_scheduled_videos(app)
+unschedule_video(app)
 
 
 // TEAM

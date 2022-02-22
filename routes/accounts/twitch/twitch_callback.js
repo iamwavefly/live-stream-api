@@ -38,23 +38,17 @@ module.exports = function (app) {
             });
 
             const user_profile_body = user_profile_response.data.data[0];
-            console.log(user_profile_body);
-
-            // const user_profile_id = user_profile_body.id;
-
-            // const user_profile_email = user_profile_body.email;
 
             const user_profile_name = user_profile_body.display_name;
 
             const user_profile_picture = user_profile_body.profile_image_url;
-        
+
             
             if (functions.empty(exchange_token_response.data)) { throw new Error("Access token and refresh token data are missing."); }
 
             if (!functions.empty(exchange_token_response.data.access_token || !functions.empty(exchange_token_response.data.refresh_token))) {
 
                 let token = request.query.state;
-                
 
                 let userExists = await USER.find({ token: token });
 
