@@ -37,7 +37,7 @@ cron.schedule('*/3 * * * *', async (request, response) => {
                         console.log(difference, 'difference');
                         console.log(new Date());
     
-                        if (videos.length > 0 && difference <= 5 ) {
+                        if (videos.length > 0 && difference <= 3 ) {
     
                             //download the videos separately
                             for(let i = 0; i < video_ids.length; i++){
