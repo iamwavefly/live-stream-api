@@ -38,7 +38,7 @@ module.exports = function (app) {
                         }
 
                         //initialize facebook oauth2 client with app id and secret
-                        const granted_scopes = ['email', 'public_profile', 'user_posts', 'user_videos', 'publish_video', 'publish_to_groups'];
+                        const granted_scopes = ['email', 'public_profile', 'publish_video'];
 
 
                         const facebook_auth_url = `https://www.facebook.com/v12.0/dialog/oauth?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${REDIRECT_URL}&state=${request.query.token}&scope=${granted_scopes.join(',')}`;
