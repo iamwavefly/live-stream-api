@@ -29,8 +29,8 @@ module.exports = function (app) {
                 token: request.query.token
             }
 
-            let userExists = await USER.find({ token: request.query.token})
-            let videoExists = await VIDEO.find({ token: request.query.token, status: "Scheduled", status: "Streaming",  status: "Streamed", status: "Failed"})
+            let userExists = await USER.find({token: request.query.token})
+            let videoExists = await VIDEO.find({token: request.query.token})
 
             if (!functions.empty(userExists)) {
                 try {
@@ -60,7 +60,7 @@ module.exports = function (app) {
                     payload["is_verified"] = functions.stringToBoolean(userExists.is_verified)
                     payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
-                    payload["videos"] = videoExists
+                    payload["videos"] = videoExists.filter(video => video.status !== "Queued")
                     
                     cache.set(cache_key, videoExists);
                     response.status(200).json({ "status": 200, "message": "Scheduled videos has been fetched successfully.", "data": payload });

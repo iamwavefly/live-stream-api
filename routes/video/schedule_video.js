@@ -77,7 +77,7 @@ module.exports = function (app) {
                                 is_youtube: functions.stringToBoolean(request.body.is_youtube)? true : false,
                                 is_twitch: functions.stringToBoolean(request.body.is_twitch)? true : false,
                                 scheduled_by: userExists.name,
-                                scheduled_start_times: moment.utc(request.body.date + " " + request.body.time).toISOString()
+                                scheduled_start_times: moment(request.body.date + " " + request.body.time).toISOString()
                                 
                             },
                         );
