@@ -87,8 +87,6 @@ module.exports = function (app) {
                         throw new Error("This user authentication token has expired, login again retry.")
                     }
 
-                    // UPLOAD VIDEO TO AWS S3
-
                     // UPLOAD FROM FILE
                     if(request.body.file_base64){
                         
