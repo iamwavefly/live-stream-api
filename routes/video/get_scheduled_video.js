@@ -30,7 +30,7 @@ module.exports = function (app) {
             }
 
             let userExists = await USER.find({ token: request.query.token})
-            let videoExists = await VIDEO.find({ token: request.query.token, status: "Scheduled", is_scheduled: true})
+            let videoExists = await VIDEO.find({ token: request.query.token, status: "Scheduled", status: "Streaming",  status: "Streamed", status: "Failed"})
 
             if (!functions.empty(userExists)) {
                 try {
