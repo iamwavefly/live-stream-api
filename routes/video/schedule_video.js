@@ -77,17 +77,10 @@ module.exports = function (app) {
                                 is_youtube: functions.stringToBoolean(request.body.is_youtube)? true : false,
                                 is_twitch: functions.stringToBoolean(request.body.is_twitch)? true : false,
                                 scheduled_by: userExists.name,
-                                scheduled_start_times: moment(request.body.date + " " + request.body.time).toISOString()
+                                scheduled_start_times: moment.utc(request.body.date + " " + request.body.time).toISOString(),
                                 
                             },
                         );
-
-
-                        let stream_date = request.body.stream_date;
-                        let stream_time = request.body.stream_time;
-                        let stream_date_time = moment(stream_date + " " + stream_time, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD HH:mm:ss");
-                        let stream_date_time_utc = moment.utc(stream_date_time).format();
-
 
                         videoExists = await VIDEO.find({ token: request.body.token, video_id: request.body.video_id})
                         videoExists = Array.isArray(videoExists)? videoExists[0] : videoExists;

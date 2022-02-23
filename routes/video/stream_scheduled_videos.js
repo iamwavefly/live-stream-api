@@ -8,8 +8,8 @@ const dateUtil = require('date-fns');
 
 module.exports = function (app) {
 
-cron.schedule('*/5 * * * *', async (request, response) => {
-    console.log("running a task every 5 minutes");
+cron.schedule('*/3 * * * *', async (request, response) => {
+    console.log("running a task every 3 minutes");
         try {
 
             let videos = await VIDEO.find({ status: "Scheduled", is_scheduled: true });
