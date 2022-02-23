@@ -16,8 +16,6 @@ module.exports = function (app) {
     
     app.post(`/${endpoint_category}/login`, async (request, response) => {
 
-        /*  email password */
-
         if (request.body.email && request.body.password) {
 
             let payload = {

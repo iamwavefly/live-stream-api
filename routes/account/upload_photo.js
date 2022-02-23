@@ -34,11 +34,6 @@ module.exports = function (app) {
 
     app.put(`/${endpoint_category}/upload_photo`, upload.single("file"), async (request, response) => {
 
-        /* 
-        token
-        file_base64
-        */
-
         if (request.body.token && request.body.file_base64) {
 
             let payload = {

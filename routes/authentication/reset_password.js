@@ -14,9 +14,7 @@ module.exports = function (app) {
     let endpoint_category = path.basename(path.dirname(__filename));
 
     app.post(`/${endpoint_category}/reset_password`, async (request, response) => {
-
-        /*  email */
-
+        
         if (request.body.email) {
 
             let payload = {

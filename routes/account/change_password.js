@@ -15,13 +15,6 @@ module.exports = function (app) {
 
     app.put(`/${endpoint_category}/change_password`, async (request, response) => {
 
-        /* 
-        token
-        password
-        new_password
-        confirm_password
-        */
-
         if (request.body.token && request.body.password && request.body.new_password && request.body.confirm_password) {
 
             let payload = {
