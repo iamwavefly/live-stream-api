@@ -61,6 +61,11 @@ module.exports = function (app) {
                     payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
                     payload["videos"] = videoExists,
+                    payload["queued_videos_length"] = videoExists.filter(video => video.status === "Queued").length
+                    payload["scheduled_videos_length"] = videoExists.filter(video => video.status === "Scheduled").length
+                    payload["streaming_videos_length"] = videoExists.filter(video => video.status === "Streaming").length
+                    payload["streamed_videos_length"] = videoExists.filter(video => video.status === "Streamed").length
+                    payload["failed_videos_length"] = videoExists.filter(video => video.status === "Failed").length
                     
                     cache.set(cache_key, videoExists);
                     response.status(200).json({ "status": 200, "message": "videos has been fetched successfully.", "data": payload });
@@ -77,18 +82,6 @@ module.exports = function (app) {
             response.status(400).json({ "status": 400, "message": "Incomplete or missing requests parameter(s)", "data": null });
         }
 
-    })
-
-    //get all videos from the database
-    app.get(`/${endpoint_category}/get_all_videos`, async (request, response) => {
-        try {
-            const videos = await VIDEO.find({});
-            response.status(200).json({ "status": 200, "count": videos.length , "message": "All videos has been fetched successfully.",  "data": videos });
-        } catch (e) {
-            response.status(400).json({ "status": 400,  "message": e.message, "data": null });
-        }
-
-         
-    })
+    });
 
 }

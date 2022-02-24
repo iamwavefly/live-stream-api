@@ -58,6 +58,7 @@ module.exports = function (app) {
                     payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
                     payload["profile"] = userExists,
+                    
                     cache.set(cache_key, userExists);
                     response.status(200).json({ "status": 200, "message": "User account details has been fetched successfully.", "data": payload });
                 
