@@ -61,6 +61,7 @@ module.exports = function (app) {
                     payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
                     payload["videos"] = videoExists,
+                    payload["videos_length"] = videoExists.length
                     payload["queued_videos_length"] = videoExists.filter(video => video.status === "Queued").length
                     payload["scheduled_videos_length"] = videoExists.filter(video => video.status === "Scheduled").length
                     payload["streaming_videos_length"] = videoExists.filter(video => video.status === "Streaming").length
