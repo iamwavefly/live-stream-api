@@ -71,12 +71,8 @@ module.exports = function (app) {
 
                 try {
 
-                    if(!functions.empty(request.body.file_base64) && !functions.empty(request.body.file_url)){
-                        throw new Error("You can't have file buffer and file url at the same time, use only one.")
-                    }
-
                     userExists = Array.isArray(userExists)? userExists[0] : userExists;
-                    videoExists = Array.isArray(videoExists)? videoExists[0] : videoExists;
+                    videoExists = Array.isArray(videoExists)? videoExists.pop() : videoExists;
 
                     // Check if token has expired
                     const difference = Math.abs(dateUtil.differenceInMinutes(new Date(userExists.token_expiry), new Date()))
@@ -103,55 +99,27 @@ module.exports = function (app) {
                             }
 
                             let file_path = `https://${uploadParams.Bucket}.s3.${process.env.S3_REGION}.amazonaws.com/${filename}`;
-                            // let file_duration = await getVideoDurationInSeconds(file_path);
+
                             await VIDEO.create({
                                 video_id: functions.uniqueId(10, "alphanumeric"),
                                 token: request.body.token,
                                 name: filename,
                                 url: file_path,
                                 size: (file_buffer.length / 1024 / 1024).toFixed(2),
-                                // duration: file_duration,
                             })
 
                         })
 
-                    }else{
-                        
-                        // UPLOAD FROM URL
-                        
-                        if(request.body.file_url){
-                            if(functions.validURL(request.body.file_url)){
-
-                                let filename = "video_"+functions.uniqueId(6, "alphanumeric");
-                                uploadParams.Key = filename;
-
-                                uploadUrlToS3(request.body.file_url).then(async (data) => {
-                                    let file_path = `https://${uploadParams.Bucket}.s3.${process.env.S3_REGION}.amazonaws.com/${filename}`
-                                    let file_duration = await getVideoDurationInSeconds(file_path);
-                                    await VIDEO.create({
-                                        video_id: functions.uniqueId(10, "alphanumeric"),
-                                        token: request.body.token,
-                                        name: filename,
-                                        url: file_path,
-                                        size: (file_buffer.length / 1024 / 1024).toFixed(2),
-                                        duration: file_duration,
-                                    })
-                                }).catch((error) => {
-                                    throw new Error(error.message)
-                                })
-
-                            }else{
-                                throw new Error("File to be uploaded is not a valid url, check and retry.")
-                            }
-                        }else{
-                            throw new Error("No file to upload found, check and try again.")
-                        }
                     }
 
                     payload["is_verified"] = functions.stringToBoolean(userExists.is_verified)
                     payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
-                    payload["videos"] = videoExists,
+                    payload["video"] = videoExists
+                    console.log(videoExists)
+
+
+
                     response.status(200).json({ "status": 200, "message": "Hurray! video has uploaded successfully.", "data": payload });
 
                 } catch (e) {
