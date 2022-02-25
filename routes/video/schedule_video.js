@@ -67,8 +67,6 @@ module.exports = function (app) {
                                 title: functions.empty(request.body.title)? videoExists.title : request.body.title,
                                 description: functions.empty(request.body.description)? videoExists.description : request.body.description,
                                 tags: functions.empty(request.body.tags)? videoExists.tags : request.body.tags,
-                                date: functions.empty(request.body.date)? videoExists.date : request.body.date,
-                                time: functions.empty(request.body.time)? videoExists.time : request.body.time,
                                 is_scheduled: true,
                                 status: "Scheduled",
                                 is_facebook: functions.stringToBoolean(request.body.is_facebook)? true : false,
@@ -77,8 +75,10 @@ module.exports = function (app) {
                                 is_youtube: functions.stringToBoolean(request.body.is_youtube)? true : false,
                                 is_twitch: functions.stringToBoolean(request.body.is_twitch)? true : false,
                                 scheduled_by: userExists.name,
-                                scheduled_start_times: moment.utc(request.body.date + " " + request.body.time).toISOString(),
-                                
+                                date: functions.empty(request.body.date)? videoExists.date : request.body.date,
+                                time: functions.empty(request.body.time)? videoExists.time : request.body.time,
+                                scheduled_start_times: moment(request.body.date + " " + request.body.time).format('YYYY-MM-DD HH:mm:ss')
+              
                             },
                         );
 

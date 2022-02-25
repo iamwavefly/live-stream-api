@@ -23,19 +23,26 @@ cron.schedule('*/3 * * * *', async (request, response) => {
             let scheduled_start_times = videos.map(video => video.scheduled_start_times);
             let facebook_streams = [];
             let youtube_streams = [];
+            
             console.log(scheduled_start_times, 'scheduled_start_times');
     
             for (let i = 0; i < scheduled_start_times.length; i++) {
+
                 let scheduled_start_time = scheduled_start_times[i];
     
                 if (scheduled_start_time) {
+
                     let scheduled_start_time_iso = new Date(scheduled_start_time);
+
                     console.log(scheduled_start_time_iso, 'scheduled_start_time_iso');
     
                     if (scheduled_start_time_iso) {
+
                         let difference = Math.abs(dateUtil.differenceInMinutes(new Date(scheduled_start_time_iso), new Date()));
+
                         console.log(difference, 'difference');
-                        console.log(new Date());
+
+                        console.log(new Date(), 'new date');
     
                         if (videos.length > 0 && difference <= 3 ) {
     
