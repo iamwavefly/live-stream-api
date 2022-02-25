@@ -77,7 +77,8 @@ module.exports = function (app) {
                                 scheduled_by: userExists.name,
                                 date: functions.empty(request.body.date)? videoExists.date : request.body.date,
                                 time: functions.empty(request.body.time)? videoExists.time : request.body.time,
-                                scheduled_start_times: moment(request.body.date + " " + request.body.time).format('YYYY-MM-DD HH:mm:ss')
+                                // scheduled_start_times: moment(request.body.date + " " + request.body.time).toISOString(),
+                                scheduled_start_times: moment(request.body.date + " " + request.body.time).subtract(1, 'hours').toISOString(),
               
                             },
                         );
