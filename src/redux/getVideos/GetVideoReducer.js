@@ -1,4 +1,4 @@
-import { FETCH_VIDEO_REQUEST, FETCH_VIDEO_SUCCESS } from "./GetVideoTypes";
+import { FETCH_VIDEO_REQUEST, FETCH_VIDEO_SUCCESS, FETCH_VIDEO_FAILURE } from "./GetVideoTypes";
 
 
 export const getVideosReducer = (state = {}, action) => {
@@ -7,7 +7,7 @@ export const getVideosReducer = (state = {}, action) => {
             return { loading: true};
         case FETCH_VIDEO_SUCCESS:
             return { loading: false, allVideos:action.payload, status:true };
-        case FETCH_VIDEO_SUCCESS:
+        case FETCH_VIDEO_FAILURE:
             return { loading: false, error: action.payload };
         default: 
             return state

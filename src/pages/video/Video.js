@@ -665,7 +665,7 @@ const Video = () => {
                             {(status !== 'recording' && status !== 'paused') && (
                               <div class="recordingActiveAndDoneState">
               
-                                {recordingDone == false && (
+                                {recordingDone === false && (
                                   <div class="recordingCover">
               
                                     <a target="_blank" href="https://live-snap.herokuapp.com/guides">
