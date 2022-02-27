@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css?family=Mulish');
+
+section{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+}
+
+.content{
+    width: 400px;
+}
+.show-logo{
+    text-align: center;
+    margin-top: 30px;
+    /* margin-left: -30px; */
+}
+.page{
+    background: #FFFFFF;
+    border: 1px solid #CECECE;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 20px;
+}
+.page-header{
+    margin-top: 25px;
+    font-family: Mulish;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 30px;
+    color: #121212;
+    text-align: center;
+}
+
+/* .page-body{
+    text-align: center;
+} */
+.page-verify{
+    position: absolute;
+    background: #FFFFFF;
+    border: 1px solid #CECECE;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 350px;
+    margin-left: 40px;
+    margin-top: 150px;
+}
+.page-verify-body{
+    text-align: center;
+    padding: 50px;
+}
+.boxImage{
+    border-radius: 100%;
+    background-color: #EEE9FF;
+    width: 100px;
+    height: 100px;
+    margin-left: 75px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.boxImageSuccess{
+    border-radius: 100%;
+    background-color: #EEE9FF;
+    width: 100px;
+    height: 100px;
+    margin-left: 115px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.resetSuccess{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0.5px;
+    color: #15202B;
+    text-align: center;
+}
+.message{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #666666;
+}
+
+.continue{
+    text-align: center;
+    padding-top: 40px;
+}
+.continueText{
+    font-family: Mulish;
+    color: #000000;
+    line-height: 18px;
+    font-size: 14px;
+    font-style: normal;
+}
+.socials{
+    padding-top: 20px;
+}
+/* .dash1{
+    position: relative;
+    width: 75px;
+    left: 30px;
+    top: 11px;
+    border: 1px solid #B5B4B4;
+}
+.dash2{
+    position: absolute;
+    width: 75px;
+    left: 750px;
+    top: 325px;
+    border: 1px solid #B5B4B4;
+} */
+.or{
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color: #999999;
+}
+.form-group{
+   padding: 15px;
+   display: flex;
+   position: relative;
+   width: 100%;
+   align-items: center;
+   background: transparent;
+}
+
+::placeholder{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.5px;
+    color: #666666;
+    position: absolute;
+    top: 15px;
+}
+
+.inputDiv{
+    width: inherit;
+}
+.hint{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    /* or 150% */
+
+    text-align: left;
+    letter-spacing: -0.3px;
+    color: #323B43;
+}
+.hintBtn:hover{
+    background-color: inherit;
+}
+
+
+.iconDiv{
+    position: absolute;
+    left: 30px;
+    right: 10px;
+    background: transition;
+    width: 30px;
+}
+.iconDivPass{
+    position: absolute;
+    right: 20px;
+    background: transition;
+    width: 30px;
+    cursor: pointer;
+}
+.form-control{
+    height: 45px;
+}
+.icons{
+    font-size: 25px;
+}
+input:active{
+    border-color: #451ECC;
+}
+input{
+    width: 100%;
+}
+.forgot{
+    margin-left: 15px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    text-decoration-line: underline;
+    color: #451ECC;
+}
+.btn-text{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 18px;
+
+    text-align: center;
+    letter-spacing: -0.5px;
+
+    color: #FFFFFF;
+}
+.form-footer{
+    margin-bottom: 50px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #666666;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .page{
+        border: none;
+    }
+    .content{
+        width: 100%;
+    }
+    .page-verify{
+        width: 300px;
+        margin-left: -65px;
+    }
+    .boxImage{
+        width: 80px;
+        height: 80px;
+        margin-left: 62px;
+    }
+    .boxImageSuccess{
+        width: 80px;
+        height: 80px;
+        margin-left: 90px;
+    }
+    /* .dash1{
+        position: relative;
+        width: 45px;
+    }
+    .dash2{
+        width: 45px;
+        left: 265px;
+        border: 1px solid #B5B4B4;
+    } */
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

@@ -1,0 +1,151 @@
+.contentDiv{
+    display: flex;
+    margin: 2.5rem;
+}
+.contentLeft{
+    margin-right: 3.5rem;
+    /* width: 60%; */
+}
+
+.addAccountDiv{
+    margin-bottom: 1.5rem;
+}
+
+.addAccount-header h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.addAccountBody{
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+    padding: 2.0rem;
+    display: flex;
+}
+
+.socialIconsGroup{
+    display: flex;
+    width: 100%;
+    margin-right: 7.5rem;
+}
+.socialItem1{
+    background: #FFFFFF;
+    border: 0.177143px solid #D8D8D8;
+    box-sizing: border-box;
+    box-shadow: 2.68284px 2.68284px 48.2911px rgba(45, 43, 126, 0.1);
+    border-radius: 5.36567px;
+    padding: 0.9rem;
+    margin-right: 1.7rem;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.borderRights{
+    display: flex;
+    flex-direction: column;
+}
+.borderLineRight1{
+    background: linear-gradient(0deg, #451ECB, #451ECB), #F5F5F5;
+    border-radius: 3px;
+    height: 60px;
+}
+.borderLineRight2{
+    border-right: 4px solid #D8D8D8;
+    height: 60px;
+}
+
+.scheduledStream-header{
+    display: flex;
+    justify-content: space-between;
+}
+.mainText h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.87);
+}
+/* .mainText{
+    margin-right: 31rem;
+} */
+.subText h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: -0.0457529px;
+    color: #3A3B3F;
+    margin-top: 0.4rem;
+}
+.scheduledStream-body{
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+}
+
+.videoTableBody{
+    width:100%;
+    /* padding: 1.5rem; */
+}
+.tableBorder td{
+    padding-top: 1.0rem;
+    padding-bottom: 1.0rem;
+}
+
+.activeAccountsDiv{
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    padding-right: 2.5rem;
+    height: 90%;
+}
+.acctItemLeft{
+    display: flex;
+    padding-top: 1.0rem;
+    padding-left: 1.3rem;
+}
+.socialAccount{
+    display: flex;
+    justify-content: space-between;
+}
+/* .socialAcctIcon{
+    margin-right: 1.4rem;
+} */
+.socialAcctText{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    letter-spacing: 0.163835px;
+    color: #455A64;
+    margin-right: 6.5rem;
+}
+.socialAcctText a {
+    text-decoration: none;
+}
+.socialName{
+    margin-right: 3.5rem;
+}
+
+.contentRight-header h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.removeText{
+    cursor: pointer;
+}
+
+.removeText a {
+    cursor: pointer;
+}

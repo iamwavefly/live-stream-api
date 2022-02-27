@@ -1,0 +1,366 @@
+.splitScreen{
+    display: flex;
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+    margin-top: 2.0rem;
+}
+
+.leftSplit{
+    margin-right: 2.0rem;
+    width: 55%;
+}
+.leftSplitTop{
+    margin-bottom: 2.5rem;
+}
+.leftSplitTopTitle{
+    margin-bottom: 1.0rem;
+}
+.leftSplitTopTitle h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.leftSplitTopContent{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+.contentHeader{
+    margin-bottom: 1.5rem;
+}
+.contentHeader h5{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.contentBody{
+    margin-bottom: 2.5rem;
+}
+.contentBody p{
+    font-family: Mulish;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 11px;
+    color: #000000;
+}
+
+.contentFooterTop{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .footerTopLeft{
+    margin-right: 17.5rem;
+} */
+.footerTopLeft h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    color: #000000;
+}
+.footerTopRight p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 17px;
+    letter-spacing: -0.043556px;
+    text-transform: capitalize;
+    color: #0a0909;
+}
+
+.leftSplitBody{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.splitTableHead{
+    display: flex;
+    justify-content: space-between;
+    padding: 1.0rem;
+}
+
+.leftSplitBody{
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+/* .scheduleDiv{
+    margin-right: 20rem;
+} */
+
+.splitTableHead{
+    margin-bottom: 1.5rem;
+}
+.scheduleTableBody{
+    width: 95%;
+}
+
+.scheduleDiv h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14.6409px;
+    color: #3A3B3F;
+}
+.sortByDiv h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14.6409px;
+    color: #3A3B3F;
+}
+
+.rightSplit{
+    padding: 1.0rem;
+    width: 50%;
+}
+
+.rightSplitHeader h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 19px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.rightSplitHeader{
+    margin-bottom: 1.0rem;
+}
+
+.rightSplitBody{
+    background: #FFFFFF;
+    /* box-shadow: 4px 4px 72px rgba(0, 0, 0, 0.1); */
+    border-radius: 8px;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    padding: 1.0rem;
+}
+
+.rightSplitBodyTop{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+}
+/* .fileSize{
+    margin-right: 16.5rem;
+} */
+
+.fileSize h5{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    letter-spacing: -0.0457529px;
+    color: #3A3B3F;
+}
+
+.viewStatus h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.8108px;
+    letter-spacing: -0.0457529px;
+    color: #9EA0A5;
+}
+
+.rightSplitBodyImage{
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 11px;
+    height: 18rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.0rem;
+}
+
+.videoIconBtn{
+    cursor: pointer;
+}
+
+.rightSplitBodyTags{
+    display: flex;
+    margin-bottom: 2.5rem;
+}
+
+.bodyTimeTags{
+    display: flex;
+    margin-right: 6.5rem;
+}
+.timeItemTag{
+    background: rgba(174, 165, 147, 0.21);
+    border-radius: 7px;
+    margin-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+.timeItemTag h2{
+    font-family: Maven Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 7px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.timeItemTag span{
+    font-family: Maven Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 8px;
+    line-height: 10px;
+    text-align: center;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconDetailTags{
+    display: flex;
+}
+.iconItemTags{
+    margin-left: 0.6rem;
+    cursor: pointer;
+}
+.scheduleDetailsHere{
+    margin-bottom: 2.0rem;
+}
+.scheduleDetailsTop{
+    margin-bottom: 1.5rem;
+}
+.scheduleDetailsTop h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 16px;
+    letter-spacing: -0.0457529px;
+    color: #000000;
+}
+
+.scheduleDetailsBody p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    letter-spacing: -0.0457529px;
+    color: #000000;
+}
+
+.streamTags{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.streamDetailsTop{
+    text-align: center;
+}
+
+.streamDetailsTop h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 16px;
+    letter-spacing: -0.0457529px;
+    color: #000000;
+}
+
+.rightSplit{
+    width: 50%;
+}
+
+.create_schedule_main{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin: 2.5rem;
+    padding: 1.5rem;
+}
+
+.createStreamHeading{
+    margin-bottom: 1.0rem;
+}
+.createScehduleMainHeading{
+    margin-bottom: 1.0rem;
+}
+.createScehduleMainHeading h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    color: #121212;
+}
+
+.createScheduleSubHeading p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;    
+    color: #121212;
+}
+.createScheduleNormalDetails{
+    margin-bottom: 2.5rem;
+}
+
+.formControl{
+    width: 100%;
+    height: 3.5rem;
+    background: #FAFAFA;
+    border-radius: 5px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.6884px;
+    color: #666666;
+    padding: 0.5rem;
+    border: none;
+}
+.formGroup{
+    padding-bottom: 1.0rem;
+}
+
+/* .checkBoxItem label{
+    white-space: nowrap;
+    display: block;
+} */
+.checkBoxItem input[type='checkbox']{
+    float: left;
+    width: 20px;
+    margin-top: 0.3rem;
+}
+
+.checkBoxItem input[type='checkbox'] + label {
+    display: block;
+    width: 30px;
+  }
+
+  .submitBtn{
+    background: #451ECC;
+    border-radius: 3.66667px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0.9rem;
+    border: none;
+    width: 20%;
+}
