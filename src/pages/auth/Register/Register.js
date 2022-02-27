@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import './Register.css';
 import { Link, useHistory } from "react-router-dom";

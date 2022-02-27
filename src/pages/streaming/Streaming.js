@@ -497,7 +497,7 @@ const Streaming = () => {
                               {status !== 'recording' && (
                                 <div class="recordingActiveAndDoneState">
                 
-                                  {recordingDone == false && (
+                                  {recordingDone === false && (
                                     <div class="recordingCover">
                 
                                       <div title="Enable Countdown" class="countdownButton">

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import StreamingModals from '../../components/modals/StreamingModals'
@@ -666,7 +668,7 @@ const Video = () => {
                                 {recordingDone == false && (
                                   <div class="recordingCover">
               
-                                    <a target="_blank" href="https://sendbetter.io/guides">
+                                    <a target="_blank" href="https://live-snap.herokuapp.com/guides">
                                       <div title="Watch guides" class="countdownButton">
                                         <svg style={{marginLeft: "-1px", width: "30px"}} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
