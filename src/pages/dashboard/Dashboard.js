@@ -10,52 +10,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllVideos } from '../../redux/getVideos/GetVideoAction'
 import Loader from '../../components/Loader'
 
-// figma.com/file/O6B8XoKu3BkTKeVw5w59FQ/LiveSumo?node-id=327%3A0
-const data = [
-    {
-        "name": "Page A",
-        "uv": 4000,
-        "pv": 2400,
-        "amt": 2400
-    },
-    {
-        "name": "Page B",
-        "uv": 3000,
-        "pv": 1398,
-        "amt": 2210
-    },
-    {
-        "name": "Page C",
-        "uv": 2000,
-        "pv": 9800,
-        "amt": 2290
-    },
-    {
-        "name": "Page D",
-        "uv": 2780,
-        "pv": 3908,
-        "amt": 2000
-    },
-    {
-        "name": "Page E",
-        "uv": 1890,
-        "pv": 4800,
-        "amt": 2181
-    },
-    {
-        "name": "Page F",
-        "uv": 2390,
-        "pv": 3800,
-        "amt": 2500
-    },
-    {
-        "name": "Page G",
-        "uv": 3490,
-        "pv": 4300,
-        "amt": 2100
-    }
-]
-
 const Dashboard = () => {
     const dispatch = useDispatch();
 
@@ -93,7 +47,7 @@ const Dashboard = () => {
                             <div className="welcome">
                                 <div className="welcome-left">
                                     <div className="welcome-left-header">
-                                        <h4>Welcome back {userInfo.data.name}!</h4>
+                                        <h4>Welcome back {userInfo?.data?.name}!</h4>
                                     </div>
                                     <div className="welcome-left-body">
                                         <p>
@@ -142,37 +96,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
 
-                            <div className="graph-card" style={{display: "none"}}>
-                                <div className="graph-header">
-                                    <h6>LiveStream Summary</h6>
-                                </div>
-                                <div className="line">
-
-                                </div>
-                                <div className="graph-body">
-                                    <div className="graphLeft">
-                                        <div className="graph-socials">
-                                            {/* <div className="socialsDiv">
-                                                Youtubnufvn
-                                            </div> */}
-                                        </div>
-                                        <div className="mainGraph">
-                                            <LineChart width={730} height={250} data={data}
-                                                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                                                <CartesianGrid strokeDasharray="3 3" />
-                                                <XAxis dataKey="name" />
-                                                <YAxis />
-                                                <Tooltip />
-                                                {/* <Legend /> */}
-                                                <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-                                                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                                            </LineChart>
-                                        </div>
-                                    </div>
-                                    <div className="graphRight">
-                                    </div>
-                                </div>
-                            </div>
+                          {/* Graph */}
                             
                         </div>
                         <div className="rightContent">
@@ -230,3 +154,36 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+
+// <div className="graph-card" style={{display: "none"}}>
+// <div className="graph-header">
+//     <h6>LiveStream Summary</h6>
+// </div>
+// <div className="line">
+
+// </div>
+// <div className="graph-body">
+//     <div className="graphLeft">
+//         <div className="graph-socials">
+//             {/* <div className="socialsDiv">
+//                 Youtubnufvn
+//             </div> */}
+//         </div>
+//         <div className="mainGraph">
+//             <LineChart width={730} height={250} data={data}
+//                 margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+//                 <CartesianGrid strokeDasharray="3 3" />
+//                 <XAxis dataKey="name" />
+//                 <YAxis />
+//                 <Tooltip />
+//                 {/* <Legend /> */}
+//                 <Line type="monotone" dataKey="pv" stroke="#8884d8" />
+//                 <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+//             </LineChart>
+//         </div>
+//     </div>
+//     <div className="graphRight">
+//     </div>
+// </div>
+// </div>
