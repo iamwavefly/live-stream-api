@@ -1,0 +1,256 @@
+.teamScreenDivide{
+    display: flex;
+    margin-left: 2.5rem;
+    margin-top: 2.0rem;
+}
+.teamLeft{
+    margin-right: 0.5rem;
+}
+.teamLeftHead{
+    display: flex;
+    margin-bottom: 2.5rem;
+}
+.teamLeftHeadItem{
+    margin-right: 2.8rem;
+    padding-top: 1.0rem;
+    padding-left: 1.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 3.5rem;
+    cursor: pointer;
+}
+.blueColor{
+    background: #451ECC;
+    border-radius: 10.37px;
+}
+.blueColor h1{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 27.5896px;
+    color: #FFFFFF;
+}
+.blueColor h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 9px;
+    color: #FFFFFF;
+}
+.grayColor{
+    background: #EAE4FE;
+    border-radius: 10.37px;
+}
+.grayColor h1{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 27px;
+    color: #000000;
+}
+.grayColor h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 9px;
+    color: #000000;
+}
+
+.teamLeftBody{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 92%;
+}
+
+.teamRight{
+    width: 45%;
+}
+
+.teamRightTop{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.teamRightTopRight{
+    /* margin-top: 1.5rem;
+    margin-left: -0.9rem;
+    margin-right: 7.5rem; */
+}
+
+.headName h3{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    color: #666666;
+}
+
+.headEmail h5{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.05em;
+    color: #451ECC;
+}
+
+.headPosition h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+
+    color: #EB9481;
+}
+
+.teamHeadDetails{
+    margin-bottom: 3.5rem;
+}
+.modifyBtn{
+    height: 3rem;
+    width: 90%;
+    margin-right: 3.5rem;
+    border: none;
+    color: #FFFFFF;
+    background-color: #451ECC;
+}
+
+.editText h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 10px;
+}
+.deleteBtn{
+    height: 3rem;
+    width: 6.5rem;
+    border:none;
+    color: #FFFFFF;
+    background-color: #EA1D1D;
+}
+.deleteText h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 10px;
+}
+.flexed{
+    display: flex;
+}
+
+.flexedDiv{
+    margin-right: 2.0rem;
+}
+
+.teamRightBody{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 2.0rem;
+}
+
+.inputDivElemet{
+    width: inherit;
+}
+
+.inputDivElement input::placeholder{
+    margin-top: -0.3rem;
+}
+
+.iconDivElement{
+    position: absolute;
+    left: 67rem;
+    top: 29.9rem;
+    background: transition;
+    width: 30px;
+}
+
+.inputFormElement{
+    background: #FAFAFA;
+    border-radius: 4px;
+    width: 26rem;
+}
+
+.inputSection{
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+.inputAddElement span{
+    font-size: 22px;
+}
+
+.tagContent{
+    background: #FAFAFA;
+    border: 0.5px solid #EBEBEB;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    width: 45%;
+}
+.tagText{
+    margin-right: 3.5rem;
+}
+.tagText h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    color: #666666;
+}
+
+.tagIcon{
+    background: #C4C4C4;
+    border-radius: 50%;
+    height: 50%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.inviteTeamMiddle{
+    display: flex;
+}
+.tagSection{
+    margin-right: 0.9rem;
+}
+.inviteTeamBody{
+    margin-top: 20px;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.inviteTeamFooter{
+
+}
+.inviteBtnStyle{
+    height: 3rem;
+    width: 30%;
+    margin-right: 3.5rem;
+    border: none;
+    color: #FFFFFF;
+    background-color: #451ECC;
+}
+
+.inviteTeamInput{
+    width: 314px;
+    height: 48px;
+    margin-bottom: 20px;
+    background: #FAFAFA;
+    border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+}

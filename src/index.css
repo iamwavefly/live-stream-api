@@ -1,0 +1,20 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+td{
+    cursor: pointer;
+}
+button:hover{
+    background-color: #7854ed;
+    transition: 0.6s;
+}
+.contentRight-header h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.87);
+}

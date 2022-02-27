@@ -1,0 +1,50 @@
+img{
+    max-width: 100%;
+}
+
+.mainBar{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    /* height: 760px; */
+    width: 100%;
+}
+.logoBar{
+    margin-left: 1.5rem;
+    margin-bottom: 2.3rem;
+    padding-top: 1.8rem;
+}
+.itemBar{
+    display: flex;
+    padding: 1.2rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+.itemBar:hover{
+    background: rgba(69, 30, 204, 0.1);
+    transition: 0.5s ease-out;
+    border-left: 5px solid #451ECC;
+}
+
+.textBar{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.163835px;
+    margin-left: 1.0rem;
+}
+.textBar a{
+    text-decoration: none;
+    color: #455A64;
+}
+.reverseIcon{
+    margin-top: 10.5rem;
+    margin-left: 10.5rem;
+    padding-bottom: 1.5rem;
+    cursor: pointer;
+}
+.reverseIcon a:hover{
+    color: #1f0e5f;
+    transition: 0.6s ease-in-out;
+}

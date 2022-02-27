@@ -1,0 +1,171 @@
+
+.splitScreen{
+    display: flex;
+    margin-left: 2.5rem;
+    margin-top: 2.0rem;
+}
+
+.splitLeft{
+    margin-right: 2.5rem;
+}
+.newStream{
+    margin-bottom: 1.5rem;
+}
+
+.newStreamHeader h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    color: rgba(0, 0, 0, 0.87);
+}
+.newStreamBody{
+    background: #451ECC;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    padding-left: 2.5rem;
+}
+
+.newStreambodyHead{
+    margin-bottom: 3.5rem;
+}
+
+.newStreambodyHead h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 18px;
+    letter-spacing: -0.0457529px;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+.streamOptionsGroup{
+    display: flex;
+    margin-right: 2.5rem;
+}
+
+.streamItem{
+    padding: 1.0rem;
+    margin-bottom: 2.5rem;
+    cursor: pointer;
+}
+.streamImg{
+    margin-bottom: 0.9rem;
+}
+.streamImg img{
+    width: 3.0rem;
+}
+
+.streamText h6{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 8px;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+.divContentLeftFooterBody{
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    padding: 0.5rem;
+    padding-bottom: 1.7rem;
+}
+.videoUploadBtn{
+    border: 0.907859px dashed #451ECC;
+    box-sizing: border-box;
+    border-radius: 5.44715px;
+    padding: 0.5rem;
+    margin-right: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 3.63144px 3.63144px 65.3659px rgba(45, 43, 126, 0.1);
+    border-radius: 7.26287px;
+    cursor: pointer;
+}
+.uploadStream{
+    background: #FFFFFF;
+    border: 1px solid #C5C5C7;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.uploadStreamHeader{
+    padding-bottom: 1.5rem;
+    padding-left: 0.8rem;
+}
+
+.uploadStreamHeader h5{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: -0.0457529px;
+    text-transform: capitalize;
+    color: #3A3B3F;
+}
+
+.uploadStreamBody{
+    /* padding: 1.5rem; */
+    padding-left: 0.5rem;
+}
+.uploadStreamFooter{
+    width: 85%;
+    padding-left: 0.8rem;
+}
+
+.splitRightHeader{
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
+}
+
+/* .mainHeading{
+    margin-right: 31rem;
+} */
+
+.mainHeading h4{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    color: rgba(0, 0, 0, 0.87);
+    margin-left: 13px;
+}
+.subHeading {
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 9px;
+    text-decoration-line: underline;
+    color: #451ECC;
+    margin-right: 10px;
+}
+.splitRightBody{
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid #C5C5C7;
+}
+
+.streamImg > input{
+    visibility:hidden;
+    width:0;
+    height:0
+}
+
+.splitRight{
+    width: 50%;
+}
+
+
+
+  
+  

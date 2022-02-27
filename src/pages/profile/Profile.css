@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css?family=Mulish");
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+@import url("https://fonts.googleapis.com/css?family=Barlow");
+
+/* global dashboard styles */
+.mainContent{
+    display: flex;
+}
+.left{
+    width: 20%;
+}
+.right{
+    width: 100%;
+}
+
+.profileContent{
+    width: 95%;
+    margin: 2.0rem;
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+}
+.profileContentHeader{
+    display: flex;
+}
+.profileContentItem{
+    padding-top: 1.5rem;
+    padding-bottom: 0.4rem;
+    padding-left: 3.5rem;
+}
+.profileContentItem a{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #666666;
+    text-decoration: none;
+}
+.profileContentItem a:hover{
+    border-bottom: 1px solid #2b1770;
+    transition: 0.6s ease-in-out;
+}
+
+.headerSectionDiv{
+    margin-left: 1.0rem;
+    margin-right: 1.0rem;
+}
+.profileDivider{
+    height: 1px;
+    background: #DADADA;
+    border-radius: 0.5px;
+    margin: 1.5rem;
+}
+
+.profileContentTitle h3{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.87);
+    margin: 1.5rem;
+}
+
+.profileContentBody{
+    display: flex;
+}
+.profilePicDiv{
+    margin-left: 2.0rem;
+    width: 15%;
+}
+
+.profileDetailsDiv{
+    margin-left: 4.0rem;
+    margin-bottom: 1.0rem;
+}
+.formHeader{
+    margin-bottom: 1.2rem;
+}
+.formHeader h5{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #666666;
+}
+.formBody{
+    width: 90%;
+}
+
+.formElement label{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #666666;
+    padding-bottom: 0.5rem;
+}
+.formControl{
+    width: 100%;
+    height: 3.5rem;
+    background: #FAFAFA;
+    border-radius: 5px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12.6884px;
+    color: #666666;
+    padding: 0.5rem;
+    border: none;
+}
+.formGroup{
+    padding-bottom: 1.0rem;
+}
+.profilePasswordDiv{
+    margin-left: 11.5rem;
+}
+.formBtn{
+    background: #451ECC;
+    border-radius: 3.66667px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0.9rem;
+    border: none;
+}
+
+.accountBody{
+    display: flex;
+    width: 97%;
+}
+.accountLeft{
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+    width: 75%;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: 2rem
+}
+
+.acctItemLeft{
+    display: flex;
+    padding-top: 1.0rem;
+    padding-left: 1.3rem;
+}
+.socialAccount{
+    display: flex;
+}
+.socialAcctIcon{
+    margin-right: 1.4rem;
+}
+.socialAcctText{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    letter-spacing: 0.163835px;
+    color: #455A64;
+    margin-right: 6.5rem;
+}
+.socialAcctText a {
+    text-decoration: none;
+}
+.socialName{
+    margin-right: 3.5rem;
+}
+.accountRight{
+    margin-left: 2rem;
+    background: #FFFFFF;
+    box-shadow: 4px 4px 72px rgba(45, 43, 126, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+}
+.messageRight{
+    font-family: Mulish;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 2.8rem;
+}
+.changeEmailTitle{
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20.6667px;
+    text-transform: capitalize;
+    color: #666666;
+    margin-bottom: 0.7rem;
+}
+.changeEmailFooter{
+    float: right;
+    margin-top: 7.0rem;
+}
+.saveBtn{
+    background: #451ECC;
+    border-radius: 3.66667px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14.6667px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0.8rem 3.5rem;
+    margin-left: 0.9rem;
+}
+.cancelBtn{
+    border: 0.916667px solid #FF3D00;
+    box-sizing: border-box;
+    border-radius: 3.66667px;
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14.6667px;
+    line-height: 18px;
+    text-align: center;
+    color: #FF3D00;
+    padding: 0.8rem 3.5rem;
+    margin-left: 0.9rem;
+    background: #FFFFFF;
+}
+input{
+    border: none;
+}
+
+.notifyMainContent{
+    display: flex;
+    margin: 2.5rem;
+}
+
+.notifyContent{
+    width: 39%;
+}
+.notifyHead {
+    margin-bottom: 1.8rem;
+}
+.notifyHead h3{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25.5525px;
+    text-transform: capitalize;
+    color: #666666;
+}
+/* .notifyItem{
+    display: flex;
+} */
+.notifyText h3{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20.6667px;
+    text-transform: capitalize;
+    color: #666666;
+}
+
+.notifyTextBody p{
+    font-family: Mulish;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14.7619px;
+    line-height: 19px;
+    color: #666666;
+}
+.notifyItem{
+    margin-bottom: 2.5rem;
+}
+.notifyFooter{
+    float: right;
+}
