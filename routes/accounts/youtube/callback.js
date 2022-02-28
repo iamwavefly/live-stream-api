@@ -98,7 +98,7 @@ module.exports = function (app) {
                         payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked)
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
 
-                        response.redirect('http://localhost:3000/accounts')
+                        response.redirect('https://live-snap.netlify.app/accounts')
                         
 
                     } catch (e) {

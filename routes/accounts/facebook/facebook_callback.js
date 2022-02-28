@@ -88,7 +88,7 @@ module.exports = function (app) {
                                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
             
                                    
-                                        response.redirect('http://localhost:3000/accounts')
+                                        response.redirect('https://live-snap.netlify.app/accounts')
             
                                 } catch (e) {
                                     response.status(400).json({ "status": 400, "message": e.message, "data": payload });
