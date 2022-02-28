@@ -610,9 +610,6 @@ var self = module.exports = {
         });
     },
 
-  
-
-
     delete_video: (fileName, callback) => {
         return new Promise((resolve, reject) => {
             fs.unlink(`./uploads/${fileName}.mp4`, (err) => {

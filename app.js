@@ -148,6 +148,13 @@ const twitter_callback = require('./routes/accounts/twitter/twitter_callback')
 twitter_auth(app)
 twitter_callback(app)
 
+//GOOGLE DRIVE
+const auth_google_drive_ = require('./routes/accounts/google_drive/auth_google_drive')
+const callback_google_drive = require('./routes/accounts/google_drive/callback_google_drive')
+
+auth_google_drive_(app)
+callback_google_drive(app)
+
 
 app.get("/", (req, res) => {
   res.status(200).json({ "status": 200, "message": "Welcome to live snap api.", "data": null })

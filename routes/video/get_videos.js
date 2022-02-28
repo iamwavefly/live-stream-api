@@ -67,6 +67,7 @@ module.exports = function (app) {
                     payload["streaming_videos_length"] = videoExists.filter(video => video.status === "Streaming").length
                     payload["streamed_videos_length"] = videoExists.filter(video => video.status === "Streamed").length
                     payload["failed_videos_length"] = videoExists.filter(video => video.status === "Failed").length
+                    payload["total_video_size"] = videoExists.reduce((acc, video) => { return acc + video.size }, 0)
                     
                     cache.set(cache_key, videoExists);
                     response.status(200).json({ "status": 200, "message": "videos has been fetched successfully.", "data": payload });
