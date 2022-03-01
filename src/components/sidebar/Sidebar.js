@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -39,14 +40,14 @@ const Sidebar = () => {
                         <div className="textBar">Accounts</div>
                     </div>
                 </Link>
-                <Link to="/broadcast" style={{ color: "#455A64", textDecoration: "none" }}>
+                {/* <Link to="/broadcast" style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">
                             <img src="/images/broadcast.svg" alt="" />
                         </div>
                         <div className="textBar">Broadcast</div>
                     </div>
-                </Link>
+                </Link> */}
                 {/* <Link to="/streaming" style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">
@@ -71,6 +72,22 @@ const Sidebar = () => {
                         <div className="textBar">Teams</div>
                     </div>
                 </Link>
+                {/* <Link to="/privacy-policy" style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/accounts-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Privacy</div>
+                    </div>
+                </Link>
+                <Link to="/terms-service" style={{ color: "#455A64", textDecoration: "none" }}>
+                    <div className="itemBar">
+                        <div className="iconBar">
+                            <img src="/images/accounts-icon.svg" alt="" />
+                        </div>
+                        <div className="textBar">Terms</div>
+                    </div>
+                </Link> */}
                 <a href="#" onClick={logoutHandler} style={{ color: "#455A64", textDecoration: "none" }}>
                     <div className="itemBar">
                         <div className="iconBar">

@@ -32,8 +32,9 @@ const ProfileAccount = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        <Loader />
         if (!userInfo) {
-            document.location.href("/login")
+            window.location.href = "/login"
         } else {
             setEmail(userDet?.data?.email)
         }
@@ -99,13 +100,10 @@ const ProfileAccount = () => {
     }
 
 
-    if(loadingAddAcounts ){
-        return <Loader />
-    }
-
 
     return (
         <>
+        {loadingAddAcounts && <Loader />}
             <div className="mainContent">
                 <div className="left">
                     <Sidebar />

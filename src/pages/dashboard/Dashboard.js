@@ -20,6 +20,7 @@ const Dashboard = () => {
     const { userInfo } = userLogin;
     
     useEffect(() => {
+        <Loader />
         if(!userInfo){
             //redirect to login page
             window.location.href = "/login"
@@ -29,9 +30,7 @@ const Dashboard = () => {
     }, [])
 
 
-    if(loading){
-        return <Loader />
-    }
+    
     return (
         <>
             <div className="mainContent">
@@ -61,6 +60,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
+                            {loading && <Loader />}
                             <div className="overview">
                                 <div className="overview-header">
                                     <h4>My Overview</h4>
@@ -99,53 +99,34 @@ const Dashboard = () => {
                           {/* Graph */}
                             
                         </div>
-                        <div className="rightContent">
-                            <div className="rightContentHeader">
-                                <h4>Activity</h4>
-                            </div>
-                            <div className="activityItem">
-                                <div className="activityTitle">
-                                    <div className="activityText">
-                                        <h5>Livestream Calender</h5>
-                                    </div>
-                                    <div className="activityTime">
-                                        <h5>12:10pm</h5>
-                                    </div>
+                        
+
+                        <div className="divContentRight">
+                                <div className="divContentRight-header">
+                                    <h5>Personal Storage</h5>
                                 </div>
-                                <div className="activityContent">
-                                    <p>Detailed live analytics are available from Standard Plan onwards. You can still access basic analytics available on Dashboard.</p>
-                                </div>
-                            </div>
-                            <div className="activityItem">
-                                <div className="activityTitle">
-                                    <div className="activityText">
-                                        <h5>Livestream Calender</h5>
+                                <div className="divContentRight-body">
+                                    <div className="divContentRight-body-header">
+                                        <h4>Video Storage</h4>
                                     </div>
-                                    <div className="activityTime">
-                                        <h5>12:10pm</h5>
+                                    <div className="divContentRight-body-text">
+                                        <p>Video storage capacity depends on the subscription plan. Videos that are not used for 60 days will be deleted automatically</p>
                                     </div>
-                                </div>
-                                <div className="activityContent">
-                                    <p>Detailed live analytics are available from Standard Plan onwards. You can still access basic analytics available on Dashboard.</p>
+                                    {/* <div className="bodyDividers">
+                                        <div className="bodyDivider1">
+
+                                        </div>
+                                        <div className="bodyDivider2">
+
+                                        </div>
+                                    </div> */}
+                                    {/* <div className="storageSpace">
+                                        <span>USED: 256<span style={{ fontWeight: "bolder", fontSize: "15.9423px" }}>/956</span>GB</span>
+                                    </div> */}
                                 </div>
                             </div>
-                            <div className="activityItem">
-                                <div className="activityTitle">
-                                    <div className="activityText">
-                                        <h5>Livestream Calender</h5>
-                                    </div>
-                                    <div className="activityTime">
-                                        <h5>12:10pm</h5>
-                                    </div>
-                                </div>
-                                <div className="activityContent">
-                                    <p>Detailed live analytics are available from Standard Plan onwards. You can still access basic analytics available on Dashboard.</p>
-                                </div>
-                            </div>
-                            {/* <div className="calenderDiv">
-                                <DatePicker onChange={onChange} />
-                            </div> */}
-                        </div>
+
+
                     </div>
                 </div>
             </div>

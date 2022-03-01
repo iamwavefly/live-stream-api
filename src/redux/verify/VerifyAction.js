@@ -29,7 +29,7 @@ export const verify =
       });
       if( data.status === 200 ){
         setTimeout(()=>{
-          document.location.href = "/verify-complete"
+          window.location.href = "/verify-complete"
         }, 500)
       }
 

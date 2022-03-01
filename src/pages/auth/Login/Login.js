@@ -54,9 +54,9 @@ const Login = () => {
                                     <span>Welcome Back, Sign in</span>
                                 </div>
                                 <div className='continue'>
-                                    <span className='continueText'>Continue with</span> <br />
+                                    {/* <span className='continueText'>Continue with</span> <br /> */}
 
-                                    <GoogleAuth />
+                                    {/* <GoogleAuth /> */}
                                 </div>
                                 <div className="social col-lg-12" style={{ textAlign: "center" }}>
                                     {/* Social media auth */}
@@ -64,7 +64,7 @@ const Login = () => {
                                 <div className="page-body">
                                     <div className="or">
                                         {/* ---------  Or login with email  -------- */}
-                                        <div className="dash1"></div> Or login with email <div className="dash2"></div>
+                                        <div className="dash1"></div> Login with email <div className="dash2"></div>
                                     </div>
                                     {loading && <Loader />}
                                     <form>

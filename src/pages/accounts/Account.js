@@ -37,8 +37,9 @@ const Account = () => {
     }, []);
 
     React.useEffect(() => {
+        <Loader />
         if (!userInfo) {
-            document.location.href("/login")
+            window.location.href = "/login"
         } 
     }, [dispatch, userInfo]);
 
@@ -95,6 +96,7 @@ const Account = () => {
                 console.log(response.data.message);
                 setRemoveAccountSuccess(true);
                 toast.success(response.data.message);
+                window.location.reload();
             })
             .catch(function (error) {
                 setLoadingAddAcounts(false);
@@ -150,6 +152,7 @@ const Account = () => {
                 console.log(response.data.message);
                 setRemoveAccountSuccess(true);
                 toast.success(response.data.message);
+                window.location.reload();
             })
             .catch(function (error) {
                 setLoadingAddAcounts(false);
@@ -157,12 +160,9 @@ const Account = () => {
     }
 
 
-    if(loadingAddAcounts ){
-        return <Loader />
-    }
-
     return (
         <>
+        {loadingAddAcounts &&  <Loader />}
             <div className="mainContent">
                 <div className="left">
                     <Sidebar />
@@ -216,7 +216,7 @@ const Account = () => {
                                 </div>
                                 <div className="scheduledStream-body">
                                     <div className="videoTableBody">
-                                    {loading ? (<Loader2 />) : (
+                                    {loading ? (<Loader />) : (
                                         <table style={{
                                             width: "550px"
                                         }}>
@@ -224,7 +224,7 @@ const Account = () => {
                                                 <tr>
                                                     <th>Files</th>
                                                     <th>Size</th>
-                                                    <th>Duration</th>
+                                                    {/* <th>Duration</th> */}
                                                     <th>Status</th>
                                                     {/* <th>Actions</th> */}
                                                 </tr>
@@ -234,7 +234,7 @@ const Account = () => {
                                                 <tr key={video.video_id}>
                                                     <td>{video.name}</td>
                                                     <td>{video.size}Mb</td>
-                                                    <td>{video.duration}</td>
+                                                    {/* <td>{video.duration}</td> */}
                                                     <td>{video.status}</td>
                                                 </tr>
 )}

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { videoUpload } from "../../redux/video/VideoActions";
 import { useSelector } from "react-redux";
 import Loader2 from "../Loader2.js";
+import Loader from '../../components/Loader'
 toast.configure();
 
 
@@ -57,7 +58,7 @@ const StreamingModals = ({ show, close }) => {
                                             <img src="/images/uploadPic.svg" alt="" />
                                         </div>
                                         <div className="uploadTextArea">
-                                            {loading_video ? (<Loader2 />) : (
+                                            {loading_video ? (<Loader />) : (
                                                 <div style={{ paddingLeft: "5.0rem" }}>
                                                     <input type='file' accept=".mp4, .mkv, .avi, .webm" onChange={(event) => {
                                                         event.preventDefault()

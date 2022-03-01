@@ -27,8 +27,9 @@ const Teams = () => {
     const { userInfo } = userLogin;
 
     React.useEffect(() => {
+        <Loader />
         if (!userInfo) {
-            document.location.href("/login")
+            window.location.href = "/login"
         } 
     }, [dispatch, userInfo]);
 
@@ -133,9 +134,7 @@ const Teams = () => {
         getTeams();
     }, []);
 
-    if(loadingTeam){
-        return <Loader/>
-    }
+   
 
     
     return (
@@ -179,7 +178,7 @@ const Teams = () => {
                             </div>
                             <div className="teamLeftBody">
                                 <div className="videoTableBody">
-                                {loadingTeam ? (<Loader2 />) : (
+                                {loadingTeam ? (<Loader />) : (
                                     <table>
                                         <thead>
                                             <tr>

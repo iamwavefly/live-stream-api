@@ -7,6 +7,7 @@ import { newSchedule } from '../../redux/schedule/ScheduleActions';
 import { toast } from 'react-toastify';
 import Loader from '../../components/Loader';
 import { fetchUserDetails } from '../../redux/fetchUser/fetchUserAction';
+import {Link} from 'react-router-dom'
 toast.configure();
 
 const CreateNewSchedule = () => {
@@ -78,9 +79,10 @@ const CreateNewSchedule = () => {
         dispatch(newSchedule(token, video_id, title, date, time, tags, description, is_instagram, is_twitter, is_facebook, is_youtube, is_twitch))
         console.log(token, video_id, title, date, time, tags, description, is_instagram, is_twitter, is_facebook, is_youtube, is_twitch)
     }
-
-    return <div>
-
+    
+    
+    return <>
+ 
         <div className="mainContent">
             <div className="left">
                 <Sidebar />
@@ -179,9 +181,30 @@ const CreateNewSchedule = () => {
                                     
                                 </div>
 
-                                <div>
-                                    <button className="submitBtn" onSubmit={handleStreamCreate}>Submit</button>
-                                </div>
+
+                                   {/* {userDet?.data?.profile?.is_connected_facebook !== true || userDet?.data?.profile?.is_connected_google !== true ? (
+                                    
+                                    <p>
+                                        <span style={{ color: "red" }}>*</span>
+                                        <span style={{ fontSize: "20px", fontStyle: "italic" }}>
+                                            You are not connected to any social media account click<Link to= '/accounts' style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                fontSize: "20px",
+                                            }}>here</Link>to connect account
+                                        </span>
+
+                                    </p>
+                                    ) : (
+                                       ""
+                                    )} */}
+
+<div>
+                                        <button className="submitBtn" onSubmit={handleStreamCreate}>Submit</button>
+                                    </div>
+
+
+                               
 
                             </form>
                         </div>
@@ -191,7 +214,7 @@ const CreateNewSchedule = () => {
             </div>
         </div>
 
-    </div>;
+    </>;
 };
 
 export default CreateNewSchedule;

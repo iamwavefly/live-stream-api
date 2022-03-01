@@ -53,9 +53,9 @@ const Register = () => {
                                     <span>Welcome! create your account</span>
                                 </div>
                                 <div className='continue'>
-                                    <span className='continueText'>Continue with</span> <br />
+                                    {/* <span className='continueText'>Continue with</span> <br /> */}
 
-                                    <GoogleAuth />
+                                    {/* <GoogleAuth /> */}
 
                                 </div>
                                 <div className="social col-lg-12" style={{ textAlign: "center" }}>
@@ -63,7 +63,7 @@ const Register = () => {
                                 </div>
                                 <div className="page-body">
                                     <div className="or">
-                                        Or login with email
+                                        Sign up with email
                                         {/* <div className="dash1"></div> Or login with email <div className="dash2"></div> */}
                                     </div>
                                     {/* {message && <Message variant="danger">{message}</Message>} */}

@@ -31,7 +31,7 @@ export const fetchUserDetails =
 
       // if( data.status === "success" ){
       //   setTimeout(()=>{
-      //     document.location.href = "/verify"
+      //      window.location.href  = "/verify"
       //   }, 500)
       // }
 

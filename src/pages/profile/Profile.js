@@ -46,8 +46,9 @@ const Profile = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        <Loader />
         if (!userInfo) {
-            document.location.href("/login")
+            window.location.href = "/login"
         } else {
             setName(userDet?.data?.profile?.name)
             setEmail(userDet?.data.profile?.email)
@@ -60,6 +61,9 @@ const Profile = () => {
     useEffect(() => {
         if (newDetails) {
             toast.success("Profile update was successfull")
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000);
         }
         else {
             toast.error(error_new)
@@ -69,6 +73,9 @@ const Profile = () => {
     useEffect(() => {
         if (changePassword) {
             toast.success("Password update was successfull")
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000);
         }
         else {
             toast.error(error_pass)
@@ -78,6 +85,9 @@ const Profile = () => {
     useEffect(() => {
         if (newPhoto) {
             toast.success("Profile photo was Updated Successfully")
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000);
         }
         else {
             toast.error(error_pics)

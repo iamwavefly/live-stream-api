@@ -551,10 +551,6 @@ const Video = () => {
     useEffect(() => {
     }, [dispatch, allVideos]);
 
-    if(loading_video){
-        return <Loader />
-    }
-
 
     return (
         <>
@@ -569,7 +565,7 @@ const Video = () => {
 
                     <div className="divContent">
                         <div className="topContent">
-
+                        {loading_video && <Loader />}
                               { recordingState ? ("") : (
                                  <div className="divContentLeft">
                                  <div className="divContentLeft-header">
@@ -609,7 +605,7 @@ const Video = () => {
                                          </div>
                                      </div>
                                  </div>
-                                 <div className="divContentLeft-footer">
+                                 <div className="divContentLeft-footer" style={{display: "none"}}>
                                      <div className="divContentLeft-footer-top">
                                          <h4>Upload Videos</h4>
                                      </div>
@@ -901,7 +897,7 @@ const Video = () => {
                                 </div> */}
                             </div>
                             <div className="videoTableBody">
-                                {loading || loading_video || loading_delete ? (<Loader2 />) : (
+                                {loading || loading_video || loading_delete ? (<Loader />) : (
                                     <table>
                                         <thead>
                                             <tr>

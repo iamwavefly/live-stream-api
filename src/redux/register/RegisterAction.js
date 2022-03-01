@@ -32,7 +32,7 @@ export const register =
       });
       if( data.status === 200 ){
         setTimeout(()=>{
-          document.location.href = "/verify?email="+email
+          window.location.href  = "/verify?email="+email
         }, 500)
       }
       

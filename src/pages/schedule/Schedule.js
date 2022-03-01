@@ -67,11 +67,10 @@ const Schedule = () => {
             });
     }
 
-    if(loadingRemove){
-        return <Loader/>
-    }
+    
     return (
         <>
+        {loadingRemove && <Loader />}
             <div className="mainContent">
                 <div className="left">
                     <Sidebar />
@@ -83,7 +82,7 @@ const Schedule = () => {
 
                     <div className="splitScreen">
                         <div className="leftSplit">
-                            <div className="leftSplitTop">
+                            <div className="leftSplitTop" style={{display: "none"}}>
                                 <div className="leftSplitTopTitle">
                                     <h4>Schedule</h4>
                                 </div>
@@ -124,12 +123,12 @@ const Schedule = () => {
                                     <div className="scheduleDiv">
                                         <h6>Schedule History</h6>
                                     </div>
-                                    <div className="sortByDiv">
+                                    {/* <div className="sortByDiv">
                                         <h6>Sort by: Size </h6>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="scheduleTableBody">
-                                {loading ? (<Loader2 />) : (
+                                {loading ? (<Loader />) : (
                                     <table>
                                         <thead>
                                             <tr>
@@ -182,23 +181,25 @@ const Schedule = () => {
                                
                                 </div>
                                 <div>
-
-                                    <button 
-                                    style={{
-                                        backgroundColor: "red",
-                                        color: "white",
-                                        border: "none",
-                                        borderRadius: "5px",
-                                        padding: "10px",
-                                        marginTop: "10px",
-                                        width: "30%",
-                                        cursor: "pointer"
-
-                                    }}
-                                    onClick={removeSchedule}
-                                    >
-                                        Remove
-                                    </button>
+                                    {selectedSchedule.status === "Streamed" ? ("") : (
+                                           <button 
+                                           style={{
+                                               backgroundColor: "red",
+                                               color: "white",
+                                               border: "none",
+                                               borderRadius: "5px",
+                                               padding: "10px",
+                                               marginTop: "10px",
+                                               width: "30%",
+                                               cursor: "pointer"
+       
+                                           }}
+                                           onClick={removeSchedule}
+                                           >
+                                               Remove
+                                           </button>
+                                    )}
+                                 
 
                                 </div>
                                 <div className="rightSplitBodyTags">

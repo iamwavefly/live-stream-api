@@ -1,68 +1,52 @@
-    React.useEffect(() => {
-        if(successDelete){
-            toast.success(messageDelete, { transition: bounce });  
-        }
-        if(errorDelete){
-            toast.error(errorDelete, { transition: bounce });
-        }
-    }, [dispatch, successDelete, messageDelete, loadingDelete, errorDelete]);
-
-            
-    React.useEffect(() => {
-        let data = workSpaceData;
-        if(data){
-            setName(data[0].name);
-            setWorkspace_id(data[0].workspace_id);
-        }
-        if(errorGetWorkById){
-            toast.error(errorGetWorkById, { transition: bounce });
-        }
-    }, [dispatch, successGetWorkById, messageGetWorkById, errorGetWorkById, workSpaceData]);
-    
-
-    React.useEffect(() => {
-        if(editWorkspaceData && successEdit === true){
-            toast.success(messageEdit, { transition: bounce });
-            // setTimeout(() => {
-            //     window.location.reload();
-            // }, 4000);
-        }
-        if(errorEdit){
-            toast.error(errorEdit, { transition: bounce });
-        }
-    }, [dispatch, editWorkspaceData, successEdit, messageEdit, loadingEdit, errorEdit]);
-
-
-
-
-
-
-
-
-
-
-
-     const deleteWork = useSelector((state) => state.deleteWork);
-  const { loading:loadingDelete, error:errorDelete, message:messageDelete, deleteWorkspaceData, success:successDelete } = deleteWork;
-
-  const editWork = useSelector((state) => state.editWork);
-  const { loading:loadingEdit, error:errorEdit, message:messageEdit, success:successEdit, editWorkspaceData } = editWork;
-
-  const getWorkByIdAndUpd = useSelector((state) => state.getWorkByIdAndUpd);
-  const { loading:loadinGetWorkById, error:errorGetWorkById, message:messageGetWorkById, success:successGetWorkById, workSpaceData  } = getWorkByIdAndUpd;
+<div className="rightContent">
+                            
+                            
+                            <div className="rightContentHeader">
+                                <h4>Activity</h4>
+                            </div>
+                            <div className="activityItem">
+                                <div className="activityTitle">
+                                    <div className="activityText">
+                                        <h5>Livestream Calender</h5>
+                                    </div>
+                                    <div className="activityTime">
+                                        <h5>12:10pm</h5>
+                                    </div>
+                                </div>
+                                <div className="activityContent">
+                                    <p>Detailed live analytics are available from Standard Plan onwards. You can still access basic analytics available on Dashboard.</p>
+                                </div>
+                            </div>
+                            <div className="activityItem">
+                                <div className="activityTitle">
+                                    <div className="activityText">
+                                        <h5>Livestream Calender</h5>
+                                    </div>
+                                    <div className="activityTime">
+                                        <h5>12:10pm</h5>
+                                    </div>
+                                </div>
+                                <div className="activityContent">
+                                    <p>Detailed live analytics are available from Standard Plan onwards. You can still access basic analytics available on Dashboard.</p>
+                                </div>
+                            </div>
+                            <div className="activityItem">
+                                <div className="activityTitle">
+                                    <div className="activityText">
+                                        <h5>Livestream Calender</h5>
+                                    </div>
+                                    <div className="activityTime">
+                                        <h5>12:10pm</h5>
+                                    </div>
+                                </div>
+                                <div className="activityContent">
+                                    <p>Detailed live analytics are available from Standard Plan onwards. You can still access basic analytics available on Dashboard.</p>
+                                </div>
+                            </div>
+                            {/* <div className="calenderDiv">
+                                <DatePicker onChange={onChange} />
+                            </div> */}
 
 
 
-
-
-
-
-
-   onClick={async (e) => {
-                                    dispatch(
-                                      await editWorkspace(
-                                        token,
-                                        workspace_id,
-                                        name,
-                                        category,
-                                      ))}}
+                        </div>

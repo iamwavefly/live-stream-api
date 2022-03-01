@@ -28,7 +28,7 @@ export const login =
       });
       if( data.status === 200 ){
         setTimeout(()=>{
-          document.location.href = "/dashboard"
+          window.location.href = "/dashboard"
         }, 500)
       }
 
@@ -49,5 +49,5 @@ export const login =
   export const logout = () => dispatch => {
     localStorage.removeItem('userInfo');
     dispatch({ type: USER_LOGOUT });
-    document.location.href = '/login';
+    window.location.href = "/login"
   };
