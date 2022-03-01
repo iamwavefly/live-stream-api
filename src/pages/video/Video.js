@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import StreamingModals from '../../components/modals/StreamingModals'
@@ -659,7 +661,7 @@ const Video = () => {
                             {(status !== 'recording' && status !== 'paused') && (
                               <div class="recordingActiveAndDoneState">
               
-                                {recordingDone == false && (
+                                {recordingDone === false && (
                                   <div class="recordingCover">
               
                                     <a target="_blank" href="https://sendbetter.io/guides">

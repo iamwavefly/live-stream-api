@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from "./pages/landing/Landing";
 import "bootstrap/dist/css/bootstrap.min.css";
