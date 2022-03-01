@@ -983,13 +983,16 @@ const Video = () => {
                                     </table>)}
 
                             </div>
-                            <Link to="/video/video-list" className='clickBtn' style={{ color: "#FFFFFF" }}>
+                            {allVideos?.data?.videos_length === 0 ? ("") : (
+                                <Link to="/video/video-list" className='clickBtn' style={{ color: "#FFFFFF" }}>
                                 <div className="viewAll">
                                     <div className="viewAllBtn">
                                         View all
                                     </div>
                                 </div>
                             </Link>
+                            )}
+                          
                         </div>
 
 
