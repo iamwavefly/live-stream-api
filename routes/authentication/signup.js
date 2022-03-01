@@ -70,7 +70,7 @@ module.exports = function (app) {
                     //Send email
                     let subject = `Verify your ${functions.ucwords(process.env.APP_NAME)} account`;
                     let message = `${verification_code} is your ${functions.ucwords(process.env.APP_NAME)} account verification code.`;
-                    functions.sendEmail(subject, request.body.email, message, "html", function () { })
+                    functions.sendEmailWithElasticEmail(subject, request.body.email, message, "html", function () { })
                     
                     payload["email"] = request.body.email
                     response.status(200).json({ "status": 200, "message": "Email address verification code has been sent to your email address.", "data": payload });

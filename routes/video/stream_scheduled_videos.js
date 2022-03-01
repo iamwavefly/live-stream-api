@@ -8,7 +8,7 @@ const dateUtil = require('date-fns');
 
 module.exports = function (app) {
 
-cron.schedule('*/3 * * * *', async (request, response) => {
+cron.schedule('*/2 * * * *', async (request, response) => {
     console.log("running a task every 3 minutes");
         try {
 
@@ -44,7 +44,7 @@ cron.schedule('*/3 * * * *', async (request, response) => {
 
                         console.log(new Date(), 'new date');
     
-                        if (videos.length > 0 && difference <= 3 ) {
+                        if (videos.length > 0 && difference <= 2 ) {
     
                             //download the videos separately
                             for(let i = 0; i < video_ids.length; i++){
