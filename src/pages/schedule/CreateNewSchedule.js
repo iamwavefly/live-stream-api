@@ -14,6 +14,7 @@ toast.configure();
 const CreateNewSchedule = () => {
 
     const dispatch = useDispatch();
+    
 
     const fetchUser = useSelector((state) => state.fetchUser)
     const { loading:loadingFectUser, error:errorFectUser, userDet } = fetchUser;
@@ -24,6 +25,10 @@ const CreateNewSchedule = () => {
 
     const createNewSchedule = useSelector((state) => state.createNewSchedule)
     const { loading, error, createSchedule } = createNewSchedule;
+
+    const [connected, setConnected] = useState(false)
+    
+
 
     const search = useLocation().search;
     const video_from = new URLSearchParams(search).get('video');
@@ -80,10 +85,16 @@ const CreateNewSchedule = () => {
         dispatch(newSchedule(token, video_id, title, date, time, tags, description, is_instagram, is_twitter, is_facebook, is_youtube, is_twitch))
         console.log(token, video_id, title, date, time, tags, description, is_instagram, is_twitter, is_facebook, is_youtube, is_twitch)
     }
-    
+    //check if user has any conected account is connected
+    useEffect(() => {
+        if (userDet?.data?.profile?.is_connected_facebook !== true && userDet?.data?.profile?.is_connected_google !== true) {
+            setConnected(false)
+        }else if(userDet?.data?.profile?.is_connected_facebook === true || userDet?.data?.profile?.is_connected_google === true){
+            setConnected(true)
+        }
+    }, [userDet])
     
     return <>
- 
         <div className="mainContent">
             <div className="left">
                 <Sidebar />
@@ -183,7 +194,7 @@ const CreateNewSchedule = () => {
                                 </div>
 
 
-                                   {/* {userDet?.data?.profile?.is_connected_facebook !== true || userDet?.data?.profile?.is_connected_google !== true ? (
+                                   {connected === false ? (
                                     
                                     <p>
                                         <span style={{ color: "red" }}>*</span>
@@ -197,12 +208,12 @@ const CreateNewSchedule = () => {
 
                                     </p>
                                     ) : (
-                                       ""
-                                    )} */}
-
-<div>
+                                    <div>
                                         <button className="submitBtn" onSubmit={handleStreamCreate}>Submit</button>
                                     </div>
+                                    )}
+
+                                    
 
 
                                

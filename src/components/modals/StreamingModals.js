@@ -26,7 +26,7 @@ const StreamingModals = ({ show, close }) => {
             toast.success("Hurray!!! your video was uploaded Successfully", { autoClose: 1000 })
             setTimeout(() => {
                 window.location.reload();
-            }, 1500);
+            }, 1000);
         }
         else {
             toast.error(error_video)

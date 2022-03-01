@@ -518,12 +518,8 @@ const Video = () => {
           dispatch(videoUpload(base64))
           stopRecordingAndClose()
 
-      }
-
-      stopRecordingAndClose()
-
-        
-      }
+      }  
+    }
 
 
     const dispatch = useDispatch();
@@ -538,8 +534,8 @@ const Video = () => {
       if (newVideo) {
           toast.success("Hurray!!! your video was uploaded Successfully", { autoClose: 1000 })
           setTimeout(() => {
-              // window.location.reload();
-          }, 1500);
+              window.location.reload();
+          }, 1000);
       }
       else {
           toast.error(error_video)
@@ -899,7 +895,7 @@ const Video = () => {
                                 </div> */}
                             </div>
                             <div className="videoTableBody">
-                                {loading || loading_video || loading_delete ? (<Loader />) : (
+                                {loading || loading_delete ? (<Loader />) : (
                                     <table>
                                         <thead>
                                             <tr>
