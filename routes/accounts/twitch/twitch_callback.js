@@ -83,11 +83,9 @@ module.exports = function (app) {
                         payload["is_blocked"] = functions.stringToBoolean(userExists.is_blocked);
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered);
 
-                        if(process.env.Mode === 'development'){
-                            response.redirect('http://localhost:3000/accounts')
-                        }else{
-                            response.redirect('https://live-snap-front-end.herokuapp.com/accounts')
-                        }
+                        
+                            response.redirect('https://livesnap.co/accounts')
+                        
 
                     } catch (e) {
                         response.status(400).json({ "status": 400, "message": e.message, "data": payload });
