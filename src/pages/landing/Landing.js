@@ -10,7 +10,7 @@ const Landing = () => {
                         <img src="/coming-soon/logo.svg" alt="" />
                     </div>
                     <div className="topRight">
-                        <a href="/blog">Go to blog</a>
+                        <a href="/sign-up">Get Started</a>
                     </div>
 
                     <div className="rows">

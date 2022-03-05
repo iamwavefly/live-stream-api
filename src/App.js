@@ -33,7 +33,7 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path='/' component={Dashboard} exact />
+          <Route path='/' component={Landing} exact />
           <Route path='/sign-up' component={Register} exact />
           <Route path='/login' component={Login} exact />
           <Route path='/verify' component={VerifyEmail} exact />
