@@ -88,7 +88,7 @@ module.exports = function (app) {
                                     payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
             
                                    
-                                        response.redirect('https://livesnap.co/accounts')
+                                        response.redirect('https://livesnapp.co/accounts')
             
                                 } catch (e) {
                                     response.status(400).json({ "status": 400, "message": e.message, "data": payload });
