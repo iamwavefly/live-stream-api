@@ -21,6 +21,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
             let twitch_rtmp_urls = videos.map(video => video.twitch_rtmp_url);
             let is_facebook = videos.map(video => video.is_facebook);
             let is_youtube = videos.map(video => video.is_youtube);
+            let is_twitch = videos.map(video => video.is_twitch);
             let scheduled_start_times = videos.map(video => video.scheduled_start_times);
             let facebook_streams = [];
             let youtube_streams = [];
