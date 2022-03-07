@@ -30,7 +30,7 @@ module.exports = function (app) {
             const refresh_token = exchange_token_response.data.refresh_token;
 
             //get the user profile from twitch
-            const user_profile_response = await axios.get(`https://api.twitch.tv/helix/users?login=${request.query.username}`, {
+            const user_profile_response = await axios.get(`https://api.twitch.tv/helix/users`, {
                 headers: {
                     'Client-ID': process.env.TWITCH_CLIENT_ID,
                     'Authorization': `Bearer ${access_token}`
@@ -38,10 +38,17 @@ module.exports = function (app) {
             });
 
             const user_profile_body = user_profile_response.data.data[0];
+            
+            console.log(user_profile_body, 'user_profile_body');
 
             const user_profile_name = user_profile_body.display_name;
+            console.log(user_profile_name, 'user_profile_name');
 
             const user_profile_picture = user_profile_body.profile_image_url;
+            console.log(user_profile_picture, 'user_profile_picture');
+
+            const user_profile_id = user_profile_body.id;
+            console.log(user_profile_id, 'user_profile_id');
 
             
             if (functions.empty(exchange_token_response.data)) { throw new Error("Access token and refresh token data are missing."); }
@@ -60,6 +67,7 @@ module.exports = function (app) {
                         twitch_refresh_token: exchange_token_response.data.refresh_token,
                         twitch_profile_picture: user_profile_picture,
                         twitch_profile_name: user_profile_name,
+                        twitch_profile_id: user_profile_id,
                     }
                 }, { new: true });
 
@@ -84,7 +92,7 @@ module.exports = function (app) {
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered);
 
                         
-                            response.redirect('https://livesnap.co/accounts')
+                            response.redirect('https://livesnapp.co/accounts')
                         
 
                     } catch (e) {

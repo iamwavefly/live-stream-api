@@ -65,6 +65,10 @@ module.exports = mongoose => {
             type: String,
             default: ''
         },
+        twitch_profile_id:{
+            type: String,
+            default: ''
+        },
         is_connected_twitch:{
             type: Boolean,
             default: false

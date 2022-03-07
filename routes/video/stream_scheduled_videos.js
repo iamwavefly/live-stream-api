@@ -9,7 +9,7 @@ const dateUtil = require('date-fns');
 module.exports = function (app) {
 
 cron.schedule('*/2 * * * *', async (request, response) => {
-    console.log("running a task every 3 minutes");
+    console.log("running a task every 2 minutes");
         try {
 
             let videos = await VIDEO.find({ status: "Scheduled", is_scheduled: true });
@@ -18,6 +18,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
             let video_urls = videos.map(video => video.url);
             let facebook_rtmp_urls = videos.map(video => video.facebook_rtmp_url);
             let youtube_rtmp_urls = videos.map(video => video.youtube_rtmp_url);
+            let twitch_rtmp_urls = videos.map(video => video.twitch_rtmp_url);
             let is_facebook = videos.map(video => video.is_facebook);
             let is_youtube = videos.map(video => video.is_youtube);
             let scheduled_start_times = videos.map(video => video.scheduled_start_times);
@@ -102,7 +103,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                 }
                             }
     
-                            // //stream to youtube
+                            //stream to youtube
                             if(is_youtube[0] === true){
                                 for(let i = 0; i < videos.length; i++){
                                     if(videos[i].is_youtube === true){
@@ -141,6 +142,47 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                     }
                                 }
                             }
+
+                            //stream to twitch
+                            if(is_twitch[0] === true){
+                                for(let i = 0; i < videos.length; i++){
+                                    if(videos[i].is_twitch === true){
+                                        //change the status to streaming
+                                        VIDEO.updateOne({video_id: video_ids[i]}, {$set: {status: "Streaming"}}, (err, data) => {
+                                            if(err) {
+                                                console.log(err);
+                                            } else {
+                                                console.log("video status updated to Streaming");
+                                                console.log(data);
+                                            }
+                                        })
+
+                                        let stream_video_twitch = functions.stream_video_twitch(
+                                            `${__dirname}/../../uploads/${video_ids[i]}.mp4`,
+                                            twitch_rtmp_urls[i],
+                                            //callback
+                                            function(data) {
+                                                if(data.status === 200) {
+                                                    //update the video status
+                                                    VIDEO.updateOne({video_id: video_ids[i]}, {$set: {
+                                                        status: "Streamed",
+                                                        twitch_rtmp_url: "",
+                                                        is_scheduled: false,
+                                                    }}, (err, data) => {
+                                                        if(err) {
+                                                            console.log(err);
+                                                        } else {
+                                                            console.log("twitch stream completed");
+                                                            console.log(data);
+                                                        }
+                                                    })
+                                                }
+                                            });
+                                        twitch_streams.push(stream_video_twitch);  //push the stream to the array
+                                    }
+                                }
+                            }
+
                            
                             //wait for all the streams to complete
                             await Promise.all(facebook_streams);

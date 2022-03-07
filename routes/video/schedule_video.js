@@ -120,6 +120,17 @@ module.exports = function (app) {
                                 console.log("Not facebook")
                             }
 
+                        //schedule to twitch
+                        if(videoExists.is_twitch === true) {
+                            let broadcast_twitch = streaming.get_twitch_stream_key(
+                                userExists.twitch_refresh_token,
+                                userExists.twitch_profile_id,
+                                
+                            )
+                        }else{
+                            console.log("Not twitch")
+                        }
+
                            
 
                         response.status(200).json({ "status": 200, "message": "Video has been scheduled successfully.", "data": payload });

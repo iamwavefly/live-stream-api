@@ -6,7 +6,7 @@ const VIDEO = db.video;
 
 
 module.exports = {
-
+//create a youtube broadcast and bind to live stream
 broadcast_youtube: ( title, description, scheduledStartTime, refreshtoken, userToken, videoId, callback ) => {
     
         var url = 'https://www.googleapis.com/oauth2/v4/token';
@@ -193,10 +193,64 @@ create_facebook_live_video: ( title, description, facebookAccessToken, userToken
     
 )},
 
+//get a users twictch stream key
+get_twitch_stream_key: ( user_refresh_token, twitch_id, callback ) => {
+    let url = 'https://id.twitch.tv/oauth2/token';
+
+    let body = {
+        "grant_type": "refresh_token",
+        "client_id": process.env.TWITCH_CLIENT_ID,
+        "client_secret": process.env.TWITCH_CLIENT_SECRET,
+        "refresh_token": user_refresh_token,
+    };
+
+    request_url.post(url, {form: body, json: true}, async (err, res, body) => {
+        if(err){
+            
+                console.log('Error: ' + err)
+            
+        }else{
+            //update the user access token and refresh token
+            await USER.updateOne({twitch_id: twitch_id}, {
+                $set: {
+                    twitch_access_token: body.access_token,
+                    twitch_refresh_token: user_refresh_token,
+                }
+            });
+        
+        }
+
+
+        //get the users stream key
+        let urls = `https://api.twitch.tv/helix/streams/key?broadcaster_id=${twitch_id}`;
+
+        let headers = {
+            'Client-ID': process.env.TWITCH_CLIENT_ID,
+            'Authorization': `Bearer ${body.access_token}`
+        };
+
+        request_url.get(urls, {headers: headers, json: true}, async (err, res, body) => {
+            if(err){
+                
+                    console.log('Error: ' + err)
+                
+            }else{
+                    //store the stream key in the database
+                    await VIDEO.updateOne({twitch_id: twitch_id}, {
+                        $set: {
+                            twitch_rtmp_url: `rtmp://sfo.contribute.live-video.net/app/${body.data[0].stream_key}`,
+                        }
+                    });
+            
+            }
+        });
 
 
 
-    
+    });
 
+   
+
+}
 
 }
