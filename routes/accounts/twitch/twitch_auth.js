@@ -39,7 +39,7 @@ module.exports = function (app) {
 
                         //initialize twitch oauth2 client with app id and secret
                         
-                        const granted_scopes = [ 'user:read:email', 'channel_stream', 'channel_editor', 'channel:read:stream_key' ];
+                        const granted_scopes = [ 'user:read:email', 'channel_stream', 'channel_editor', 'channel:read:stream_key', 'channel:manage:schedule' ];
 
                         const twitch_auth_url = `https://id.twitch.tv/oauth2/authorize?client_id=${process.env.TWITCH_CLIENT_ID}&redirect_uri=${REDIRECT_URL}&response_type=code&scope=${granted_scopes.join(' ')}&force_verify=true&state=${request.query.token}`;
 

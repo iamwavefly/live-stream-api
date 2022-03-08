@@ -25,6 +25,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
             let scheduled_start_times = videos.map(video => video.scheduled_start_times);
             let facebook_streams = [];
             let youtube_streams = [];
+            let twitch_streams = [];
             
             console.log(scheduled_start_times, 'scheduled_start_times');
     
@@ -188,8 +189,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                             //wait for all the streams to complete
                             await Promise.all(facebook_streams);
                             await Promise.all(youtube_streams);
-    
-                            // console.log("Streaming started");
+                            await Promise.all(twitch_streams);
 
                             //delete the videos after streaming
                             // for(let i = 0; i < videos.length; i++){

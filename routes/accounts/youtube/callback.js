@@ -50,10 +50,6 @@ module.exports = function (app) {
 
             let user_profile_body = user_profile.data
 
-            // let user_profile_id = user_profile_body.id
-
-            // let user_profile_email = user_profile_body.email
-
             let user_profile_name = user_profile_body.name
 
             let user_profile_picture = user_profile_body.picture
