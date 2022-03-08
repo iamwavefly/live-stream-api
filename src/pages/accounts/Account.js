@@ -159,6 +159,61 @@ const Account = () => {
             });
     }
 
+    //add twitch account
+    const addTwitchAccount = () => {
+        setLoadingAddAcounts(true);
+        
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + userInfo.token
+            },
+
+            url: `${BACKEND_BASE_URL}/accounts/twitch/twitch_auth?token=${userInfo.data.token}`,
+            method: 'GET'
+        }
+
+        axios(config)
+            .then(function (response) {
+                window.open(response.data.data, '_blank');
+                window.close();
+                setLoadingAddAcounts(false);
+                console.log(response.data.message, 'response');
+            })
+            .catch(function (error) {
+                setLoadingAddAcounts(false);
+            });
+    }
+
+    //remove twitch account
+    const removeTwitchAccount = () => {
+        setLoadingAddAcounts(true);
+        var data = {
+            "token" : userInfo.data.token
+        }
+
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+
+            url: `${BACKEND_BASE_URL}/accounts/twitch/disconnect_twitch`,
+            method: 'POST',
+            data: data
+        }
+
+        axios(config)
+            .then(function (response) {
+                setLoadingAddAcounts(false);
+                console.log(response.data.message);
+                setRemoveAccountSuccess(true);
+                toast.success(response.data.message);
+                window.location.reload();
+            })
+            .catch(function (error) {
+                setLoadingAddAcounts(false);
+            });
+    }
 
     return (
         <>
@@ -179,18 +234,19 @@ const Account = () => {
                                 </div>
                                 <div className="addAccountBody">
                                     <div className="socialIconsGroup">
-                                        {/* <div className="socialItem1">
-                                            <img src="/images/instagram.svg" alt="" />
-                                        </div>
-                                        <div className="socialItem1">
-                                            <img src="/images/twitter.svg" alt="" />
-                                        </div> */}
+                                      
                                         <div className="socialItem1" onClick={() => addYoutubeAccount()}>
                                             <img src="/images/youtube.svg" alt="" />
                                         </div>
                                         <div className="socialItem1" onClick={() => addFacebookAccount()}>
                                             <img src="/images/faceGroup.svg" alt="" />
                                         </div>
+                                          <div className="socialItem1" onClick={() => addTwitchAccount()}>
+                                            <img src="/images/twitch.svg" alt="" />
+                                        </div>
+                                        {/* <div className="socialItem1">
+                                            <img src="/images/twitter.svg" alt="" />
+                                        </div> */}
                                     </div>
                                     {/* <div className="borderRights">
                                         <div className="borderLineRight2">
@@ -315,6 +371,43 @@ const Account = () => {
                                       </div>
                                       <div className="removeText">
                                           <a onClick={() => removeYoutubeAccount()} 
+                                           style={{
+                                                 cursor:"pointer",
+                                                  color:"red",
+                                                  fontSize:"1.2rem",
+                                                  fontWeight:"600",
+                                               }}>
+                                          Remove</a>
+                                      </div>
+                                  </div>
+                                ) : 
+                                ("")}
+
+                                {userDet?.data?.profile?.is_connected_twitch === true ? (
+                                      <div className="acctItemLeft">
+                                      <div className="socialAccount">
+                                          <div className="socialAcctIcon" style={{ background: "#395185", width: "30px", textAlign: "center" }}>
+                                          <img src={userDet?.data?.profile?.twitch_profile_picture} alt="" />
+                                          </div>
+                                          <div className="socialAcctText"
+                                          style={{
+                                            cursor:"pointer",
+                                             fontSize:"1.2rem",
+                                             fontWeight:"500",
+                                          }}
+                                          >Twitch</div>
+                                      </div>
+                                      <div className="socialName" style={{marginLeft:"-1.5rem"}}>
+                                      <span
+                                      style={{
+                                        cursor:"pointer",
+                                         fontSize:"1.2rem",
+                                         fontWeight:"600",
+                                      }}
+                                      >{userDet?.data?.profile?.twitch_profile_name} </span>
+                                      </div>
+                                      <div className="removeText">
+                                          <a onClick={() => removeTwitchAccount()} 
                                            style={{
                                                  cursor:"pointer",
                                                   color:"red",

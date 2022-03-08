@@ -261,7 +261,7 @@ const Schedule = () => {
 
                                         {selectedSchedule.is_twitch === true ? (
                                             <div className="streamItemTags">
-                                            <img src="/images/chatImage.svg" alt="" />
+                                            <img src="/images/twitch.svg" alt="" />
                                             </div>
                                         ) 
                                         : ("")}
