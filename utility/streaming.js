@@ -220,7 +220,6 @@ get_twitch_stream_key: ( user_refresh_token, twitch_id, title, callback ) => {
         
         }
 
-
         //update the stream info on twitch
         let urlss = `https://api.twitch.tv/helix/channels?broadcaster_id=${twitch_id}`;
         
@@ -240,7 +239,6 @@ get_twitch_stream_key: ( user_refresh_token, twitch_id, title, callback ) => {
                 console.log ('Done updating stream info on twitch');
             }
         })
-
 
         //get the users stream key
         let urls = `https://api.twitch.tv/helix/streams/key?broadcaster_id=${twitch_id}`;
