@@ -194,7 +194,7 @@ create_facebook_live_video: ( title, description, facebookAccessToken, userToken
 )},
 
 //get a users twictch stream key
-get_twitch_stream_key: ( user_refresh_token, twitch_id, callback ) => {
+get_twitch_stream_key: ( user_refresh_token, twitch_id, title, callback ) => {
     let url = 'https://id.twitch.tv/oauth2/token';
 
     let body = {
@@ -219,6 +219,27 @@ get_twitch_stream_key: ( user_refresh_token, twitch_id, callback ) => {
             });
         
         }
+
+
+        //update the stream info on twitch
+        let urlss = `https://api.twitch.tv/helix/channels?broadcaster_id=${twitch_id}`;
+        
+        let header = {
+            'Client-ID': process.env.TWITCH_CLIENT_ID,
+            'Authorization': `Bearer ${body.access_token}`
+        };
+        
+        let bodys = {
+            "title": title,
+        }
+
+        request_url.patch(urlss, {headers: header, form: bodys, json: true}, async (err, res, body) => {
+            if(err){
+                console.log('Error: ' + err)
+            }else{
+                console.log ('Done updating stream info on twitch');
+            }
+        })
 
 
         //get the users stream key
