@@ -26,8 +26,6 @@ cron.schedule('*/2 * * * *', async (request, response) => {
             let facebook_streams = [];
             let youtube_streams = [];
             let twitch_streams = [];
-            
-            console.log(scheduled_start_times, 'scheduled_start_times');
     
             for (let i = 0; i < scheduled_start_times.length; i++) {
 
@@ -36,18 +34,13 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                 if (scheduled_start_time) {
 
                     let scheduled_start_time_iso = new Date(scheduled_start_time);
-
-                    console.log(scheduled_start_time_iso, 'scheduled_start_time_iso');
     
                     if (scheduled_start_time_iso) {
 
                         let difference = Math.abs(dateUtil.differenceInMinutes(new Date(scheduled_start_time_iso), new Date()));
 
-                        console.log(difference, 'difference');
-
-                        console.log(new Date(), 'new date');
     
-                        if (videos.length > 0 && difference <= 2 ) {
+                        if (videos.length > 0 && difference <= 1 ) {
     
                             //download the videos separately
                             for(let i = 0; i < video_ids.length; i++){

@@ -465,7 +465,6 @@ var self = module.exports = {
                 callback({
                         status: 200,
                         message: "Successfully streamed to facebook",
-                        
                     }
                 );
             })
@@ -521,7 +520,6 @@ var self = module.exports = {
                 callback({
                         status: 200,
                         message: "Successfully streamed to youtube",
-                        
                     }
                 );
             })
@@ -547,23 +545,12 @@ var self = module.exports = {
             .withVideoBitrate('800k')
             .withSize('640x360')
             .withFps(30)
-            // .addOutputOption('-vcodec', 'libx264')
-            // .addOutputOption('-acodec', 'aac')
             .addOutputOption('-strict', 'experimental')
             .addOutputOption('-preset', 'veryfast')
-            // .addOutputOption('-ac', '2')
-            // .addOutputOption('-ar', '44100')
             .addOutputOption('-ab', '128k')
             .addOutputOption('-vb', '800k')
             .addOutputOption('-s', '640x360')
-            // .addOutputOption('-r', '30')
-            // .addOutputOption('-f', 'mp4')
             .addOutputOption('-y')
-            // .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
-            // .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
-            // .addOutputOption('-vf', 'crop=640:360:0:0')
-            // .addOutputOption('-vf', 'setsar=1')
-            // .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
             .addOutputOption('-g', '4')
             .addOutputOption('-analyzeduration', '2147483647')
             .addOutputOption('-probesize', '2147483647')
@@ -578,7 +565,6 @@ var self = module.exports = {
                 callback({
                         status: 200,
                         message: "Successfully streamed to twitch",
-                        
                     }
                 );
                 
