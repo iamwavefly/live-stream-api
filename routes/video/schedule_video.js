@@ -77,9 +77,9 @@ module.exports = function (app) {
                                 scheduled_by: userExists.name,
                                 date: functions.empty(request.body.date)? videoExists.date : request.body.date,
                                 time: functions.empty(request.body.time)? videoExists.time : request.body.time,
-                                scheduled_start_times: functions.empty(request.body.scheduled_start_times)? videoExists.scheduled_start_times : request.body.scheduled_start_times,
+                                // scheduled_start_times: functions.empty(request.body.scheduled_start_times)? videoExists.scheduled_start_times : request.body.scheduled_start_times,
                                 // scheduled_start_times: moment(request.body.date + " " + request.body.time).toISOString(),
-                                // scheduled_start_times: moment(request.body.date + " " + request.body.time).subtract(1, 'hours').toISOString(),
+                                scheduled_start_times: moment(request.body.date + " " + request.body.time).subtract(1, 'hours').toISOString(),
               
                             },
                         );
