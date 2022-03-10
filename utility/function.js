@@ -357,208 +357,16 @@ var self = module.exports = {
             
         });
     },
-
-    stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
-        return new Promise((resolve, reject) => {
-            var stream_facebook = fs.createReadStream(path_facebook);
-            var live = new ffmpeg({
-                source: stream_facebook
-            })
-                .toFormat('mp4')
-                .withVideoCodec('libx264')
-                .withAudioCodec('aac')
-                .withAudioFrequency(44100)
-                .withAudioChannels(2)
-                .withAudioBitrate('128k')
-                .withVideoBitrate('800k')
-                .withSize('640x360')
-                .withFps(30)
-                .addOutputOption('-vcodec', 'libx264')
-                .addOutputOption('-acodec', 'aac')
-                .addOutputOption('-strict', 'experimental')
-                .addOutputOption('-preset', 'veryfast')
-                .addOutputOption('-ac', '2')
-                .addOutputOption('-ar', '44100')
-                .addOutputOption('-ab', '128k')
-                .addOutputOption('-vb', '800k')
-                .addOutputOption('-s', '640x360')
-                .addOutputOption('-r', '30')
-                .addOutputOption('-f', 'flv')
-                .addOutputOption('-y')
-                .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
-                .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
-                .addOutputOption('-vf', 'crop=640:360:0:0')
-                .addOutputOption('-vf', 'setsar=1')
-                .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
-                .addOutputOption('-g', '4')
-                .addOutputOption('-analyzeduration', '2147483647')
-                .addOutputOption('-probesize', '2147483647')
-
-                .on('error', function(err) {
-                    reject(err);
-                    callback({ status: 400, message: "facebook error" + err, data: null })
-                })
-                .on('end', function() {
-                    resolve(true);
-                    callback({
-                            status: 200,
-                            message: "Successfully streamed to facebook",
-                            data: {
-                                rtmp_server_url: rtmp_server_url_facebook
-                            }}
-                    );
-                })
-
-                .save(rtmp_server_url_facebook);
-
-        });
-    },
-
-    stream_video_twitch: (path_twitch, rtmp_server_url_twitch, callback) => {
-        return new Promise((resolve, reject) => {
-            var stream_twitch = fs.createReadStream(path_twitch);
-            var live = new ffmpeg({
-                source: stream_twitch
-            })
-                .toFormat('mp4')
-                .withVideoCodec('libx264')
-                .withAudioCodec('aac')
-                .withAudioFrequency(44100)
-                .withAudioChannels(2)
-                .withAudioBitrate('128k')
-                .withVideoBitrate('800k')
-                .withSize('640x360')
-                .withFps(30)
-                .addOutputOption('-vcodec', 'libx264')
-                .addOutputOption('-acodec', 'aac')
-                .addOutputOption('-strict', 'experimental')
-                .addOutputOption('-preset', 'veryfast')
-                .addOutputOption('-ac', '2')
-                .addOutputOption('-ar', '44100')
-                .addOutputOption('-ab', '128k')
-                .addOutputOption('-vb', '800k')
-                .addOutputOption('-s', '640x360')
-                .addOutputOption('-r', '30')
-                .addOutputOption('-f', 'flv')
-                .addOutputOption('-y')
-                .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
-                .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
-                .addOutputOption('-vf', 'crop=640:360:0:0')
-                .addOutputOption('-vf', 'setsar=1')
-                .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
-                .addOutputOption('-g', '4')
-                .addOutputOption('-analyzeduration', '2147483647')
-                .addOutputOption('-probesize', '2147483647')
-
-                .on('error', function(err) {
-                    reject(err);
-                    callback({ status: 400, message: "twitch error" + err, data: null })
-                })
-                .on('end', function() {
-                    resolve(true);
-                    callback({
-                            status: 200,
-                            message: "Successfully streamed to twitch",
-                            data: {
-                                rtmp_server_url: rtmp_server_url_twitch
-                            }}
-                    );
-                    
-                })
-
-                .save(rtmp_server_url_twitch);
-
-        });
-    },
-
-    stream_video_youtube: (path_youtube, rtmp_server_url_youtube, callback) => {
-        return new Promise((resolve, reject) => {
-            var stream_youtube = fs.createReadStream(path_youtube);
-            var live = new ffmpeg({
-                source: stream_youtube
-            })
-                .toFormat('mp4')
-                .withVideoCodec('libx264')
-                .withAudioCodec('aac')
-                .withAudioFrequency(44100)
-                .withAudioChannels(2)
-                .withAudioBitrate('128k')
-                .withVideoBitrate('800k')
-                .withSize('640x360')
-                .withFps(30)
-                .addOutputOption('-vcodec', 'libx264')
-                .addOutputOption('-acodec', 'aac')
-                .addOutputOption('-strict', 'experimental')
-                .addOutputOption('-preset', 'veryfast')
-                .addOutputOption('-ac', '2')
-                .addOutputOption('-ar', '44100')
-                .addOutputOption('-ab', '128k')
-                .addOutputOption('-vb', '800k')
-                .addOutputOption('-s', '640x360')
-                .addOutputOption('-r', '30')
-                .addOutputOption('-f', 'flv')
-                .addOutputOption('-y')
-                .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
-                .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
-                .addOutputOption('-vf', 'crop=640:360:0:0')
-                .addOutputOption('-vf', 'setsar=1')
-                .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
-                .addOutputOption('-g', '4')
-                .addOutputOption('-analyzeduration', '2147483647')
-                .addOutputOption('-probesize', '2147483647')
-
-                .on('error', function(err) {
-                    reject(err);
-                    callback({ status: 400, message: "youtube error" + err, data: null })
-                })
-                .on('end', function() {
-                    resolve(true);
-                    callback({
-                            status: 200,
-                            message: "Successfully streamed to youtube",
-                            data: {
-                                rtmp_server_url: rtmp_server_url_youtube
-                            }}
-                    );
-                })
-
-                .save(rtmp_server_url_youtube);
-
-        });
-    },
     
     transcode_video:(fileName, filePath, callback) =>{
         return new Promise((resolve, reject) => {
             ffmpeg(filePath)
-            .toFormat('mp4')
-            .withVideoCodec('libx264')
-            .withAudioCodec('aac')
-            .withAudioFrequency(44100)
-            .withAudioChannels(2)
-            .withAudioBitrate('128k')
-            .withVideoBitrate('800k')
-            .withSize('640x360')
-            .withFps(30)
-            .addOutputOption('-vcodec', 'libx264')
-            .addOutputOption('-acodec', 'aac')
-            .addOutputOption('-strict', 'experimental')
-            .addOutputOption('-preset', 'veryfast')
-            .addOutputOption('-ac', '2')
-            .addOutputOption('-ar', '44100')
-            .addOutputOption('-ab', '128k')
-            .addOutputOption('-vb', '800k')
-            .addOutputOption('-s', '640x360')
-            .addOutputOption('-r', '30')
-            .addOutputOption('-f', 'flv')
-            .addOutputOption('-y')
-            .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
-            .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
-            .addOutputOption('-vf', 'crop=640:360:0:0')
-            .addOutputOption('-vf', 'setsar=1')
-            .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
-            .addOutputOption('-g', '4')
-            .addOutputOption('-analyzeduration', '2147483647')
-            .addOutputOption('-probesize', '2147483647')
+                
+                .videoCodec('libx264')
+                .audioCodec('libmp3lame')
+                .size('640x480')
+                .format('mp4')
+                .videoBitrate('4500k')
     
             .on('error', function(err) {
                 reject(err);
@@ -609,6 +417,178 @@ var self = module.exports = {
             });
         });
     },
+
+    stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
+        return new Promise((resolve, reject) => {
+            var stream_facebook = fs.createReadStream(path_facebook);  // create a read-stream from the file path
+            ffmpeg({ 
+                source: stream_facebook
+             })
+                
+            .toFormat('mp4')
+            .withVideoCodec('libx264')
+            .withAudioCodec('aac')
+            .withAudioFrequency(44100)
+            .withAudioChannels(2)
+            .withAudioBitrate('128k')
+            .withVideoBitrate('800k')
+            .withSize('640x360')
+            .withFps(30)
+            .addOutputOption('-vcodec', 'libx264')
+            .addOutputOption('-acodec', 'aac')
+            .addOutputOption('-strict', 'experimental')
+            .addOutputOption('-preset', 'veryfast')
+            .addOutputOption('-ac', '2')
+            .addOutputOption('-ar', '44100')
+            .addOutputOption('-ab', '128k')
+            .addOutputOption('-vb', '800k')
+            .addOutputOption('-s', '640x360')
+            .addOutputOption('-r', '30')
+            .addOutputOption('-f', 'flv')
+            .addOutputOption('-y')
+            .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
+            .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
+            .addOutputOption('-vf', 'crop=640:360:0:0')
+            .addOutputOption('-vf', 'setsar=1')
+            .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+            .addOutputOption('-g', '4')
+            .addOutputOption('-analyzeduration', '2147483647')
+            .addOutputOption('-probesize', '2147483647')
+
+            .on('error', function(err) {
+                reject(err);
+                callback({ status: 400, message: "facebook error" + err, data: null })
+            })
+            .on('end', function() {
+                resolve(true);
+                callback({
+                        status: 200,
+                        message: "Successfully streamed to facebook",
+                        
+                    }
+                );
+            })
+
+            .save(rtmp_server_url_facebook);
+                
+        });
+    },
+
+    stream_video_youtube: (path_youtube, rtmp_server_url_youtube, callback) => {
+        return new Promise((resolve, reject) => {
+            var stream_youtube = fs.createReadStream(path_youtube);
+            var live = new ffmpeg({
+                source: stream_youtube
+            })
+
+            .toFormat('mp4')
+            .withVideoCodec('libx264')
+            .withAudioCodec('aac')
+            .withAudioFrequency(44100)
+            .withAudioChannels(2)
+            .withAudioBitrate('128k')
+            .withVideoBitrate('800k')
+            .withSize('640x360')
+            .withFps(30)
+            .addOutputOption('-vcodec', 'libx264')
+            .addOutputOption('-acodec', 'aac')
+            .addOutputOption('-strict', 'experimental')
+            .addOutputOption('-preset', 'veryfast')
+            .addOutputOption('-ac', '2')
+            .addOutputOption('-ar', '44100')
+            .addOutputOption('-ab', '128k')
+            .addOutputOption('-vb', '800k')
+            .addOutputOption('-s', '640x360')
+            .addOutputOption('-r', '30')
+            .addOutputOption('-f', 'flv')
+            .addOutputOption('-y')
+            .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
+            .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
+            .addOutputOption('-vf', 'crop=640:360:0:0')
+            .addOutputOption('-vf', 'setsar=1')
+            .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+            .addOutputOption('-g', '4')
+            .addOutputOption('-analyzeduration', '2147483647')
+            .addOutputOption('-probesize', '2147483647')
+
+            .on('error', function(err) {
+                reject(err);
+                callback({ status: 400, message: "youtube error" + err, data: null })
+            })
+            .on('end', function() {
+                resolve(true);
+                callback({
+                        status: 200,
+                        message: "Successfully streamed to youtube",
+                        
+                    }
+                );
+            })
+
+            .save(rtmp_server_url_youtube);
+
+        });
+    },
+
+    stream_video_twitch: (path_twitch, rtmp_server_url_twitch, callback) => {
+        return new Promise((resolve, reject) => {
+            var stream_twitch = fs.createReadStream(path_twitch);
+            var live = new ffmpeg({
+                source: stream_twitch
+            })
+
+            .toFormat('mp4')
+            .withVideoCodec('libx264')
+            .withAudioCodec('aac')
+            .withAudioFrequency(44100)
+            .withAudioChannels(2)
+            .withAudioBitrate('128k')
+            .withVideoBitrate('800k')
+            .withSize('640x360')
+            .withFps(30)
+            // .addOutputOption('-vcodec', 'libx264')
+            // .addOutputOption('-acodec', 'aac')
+            .addOutputOption('-strict', 'experimental')
+            .addOutputOption('-preset', 'veryfast')
+            // .addOutputOption('-ac', '2')
+            // .addOutputOption('-ar', '44100')
+            .addOutputOption('-ab', '128k')
+            .addOutputOption('-vb', '800k')
+            .addOutputOption('-s', '640x360')
+            // .addOutputOption('-r', '30')
+            .addOutputOption('-f', 'mp4')
+            .addOutputOption('-y')
+            .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
+            .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
+            .addOutputOption('-vf', 'crop=640:360:0:0')
+            .addOutputOption('-vf', 'setsar=1')
+            .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
+            .addOutputOption('-g', '4')
+            .addOutputOption('-analyzeduration', '2147483647')
+            .addOutputOption('-probesize', '2147483647')
+
+
+            .on('error', function(err) {
+                reject(err);
+                callback({ status: 400, message: "twitch error" + err, data: null })
+            })
+            .on('end', function() {
+                resolve(true);
+                callback({
+                        status: 200,
+                        message: "Successfully streamed to twitch",
+                        
+                    }
+                );
+                
+            })
+
+            .save(rtmp_server_url_twitch);
+
+        });
+    },
+
+  
 
     
 };

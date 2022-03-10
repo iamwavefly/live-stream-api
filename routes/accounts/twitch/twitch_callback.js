@@ -44,6 +44,7 @@ module.exports = function (app) {
             const user_profile_picture = user_profile_body.profile_image_url;
 
             const user_profile_id = user_profile_body.id;
+            console.log(user_profile_id, 'user_profile_id');
 
             
             if (functions.empty(exchange_token_response.data)) { throw new Error("Access token and refresh token data are missing."); }
@@ -63,9 +64,11 @@ module.exports = function (app) {
                         twitch_profile_picture: user_profile_picture,
                         twitch_profile_name: user_profile_name,
                         twitch_profile_id: user_profile_id,
-                        is_connected_twitch: true
+                        is_connected_twitch: true,
+                        connected_accounts: userExists[0].connected_accounts + 1
                     }
                 }, { new: true });
+                console.log(user, 'user');
 
                 if (!functions.empty(userExists)) {
 

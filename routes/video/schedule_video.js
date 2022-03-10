@@ -77,9 +77,9 @@ module.exports = function (app) {
                                 scheduled_by: userExists.name,
                                 date: functions.empty(request.body.date)? videoExists.date : request.body.date,
                                 time: functions.empty(request.body.time)? videoExists.time : request.body.time,
-                                // scheduled_start_times: functions.empty(request.body.scheduled_start_times)? videoExists.scheduled_start_times : request.body.scheduled_start_times,
+                                scheduled_start_times: functions.empty(request.body.scheduled_start_times)? videoExists.scheduled_start_times : request.body.scheduled_start_times,
                                 // scheduled_start_times: moment(request.body.date + " " + request.body.time).toISOString(),
-                                scheduled_start_times: moment(request.body.date + " " + request.body.time).subtract(1, 'hours').toISOString(),
+                                // scheduled_start_times: moment(request.body.date + " " + request.body.time).subtract(1, 'hours').toISOString(),
               
                             },
                         );
@@ -92,6 +92,8 @@ module.exports = function (app) {
                         payload["is_registered"] = functions.stringToBoolean(userExists.is_registered)
                         payload["video"] = videoExists
                             
+
+                        
                          //schedule to youtube
                          if(videoExists.is_youtube === true) {
                             let broadcast_youtube = streaming.broadcast_youtube(
@@ -133,9 +135,28 @@ module.exports = function (app) {
                             console.log("Not twitch")
                         }
 
+                        if(videoExists.is_youtube === true && videoExists.youtube_rtmp_url === "") {
+                           console.log('youtube error')
+                        }                        
+
+                        if(videoExists.is_youtube === false && videoExists.is_facebook === false && videoExists.is_twitch === false) {
+                            payload["is_scheduled"] = videoExists.is_scheduled = false
+                            payload["status"] = videoExists.status = "Queued"
+                            payload["scheduled_start_times"] = videoExists.scheduled_start_times = ""
+                            payload["scheduled_by"] = videoExists.scheduled_by = ""
+                            payload["date"] = videoExists.date = ""
+                            payload["time"] = videoExists.time = ""
+                            payload["title"] = videoExists.title = ""
+                            payload["description"] = videoExists.description = ""
+                            payload["tags"] = videoExists.tags = ""
+                            response.status(400).json({ "status": 400, "message": "No streaming platform was selected, please select a streaming platform", "data": payload });
+                        }else{
+                            response.status(200).json({ "status": 200, "message": "Video scheduled successfully", "data": payload });
+                        }
+
                            
 
-                        response.status(200).json({ "status": 200, "message": "Video has been scheduled successfully.", "data": payload });
+                        // response.status(200).json({ "status": 200, "message": "Video has been scheduled successfully.", "data": payload });
                     
                     } catch (e) {
                         response.status(400).json({ "status": 400, "message": e.message, "data": payload });

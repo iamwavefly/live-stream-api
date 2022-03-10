@@ -152,6 +152,10 @@ module.exports = mongoose => {
             type: String,
             default: dateUtil.addMinutes(new Date(), process.env.TOKEN_EXPIRY_MINUTES).toISOString()
         },
+        connected_accounts: {
+            type: Number,
+            default: 0
+        }
     }, { timestamps: true });
 
     schema.plugin(uniqueValidator, {message: 'This email address is already taken, Try another one.'});
