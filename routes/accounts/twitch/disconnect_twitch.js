@@ -46,7 +46,7 @@ module.exports = function (app) {
                             twitch_profile_picture: '',
                             twitch_profile_name: '',
                             is_connected_twitch: false,
-                            connected_accounts: userExists.connected_accounts - 1
+                            connected_accounts: - 1
                         }
                     }, { new: true })
 

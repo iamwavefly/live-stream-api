@@ -44,7 +44,7 @@ module.exports = function (app) {
                             token: request.body.token,
                             facebook_access_token: "",
                             is_connected_facebook: false,
-                            connected_accounts: userExists.connected_accounts - 1
+                            connected_accounts: - 1
                             // facebook_refresh_token: "",
                         }
                     }, { new: true })

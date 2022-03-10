@@ -71,7 +71,7 @@ module.exports = function (app) {
                         google_profile_picture: user_profile_picture,
                         google_profile_name: user_profile_name,
                         is_connected_google: true,
-                        connected_accounts: userExists.connected_accounts + 1
+                        connected_accounts: + 1
                     }
                 }, { new: true })
                 
