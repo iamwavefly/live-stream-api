@@ -121,6 +121,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
     
                                         let stream_video_youtube = functions.stream_video_youtube(
                                             `${__dirname}/../../uploads/${video_ids[i]}.mp4`,
+                                            // 'rtmp://a.rtmp.youtube.com/live2/xmes-atw2-06xx-41gw-eyam',
                                             youtube_rtmp_urls[i],
                                             //callback
                                             function(data) {
