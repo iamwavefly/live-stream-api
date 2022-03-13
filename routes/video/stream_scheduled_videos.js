@@ -9,7 +9,7 @@ const dateUtil = require('date-fns');
 module.exports = function (app) {
 
 cron.schedule('*/2 * * * *', async (request, response) => {
-    console.log("running a task every 2 minutes");
+    console.log("running cron job every 2 minutes");
         try {
 
             let videos = await VIDEO.find({ status: "Scheduled", is_scheduled: true });

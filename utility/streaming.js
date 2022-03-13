@@ -98,7 +98,7 @@ broadcast_youtube: ( title, description, scheduledStartTime, refreshtoken, userT
                     let streamName = stream_data.data.cdn.ingestionInfo.streamName;
 
                     let rtmpAddress = `rtmps://a.rtmps.youtube.com/live2/${streamName}` 
-                    console.log(rtmpAddress, 'rtmpAddress');
+                    console.log('youtube rtmp address created: ');
 
                     //store the stream name and rtmp address in the database
                    await VIDEO.updateOne({token: userToken, video_id: videoId}, {
@@ -177,7 +177,7 @@ create_facebook_live_video: ( title, description, facebookAccessToken, userToken
 
                 }else{
                     let secure_stream_url = body.secure_stream_url; 
-                    console.log(secure_stream_url, 'secure_stream_url');
+                    console.log('facebook live video created');
                     
                     //store the secure stream url and video id in the database
                         await VIDEO.updateOne({token: userToken, video_id: videoId}, {
@@ -192,7 +192,6 @@ create_facebook_live_video: ( title, description, facebookAccessToken, userToken
     }
     
 )},
-
 
 //get a users twictch stream key
 get_twitch_stream_key: ( user_refresh_token, twitch_id, title, callback ) => {
@@ -237,7 +236,7 @@ get_twitch_stream_key: ( user_refresh_token, twitch_id, title, callback ) => {
             if(err){
                 console.log('Error: ' + err)
             }else{
-                console.log ('Done updating stream info on twitch');
+                console.log ('twitch stream created');
             }
         })
 
