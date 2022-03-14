@@ -28,6 +28,7 @@ module.exports = function (app) {
                 if (!functions.empty(userExists)) {
 
                     userExists = Array.isArray(userExists)? userExists[0] : userExists;
+                    console.log(userExists.connected_accounts, 'userExists');
 
                     // Check if token has expired
                     const difference = Math.abs(dateUtil.differenceInMinutes(new Date(userExists.token_expiry), new Date()))
@@ -44,8 +45,7 @@ module.exports = function (app) {
                             token: request.body.token,
                             facebook_access_token: "",
                             is_connected_facebook: false,
-                            // connected_accounts: - 1
-                            connected_accounts: userExists.connected_accounts - 1
+                            connected_accounts:  - 1
                         }
                     }, { new: true })
 

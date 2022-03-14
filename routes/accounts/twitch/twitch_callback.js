@@ -53,6 +53,7 @@ module.exports = function (app) {
                 let token = request.query.state;
 
                 let userExists = await USER.find({ token: token });
+                console.log(userExists.connected_accounts, 'userExists');
 
                 //save access token and refresh token to the database
                 let user = await USER.findOneAndUpdate({ token: token }, {
@@ -64,8 +65,7 @@ module.exports = function (app) {
                         twitch_profile_name: user_profile_name,
                         twitch_profile_id: user_profile_id,
                         is_connected_twitch: true,
-                        // connected_accounts: + 1
-                        connected_accounts: userExists.connected_accounts + 1
+                        connected_accounts:  + 1
                     }
                 }, { new: true });
                 console.log(user, 'user');
