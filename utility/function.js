@@ -430,8 +430,8 @@ var self = module.exports = {
              .addOutputOption('-vcodec libx264')
              .addOutputOption('-acodec aac')
              .addInputOption('-i ' + path_facebook)
-             .addOutputOption('-f flv') // set the output format to flv
-             .addOutputOption('-flvflags no_duration_filesize')
+             .addOutputOption('-f mp4') // set the output format to mp4
+            //  .addOutputOption('-flvflags no_duration_filesize')
              .addInputOption('-thread_queue_size 1024')
              .addOutputOption('-strict experimental')
              .addOutputOption('-preset veryfast')
@@ -477,7 +477,7 @@ var self = module.exports = {
             .addOutputOption('-vcodec libx264')
             .addOutputOption('-acodec aac')
             .addInputOption('-i ' + path_twitch)
-            .addOutputOption('-f flv') // set the output format to flv
+            .addOutputOption('-f mp4') // set the output format to mp4
             .addOutputOption('-flvflags no_duration_filesize')
             .addInputOption('-thread_queue_size 1024')
             .addOutputOption('-strict experimental')
@@ -524,8 +524,8 @@ var self = module.exports = {
             .addOutputOption('-vcodec libx264')
             .addOutputOption('-acodec aac')
             .addInputOption('-i ' + path_twitch)
-            .addOutputOption('-f flv') // set the output format to flv
-            .addOutputOption('-flvflags no_duration_filesize')
+            .addOutputOption('-f mp4') // set the output format to mp4
+            // .addOutputOption('-flvflags no_duration_filesize')
             .addInputOption('-thread_queue_size 1024')
             .addOutputOption('-strict experimental')
             .addOutputOption('-preset veryfast')
