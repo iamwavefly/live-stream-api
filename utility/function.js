@@ -451,7 +451,7 @@ var self = module.exports = {
                 console.log('ffmpeg stderr for facebook:\n' + stderr);
                 // console.log(err, 'err fb');
                 // reject(err);
-                callback({ status: 400, message: "facebook error" + err, data: null })  // if an error occurs, log it to the console
+                //callback({ status: 400, message: "facebook error" + err, data: null })  // if an error occurs, log it to the console
             })
             .on('end', function() { // handle encoding finished here 
                 resolve(true);
@@ -498,7 +498,7 @@ var self = module.exports = {
                 console.log('ffmpeg stderr for youtube:\n' + stderr);
                 // console.log(err, 'err youtube');
                 // reject(err);
-                callback({ status: 400, message: "youtube error" + err, data: null })  // if an error occurs, log it to the console
+                //callback({ status: 400, message: "youtube error" + err, data: null })  // if an error occurs, log it to the console
             })
             .on('end', function() {
                 resolve(true);
@@ -546,7 +546,7 @@ var self = module.exports = {
                 console.log('ffmpeg stderr for twitch:\n' + stderr);
                 // console.log(err, 'err twitch');
                 // reject(err);
-                callback({ status: 400, message: "twitch error" + err, data: null }) // if an error occurs, log it to the console
+                //callback({ status: 400, message: "twitch error" + err, data: null }) // if an error occurs, log it to the console
             })
             .on('end', function() { // handle encoding finished here
                 resolve(true);
