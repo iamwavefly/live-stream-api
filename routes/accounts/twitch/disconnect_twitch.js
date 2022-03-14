@@ -28,6 +28,7 @@ module.exports = function (app) {
                 if (!functions.empty(userExists)) {
 
                     userExists = Array.isArray(userExists)? userExists[0] : userExists;
+                    console.log(userExists.connected_accounts, "connected accounts")
 
                     // Check if token has expired
                     const difference = Math.abs(dateUtil.differenceInMinutes(new Date(userExists.token_expiry), new Date()))
@@ -47,7 +48,7 @@ module.exports = function (app) {
                             twitch_profile_name: '',
                             is_connected_twitch: false,
                             // connected_accounts:  - 1
-                            connected_accounts: userExists[0].connected_accounts - 1
+                            // connected_accounts: userExists[0].connected_accounts - 1
                         }
                     }, { new: true })
 
