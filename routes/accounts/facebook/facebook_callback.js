@@ -54,7 +54,6 @@ module.exports = function (app) {
                             let token = request.query.state
             
                             let userExists = await USER.find({ token: token})
-                            console.log(userExists, 'userExists');
                             
                             //save access token and refresh token to the database
                             let user = await USER.findOneAndUpdate({ token: token }, {
@@ -64,10 +63,9 @@ module.exports = function (app) {
                                     facebook_profile_picture: user_profile_picture,
                                     facebook_profile_name: user_profile_name,
                                     is_connected_facebook: true,
-                                    connected_accounts: + 1
+                                    connected_accounts: user.connected_accounts + 1
                                 }
                             }, { new: true })
-                            console.log(user, 'user');
                             
                             if (!functions.empty(userExists)) {
             
