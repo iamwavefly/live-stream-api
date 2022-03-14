@@ -63,7 +63,7 @@ module.exports = function (app) {
                                     facebook_profile_picture: user_profile_picture,
                                     facebook_profile_name: user_profile_name,
                                     is_connected_facebook: true,
-                                    connected_accounts: user.connected_accounts + 1
+                                    connected_accounts: userExists.connected_accounts + 1
                                 }
                             }, { new: true })
                             

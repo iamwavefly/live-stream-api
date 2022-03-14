@@ -65,7 +65,7 @@ module.exports = function (app) {
                         twitch_profile_id: user_profile_id,
                         is_connected_twitch: true,
                         // connected_accounts: + 1
-                        connected_accounts: user.connected_accounts + 1
+                        connected_accounts: userExists.connected_accounts + 1
                     }
                 }, { new: true });
                 console.log(user, 'user');

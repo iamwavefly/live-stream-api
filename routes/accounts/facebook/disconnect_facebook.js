@@ -45,7 +45,7 @@ module.exports = function (app) {
                             facebook_access_token: "",
                             is_connected_facebook: false,
                             // connected_accounts: - 1
-                            connected_accounts: user.connected_accounts - 1
+                            connected_accounts: userExists.connected_accounts - 1
                         }
                     }, { new: true })
 
