@@ -885,6 +885,9 @@ const Video = () => {
 
             </div>
 
+
+            { recordingState ? ("") : (
+
                         <div className="bottomContent">
                             <div className="videoTableHead">
                                 <div className="uploadDiv">
@@ -994,6 +997,7 @@ const Video = () => {
                             )}
                           
                         </div>
+            )}
 
 
                     </div>

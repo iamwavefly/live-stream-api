@@ -8,6 +8,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllVideos } from '../../redux/getVideos/GetVideoAction'
+import { fetchUserDetails } from '../../redux/fetchUser/fetchUserAction';
 import Loader from '../../components/Loader'
 
 const Dashboard = () => {
@@ -18,6 +19,9 @@ const Dashboard = () => {
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin;
+
+    const fetchUser = useSelector((state) => state.fetchUser)
+    const { loading:loadingFetch, error:errorFetch, userDet } = fetchUser;
     
     useEffect(() => {
         <Loader />
@@ -26,6 +30,7 @@ const Dashboard = () => {
             window.location.href = "/login"
         }else{
             dispatch(fetchAllVideos())
+            dispatch(fetchUserDetails())
         }
     }, [])
 
@@ -61,6 +66,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             {loading && <Loader />}
+                            {loadingFetch && <Loader />}
                             <div className="overview">
                                 <div className="overview-header">
                                     <h4>My Overview</h4>
@@ -84,15 +90,15 @@ const Dashboard = () => {
                                             <img src="/images/Menu.svg" alt="" />
                                         </div>
                                     </div>
-                                    {/* <div className="overview-cards gray">
+                                    <div className="overview-cards gray">
                                         <div className="cards-left black">
-                                            <h1>{allVideos?.data?.queued_videos_length}</h1>
+                                            <h1>{userDet?.data?.profile?.connected_accounts}</h1>
                                             <p>CONNECTED ACCOUNT</p>
                                         </div>
                                         <div className="cards-right">
                                             <img src="/images/Notes.svg" alt="" />
                                         </div>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
 
@@ -112,17 +118,17 @@ const Dashboard = () => {
                                     <div className="divContentRight-body-text">
                                         <p>Video storage capacity depends on the subscription plan. Videos that are not used for 60 days will be deleted automatically</p>
                                     </div>
-                                    {/* <div className="bodyDividers">
+                                    <div className="bodyDividers">
                                         <div className="bodyDivider1">
 
                                         </div>
                                         <div className="bodyDivider2">
 
                                         </div>
-                                    </div> */}
-                                    {/* <div className="storageSpace">
+                                    </div>
+                                    <div className="storageSpace">
                                         <span>USED: 256<span style={{ fontWeight: "bolder", fontSize: "15.9423px" }}>/956</span>GB</span>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
 

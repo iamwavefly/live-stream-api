@@ -212,6 +212,9 @@ const Account = () => {
             })
             .catch(function (error) {
                 setLoadingAddAcounts(false);
+                console.log(
+                    "Error: " + error.response.data.message
+                );
             });
     }
 
