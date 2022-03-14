@@ -53,7 +53,7 @@ module.exports = function (app) {
                 let token = request.query.state;
 
                 let userExists = await USER.find({ token: token });
-                console.log(userExists, 'userExists');
+                console.log(userExists[0].connected_accounts, 'userExists');
 
                 //save access token and refresh token to the database
                 let user = await USER.findOneAndUpdate({ token: token }, {
