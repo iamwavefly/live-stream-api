@@ -486,7 +486,7 @@ var self = module.exports = {
             .addOutputOption('-ar 44100')
             .addOutputOption('-ab 128k')
             .addOutputOption('-vb 800k')
-            .addOutputOption('-s 720x360')
+            .addOutputOption('-s 1920x1080')
             .addOutputOption('-r 30')
             .addOutputOption('-y')
             .addOutputOption('-g 4')
