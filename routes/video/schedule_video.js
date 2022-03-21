@@ -135,9 +135,9 @@ module.exports = function (app) {
                             console.log("Not twitch")
                         }
 
-                        if(videoExists.is_youtube === true && videoExists.youtube_rtmp_url === "") {
-                           console.log('youtube error')
-                        }                        
+                        // if(videoExists.is_youtube === true && videoExists.youtube_rtmp_url === "") {
+                        //    console.log('youtube error')
+                        // }                        
 
                         if(videoExists.is_youtube === false && videoExists.is_facebook === false && videoExists.is_twitch === false) {
                             payload["is_scheduled"] = videoExists.is_scheduled = false
