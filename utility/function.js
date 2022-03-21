@@ -476,7 +476,7 @@ var self = module.exports = {
 
             .addOutputOption('-vcodec libx264')
             .addOutputOption('-acodec aac')
-            .addInputOption('-i ' + path_twitch)
+            .addInputOption('-i ' + path_youtube)
             .addOutputOption('-f flv') // set the output format to flv
             .addOutputOption('-flvflags no_duration_filesize')
             .addInputOption('-thread_queue_size 1024')
