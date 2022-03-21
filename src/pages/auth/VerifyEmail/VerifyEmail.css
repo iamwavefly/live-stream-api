@@ -47,6 +47,7 @@ section{
     width: 350px;
     margin-left: 40px;
     margin-top: 150px;
+    zoom: 0.9;
 }
 .page-verify-body{
     text-align: center;
@@ -98,7 +99,7 @@ section{
 
 .continue{
     text-align: center;
-    padding-top: 40px;
+    /* padding-top: 40px; */
 }
 .continueText{
     font-family: Mulish;

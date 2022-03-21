@@ -1,5 +1,6 @@
 import React from 'react'
 import './index.css';
+import {Link} from 'react-router-dom'
 
 const Landing = () => {
     return (
@@ -10,7 +11,7 @@ const Landing = () => {
                         <img src="/coming-soon/logo.svg" alt="" />
                     </div>
                     <div className="topRight">
-                        <a href="/sign-up">Get Started</a>
+                        <a href="/login">Get Started</a>
                     </div>
 
                     <div className="rows">
@@ -49,20 +50,16 @@ const Landing = () => {
                                     <img src="/coming-soon/IMAGE.svg" alt="" />
                                 </div>
                                 <div className="btn-group">
-                                    <a href="/facebook">
-                                        <img src="/coming-soon/facebook.svg" alt="" />
-                                    </a>
-                                    <a href="/facebook" style={{ marginLeft: "25px" }}>
-                                        <img src="/coming-soon/instagram.svg" alt="" />
-                                    </a>
-                                    <a href="/facebook" style={{ marginLeft: "25px" }}>
-                                        <img src="/coming-soon/twitter.svg" alt="" />
-                                    </a>
+                                   <Link className='linkss' to="/privacy-policy" style={{marginRight: '15px'}}> Privacy Policy </Link>
+                                    <Link className='linkss' to="/terms-service"> Terms of Use </Link>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
+                     
                 </div>
+              
             </div>
 
         </>

@@ -98,7 +98,7 @@ section{
 
 .continue{
     text-align: center;
-    padding-top: 40px;
+    /* padding-top: 40px; */
 }
 .continueText{
     font-family: Mulish;
