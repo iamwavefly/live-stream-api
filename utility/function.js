@@ -425,7 +425,7 @@ var self = module.exports = {
             ffmpeg(path_facebook)
                 .inputFormat('mp4')
                 .inputOptions('-re')
-                .outputOptions('-vcodec copy -acodec copy')
+                .outputOptions('-vcodec libx264 -acodec aac')
                 .outputOptions('-f flv')
                 .outputOptions('-s 720x360')
                 .outputOptions(`${rtmp_server_url_facebook}`)
