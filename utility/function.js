@@ -419,176 +419,178 @@ var self = module.exports = {
         });
     },
 
+    // stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
+    //     return new Promise((resolve, reject) => {
+    //         //use ffmpeg to stream the video to the rtmp server
+    //         ffmpeg(path_facebook)
+    //             .inputFormat('mp4')
+    //             .inputOptions('-re')
+    //             .outputOptions('-vcodec libx264')
+    //             .outputOptions('-acodec aac')
+    //             .outputOptions('-f flv')
+    //             .outputOptions('-s 720x360')
+    //             .outputOptions(`${rtmp_server_url_facebook}`)
+    //             .on('error', function(err) {
+    //                 reject(err);
+    //                 callback({ status: 400, message: err, data: null })
+    //             }
+    //             )
+    //             .on('end', function() {
+    //                 resolve(true);
+    //                 callback(null, `${path_facebook} streaming to ${rtmp_server_url_facebook}`);
+    //             }
+    //             )
+    //             // .run();
+    //             .save(rtmp_server_url_facebook);
+                
+    //     });
+    // },
+
     stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
         return new Promise((resolve, reject) => {
-            //use ffmpeg to stream the video to the rtmp server
-            ffmpeg(path_facebook)
-                .inputFormat('mp4')
-                .inputOptions('-re')
-                .outputOptions('-vcodec libx264')
-                .outputOptions('-acodec aac')
-                .outputOptions('-f flv')
-                .outputOptions('-s 720x360')
-                .outputOptions(`${rtmp_server_url_facebook}`)
-                .on('error', function(err) {
-                    reject(err);
-                    callback({ status: 400, message: err, data: null })
-                }
-                )
-                .on('end', function() {
-                    resolve(true);
-                    callback(null, `${path_facebook} streaming to ${rtmp_server_url_facebook}`);
-                }
-                )
-                // .run();
-                .save(rtmp_server_url_facebook);
+            var stream_facebook = fs.createReadStream(path_facebook);  // create a read-stream from the file path
+            
+            ffmpeg({  // create a ffmpeg instance from the read-stream
+                source: stream_facebook // pipe the read-stream to the ffmpeg instance 
+             })
+             
+             .addOutputOption('-vcodec libx264')
+             .addOutputOption('-acodec aac')
+             .addInputOption('-i ' + path_facebook)
+             .addOutputOption('-f flv') // set the output format to flv
+             .addOutputOption('-flvflags no_duration_filesize')
+             .addInputOption('-thread_queue_size 1024')
+             .addOutputOption('-strict experimental')
+             .addOutputOption('-preset veryfast')
+             .addOutputOption('-ac 2')
+             .addOutputOption('-ar 44100')
+             .addOutputOption('-ab 128k')
+             .addOutputOption('-vb 800k')
+             .addOutputOption('-s 720x360')
+             .addOutputOption('-r 30')
+             .addOutputOption('-y')
+             .addOutputOption('-g 4')
+             .addOutputOption('-analyzeduration 2147483647')
+             .addOutputOption('-probesize 2147483647')
+
+            .on('error', function(err, stdout, stderr) {  // handle encoding errors here
+                console.log('ffmpeg output for facebook:\n' + stdout);
+                console.log('ffmpeg stderr for facebook:\n' + stderr);
+                // console.log(err, 'err fb');
+                // reject(err);
+                //callback({ status: 400, message: "facebook error" + err, data: null })  // if an error occurs, log it to the console
+            })
+            .on('end', function() { // handle encoding finished here 
+                resolve(true);
+                callback({
+                        status: 200,
+                        message: "Successfully streamed to facebook",
+                    }
+                );
+            })
+
+            .save(rtmp_server_url_facebook); // save the output to a file
                 
         });
     },
 
-    // stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
-    //     return new Promise((resolve, reject) => {
-    //         var stream_facebook = fs.createReadStream(path_facebook);  // create a read-stream from the file path
-            
-    //         ffmpeg({  // create a ffmpeg instance from the read-stream
-    //             source: stream_facebook // pipe the read-stream to the ffmpeg instance 
-    //          })
-             
-    //          .addOutputOption('-vcodec libx264')
-    //          .addOutputOption('-acodec aac')
-    //          .addInputOption('-i ' + path_facebook)
-    //          .addOutputOption('-f flv') // set the output format to flv
-    //          .addOutputOption('-flvflags no_duration_filesize')
-    //          .addInputOption('-thread_queue_size 1024')
-    //          .addOutputOption('-strict experimental')
-    //          .addOutputOption('-preset veryfast')
-    //          .addOutputOption('-ac 2')
-    //          .addOutputOption('-ar 44100')
-    //          .addOutputOption('-ab 128k')
-    //          .addOutputOption('-vb 800k')
-    //          .addOutputOption('-s 720x360')
-    //          .addOutputOption('-r 30')
-    //          .addOutputOption('-y')
-    //          .addOutputOption('-g 4')
-    //          .addOutputOption('-analyzeduration 2147483647')
-    //          .addOutputOption('-probesize 2147483647')
+    stream_video_youtube: (path_youtube, rtmp_server_url_youtube, callback) => {
+        return new Promise((resolve, reject) => {
+            var stream_youtube = fs.createReadStream(path_youtube);
+            var live = new ffmpeg({ // create a ffmpeg instance from the read-stream 
+                source: stream_youtube // pipe the read-stream to the ffmpeg instance 
+            })
 
-    //         .on('error', function(err, stdout, stderr) {  // handle encoding errors here
-    //             console.log('ffmpeg output for facebook:\n' + stdout);
-    //             console.log('ffmpeg stderr for facebook:\n' + stderr);
-    //             // console.log(err, 'err fb');
-    //             // reject(err);
-    //             //callback({ status: 400, message: "facebook error" + err, data: null })  // if an error occurs, log it to the console
-    //         })
-    //         .on('end', function() { // handle encoding finished here 
-    //             resolve(true);
-    //             callback({
-    //                     status: 200,
-    //                     message: "Successfully streamed to facebook",
-    //                 }
-    //             );
-    //         })
+            .addOutputOption('-vcodec libx264')
+            .addOutputOption('-acodec aac')
+            .addInputOption('-i ' + path_youtube)
+            .addOutputOption('-f flv') // set the output format to flv
+            .addOutputOption('-flvflags no_duration_filesize')
+            .addInputOption('-thread_queue_size 1024')
+            .addOutputOption('-strict experimental')
+            .addOutputOption('-preset veryfast')
+            .addOutputOption('-ac 2')
+            .addOutputOption('-ar 44100')
+            .addOutputOption('-ab 128k')
+            .addOutputOption('-vb 800k')
+            .addOutputOption('-s 1920x1080')
+            .addOutputOption('-r 30')
+            .addOutputOption('-y')
+            .addOutputOption('-g 4')
+            .addOutputOption('-analyzeduration 2147483647')
+            .addOutputOption('-probesize 2147483647')
 
-    //         .save(rtmp_server_url_facebook); // save the output to a file
+            .on('error', function(err, stdout, stderr) {
+                console.log('ffmpeg output for youtube:\n' + stdout);
+                console.log('ffmpeg stderr for youtube:\n' + stderr);
+                // console.log(err, 'err youtube');
+                // reject(err);
+                //callback({ status: 400, message: "youtube error" + err, data: null })  // if an error occurs, log it to the console
+            })
+            .on('end', function() {
+                resolve(true);
+                callback({
+                        status: 200,
+                        message: "Successfully streamed to youtube",
+                    }
+                );
+            })
+
+            .save(rtmp_server_url_youtube);
+
+        });
+    },
+
+    stream_video_twitch: (path_twitch, rtmp_server_url_twitch, callback) => {
+        return new Promise((resolve, reject) => {
+            var stream_twitch = fs.createReadStream(path_twitch);  // create a read-stream from the file path  
+            var live = new ffmpeg({  // create a ffmpeg instance from the read-stream 
+                source: stream_twitch // pipe the read-stream to the ffmpeg instance 
+            })  
+
+            .addOutputOption('-vcodec libx264')
+            .addOutputOption('-acodec aac')
+            .addInputOption('-i ' + path_twitch)
+            .addOutputOption('-f flv') // set the output format to flv
+            .addOutputOption('-flvflags no_duration_filesize')
+            .addInputOption('-thread_queue_size 1024')
+            .addOutputOption('-strict experimental')
+            .addOutputOption('-preset veryfast')
+            .addOutputOption('-ac 2')
+            .addOutputOption('-ar 44100')
+            .addOutputOption('-ab 128k')
+            .addOutputOption('-vb 800k')
+            .addOutputOption('-s 720x360')
+            .addOutputOption('-r 30')
+            .addOutputOption('-y')
+            .addOutputOption('-g 4')
+            .addOutputOption('-analyzeduration 2147483647')
+            .addOutputOption('-probesize 2147483647')
+
+
+            .on('error', function(err, stdout, stderr) { // handle encoding errors here 
+                console.log('ffmpeg output for twitch:\n' + stdout);
+                console.log('ffmpeg stderr for twitch:\n' + stderr);
+                // console.log(err, 'err twitch');
+                // reject(err);
+                //callback({ status: 400, message: "twitch error" + err, data: null }) // if an error occurs, log it to the console
+            })
+            .on('end', function() { // handle encoding finished here
+                resolve(true);
+                callback({
+                        status: 200,
+                        message: "Successfully streamed to twitch",
+                    }
+                );
                 
-    //     });
-    // },
+            })
 
-    // stream_video_youtube: (path_youtube, rtmp_server_url_youtube, callback) => {
-    //     return new Promise((resolve, reject) => {
-    //         var stream_youtube = fs.createReadStream(path_youtube);
-    //         var live = new ffmpeg({ // create a ffmpeg instance from the read-stream 
-    //             source: stream_youtube // pipe the read-stream to the ffmpeg instance 
-    //         })
+            .save(rtmp_server_url_twitch);  // save the output to a file
 
-    //         .addOutputOption('-vcodec libx264')
-    //         .addOutputOption('-acodec aac')
-    //         .addInputOption('-i ' + path_youtube)
-    //         .addOutputOption('-f flv') // set the output format to flv
-    //         .addOutputOption('-flvflags no_duration_filesize')
-    //         .addInputOption('-thread_queue_size 1024')
-    //         .addOutputOption('-strict experimental')
-    //         .addOutputOption('-preset veryfast')
-    //         .addOutputOption('-ac 2')
-    //         .addOutputOption('-ar 44100')
-    //         .addOutputOption('-ab 128k')
-    //         .addOutputOption('-vb 800k')
-    //         .addOutputOption('-s 1920x1080')
-    //         .addOutputOption('-r 30')
-    //         .addOutputOption('-y')
-    //         .addOutputOption('-g 4')
-    //         .addOutputOption('-analyzeduration 2147483647')
-    //         .addOutputOption('-probesize 2147483647')
+        });
+    },
 
-    //         .on('error', function(err, stdout, stderr) {
-    //             console.log('ffmpeg output for youtube:\n' + stdout);
-    //             console.log('ffmpeg stderr for youtube:\n' + stderr);
-    //             // console.log(err, 'err youtube');
-    //             // reject(err);
-    //             //callback({ status: 400, message: "youtube error" + err, data: null })  // if an error occurs, log it to the console
-    //         })
-    //         .on('end', function() {
-    //             resolve(true);
-    //             callback({
-    //                     status: 200,
-    //                     message: "Successfully streamed to youtube",
-    //                 }
-    //             );
-    //         })
-
-    //         .save(rtmp_server_url_youtube);
-
-    //     });
-    // },
-
-    // stream_video_twitch: (path_twitch, rtmp_server_url_twitch, callback) => {
-    //     return new Promise((resolve, reject) => {
-    //         var stream_twitch = fs.createReadStream(path_twitch);  // create a read-stream from the file path  
-    //         var live = new ffmpeg({  // create a ffmpeg instance from the read-stream 
-    //             source: stream_twitch // pipe the read-stream to the ffmpeg instance 
-    //         })  
-
-    //         .addOutputOption('-vcodec libx264')
-    //         .addOutputOption('-acodec aac')
-    //         .addInputOption('-i ' + path_twitch)
-    //         .addOutputOption('-f flv') // set the output format to flv
-    //         .addOutputOption('-flvflags no_duration_filesize')
-    //         .addInputOption('-thread_queue_size 1024')
-    //         .addOutputOption('-strict experimental')
-    //         .addOutputOption('-preset veryfast')
-    //         .addOutputOption('-ac 2')
-    //         .addOutputOption('-ar 44100')
-    //         .addOutputOption('-ab 128k')
-    //         .addOutputOption('-vb 800k')
-    //         .addOutputOption('-s 720x360')
-    //         .addOutputOption('-r 30')
-    //         .addOutputOption('-y')
-    //         .addOutputOption('-g 4')
-    //         .addOutputOption('-analyzeduration 2147483647')
-    //         .addOutputOption('-probesize 2147483647')
-
-
-    //         .on('error', function(err, stdout, stderr) { // handle encoding errors here 
-    //             console.log('ffmpeg output for twitch:\n' + stdout);
-    //             console.log('ffmpeg stderr for twitch:\n' + stderr);
-    //             // console.log(err, 'err twitch');
-    //             // reject(err);
-    //             //callback({ status: 400, message: "twitch error" + err, data: null }) // if an error occurs, log it to the console
-    //         })
-    //         .on('end', function() { // handle encoding finished here
-    //             resolve(true);
-    //             callback({
-    //                     status: 200,
-    //                     message: "Successfully streamed to twitch",
-    //                 }
-    //             );
-                
-    //         })
-
-    //         .save(rtmp_server_url_twitch);  // save the output to a file
-
-    //     });
-    // },
+    
 };
 
 
