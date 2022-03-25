@@ -438,7 +438,8 @@ var self = module.exports = {
                     callback(null, `${path_facebook} streaming to ${rtmp_server_url_facebook}`);
                 }
                 )
-                .run();
+                // .run();
+                .save(rtmp_server_url_facebook);
                 
         });
     },
