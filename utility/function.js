@@ -427,6 +427,7 @@ var self = module.exports = {
                 .inputOptions('-re')
                 .outputOptions('-vcodec copy -acodec copy')
                 .outputOptions('-f flv')
+                .outputOptions('-s 720x360')
                 .outputOptions(`${rtmp_server_url_facebook}`)
                 .on('error', function(err) {
                     reject(err);
