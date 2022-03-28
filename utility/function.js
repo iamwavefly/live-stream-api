@@ -456,7 +456,7 @@ var self = module.exports = {
              
              .addOutputOption('-vcodec libx264')
              .addOutputOption('-acodec aac')
-             .addInputOption('-i ' + path_facebook)
+             .addInputOption('-i mp4')
              .addOutputOption('-f flv') // set the output format to flv
              .addOutputOption('-flvflags no_duration_filesize')
              .addInputOption('-thread_queue_size 1024')
@@ -503,7 +503,7 @@ var self = module.exports = {
 
             .addOutputOption('-vcodec libx264')
             .addOutputOption('-acodec aac')
-            .addInputOption('-i ' + path_youtube)
+            .addInputOption('-i mp4')
             .addOutputOption('-f flv') // set the output format to flv
             .addOutputOption('-flvflags no_duration_filesize')
             .addInputOption('-thread_queue_size 1024')
@@ -550,22 +550,13 @@ var self = module.exports = {
 
             .addOutputOption('-vcodec libx264')
             .addOutputOption('-acodec aac')
-            .addInputOption('-i ' + path_twitch)
+            .addInputOption(`-i ${path_twitch}`)
             .addOutputOption('-f flv') // set the output format to flv
-            .addOutputOption('-flvflags no_duration_filesize')
             .addInputOption('-thread_queue_size 1024')
-            .addOutputOption('-strict experimental')
-            .addOutputOption('-preset veryfast')
-            .addOutputOption('-ac 2')
-            .addOutputOption('-ar 44100')
             .addOutputOption('-ab 128k')
             .addOutputOption('-vb 800k')
             .addOutputOption('-s 720x360')
             .addOutputOption('-r 30')
-            .addOutputOption('-y')
-            .addOutputOption('-g 4')
-            .addOutputOption('-analyzeduration 2147483647')
-            .addOutputOption('-probesize 2147483647')
 
 
             .on('error', function(err, stdout, stderr) { // handle encoding errors here 
