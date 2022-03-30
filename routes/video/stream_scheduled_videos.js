@@ -59,9 +59,9 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                             }
         
                             //stream to facebook
-                            if(is_facebook[0] === true){ 
+                            if(is_facebook[0] === true || is_youtube[0] === true || is_twitch[0] === true){ 
                                 for(let i = 0; i < videos.length; i++){
-                                    if(videos[i].is_facebook === true){
+                                    if(videos[i].is_facebook === true || videos[i].is_youtube === true || videos[i].is_twitch === true){
                                         //change the status to streaming
                                         VIDEO.updateOne({video_id: video_ids[i]}, {$set: {status: "Streaming"}}, (err, data) => {
                                             if(err) {
@@ -93,25 +93,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                     })
                                                 }
                                             });
-                                        facebook_streams.push(stream_video_facebook);  //push the stream to the array
-                                    }
-                                }
-                            }
-    
-                            //stream to youtube
-                            if(is_youtube[0] === true){
-                                for(let i = 0; i < videos.length; i++){
-                                    if(videos[i].is_youtube === true){
-                                        //change the status to streaming
-                                        VIDEO.updateOne({video_id: video_ids[i]}, {$set: {status: "Streaming"}}, (err, data) => {
-                                            if(err) {
-                                                console.log(err);
-                                            } else {
-                                                console.log("video status updated to Streaming");
-                                                console.log(data);
-                                            }
-                                        })
-    
+
                                         let stream_video_youtube = functions.stream_video_youtube(
                                             `${__dirname}/../../uploads/${video_ids[i]}.mp4`,
                                             // 'rtmp://a.rtmp.youtube.com/live2/xmes-atw2-06xx-41gw-eyam',
@@ -134,69 +116,40 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                     })
                                                 }
                                             });
-                                        youtube_streams.push(stream_video_youtube);  //push the stream to the array
-                                    }
-                                }
-                            }
-
-                            //stream to twitch
-                            if(is_twitch[0] === true){
-                                for(let i = 0; i < videos.length; i++){
-                                    if(videos[i].is_twitch === true){
-                                        //change the status to streaming
-                                        VIDEO.updateOne({video_id: video_ids[i]}, {$set: {status: "Streaming"}}, (err, data) => {
-                                            if(err) {
-                                                console.log(err);
-                                            } else {
-                                                console.log("video status updated to Streaming");
-                                                console.log(data);
-                                            }
-                                        })
 
                                         let stream_video_twitch = functions.stream_video_twitch(
-                                            `${__dirname}/../../uploads/${video_ids[i]}.mp4`,
-                                            twitch_rtmp_urls[i],
-                                            //callback
-                                            function(data) {
-                                                if(data.status === 200) {
-                                                    //update the video status
-                                                    VIDEO.updateOne({video_id: video_ids[i]}, {$set: {
-                                                        status: "Streamed",
-                                                        twitch_rtmp_url: "",
-                                                        is_scheduled: false,
-                                                    }}, (err, data) => {
-                                                        if(err) {
-                                                            console.log(err);
-                                                        } else {
-                                                            console.log("twitch stream completed");
-                                                            console.log(data);
-                                                        }
-                                                    })
-                                                }
-                                            });
+                                                `${__dirname}/../../uploads/${video_ids[i]}.mp4`,
+                                                twitch_rtmp_urls[i],
+                                                //callback
+                                                function(data) {
+                                                    if(data.status === 200) {
+                                                        //update the video status
+                                                        VIDEO.updateOne({video_id: video_ids[i]}, {$set: {
+                                                            status: "Streamed",
+                                                            twitch_rtmp_url: "",
+                                                            is_scheduled: false,
+                                                        }}, (err, data) => {
+                                                            if(err) {
+                                                                console.log(err);
+                                                            } else {
+                                                                console.log("twitch stream completed");
+                                                                console.log(data);
+                                                            }
+                                                        })
+                                                    }
+                                                });
+                                            
+                                        facebook_streams.push(stream_video_facebook);  //push the stream to the array
+                                        youtube_streams.push(stream_video_youtube);  //push the stream to the array
                                         twitch_streams.push(stream_video_twitch);  //push the stream to the array
                                     }
                                 }
                             }
-
-                           
+                       
                             //wait for all the streams to complete
                             await Promise.all(facebook_streams);
                             await Promise.all(youtube_streams);
                             await Promise.all(twitch_streams);
-
-                            //delete the videos after streaming
-                            // for(let i = 0; i < videos.length; i++){
-                            //     if(videos[i].is_facebook === true || videos[i].is_youtube === true){  
-                            //         fs.unlink(`${__dirname}/../../uploads/${video_ids[i]}.mp4`, (err) => {
-                            //             if(err) {
-                            //                 console.log(err);
-                            //             } else {
-                            //                 console.log("video deleted");
-                            //             }
-                            //         })
-                            //     }
-                            // }
     
                             
                         }else{
