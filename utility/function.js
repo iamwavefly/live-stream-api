@@ -454,26 +454,16 @@ var self = module.exports = {
                 source: stream_facebook // pipe the read-stream to the ffmpeg instance 
              })
              
-             .format('flv')
-             .size('720x360')
-             .videoBitrate('512k')
-             .videoCodec('libx264')
-             .fps(24)
-             .audioBitrate('96k')
-             .audioCodec('aac')
-             .audioFrequency(22050)
-             .audioChannels(2)
-
-            //  .addOutputOption('-vcodec libx264')
-            //  .addOutputOption('-acodec aac')
-            //  .addInputOption(`-i ${path_facebook}`)
-            //  .addOutputOption('-f flv') // set the output format to flv
-            //  .addInputOption('-thread_queue_size 1024')
-            //  .addOutputOption('-ab 128k')
-            //  .addOutputOption('-vb 800k')
-            //  .addOutputOption('-s 720x360')
-            //  .addOutputOption('-r 30')
-            //  .addOutputOption('-preset veryfast')
+             .addOutputOption('-vcodec libx264')
+             .addOutputOption('-acodec aac')
+             .addInputOption(`-i ${path_facebook}`)
+             .addOutputOption('-f flv') // set the output format to flv
+             .addInputOption('-thread_queue_size 1024')
+             .addOutputOption('-ab 128k')
+             .addOutputOption('-vb 4500k')
+             .addOutputOption('-s 720x360')
+             .addOutputOption('-r 30')
+             .addOutputOption('-preset veryfast')
 
             .on('error', function(err, stdout, stderr) {  // handle encoding errors here
                 console.log('ffmpeg output for facebook:\n' + stdout);
@@ -503,27 +493,17 @@ var self = module.exports = {
                 source: stream_youtube // pipe the read-stream to the ffmpeg instance 
             })
 
-            .format('flv')
-            .size('720x360')
-            .videoBitrate('512k')
-            .videoCodec('libx264')
-            .fps(24)
-            .audioBitrate('96k')
-            .audioCodec('aac')
-            .audioFrequency(22050)
-            .audioChannels(2)
-
-            // .addOutputOption('-vcodec libx264')
-            // .addOutputOption('-acodec aac')
-            // .addInputOption(`-i ${path_youtube}`)
-            // .addOutputOption('-f flv') // set the output format to flv
-            // .addInputOption('-thread_queue_size 1024')
-            // .addOutputOption('-ab 128k')
-            // .addOutputOption('-vb 4500k')
-            // // .addOutputOption('-s 1920x1080')
-            // .addOutputOption('-s 720x360')
-            // .addOutputOption('-r 30')
-            // .addOutputOption('-preset veryfast')
+            .addOutputOption('-f flv') // set the output format to flv
+            .addOutputOption('-vcodec libx264')
+            .addOutputOption('-acodec aac')
+            .addInputOption(`-i ${path_youtube}`)
+            .addInputOption('-thread_queue_size 1024')
+            .addOutputOption('-ab 128k')
+            .addOutputOption('-vb 4500k')
+            // .addOutputOption('-s 1920x1080')
+            .addOutputOption('-s 720x360')
+            .addOutputOption('-r 30')
+            .addOutputOption('-preset veryfast')
 
             .on('error', function(err, stdout, stderr) {
                 console.log('ffmpeg output for youtube:\n' + stdout);
@@ -559,7 +539,7 @@ var self = module.exports = {
             .addOutputOption('-f flv') // set the output format to flv
             .addInputOption('-thread_queue_size 1024')
             .addOutputOption('-ab 128k')
-            .addOutputOption('-vb 800k')
+            .addOutputOption('-vb 4500k')
             .addOutputOption('-s 720x360')
             .addOutputOption('-r 30')
             .addOutputOption('-preset veryfast')
@@ -592,6 +572,16 @@ var self = module.exports = {
 
 
 
+
+// .format('flv')
+// .size('720x360')
+// .videoBitrate('4500k')
+// .videoCodec('libx264')
+// .fps(24)
+// .audioBitrate('96k')
+// .audioCodec('aac')
+// .audioFrequency(22050)
+// .audioChannels(2)
 
 // .toFormat('mp4')
 // .withVideoCodec('libx264')
