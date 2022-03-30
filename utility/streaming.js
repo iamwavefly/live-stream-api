@@ -84,7 +84,7 @@ broadcast_youtube: ( title, description, scheduledStartTime, refreshtoken, userT
                     cdn: {
                         ingestionType: 'rtmp',
                         resolution: '720p',
-                        frameRate: 'variable',
+                        frameRate: '60fps',
                     },
                 },
             };
