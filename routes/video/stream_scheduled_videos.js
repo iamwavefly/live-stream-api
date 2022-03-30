@@ -95,6 +95,8 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                         })
                                                     }
                                                 });
+
+                                                facebook_streams.push(stream_video_facebook);  //push the stream to the array
                                         }
 
 
@@ -121,7 +123,8 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                         })
                                                     }
                                                 });
-    
+
+                                                youtube_streams.push(stream_video_youtube);  //push the stream to the array
                                         }
 
 
@@ -147,11 +150,10 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                         })
                                                     }
                                                 });
+
+                                                twitch_streams.push(stream_video_twitch);  //push the stream to the array
                                         }
 
-                                        facebook_streams.push(stream_video_facebook);  //push the stream to the array
-                                        youtube_streams.push(stream_video_youtube);  //push the stream to the array
-                                        twitch_streams.push(stream_video_twitch);  //push the stream to the array
                                     }
                                 }
                             }
