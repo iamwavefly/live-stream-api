@@ -421,7 +421,7 @@ var self = module.exports = {
 
     stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
         //use ffmpeg to convert the video to h264
-        ffmpeg = spawn('ffmpeg', ['-i', path_facebook, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-c:a', 'aac', '-b:a', '128k', '-strict', '-2', '-f', 'flv', rtmp_server_url_facebook]);
+        ffmpeg = ('ffmpeg', ['-i', path_facebook, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-c:a', 'aac', '-b:a', '128k', '-strict', '-2', '-f', 'flv', rtmp_server_url_facebook]);
 
         ffmpeg.stdout.on('data', function (data) {
             console.log(`stdout: ${data}`);
