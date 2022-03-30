@@ -54,6 +54,7 @@ broadcast_youtube: ( title, description, scheduledStartTime, refreshtoken, userT
                 },
                 contentDetails: {
                     enableAutoStart: true,
+                    enableAutoStop: true,
                     monitorStream: {
                         enableMonitorStream: true,
                         },
@@ -81,10 +82,9 @@ broadcast_youtube: ( title, description, scheduledStartTime, refreshtoken, userT
                         description: description
                     },
                     cdn: {
-                        format: '1080p',
                         ingestionType: 'rtmp',
-                        resolution: '1080p',
-                        frameRate: '60fps',
+                        resolution: '720p',
+                        frameRate: 'variable',
                     },
                 },
             };
