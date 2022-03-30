@@ -58,7 +58,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                 )
                             }
         
-                            //stream to facebook
+                            //stream the downloaded videos 
                             if(is_facebook[0] === true || is_youtube[0] === true || is_twitch[0] === true){ 
                                 for(let i = 0; i < videos.length; i++){
                                     if(videos[i].is_facebook === true || videos[i].is_youtube === true || videos[i].is_twitch === true){
