@@ -474,7 +474,7 @@ var self = module.exports = {
             .addOutputOption('-ab 128k')
             .addOutputOption('-vb 4500k')
             // .addOutputOption('-s 1920x1080')
-            .addOutputOption('-s 720x360')
+            .addOutputOption('-s 1280x720')
             .addOutputOption('-r 30')
             .addOutputOption('-preset veryfast')
 
