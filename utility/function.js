@@ -419,33 +419,6 @@ var self = module.exports = {
         });
     },
 
-    // stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
-    //     return new Promise((resolve, reject) => {
-    //         //use ffmpeg to stream the video to the rtmp server
-    //         ffmpeg(path_facebook)
-    //             .inputFormat('mp4')
-    //             .inputOptions('-re')
-    //             .outputOptions('-vcodec libx264')
-    //             .outputOptions('-acodec aac')
-    //             .outputOptions('-f flv')
-    //             .outputOptions('-s 720x360')
-    //             .outputOptions(`${rtmp_server_url_facebook}`)
-    //             .on('error', function(err) {
-    //                 reject(err);
-    //                 callback({ status: 400, message: err, data: null })
-    //             }
-    //             )
-    //             .on('end', function() {
-    //                 resolve(true);
-    //                 callback(null, `${path_facebook} streaming to ${rtmp_server_url_facebook}`);
-    //             }
-    //             )
-    //             // .run();
-    //             .save(rtmp_server_url_facebook);
-                
-    //     });
-    // },
-
     stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
         return new Promise((resolve, reject) => {
             var stream_facebook = fs.createReadStream(path_facebook);  // create a read-stream from the file path
@@ -566,49 +539,5 @@ var self = module.exports = {
 
         });
     },
-
     
 };
-
-
-
-
-// .format('flv')
-// .size('720x360')
-// .videoBitrate('4500k')
-// .videoCodec('libx264')
-// .fps(24)
-// .audioBitrate('96k')
-// .audioCodec('aac')
-// .audioFrequency(22050)
-// .audioChannels(2)
-
-// .toFormat('mp4')
-// .withVideoCodec('libx264')
-// .withAudioCodec('aac')
-// .withAudioFrequency(44100)
-// .withAudioChannels(2)
-// .withAudioBitrate('128k')
-// .withVideoBitrate('800k')
-// .withSize('640x360')
-// .withFps(30)
-// .addOutputOption('-vcodec', 'libx264')
-// .addOutputOption('-acodec', 'aac')
-// .addOutputOption('-strict', 'experimental')
-// .addOutputOption('-preset', 'veryfast')
-// .addOutputOption('-ac', '2')
-// .addOutputOption('-ar', '44100')
-// .addOutputOption('-ab', '128k')
-// .addOutputOption('-vb', '800k')
-// .addOutputOption('-s', '640x360')
-// .addOutputOption('-r', '30')
-// .addOutputOption('-f', 'flv')
-// .addOutputOption('-y')
-// .addOutputOption('-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2')
-// .addOutputOption('-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2')
-// .addOutputOption('-vf', 'crop=640:360:0:0')
-// .addOutputOption('-vf', 'setsar=1')
-// .addOutputOption('-vf', 'setpts=PTS-STARTPTS')
-// .addOutputOption('-g', '4')
-// .addOutputOption('-analyzeduration', '2147483647')
-// .addOutputOption('-probesize', '2147483647')
