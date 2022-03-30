@@ -8,7 +8,7 @@ let languages = require('../json/languages.json');
 const fs = require('fs');
 var validator = require('validator');
 const https = require('https');
-const ffmpeg = process.env.FFMPEG_PATH
+const ffmpeg = require('fluent-ffmpeg');
 
 "use strict"
 var self = module.exports = {
@@ -419,73 +419,79 @@ var self = module.exports = {
         });
     },
 
-    stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
-        //use ffmpeg to convert the video to h264
-        ffmpeg = ('ffmpeg', ['-i', path_facebook, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-c:a', 'aac', '-b:a', '128k', '-strict', '-2', '-f', 'flv', rtmp_server_url_facebook]);
-
-        ffmpeg.stdout.on('data', function (data) {
-            console.log(`stdout: ${data}`);
-        });
-
-        ffmpeg.stderr.on('data', function (data) {
-            console.log(`stderr: ${data}`);
-        });
-
-        ffmpeg.on('close', function (code) {
-            console.log(`child process exited with code ${code}`);
-            callback({ status: 200, message: "", data: null })
-        }
-        );
-    },
-
-
-
     // stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
     //     return new Promise((resolve, reject) => {
-    //         var stream_facebook = fs.createReadStream(path_facebook);  // create a read-stream from the file path
-            
-    //         ffmpeg({  // create a ffmpeg instance from the read-stream
-    //             source: stream_facebook // pipe the read-stream to the ffmpeg instance 
-    //          })
-             
-    //          .addOutputOption('-vcodec libx264')
-    //          .addOutputOption('-acodec aac')
-    //          .addInputOption(`-i ${path_facebook}`)
-    //          .addOutputOption('-f flv') // set the output format to flv
-    //          .addInputOption('-thread_queue_size 1024')
-    //          .addOutputOption('-ab 128k')
-    //          .addOutputOption('-vb 800k')
-    //          .addOutputOption('-s 720x360')
-    //          .addOutputOption('-r 30')
-    
-    //         .on('error', function(err, stdout, stderr) {  // handle encoding errors here
-    //             console.log('ffmpeg output for facebook:\n' + stdout);
-    //             console.log('ffmpeg stderr for facebook:\n' + stderr);
-    //             // console.log(err, 'err fb');
-    //             // reject(err);
-    //             //callback({ status: 400, message: "facebook error" + err, data: null })  // if an error occurs, log it to the console
-    //         })
-    //         .on('end', function() { // handle encoding finished here 
-    //             resolve(true);
-    //             callback({
-    //                     status: 200,
-    //                     message: "Successfully streamed to facebook",
-    //                 }
-    //             );
-    //         })
-    
-    //         .save(rtmp_server_url_facebook); // save the output to a file
+    //         //use ffmpeg to stream the video to the rtmp server
+    //         ffmpeg(path_facebook)
+    //             .inputFormat('mp4')
+    //             .inputOptions('-re')
+    //             .outputOptions('-vcodec libx264')
+    //             .outputOptions('-acodec aac')
+    //             .outputOptions('-f flv')
+    //             .outputOptions('-s 720x360')
+    //             .outputOptions(`${rtmp_server_url_facebook}`)
+    //             .on('error', function(err) {
+    //                 reject(err);
+    //                 callback({ status: 400, message: err, data: null })
+    //             }
+    //             )
+    //             .on('end', function() {
+    //                 resolve(true);
+    //                 callback(null, `${path_facebook} streaming to ${rtmp_server_url_facebook}`);
+    //             }
+    //             )
+    //             // .run();
+    //             .save(rtmp_server_url_facebook);
                 
     //     });
     // },
-    
+
+    stream_video_facebook: (path_facebook, rtmp_server_url_facebook, callback) => {
+        return new Promise((resolve, reject) => {
+            var stream_facebook = fs.createReadStream(path_facebook);  // create a read-stream from the file path
+            
+            ffmpeg({  // create a ffmpeg instance from the read-stream
+                source: stream_facebook // pipe the read-stream to the ffmpeg instance 
+             })
+             
+             .addOutputOption('-vcodec libx264')
+             .addOutputOption('-acodec aac')
+             .addInputOption(`-i ${path_facebook}`)
+             .addOutputOption('-f flv') // set the output format to flv
+             .addInputOption('-thread_queue_size 1024')
+             .addOutputOption('-ab 128k')
+             .addOutputOption('-vb 800k')
+             .addOutputOption('-s 720x360')
+             .addOutputOption('-r 30')
+
+            .on('error', function(err, stdout, stderr) {  // handle encoding errors here
+                console.log('ffmpeg output for facebook:\n' + stdout);
+                console.log('ffmpeg stderr for facebook:\n' + stderr);
+                // console.log(err, 'err fb');
+                // reject(err);
+                //callback({ status: 400, message: "facebook error" + err, data: null })  // if an error occurs, log it to the console
+            })
+            .on('end', function() { // handle encoding finished here 
+                resolve(true);
+                callback({
+                        status: 200,
+                        message: "Successfully streamed to facebook",
+                    }
+                );
+            })
+
+            .save(rtmp_server_url_facebook); // save the output to a file
+                
+        });
+    },
+
     stream_video_youtube: (path_youtube, rtmp_server_url_youtube, callback) => {
         return new Promise((resolve, reject) => {
             var stream_youtube = fs.createReadStream(path_youtube);
             var live = new ffmpeg({ // create a ffmpeg instance from the read-stream 
                 source: stream_youtube // pipe the read-stream to the ffmpeg instance 
             })
-    
+
             .addOutputOption('-vcodec libx264')
             .addOutputOption('-acodec aac')
             .addInputOption(`-i ${path_youtube}`)
@@ -496,7 +502,7 @@ var self = module.exports = {
             // .addOutputOption('-s 1920x1080')
             .addOutputOption('-s 720x360')
             .addOutputOption('-r 40')
-    
+
             .on('error', function(err, stdout, stderr) {
                 console.log('ffmpeg output for youtube:\n' + stdout);
                 console.log('ffmpeg stderr for youtube:\n' + stderr);
@@ -512,19 +518,19 @@ var self = module.exports = {
                     }
                 );
             })
-    
+
             .save(rtmp_server_url_youtube);
-    
+
         });
     },
-    
+
     stream_video_twitch: (path_twitch, rtmp_server_url_twitch, callback) => {
         return new Promise((resolve, reject) => {
             var stream_twitch = fs.createReadStream(path_twitch);  // create a read-stream from the file path  
             var live = new ffmpeg({  // create a ffmpeg instance from the read-stream 
                 source: stream_twitch // pipe the read-stream to the ffmpeg instance 
             })  
-    
+
             .addOutputOption('-vcodec libx264')
             .addOutputOption('-acodec aac')
             .addInputOption(`-i ${path_twitch}`)
@@ -534,8 +540,8 @@ var self = module.exports = {
             .addOutputOption('-vb 800k')
             .addOutputOption('-s 720x360')
             .addOutputOption('-r 30')
-    
-    
+
+
             .on('error', function(err, stdout, stderr) { // handle encoding errors here 
                 console.log('ffmpeg output for twitch:\n' + stdout);
                 console.log('ffmpeg stderr for twitch:\n' + stderr);
@@ -552,12 +558,11 @@ var self = module.exports = {
                 );
                 
             })
-    
+
             .save(rtmp_server_url_twitch);  // save the output to a file
-    
+
         });
     },
-
 
     
 };
