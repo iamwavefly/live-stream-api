@@ -52,7 +52,7 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                         if (err) {
                                             console.log(err);
                                         } else {
-                                            console.log("videos downloaded");
+                                            console.log("video downloaded");
                                         }
                                     }
                                 )
@@ -68,7 +68,6 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                 console.log(err);
                                             } else {
                                                 console.log("video status updated to Streaming");
-                                                console.log(data);
                                             }
                                         })
     
@@ -90,7 +89,6 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                                 console.log(err);
                                                             } else {
                                                                 console.log("facebook stream completed");
-                                                                console.log(data);
                                                             }
                                                         })
                                                     }
@@ -118,7 +116,6 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                                 console.log(err);
                                                             } else {
                                                                 console.log("youtube stream completed");
-                                                                console.log(data);
                                                             }
                                                         })
                                                     }
@@ -145,7 +142,6 @@ cron.schedule('*/2 * * * *', async (request, response) => {
                                                                 console.log(err);
                                                             } else {
                                                                 console.log("twitch stream completed");
-                                                                console.log(data);
                                                             }
                                                         })
                                                     }

@@ -409,7 +409,7 @@ var self = module.exports = {
                 response.pipe(file);
                 file.on('finish', function() {
                     file.close(
-                        console.log(`${fileName} downloaded`),
+                        // console.log(`${fileName} downloaded`),
                         callback(null, `${fileName} downloaded`)
                     );
                     resolve(true);
