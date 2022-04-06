@@ -18,3 +18,7 @@ button:hover{
     font-size: 24px;
     color: rgba(0, 0, 0, 0.87);
 }
+
+a{
+    text-decoration: none;
+}

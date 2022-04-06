@@ -26,6 +26,7 @@ import TeamAdmin from "./pages/team/TeamAdmin";
 import Schedule from "./pages/schedule/Schedule";
 import Broadcast from "./pages/broadcast/Broadcast";
 import CreateNewSchedule from "./pages/schedule/CreateNewSchedule";
+import HomePage from "./pages/HomePage";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path='/' component={Landing} exact />
+          <Route path='/' component={HomePage} exact />
           <Route path='/sign-up' component={Register} exact />
           <Route path='/login' component={Login} exact />
           <Route path='/verify' component={VerifyEmail} exact />

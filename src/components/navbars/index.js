@@ -7,7 +7,7 @@ const Navbars = () => {
     <nav className="nav_bar2">
 
       <div className="logo_div">
-        <Link to="/dashboard">
+        <Link to="/">
             <svg width="152" height="34" viewBox="0 0 152 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M39.9198 8.704H43.8334V22.6086H52.3129V25.84H39.9198V8.704Z" fill="#451ECC"/>
                 <path d="M54.2339 12.6698H58.0025V25.84H54.2339V12.6698ZM56.1182 10.8338C55.4257 10.8338 54.862 10.6298 54.4271 10.2218C53.9923 9.81376 53.7749 9.30784 53.7749 8.704C53.7749 8.10016 53.9923 7.59424 54.4271 7.18624C54.862 6.77824 55.4257 6.57424 56.1182 6.57424C56.8107 6.57424 57.3744 6.77008 57.8092 7.16176C58.2441 7.55344 58.4615 8.04304 58.4615 8.63056C58.4615 9.26704 58.2441 9.79744 57.8092 10.2218C57.3744 10.6298 56.8107 10.8338 56.1182 10.8338Z" fill="#451ECC"/>
@@ -26,7 +26,7 @@ const Navbars = () => {
 
       <div className="list_div">
         <ul className="ul">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/terms-service">Features</Link>
           </li>
           <li className="nav-item">
@@ -34,13 +34,13 @@ const Navbars = () => {
           </li>
           <li className="nav_item">
             <Link to="/terms-service">Company</Link>
-          </li>
+          </li> */}
           <li className="nav_item">
             <Link to="/login">Sign In</Link>
           </li>
         </ul>
 
-        <button>Get Started</button>
+        <Link to="/sign-up" className="list_btn">Get Started</Link>
       </div>
     </nav>
   );

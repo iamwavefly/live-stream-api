@@ -3,9 +3,9 @@
     justify-content: space-between;
     align-items: center;
     height: 71px;
-    background: #FFFFFF;
-    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1); */
     padding: 0px 80px;
+    /* margin-top: 2rem; */
 }
 
 
@@ -38,10 +38,9 @@
 }
 
 
-.list_div button{
+.list_btn{
     width: 127px;
     height: 51px;
-    background: #451ECC;
     border-radius: 5px;
     font-style: normal;
     font-weight: 600;
@@ -51,6 +50,18 @@
     color: #FFFFFF;
     border: none;
     outline: none;
+    background: #4E25DD;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.list_btn:hover{
+    background: #26136c;
+    transition: 0.8s;
+    color: #ffffff;
 }
 
 .ul{
@@ -59,7 +70,7 @@
 
 .terms_wrapper{
     background: #E5E5E5;
-    height: 100vh;
+    height: auto;
     width: 100%;
   
 }
@@ -86,5 +97,4 @@
     font-size: 16px;
     line-height: 161%;
     color: #000000;
-
 }
