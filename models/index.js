@@ -6,8 +6,7 @@ let password = 'w65HMDvQTVoBJ073';
 let database = 'live-sumo-cluster';
 let collection = 'Live-snap-db'
 
-// const db_url = `mongodb+srv://${username}:${password}@${database}.bbtvv.mongodb.net/${collection}?retryWrites=true&w=majority`
-const db_url = process.env.MONGO_URI
+const db_url = `mongodb+srv://${username}:${password}@${database}.bbtvv.mongodb.net/${collection}?retryWrites=true&w=majority`
 
 const db = {};
 db.mongoose = mongoose;
