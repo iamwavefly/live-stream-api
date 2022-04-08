@@ -9,7 +9,6 @@ import "./Video.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllVideos } from '../../redux/getVideos/GetVideoAction'
 import { videoUpload } from "../../redux/video/VideoActions";
-import Loader2 from '../../components/Loader2'
 import { formatDate, formatTime } from '../../functions'
 import { BACKEND_BASE_URL } from '../../redux/backendUrl'
 import { toast } from 'react-toastify'
@@ -334,7 +333,7 @@ function LiveStreamPreview({ stream }) {
     return null;
   }
 
-  return <video ref={videoPreviewRef} autoPlay class="recorded_video_tag"/>;
+  return <video ref={videoPreviewRef} autoPlay className="recorded_video_tag"/>;
 }
 
 /**
@@ -351,7 +350,7 @@ function Player({ srcBlob }) {
   return (
     <video
       src={URL.createObjectURL(srcBlob)}
-      class="recorded_video_tag"
+      className="recorded_video_tag"
       autoPlay
       controls
     />
@@ -361,14 +360,7 @@ function Player({ srcBlob }) {
 // main
 const Video = () => {
 
-  const uploadVideo = useSelector((state) => state.uploadVideo)
-  const { loading_video, error_video, newVideo } = uploadVideo;
-
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin;
-
   const [file_base64, setFileBase64] = useState(null);
-  // const [video, setVideo] = useState('');
 
     let [recordScreen, setRecordScreen] = React.useState(false);
     const [recordingState, setRecordingState] = React.useState(false);
@@ -406,7 +398,6 @@ const Video = () => {
       let seconds = localStorage.getItem("lastRecordTimer") == null? 0 : Number(localStorage.getItem("lastRecordTimer"));
       window.video_seconds = setInterval(() => {
         seconds += 1
-        console.log(seconds)
         localStorage.setItem("lastRecordTimer", Number(seconds))
         if(document.querySelector('#currentCount_selector')){
           document.querySelector('#currentCount_selector').innerHTML = fmtMSS(seconds)
@@ -531,23 +522,8 @@ const Video = () => {
     const Toggle = () => setModal(!modal);
 
     useEffect(() => {
-      if (newVideo) {
-          toast.success("Hurray!!! your video was uploaded Successfully", { autoClose: 1000 })
-          setTimeout(() => {
-              window.location.reload();
-          }, 1000);
-      }
-      else {
-          toast.error(error_video)
-      }
-  }, [newVideo, error_video]);
-
-    useEffect(() => {
         dispatch(fetchAllVideos())
     }, [dispatch]);
-
-    useEffect(() => {
-    }, [dispatch, allVideos]);
 
 
     return (
@@ -563,7 +539,6 @@ const Video = () => {
 
                     <div className="divContent">
                         <div className="topContent">
-                        {loading_video && <Loader />}
                               { recordingState ? ("") : (
                                  <div className="divContentLeft">
                                  <div className="divContentLeft-header">
@@ -637,7 +612,7 @@ const Video = () => {
                         <div className='screen'>
             
                           {isCountdownDown && (
-                            <div class="countdownCover">
+                            <div className="countdownCover">
                               <div>
                                 <h1 id="countdownTimeTicker">3</h1>
                                 <p>Get ready, recording starts soon 🤔</p>
@@ -655,14 +630,14 @@ const Video = () => {
                             )}
               
                             {(status !== 'recording' && status !== 'paused') && (
-                              <div class="recordingActiveAndDoneState">
+                              <div className="recordingActiveAndDoneState">
               
                                 {recordingDone === false && (
-                                  <div class="recordingCover">
+                                  <div className="recordingCover">
               
                                     <a target="_blank" href="https://sendbetter.io/guides">
-                                      <div title="Watch guides" class="countdownButton">
-                                        <svg style={{marginLeft: "-1px", width: "30px"}} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                      <div title="Watch guides" className="countdownButton">
+                                        <svg style={{marginLeft: "-1px", width: "30px"}} xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-help" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                           <circle cx="12" cy="12" r="9" />
                                           <line x1="12" y1="17" x2="12" y2="17.01" />
@@ -671,8 +646,8 @@ const Video = () => {
                                       </div>
                                     </a>
               
-                                    <div title="Start recording" class="recordingStartButton" onClick={() => {startRecordingCountdown()}}>
-                                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-video" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <div title="Start recording" className="recordingStartButton" onClick={() => {startRecordingCountdown()}}>
+                                      <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-video" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
                                         <rect x="3" y="6" width="12" height="12" rx="2" />
@@ -680,8 +655,8 @@ const Video = () => {
                                     </div>
               
                                     {microphoneOn && (
-                                      <div title="Off microphone" class="muteButton" onClick={() => muteRecording()}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-microphone" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                      <div title="Off microphone" className="muteButton" onClick={() => muteRecording()}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-microphone" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                           <rect x="9" y="2" width="6" height="11" rx="3" />
                                           <path d="M5 10a7 7 0 0 0 14 0" />
@@ -691,8 +666,8 @@ const Video = () => {
                                       </div>
                                     )}
                                     {!microphoneOn && (
-                                      <div title="On microphone" class="muteButton" onClick={() => unmuteRecording()}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-microphone-off" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                      <div title="On microphone" className="muteButton" onClick={() => unmuteRecording()}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-microphone-off" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                           <line x1="3" y1="3" x2="21" y2="21" />
                                           <path d="M9 5a3 3 0 0 1 6 0v5a3 3 0 0 1 -.13 .874m-2 2a3 3 0 0 1 -3.87 -2.872v-1" />
@@ -707,18 +682,18 @@ const Video = () => {
                                 )}
               
                                 {recordingDone && (
-                                  <div class="recordedVideoConfirmationCover">
-                                    <div class="recordedVideoConfirmationTitle">Do you want to use this video? 🥳</div>
-                                    <div class="recordedVideoConfirmationButtons">
-                                        <div onClick={() => rejectRecording()} class="recordedVideoConfirmationButton_cancel">
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-down" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                  <div className="recordedVideoConfirmationCover">
+                                    <div className="recordedVideoConfirmationTitle">Do you want to use this video? 🥳</div>
+                                    <div className="recordedVideoConfirmationButtons">
+                                        <div onClick={() => rejectRecording()} className="recordedVideoConfirmationButton_cancel">
+                                          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-thumb-down" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <path d="M7 13v-8a1 1 0 0 0 -1 -1h-2a1 1 0 0 0 -1 1v7a1 1 0 0 0 1 1h3a4 4 0 0 1 4 4v1a2 2 0 0 0 4 0v-5h3a2 2 0 0 0 2 -2l-1 -5a2 3 0 0 0 -2 -2h-7a3 3 0 0 0 -3 3" />
                                           </svg>
                                           No
                                         </div>
-                                        <div onClick={() => acceptRecording()} class="recordedVideoConfirmationButton_accept">
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-thumb-up" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                        <div onClick={() => acceptRecording()} className="recordedVideoConfirmationButton_accept">
+                                          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-thumb-up" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                             <path d="M7 11v8a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1h3a4 4 0 0 0 4 -4v-1a2 2 0 0 1 4 0v5h3a2 2 0 0 1 2 2l-1 5a2 3 0 0 1 -2 2h-7a3 3 0 0 1 -3 -3" />
                                           </svg>
@@ -732,14 +707,14 @@ const Video = () => {
                             )}
                             
                             {(status === 'recording' || status === 'paused') && (
-                              <div class="recordingStopCover">
+                              <div className="recordingStopCover">
               
                                 <div>
               
                                   {status === 'paused'? (
               
-                                    <div onClick={() => resumeMediaRecord()} title="Resume" class="countdownButton">
-                                      <svg style={{marginLeft: "-1px", width: "30px"}} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <div onClick={() => resumeMediaRecord()} title="Resume" className="countdownButton">
+                                      <svg style={{marginLeft: "-1px", width: "30px"}} xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-help" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <path d="M7 4v16l13 -8z" />
                                       </svg>
@@ -747,8 +722,8 @@ const Video = () => {
               
                                   ) : (
               
-                                    <div onClick={() => pauseMediaRecord()} title="Pause" class="countdownButton">
-                                      <svg style={{marginLeft: "-1px", width: "30px"}} xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <div onClick={() => pauseMediaRecord()} title="Pause" className="countdownButton">
+                                      <svg style={{marginLeft: "-1px", width: "30px"}} xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-help" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                         <rect x="6" y="5" width="4" height="14" rx="1" />
                                         <rect x="14" y="5" width="4" height="14" rx="1" />
@@ -760,11 +735,11 @@ const Video = () => {
                                 </div>
               
                                 <div>
-                                  <div class="recordingTimer">
+                                  <div className="recordingTimer">
                                     <p id="currentCount_selector"></p>
                                   </div>
-                                  <div title="Stop recording" class="recordingStopButton" onClick={() => {stopMediaRecord()}}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-stop" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                  <div title="Stop recording" className="recordingStopButton" onClick={() => {stopMediaRecord()}}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-player-stop" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                       <rect x="5" y="5" width="14" height="14" rx="2" />
                                     </svg>
@@ -773,8 +748,8 @@ const Video = () => {
               
                                 {/* MUTE WHILE RECORDING */}
                                 {microphoneOn && (
-                                  <div title="Off microphone" class="muteButton" onClick={() => muteRecording()}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-microphone" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                  <div title="Off microphone" className="muteButton" onClick={() => muteRecording()}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-microphone" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                       <rect x="9" y="2" width="6" height="11" rx="3" />
                                       <path d="M5 10a7 7 0 0 0 14 0" />
@@ -784,8 +759,8 @@ const Video = () => {
                                   </div>
                                 )}
                                 {!microphoneOn && (
-                                  <div title="On microphone" class="muteButton" onClick={() => unmuteRecording()}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-microphone-off" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                  <div title="On microphone" className="muteButton" onClick={() => unmuteRecording()}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-microphone-off" width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#627790" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                       <line x1="3" y1="3" x2="21" y2="21" />
                                       <path d="M9 5a3 3 0 0 1 6 0v5a3 3 0 0 1 -.13 .874m-2 2a3 3 0 0 1 -3.87 -2.872v-1" />
@@ -955,7 +930,6 @@ const Video = () => {
                                                                     axios(config)
                                                                         .then(function (response) {
                                                                             setLoading(false)
-                                                                            // console.log(JSON.stringify(response.data));
                                                                             toast.success("Video was deleted Successfully", { autoClose: 1000 })
                                                                             setTimeout(() => {
                                                                                 window.location.reload();
@@ -963,13 +937,12 @@ const Video = () => {
                                                                         })
                                                                         .catch(function (error) {
                                                                             setLoading(false)
-                                                                            console.log(error);
                                                                             toast.error(error)
                                                                         });
 
                                                                 }
                                                             }}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-trash" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ef2f2f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-trash" width="28" height="28" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ef2f2f" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                                 <line x1="4" y1="7" x2="20" y2="7" />
                                                                 <line x1="10" y1="11" x2="10" y2="17" />
@@ -1005,7 +978,6 @@ const Video = () => {
             </div>
             <div className='uploadVideoModal'>
                 <StreamingModals show={modal} close={Toggle} />
-                {/* <ShowSuccessModal show={modal} close={Toggle} /> */}
             </div>
         </>
     )

@@ -38,8 +38,8 @@ const HomePage = () => {
                         <div className="why_card">
                             <div className="why_card_image">
                                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22.5 15.0001L29.3295 11.5861C29.5581 11.4718 29.8122 11.4179 30.0675 11.4294C30.3228 11.4409 30.571 11.5174 30.7884 11.6518C31.0058 11.7861 31.1853 11.9738 31.3099 12.197C31.4344 12.4202 31.4999 12.6715 31.5 12.9271V23.0731C31.4999 23.3286 31.4344 23.58 31.3099 23.8031C31.1853 24.0263 31.0058 24.214 30.7884 24.3483C30.571 24.4827 30.3228 24.5592 30.0675 24.5707C29.8122 24.5822 29.5581 24.5283 29.3295 24.4141L22.5 21.0001V15.0001Z" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M19.5 9H7.5C5.84315 9 4.5 10.3431 4.5 12V24C4.5 25.6569 5.84315 27 7.5 27H19.5C21.1569 27 22.5 25.6569 22.5 24V12C22.5 10.3431 21.1569 9 19.5 9Z" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22.5 15.0001L29.3295 11.5861C29.5581 11.4718 29.8122 11.4179 30.0675 11.4294C30.3228 11.4409 30.571 11.5174 30.7884 11.6518C31.0058 11.7861 31.1853 11.9738 31.3099 12.197C31.4344 12.4202 31.4999 12.6715 31.5 12.9271V23.0731C31.4999 23.3286 31.4344 23.58 31.3099 23.8031C31.1853 24.0263 31.0058 24.214 30.7884 24.3483C30.571 24.4827 30.3228 24.5592 30.0675 24.5707C29.8122 24.5822 29.5581 24.5283 29.3295 24.4141L22.5 21.0001V15.0001Z" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19.5 9H7.5C5.84315 9 4.5 10.3431 4.5 12V24C4.5 25.6569 5.84315 27 7.5 27H19.5C21.1569 27 22.5 25.6569 22.5 24V12C22.5 10.3431 21.1569 9 19.5 9Z" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
                             <div className="why_card_text">
@@ -51,11 +51,11 @@ const HomePage = () => {
                         <div className="why_card">
                             <div className="why_card_image">
                             <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M13.5 7.5H10.5C9.70435 7.5 8.94129 7.81607 8.37868 8.37868C7.81607 8.94129 7.5 9.70435 7.5 10.5V28.5C7.5 29.2956 7.81607 30.0587 8.37868 30.6213C8.94129 31.1839 9.70435 31.5 10.5 31.5H25.5C26.2956 31.5 27.0587 31.1839 27.6213 30.6213C28.1839 30.0587 28.5 29.2956 28.5 28.5V10.5C28.5 9.70435 28.1839 8.94129 27.6213 8.37868C27.0587 7.81607 26.2956 7.5 25.5 7.5H22.5" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M19.5 4.5H16.5C14.8431 4.5 13.5 5.84315 13.5 7.5C13.5 9.15685 14.8431 10.5 16.5 10.5H19.5C21.1569 10.5 22.5 9.15685 22.5 7.5C22.5 5.84315 21.1569 4.5 19.5 4.5Z" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M13.5 25.5V18" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M18 25.5V24" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M22.5 25.5V21" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.5 7.5H10.5C9.70435 7.5 8.94129 7.81607 8.37868 8.37868C7.81607 8.94129 7.5 9.70435 7.5 10.5V28.5C7.5 29.2956 7.81607 30.0587 8.37868 30.6213C8.94129 31.1839 9.70435 31.5 10.5 31.5H25.5C26.2956 31.5 27.0587 31.1839 27.6213 30.6213C28.1839 30.0587 28.5 29.2956 28.5 28.5V10.5C28.5 9.70435 28.1839 8.94129 27.6213 8.37868C27.0587 7.81607 26.2956 7.5 25.5 7.5H22.5" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19.5 4.5H16.5C14.8431 4.5 13.5 5.84315 13.5 7.5C13.5 9.15685 14.8431 10.5 16.5 10.5H19.5C21.1569 10.5 22.5 9.15685 22.5 7.5C22.5 5.84315 21.1569 4.5 19.5 4.5Z" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.5 25.5V18" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18 25.5V24" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22.5 25.5V21" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
                              </svg>
 
 
@@ -71,8 +71,8 @@ const HomePage = () => {
                         <div className="why_card">
                             <div className="why_card_image">
                             <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22.5 15.0001L29.3295 11.5861C29.5581 11.4718 29.8122 11.4179 30.0675 11.4294C30.3228 11.4409 30.571 11.5174 30.7884 11.6518C31.0058 11.7861 31.1853 11.9738 31.3099 12.197C31.4344 12.4202 31.4999 12.6715 31.5 12.9271V23.0731C31.4999 23.3286 31.4344 23.58 31.3099 23.8031C31.1853 24.0263 31.0058 24.214 30.7884 24.3483C30.571 24.4827 30.3228 24.5592 30.0675 24.5707C29.8122 24.5822 29.5581 24.5283 29.3295 24.4141L22.5 21.0001V15.0001Z" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M19.5 9H7.5C5.84315 9 4.5 10.3431 4.5 12V24C4.5 25.6569 5.84315 27 7.5 27H19.5C21.1569 27 22.5 25.6569 22.5 24V12C22.5 10.3431 21.1569 9 19.5 9Z" stroke="#4E25DD" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22.5 15.0001L29.3295 11.5861C29.5581 11.4718 29.8122 11.4179 30.0675 11.4294C30.3228 11.4409 30.571 11.5174 30.7884 11.6518C31.0058 11.7861 31.1853 11.9738 31.3099 12.197C31.4344 12.4202 31.4999 12.6715 31.5 12.9271V23.0731C31.4999 23.3286 31.4344 23.58 31.3099 23.8031C31.1853 24.0263 31.0058 24.214 30.7884 24.3483C30.571 24.4827 30.3228 24.5592 30.0675 24.5707C29.8122 24.5822 29.5581 24.5283 29.3295 24.4141L22.5 21.0001V15.0001Z" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19.5 9H7.5C5.84315 9 4.5 10.3431 4.5 12V24C4.5 25.6569 5.84315 27 7.5 27H19.5C21.1569 27 22.5 25.6569 22.5 24V12C22.5 10.3431 21.1569 9 19.5 9Z" stroke="#4E25DD" strokeWidth="2.25" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
 
 
@@ -107,21 +107,21 @@ const HomePage = () => {
                     <div>
                         <svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.3189 20.506C17.0063 15.102 23.2859 12.4686 27.6222 15.7658L34.8189 21.2381C39.1552 24.5354 38.296 31.2903 33.2724 33.3971L24.9348 36.8935C19.9112 39.0002 14.4908 34.8786 15.1782 29.4747L16.3189 20.506Z" fill="#4E25DD"/>
-                        <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" stroke-width="2.35884" stroke-linecap="round"/>
+                        <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" strokeWidth="2.35884" stroke-linecap="round"/>
                         </svg>
                         Organize your schedule
                     </div>
                     <div>
                         <svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.3189 20.506C17.0063 15.102 23.2859 12.4686 27.6222 15.7658L34.8189 21.2381C39.1552 24.5354 38.296 31.2903 33.2724 33.3971L24.9348 36.8935C19.9112 39.0002 14.4908 34.8786 15.1782 29.4747L16.3189 20.506Z" fill="#4E25DD"/>
-                        <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" stroke-width="2.35884" stroke-linecap="round"/>
+                        <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" strokeWidth="2.35884" stroke-linecap="round"/>
                         </svg>
                         Engage your audience in the comment section with much ease 
                     </div>
                     {/* <div>
                         <svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.3189 20.506C17.0063 15.102 23.2859 12.4686 27.6222 15.7658L34.8189 21.2381C39.1552 24.5354 38.296 31.2903 33.2724 33.3971L24.9348 36.8935C19.9112 39.0002 14.4908 34.8786 15.1782 29.4747L16.3189 20.506Z" fill="#4E25DD"/>
-                        <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" stroke-width="2.35884" stroke-linecap="round"/>
+                        <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" strokeWidth="2.35884" stroke-linecap="round"/>
                         </svg>
                         Embed videos, captions, screenshots, blend pre-recorded & live sections
                     </div> */}
@@ -148,21 +148,21 @@ const HomePage = () => {
                         <div>
                             <svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.3189 20.506C17.0063 15.102 23.2859 12.4686 27.6222 15.7658L34.8189 21.2381C39.1552 24.5354 38.296 31.2903 33.2724 33.3971L24.9348 36.8935C19.9112 39.0002 14.4908 34.8786 15.1782 29.4747L16.3189 20.506Z" fill="#4E25DD"/>
-                            <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" stroke-width="2.35884" stroke-linecap="round"/>
+                            <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" strokeWidth="2.35884" stroke-linecap="round"/>
                             </svg>
                             Customize your livestream
                         </div>
                         {/* <div>
                             <svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.3189 20.506C17.0063 15.102 23.2859 12.4686 27.6222 15.7658L34.8189 21.2381C39.1552 24.5354 38.296 31.2903 33.2724 33.3971L24.9348 36.8935C19.9112 39.0002 14.4908 34.8786 15.1782 29.4747L16.3189 20.506Z" fill="#4E25DD"/>
-                            <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" stroke-width="2.35884" stroke-linecap="round"/>
+                            <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" strokeWidth="2.35884" stroke-linecap="round"/>
                             </svg>
                             Add watermark, brand icons to your livestream 
                         </div> */}
                         <div>
                             <svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.3189 20.506C17.0063 15.102 23.2859 12.4686 27.6222 15.7658L34.8189 21.2381C39.1552 24.5354 38.296 31.2903 33.2724 33.3971L24.9348 36.8935C19.9112 39.0002 14.4908 34.8786 15.1782 29.4747L16.3189 20.506Z" fill="#4E25DD"/>
-                            <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" stroke-width="2.35884" stroke-linecap="round"/>
+                            <path d="M20.05 24.4434L22.8191 30.3405L30.6648 26.4091" stroke="white" strokeWidth="2.35884" stroke-linecap="round"/>
                             </svg>
                             Customize which platform you’re streaming to
                         </div>

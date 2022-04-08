@@ -21,7 +21,6 @@ export const verify =
         { email, verification_code },
         config
       );
-      console.log(data)
 
       dispatch({
         type: VERIFY_EMAIL_SUCCESS,
@@ -33,14 +32,8 @@ export const verify =
         }, 500)
       }
 
-    //   dispatch({
-    //     type: USER_LOGIN_SUCCESS,
-    //     payload: data,
-    //   });
 
-      // localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
-      console.log(error)
       dispatch({
         type: VERIFY_EMAIL_FAILURE,
         payload:

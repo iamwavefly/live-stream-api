@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import Navbar from "../../components/navbar/Navbar"
 import Sidebar from "../../components/sidebar/Sidebar"
@@ -6,6 +8,7 @@ import Loader from '../../components/Loader'
 import Loader2 from '../../components/Loader2'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllVideos } from '../../redux/getVideos/GetVideoAction'
 import './Teams.css'
 import { toast } from 'react-toastify';
 toast.configure();
@@ -26,11 +29,16 @@ const Teams = () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin;
 
+    const getallVideos = useSelector((state) => state.getallVideos)
+    const { loading, error, allVideos } = getallVideos;
+
     React.useEffect(() => {
         <Loader />
         if (!userInfo) {
             window.location.href = "/login"
-        } 
+        }else{
+            dispatch(fetchAllVideos())
+        }
     }, [dispatch, userInfo]);
 
 
@@ -117,7 +125,6 @@ const Teams = () => {
             .then(function (response) {
                 setLoadingTeam(false);
                 setTeamSuccess(true);
-                console.log(response.data.message);
                 toast.success(response.data.message);
                 window.location.reload();
             })
@@ -125,7 +132,6 @@ const Teams = () => {
             .catch(function (error) {
                 setLoadingTeam(false);
                 setTeamError(true);
-                console.log(error.response.data.message);
                 toast.error(error.response.data.message);
             });
     }
@@ -153,7 +159,7 @@ const Teams = () => {
                             <div className="teamLeftHead">
                                 <div className="teamLeftHeadItem blueColor">
                                     <div className="teamNo">
-                                        <h1>12</h1>
+                                        <h1>{team?.length}</h1>
                                     </div>
                                     <div className="teamText">
                                         <h6>TEAM MEMBERS</h6>
@@ -161,7 +167,7 @@ const Teams = () => {
                                 </div>
                                 <div className="teamLeftHeadItem grayColor">
                                     <div className="teamNo">
-                                        <h1>120</h1>
+                                        <h1>{allVideos?.data?.videos_length}</h1>
                                     </div>
                                     <div className="teamText">
                                         <h6>UPLOADED VIDEOS</h6>
@@ -169,7 +175,7 @@ const Teams = () => {
                                 </div>
                                 <div className="teamLeftHeadItem grayColor">
                                     <div className="teamNo">
-                                        <h1>120 <span style={{ fontSize: "13px" }}>mb</span></h1>
+                                        <h1>{allVideos?.data?.total_video_size} <span style={{ fontSize: "13px" }}>mb</span></h1>
                                     </div>
                                     <div className="teamText">
                                         <h6>VIDEO STORAGE</h6>

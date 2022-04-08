@@ -17,7 +17,6 @@ export const videoUpload =
         },
       };
 
-      //   console.log(token, file_base64)
       const { data } = await axios.post(
         `${BACKEND_BASE_URL}/video/upload_video`,
         { token, file_base64 },
@@ -29,14 +28,7 @@ export const videoUpload =
         payload: data,
       });
 
-      //   dispatch({
-      //     type: USER_LOGIN_SUCCESS,
-      //     payload: data,
-      //   });
-
-      // localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
-      console.log(error)
       dispatch({
         type: UPLOAD_VIDEO_FAILURE,
         payload:

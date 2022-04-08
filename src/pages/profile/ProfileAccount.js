@@ -18,6 +18,7 @@ const ProfileAccount = () => {
 
     const [loadingAddAcounts, setLoadingAddAcounts] = React.useState(false);
     const [removeAccountSuccess, setRemoveAccountSuccess] = React.useState(false);
+    const [allAccounts, setAllAccounts] = React.useState([]);
 
     const fetchUser = useSelector((state) => state.fetchUser)
     const { loading, error, userDet } = fetchUser;
@@ -41,93 +42,35 @@ const ProfileAccount = () => {
     }, [dispatch, userInfo, userDet]);
 
 
-    //remove youtube account
-    const removeYoutubeAccount = () => {
-        setLoadingAddAcounts(true);
-        var data = {
-            "token" : userInfo.data.token
-        }
 
-        let config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // url: `http://localhost:5000/accounts/youtube/disconnect_youtube`,
-            url: `${BACKEND_BASE_URL}/accounts/youtube/disconnect_youtube`,
-            method: 'POST',
-            data: data
-        }
-
-        axios(config)
-            .then(function (response) {
-                setLoadingAddAcounts(false);
-                setRemoveAccountSuccess(true);
-                toast.success(response.data.message)
-            })
-            .catch(function (error) {
-                setLoadingAddAcounts(false);
-            });
-    }
-    
-
-    //remove facebook account
-    const removeFacebookAccount = () => {
-        setLoadingAddAcounts(true);
-        var data = {
-            "token" : userInfo.data.token
-        }
-
-        let config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // url: `http://localhost:5000/accounts/facebook/disconnect_facebook`,
-            url: `${BACKEND_BASE_URL}/accounts/facebook/disconnect_facebook`,
-            method: 'POST',
-            data: data
-        }
-
-        axios(config)
-            .then(function (response) {
-                setLoadingAddAcounts(false);
-                setRemoveAccountSuccess(true);
-                toast.success(response.data.message)
-            })
-            .catch(function (error) {
-                setLoadingAddAcounts(false);
-                console.log(error);
-            });
-    }
-
-        //remove twitch account
-        const removeTwitchAccount = () => {
+        //get all accounts
+        const getAllAccounts = () => {
             setLoadingAddAcounts(true);
-            var data = {
-                "token" : userInfo.data.token
-            }
-    
             let config = {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
     
-                url: `${BACKEND_BASE_URL}/accounts/twitch/disconnect_twitch`,
-                method: 'POST',
-                data: data
+                url: `${BACKEND_BASE_URL}/accounts/get_accounts?token=${userInfo.data.token}`,
+                method: 'GET'
             }
     
             axios(config)
                 .then(function (response) {
                     setLoadingAddAcounts(false);
-                    console.log(response.data.message);
-                    setRemoveAccountSuccess(true);
-                    toast.success(response.data.message);
-                    window.location.reload();
+                    setAllAccounts(response.data.data.accounts.accounts);
                 })
                 .catch(function (error) {
                     setLoadingAddAcounts(false);
                 });
         }
+    
+        React.useEffect(() => {
+            getAllAccounts();
+        }, []);
+
+
+  
 
 
     return (
@@ -168,11 +111,11 @@ const ProfileAccount = () => {
 
                     <div className="accountBody">
                         <div className="accountLeft">
-                        {userDet?.data?.profile?.is_connected_facebook === true ? (
-                                      <div className="acctItemLeft">
+                        {allAccounts && allAccounts.map(account => ( 
+                                      <div className="acctItemLeft" key={account._id}>
                                       <div className="socialAccount">
                                           <div className="socialAcctIcon" style={{ background: "#395185", width: "30px", textAlign: "center" }}>
-                                              <img src={userDet?.data?.profile?.facebook_profile_picture} alt="" />
+                                              <img src={account.user_picture} alt="" />
                                           </div>
                                           <div className="socialAcctText"
                                           style={{
@@ -180,19 +123,46 @@ const ProfileAccount = () => {
                                              fontSize:"1.2rem",
                                              fontWeight:"500",
                                           }}
-                                          >Facebook</div>
+                                          >{account.name}</div>
                                       </div>
-                                      <div className="socialName" style={{marginLeft:"-1.5rem"}}>
+                                      <div className="socialName">
                                           <span
                                           style={{
                                             cursor:"pointer",
                                              fontSize:"1.2rem",
                                              fontWeight:"600",
                                           }}
-                                          >{userDet?.data?.profile?.facebook_profile_name} </span>
+                                          >{account.user_name} </span>
                                       </div>
                                       <div className="removeText">
-                                          <a onClick={() => removeFacebookAccount()} 
+                                          <a onClick={() => {
+                                                 setLoadingAddAcounts(true);
+                                                 var data = {
+                                                     "token" : userInfo.data.token,
+                                                     "accounts_name": account.name,
+                                                 }
+                                         
+                                                 let config = {
+                                                     headers: {
+                                                         'Content-Type': 'application/json',
+                                                     },
+                                         
+                                                     url: `${BACKEND_BASE_URL}/accounts/remove`,
+                                                     method: 'POST',
+                                                     data: data
+                                                 }
+                                         
+                                                 axios(config)
+                                                     .then(function (response) {
+                                                         setLoadingAddAcounts(false);
+                                                         setRemoveAccountSuccess(true);
+                                                         toast.success(response.data.message);
+                                                         window.location.reload();
+                                                     })
+                                                     .catch(function (error) {
+                                                         setLoadingAddAcounts(false);
+                                                     });
+                                          }} 
                                            style={{
                                                  cursor:"pointer",
                                                   color:"red",
@@ -202,84 +172,10 @@ const ProfileAccount = () => {
                                           Remove</a>
                                       </div>
                                   </div>
-                                ) : 
-                                ("")}
+                                ))}
 
 
-                                {userDet?.data?.profile?.is_connected_google === true ? (
-                                      <div className="acctItemLeft">
-                                      <div className="socialAccount">
-                                          <div className="socialAcctIcon" style={{ background: "#395185", width: "30px", textAlign: "center" }}>
-                                          <img src={userDet?.data?.profile?.google_profile_picture} alt="" />
-                                          </div>
-                                          <div className="socialAcctText"
-                                          style={{
-                                            cursor:"pointer",
-                                             fontSize:"1.2rem",
-                                             fontWeight:"500",
-                                          }}
-                                          >Youtube</div>
-                                      </div>
-                                      <div className="socialName" style={{marginLeft:"-1.5rem"}}>
-                                      <span
-                                      style={{
-                                        cursor:"pointer",
-                                         fontSize:"1.2rem",
-                                         fontWeight:"600",
-                                      }}
-                                      >{userDet?.data?.profile?.google_profile_name} </span>
-                                      </div>
-                                      <div className="removeText">
-                                          <a onClick={() => removeYoutubeAccount()} 
-                                           style={{
-                                                 cursor:"pointer",
-                                                  color:"red",
-                                                  fontSize:"1.2rem",
-                                                  fontWeight:"600",
-                                               }}>
-                                          Remove</a>
-                                      </div>
-                                  </div>
-                                ) : 
-                                ("")}
-
-
-                                {userDet?.data?.profile?.is_connected_twitch === true ? (
-                                      <div className="acctItemLeft">
-                                      <div className="socialAccount">
-                                          <div className="socialAcctIcon" style={{ background: "#395185", width: "30px", textAlign: "center" }}>
-                                          <img src={userDet?.data?.profile?.twitch_profile_picture} alt="" />
-                                          </div>
-                                          <div className="socialAcctText"
-                                          style={{
-                                            cursor:"pointer",
-                                             fontSize:"1.2rem",
-                                             fontWeight:"500",
-                                          }}
-                                          >Twitch</div>
-                                      </div>
-                                      <div className="socialName" style={{marginLeft:"-1.5rem"}}>
-                                      <span
-                                      style={{
-                                        cursor:"pointer",
-                                         fontSize:"1.2rem",
-                                         fontWeight:"600",
-                                      }}
-                                      >{userDet?.data?.profile?.twitch_profile_name} </span>
-                                      </div>
-                                      <div className="removeText">
-                                          <a onClick={() => removeYoutubeAccount()} 
-                                           style={{
-                                                 cursor:"pointer",
-                                                  color:"red",
-                                                  fontSize:"1.2rem",
-                                                  fontWeight:"600",
-                                               }}>
-                                          Remove</a>
-                                      </div>
-                                  </div>
-                                ) : 
-                                ("")}
+                               
                         </div>
                         <div className="accountRight">
                             <div className="messageRight">

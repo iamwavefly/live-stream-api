@@ -37,7 +37,6 @@ export const register =
       }
       
     } catch (error) {
-      console.log(error)
       dispatch({
         type: USER_REGISTER_FAIL,
         payload:

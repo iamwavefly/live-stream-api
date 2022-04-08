@@ -11,13 +11,13 @@ const Privacy = () => {
         </div>
 
         <div className="terms_content">
-          <section class="section section-article">
-            <div class="container">
-              <div class="section-article__inner">
-                <div class="more-info">
-                  <div class="section-article__content">
-                    <div class="bs-docs-section">
-                      <p class="lead text-justify">
+          <section className="section section-article">
+            <div className="container">
+              <div className="section-article__inner">
+                <div className="more-info">
+                  <div className="section-article__content">
+                    <div className="bs-docs-section">
+                      <p className="lead text-justify">
                         {" "}
                         Welcome to the web site livesnapp.co, and any other web
                         sites, applications, or services that link to this
@@ -45,14 +45,14 @@ const Privacy = () => {
                         interests, demographics and services usage).
                       </p>
                     </div>
-                    <div class="bs-docs-section">
+                    <div className="bs-docs-section">
                       <h2
-                        class="page-header"
+                        className="page-header"
                         id="TheInformationLiveSnapCollects"
                       >
                         The Information LiveSnap Collects
                       </h2>
-                      <p class="lead text-justify">
+                      <p className="lead text-justify">
                         User-provided Information: You may provide to LiveSnap
                         what is generally called "personal information" in the
                         USA and elsewhere or "personal data" in the European
@@ -148,14 +148,14 @@ const Privacy = () => {
                         LiveSnap account through that third-party service.
                       </p>
                     </div>
-                    <div class="bs-docs-section">
+                    <div className="bs-docs-section">
                       <h2
-                        class="page-header"
+                        className="page-header"
                         id="TheWayLiveSnapUsesInformation"
                       >
                         The Way LiveSnap Uses Information
                       </h2>
-                      <p class="lead text-justify">
+                      <p className="lead text-justify">
                         If you submit personally identifiable information to us
                         through the LiveSnap Services, we use your personal
                         information to operate, maintain and provide to you the
@@ -204,8 +204,8 @@ const Privacy = () => {
                         LiveSnap you agree to privacy policies of the
                         corresponding media or social network platform:
                       </p>
-                      <ul class="short-info__list">
-                        <li class="lead text-justify">
+                      <ul className="short-info__list">
+                        <li className="lead text-justify">
                           YouTube -
                           <a href="http://www.google.com/policies/privacy">
                             Google Privacy Policy
@@ -215,14 +215,14 @@ const Privacy = () => {
                             Revoking access
                           </a>
                         </li>
-                        <li class="lead text-justify">
+                        <li className="lead text-justify">
                           Twitch -
                           <a href="https://www.twitch.tv/p/legal/privacy-policy/">
                             Twitch Privacy Policy
                           </a>
                         </li>
                       </ul>
-                      <span class="lead text-justify">
+                      <span className="lead text-justify">
                         The list above is for your reference only, if you cannot
                         find the media or social network platform you have
                         connected to LiveSnap in this list, please visit their
@@ -230,14 +230,14 @@ const Privacy = () => {
                       </span>
                       <p></p>
                     </div>
-                    <div class="bs-docs-section">
+                    <div className="bs-docs-section">
                       <h2
-                        class="page-header"
+                        className="page-header"
                         id="WhenLiveSnapDisclosesInformation"
                       >
                         When LiveSnap Discloses Information
                       </h2>
-                      <p class="lead text-justify">
+                      <p className="lead text-justify">
                         LiveSnap does not share your personal information with
                         other organizations for their own marketing or
                         promotional uses without your prior express consent.
@@ -286,11 +286,11 @@ const Privacy = () => {
                         disclosure.
                       </p>
                     </div>
-                    <div class="bs-docs-section">
-                      <h2 class="page-header" id="YourChoices">
+                    <div className="bs-docs-section">
+                      <h2 className="page-header" id="YourChoices">
                         Your Choices
                       </h2>
-                      <p class="lead text-justify">
+                      <p className="lead text-justify">
                         You may, of course, refuse to submit personally
                         identifiable information through LiveSnap service.
                         <br />
@@ -304,11 +304,11 @@ const Privacy = () => {
                         visiting your account profile page.
                       </p>
                     </div>
-                    <div class="bs-docs-section">
-                      <h2 class="page-header" id="HowLiveSnapUsesCookies">
+                    <div className="bs-docs-section">
+                      <h2 className="page-header" id="HowLiveSnapUsesCookies">
                         How LiveSnap Uses Cookies
                       </h2>
-                      <p class="lead text-justify">
+                      <p className="lead text-justify">
                         Like many other sites on the Internet, LiveSnap uses
                         cookies—small text files containing a string of
                         alphanumeric characters. LiveSnap uses cookies and
@@ -326,11 +326,11 @@ const Privacy = () => {
                         you when you visit our website or use our services.
                       </p>
                     </div>
-                    <div class="bs-docs-section">
-                      <h2 class="page-header" id="DataSecurity">
+                    <div className="bs-docs-section">
+                      <h2 className="page-header" id="DataSecurity">
                         Data Security
                       </h2>
-                      <p class="lead text-justify">
+                      <p className="lead text-justify">
                         LiveSnap has strict security measures in place to
                         protect the loss, misuse, and alteration of information
                         under our control. We use secure technology, privacy
@@ -358,11 +358,11 @@ const Privacy = () => {
                         safeguards.
                       </p>
                     </div>
-                    <div class="bs-docs-section">
-                      <h2 class="page-header" id="DeleteAccountData">
+                    <div className="bs-docs-section">
+                      <h2 className="page-header" id="DeleteAccountData">
                         Delete Account Data
                       </h2>
-                      <p class="lead text-justify">
+                      <p className="lead text-justify">
                         If you would like to delete all data associated with
                         your account, mail us with request on
                         hello@LiveSnapp.co. This action is irreversible.

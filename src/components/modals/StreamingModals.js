@@ -72,7 +72,7 @@ const StreamingModals = ({ show, close }) => {
 
                                                             //convert to base64
                                                             const base64 = btoa(new Uint8Array(reader.result).reduce((data, byte) => data + String.fromCharCode(byte), ''))
-                                                            console.log(base64)
+                                                            
                                                             setVideo(`data:image/png;base64,${base64}`)
                                                             setFileBase64(base64)
                                                         }

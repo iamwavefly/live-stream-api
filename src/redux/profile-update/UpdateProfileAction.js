@@ -29,14 +29,8 @@ export const editUser =
         payload: data,
       });
 
-    //   dispatch({
-    //     type: USER_LOGIN_SUCCESS,
-    //     payload: data,
-    //   });
-
-      // localStorage.setItem("userInfo", JSON.stringify(data));
+   
     } catch (error) {
-      console.log(error)
       dispatch({
         type: UPDATE_PROFILE_FAILURE,
         payload:

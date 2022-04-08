@@ -11,7 +11,6 @@ export const fetchAllVideos =
             });
 
             const user_det = await JSON.parse(localStorage.getItem('userInfo'));
-            // console.log(user_det)
 
             const config = {
                 headers: {
@@ -23,14 +22,12 @@ export const fetchAllVideos =
                 `${BACKEND_BASE_URL}/video/get_videos?token=${user_det.data.token}`,
                 config
             );
-            // console.log(data)
 
             dispatch({
                 type: FETCH_VIDEO_SUCCESS,
                 payload: data,
             });
         } catch (error) {
-            console.log(error)
             dispatch({
                 type: FETCH_VIDEO_FAILURE,
                 payload:

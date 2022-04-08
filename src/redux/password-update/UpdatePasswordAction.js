@@ -29,17 +29,8 @@ export const changePass =
         type: UPDATE_PASSWORD_SUCCESS,
         payload: data,
       });
-      // console.log(data)
-      
 
-    //   dispatch({
-    //     type: USER_LOGIN_SUCCESS,
-    //     payload: data,
-    //   });
-
-      // localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
-      console.log(error)
       dispatch({
         type: UPDATE_PASSWORD_FAILURE,
         payload:

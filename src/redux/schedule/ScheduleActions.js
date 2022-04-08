@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../backendUrl";
 import { CREATE_SCHEDULE_FAILURE, CREATE_SCHEDULE_REQUEST, CREATE_SCHEDULE_SUCCESS, FETCH_SCHEDULE_FAILURE, FETCH_SCHEDULE_REQUEST, FETCH_SCHEDULE_SUCCESS } from "./ScheduleTypes";
 
 export const newSchedule =
-  (token, video_id, title, date, time, tags, description, is_instagram, is_twitter, is_facebook, is_youtube, is_twitch) => async (dispatch) => {
+  (token, video_id, title, date, time, tags, description, facebook, youtube, twitch) => async (dispatch) => {
     try {
       dispatch({
         type: CREATE_SCHEDULE_REQUEST
@@ -18,10 +19,9 @@ export const newSchedule =
         },
       };
 
-      //   console.log(token, file_base64)
       const { data } = await axios.put(
         `${BACKEND_BASE_URL}/video/schedule_video`,
-        { token, video_id, title, date, time, tags, description, is_instagram, is_twitter, is_facebook, is_youtube, is_twitch },
+        { token, video_id, title, date, time, tags, description, facebook, youtube, twitch },
         config
       );
 
@@ -31,7 +31,6 @@ export const newSchedule =
       });
 
     } catch (error) {
-      console.log(error)
       dispatch({
         type: CREATE_SCHEDULE_FAILURE,
         payload:
@@ -52,7 +51,6 @@ export const newSchedule =
             });
 
             const user_det = await JSON.parse(localStorage.getItem('userInfo'));
-            // console.log(user_det)
 
             const config = {
                 headers: {
@@ -64,14 +62,12 @@ export const newSchedule =
                 `${BACKEND_BASE_URL}/video/get_scheduled_video?token=${user_det.data.token}`,
                 config
             );
-            // console.log(data)
 
             dispatch({
                 type: FETCH_SCHEDULE_SUCCESS,
                 payload: data,
             });
         } catch (error) {
-            console.log(error)
             dispatch({
                 type: FETCH_SCHEDULE_FAILURE,
                 payload:

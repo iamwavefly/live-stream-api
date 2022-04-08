@@ -26,8 +26,6 @@ const VideoList = () => {
 
     useEffect(() => {
 
-        // console.log(allVideos)
-
     }, [dispatch, allVideos]);
 
     return (
@@ -112,7 +110,6 @@ const VideoList = () => {
                                                                     axios(config)
                                                                         .then(function (response) {
                                                                             setLoading(false)
-                                                                            // console.log(JSON.stringify(response.data));
                                                                             toast.success("Video was deleted Successfully", { autoClose: 1000 })
                                                                             setTimeout(() => {
                                                                                 window.location.reload();
@@ -120,13 +117,12 @@ const VideoList = () => {
                                                                         })
                                                                         .catch(function (error) {
                                                                             setLoading(false)
-                                                                            console.log(error);
                                                                             toast.error(error)
                                                                         });
 
                                                                 }
                                                             }}>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-trash" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ef2f2f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-trash" width="28" height="28" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ef2f2f" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                                 <line x1="4" y1="7" x2="20" y2="7" />
                                                                 <line x1="10" y1="11" x2="10" y2="17" />

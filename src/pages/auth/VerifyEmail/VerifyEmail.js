@@ -57,12 +57,11 @@ const VerifyEmail = () => {
             if (response.data.status === 200) {
                 toast.success("A new Verification Code has been sent to your email")
             }
-            console.log(response.data)
+           
             setLoading(false)
         } catch (error) {
             toast.error(error.response.data.message)
 
-            console.log(error)
         }
     }
 

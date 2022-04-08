@@ -16,28 +16,18 @@ export const photoUpload =
           "Content-Type": "application/json",
         },
       };
-
-    //   console.log(token, file_base64)
       const { data } = await axios.put(
         `${BACKEND_BASE_URL}/account/upload_photo`,
         {token, file_base64},
         config
       );
-      console.log(data)
 
       dispatch({
         type: UPLOAD_PICS_SUCCESS,
         payload: data,
       });
 
-    //   dispatch({
-    //     type: USER_LOGIN_SUCCESS,
-    //     payload: data,
-    //   });
-
-      // localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
-      console.log(error)
       dispatch({
         type: UPLOAD_PICS_FAILURE,
         payload:

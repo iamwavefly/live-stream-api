@@ -10,9 +10,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllVideos } from '../../redux/getVideos/GetVideoAction'
 import { fetchUserDetails } from '../../redux/fetchUser/fetchUserAction';
 import Loader from '../../components/Loader'
+import axios from 'axios'
+import { BACKEND_BASE_URL } from '../../redux/backendUrl';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
+
+    const [loadingAddAcounts, setLoadingAddAcounts] = React.useState(false);
+    const [allAccounts, setAllAccounts] = React.useState([]);
 
     const getallVideos = useSelector((state) => state.getallVideos)
     const { loading, error, allVideos } = getallVideos;
@@ -33,6 +38,32 @@ const Dashboard = () => {
             dispatch(fetchUserDetails())
         }
     }, [])
+
+        //get all accounts
+        const getAllAccounts = () => {
+            setLoadingAddAcounts(true);
+            let config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+    
+                url: `${BACKEND_BASE_URL}/accounts/get_accounts?token=${userInfo.data.token}`,
+                method: 'GET'
+            }
+    
+            axios(config)
+                .then(function (response) {
+                    setLoadingAddAcounts(false);
+                    setAllAccounts(response.data.data.accounts.accounts);
+                })
+                .catch(function (error) {
+                    setLoadingAddAcounts(false);
+                });
+        }
+    
+        React.useEffect(() => {
+            getAllAccounts();
+        }, []);
 
 
     
@@ -66,6 +97,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                             {loading && <Loader />}
+                            {loadingAddAcounts && <Loader />}
                             {loadingFetch && <Loader />}
                             <div className="overview">
                                 <div className="overview-header">
@@ -92,7 +124,7 @@ const Dashboard = () => {
                                     </div>
                                     <div className="overview-cards gray">
                                         <div className="cards-left black">
-                                            <h1>{userDet?.data?.profile?.connected_accounts}</h1>
+                                            <h1>{allAccounts?.length}</h1>
                                             <p>CONNECTED ACCOUNT</p>
                                         </div>
                                         <div className="cards-right">
