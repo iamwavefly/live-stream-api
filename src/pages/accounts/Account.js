@@ -22,6 +22,8 @@ const Account = () => {
     const [loadingAddAcounts, setLoadingAddAcounts] = React.useState(false);
     const [removeAccountSuccess, setRemoveAccountSuccess] = React.useState(false);
     const [allAccounts, setAllAccounts] = React.useState([]);
+    const [all, setAll] = React.useState([]);
+    console.log(all);
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin;

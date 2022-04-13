@@ -204,13 +204,13 @@ const HomePage = () => {
                    
                    <div className="footer_right">
                      <div className="footer_right_content">
-                         <div className='footer_right_item'>
+                         {/* <div className='footer_right_item'>
                             <h3>Company</h3>
                             <ul>
                                 <li><Link to="/">About Us</Link></li>
                                 <li><Link to="/">Contact Us</Link></li>
                             </ul>
-                         </div>
+                         </div> */}
                          <div className='footer_right_item'>
                             <h3>Resources</h3>
                             <ul>
